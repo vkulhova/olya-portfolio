@@ -29,7 +29,7 @@ export default function About() {
 
         {/* text */}
         <div>
-          <h2 style={{ fontFamily: "'Caveat', cursive", fontSize: 'clamp(2.8rem, 5vw, 4.5rem)', fontWeight: 600, color: 'var(--brown)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
+          <h2 style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: 'clamp(2.8rem, 5vw, 4.5rem)', fontWeight: 500, color: 'var(--brown)', lineHeight: 1.1, marginBottom: '1.5rem' }}>
             {a.heading}
           </h2>
 
