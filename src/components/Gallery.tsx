@@ -283,38 +283,39 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
             </svg>
           </button>
 
-          {/* outgoing image */}
-          {outgoing && (
+          {/* slide stage — fixed layer so nothing shifts */}
+          <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none' }}>
+            {outgoing && (
+              <div
+                className={outgoing.dir === 'right' ? 'lb-slide-out-left' : 'lb-slide-out-right'}
+                style={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+              >
+                <Image
+                  src={imgUrl(outgoing.item, 1400)}
+                  alt={getTitle(outgoing.item)}
+                  width={1400} height={1400}
+                  style={{ maxWidth: '82vw', maxHeight: '72vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
+                />
+              </div>
+            )}
             <div
-              className={outgoing.dir === 'right' ? 'lb-slide-out-left' : 'lb-slide-out-right'}
-              style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}
+              key={lightbox._id}
+              className={inDir === 'right' ? 'lb-slide-in-right' : inDir === 'left' ? 'lb-slide-in-left' : ''}
+              style={{ position: 'absolute', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
             >
               <Image
-                src={imgUrl(outgoing.item, 1400)}
-                alt={getTitle(outgoing.item)}
+                src={imgUrl(lightbox, 1400)}
+                alt={getTitle(lightbox)}
                 width={1400} height={1400}
-                style={{ maxWidth: '82vw', maxHeight: '78vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
+                style={{ maxWidth: '82vw', maxHeight: '72vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
               />
             </div>
-          )}
+          </div>
 
-          {/* incoming image */}
-          <div
-            key={lightbox._id}
-            className={inDir === 'right' ? 'lb-slide-in-right' : inDir === 'left' ? 'lb-slide-in-left' : ''}
-            onClick={e => e.stopPropagation()}
-            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
-          >
-            <Image
-              src={imgUrl(lightbox, 1400)}
-              alt={getTitle(lightbox)}
-              width={1400} height={1400}
-              style={{ maxWidth: '82vw', maxHeight: '78vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
-            />
-            <div style={{ textAlign: 'center', marginTop: '1.25rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.35rem', letterSpacing: '0.01em' }}>{getTitle(lightbox)}</p>
-              <p style={{ fontSize: '0.75rem', opacity: 0.4, marginTop: '0.4rem', letterSpacing: '0.1em' }}>{lbIndex + 1} / {filtered.length}</p>
-            </div>
+          {/* title + counter — outside slide stage, always stable */}
+          <div onClick={e => e.stopPropagation()} style={{ position: 'absolute', bottom: '2rem', left: 0, right: 0, textAlign: 'center', color: 'white', pointerEvents: 'none' }}>
+            <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.35rem', letterSpacing: '0.01em' }}>{getTitle(lightbox)}</p>
+            <p style={{ fontSize: '0.75rem', opacity: 0.4, marginTop: '0.4rem', letterSpacing: '0.1em' }}>{lbIndex + 1} / {filtered.length}</p>
           </div>
 
           {/* next arrow */}
