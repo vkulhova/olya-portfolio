@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/client'
 import { useLang } from '@/lib/i18n'
@@ -23,6 +23,26 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
   const getTitle = (item: Illustration) =>
     lang === 'ua' && item.title_ua ? item.title_ua : item.title
 
+  const filtered = activeCategory === 'all'
+    ? illustrations
+    : illustrations.filter(i => i.category === activeCategory)
+
+  const lbIndex = lightbox ? filtered.findIndex(i => i._id === lightbox._id) : -1
+  const goPrev = (e: React.MouseEvent) => { e.stopPropagation(); if (lbIndex > 0) setLightbox(filtered[lbIndex - 1]) }
+  const goNext = (e: React.MouseEvent) => { e.stopPropagation(); if (lbIndex < filtered.length - 1) setLightbox(filtered[lbIndex + 1]) }
+
+  // keyboard navigation
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (!lightbox) return
+      if (e.key === 'ArrowLeft' && lbIndex > 0) setLightbox(filtered[lbIndex - 1])
+      if (e.key === 'ArrowRight' && lbIndex < filtered.length - 1) setLightbox(filtered[lbIndex + 1])
+      if (e.key === 'Escape') setLightbox(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [lightbox, lbIndex, filtered])
+
   const CATEGORIES = [
     { value: 'all', label: g.cats.all },
     { value: 'characters', label: g.cats.characters },
@@ -30,10 +50,6 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     { value: 'covers', label: g.cats.covers },
     { value: 'other', label: g.cats.other },
   ]
-
-  const filtered = activeCategory === 'all'
-    ? illustrations
-    : illustrations.filter(i => i.category === activeCategory)
 
   const usedCategories = ['all', ...new Set(illustrations.map(i => i.category).filter(Boolean))]
 
@@ -172,15 +188,40 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
 
       {/* LIGHTBOX */}
       {lightbox && (
-        <div onClick={() => setLightbox(null)} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.88)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', cursor: 'zoom-out' }}>
+        <div
+          onClick={() => setLightbox(null)}
+          style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.88)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', cursor: 'zoom-out' }}
+        >
+          {/* prev */}
+          <button
+            onClick={goPrev}
+            disabled={lbIndex === 0}
+            style={{ position: 'fixed', left: '1.5rem', top: '50%', transform: 'translateY(-50%)', width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '1.4rem', cursor: lbIndex === 0 ? 'default' : 'pointer', opacity: lbIndex === 0 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s', zIndex: 101 }}
+          >‹</button>
+
           <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }} onClick={e => e.stopPropagation()}>
-            <Image src={imgUrl(lightbox, 1400)} alt={getTitle(lightbox)} width={1400} height={1400} style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }} />
+            <Image
+              src={imgUrl(lightbox, 1400)}
+              alt={getTitle(lightbox)}
+              width={1400} height={1400}
+              style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }}
+            />
             <div style={{ textAlign: 'center', marginTop: '1rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Rozha One', serif", fontSize: '1.25rem' }}>{getTitle(lightbox)}</p>
-              {lightbox.description && <p style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '0.3rem' }}>{lightbox.description}</p>}
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.3rem' }}>{getTitle(lightbox)}</p>
+              <p style={{ fontSize: '0.78rem', opacity: 0.45, marginTop: '0.3rem' }}>{lbIndex + 1} / {filtered.length}</p>
             </div>
-            <button onClick={() => setLightbox(null)} style={{ position: 'absolute', top: '-1rem', right: '-1rem', width: 36, height: 36, borderRadius: '50%', background: 'var(--rose)', border: 'none', color: 'white', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
+            <button
+              onClick={() => setLightbox(null)}
+              style={{ position: 'absolute', top: '-1rem', right: '-1rem', width: 36, height: 36, borderRadius: '50%', background: 'var(--rose)', border: 'none', color: 'white', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
+            >×</button>
           </div>
+
+          {/* next */}
+          <button
+            onClick={goNext}
+            disabled={lbIndex === filtered.length - 1}
+            style={{ position: 'fixed', right: '1.5rem', top: '50%', transform: 'translateY(-50%)', width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '1.4rem', cursor: lbIndex === filtered.length - 1 ? 'default' : 'pointer', opacity: lbIndex === filtered.length - 1 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s', zIndex: 101 }}
+          >›</button>
         </div>
       )}
     </section>
