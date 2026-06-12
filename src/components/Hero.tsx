@@ -106,7 +106,7 @@ export default function Hero() {
         </a>
 
         <br />
-        <span style={{
+        <span className="scroll-hint" style={{
           display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 6,
           color: 'var(--brown-light)', fontSize: '0.7rem', letterSpacing: '0.15em',
           textTransform: 'uppercase', opacity: 0.5, animation: 'float 2.5s ease-in-out infinite',

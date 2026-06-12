@@ -8,14 +8,7 @@ export default function About() {
       id="about"
       style={{ padding: '6rem 2rem', background: 'var(--cream-dark)' }}
     >
-      <div style={{
-        maxWidth: 900,
-        margin: '0 auto',
-        display: 'grid',
-        gridTemplateColumns: '1fr 1.5fr',
-        gap: '5rem',
-        alignItems: 'center',
-      }}>
+      <div className="about-grid" style={{ maxWidth: 900, margin: '0 auto' }}>
 
         {/* avatar */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>

@@ -128,7 +128,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
 
       {/* GRID — рівні квадрати, фіксовані колонки */}
       {layout === 'grid' && (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.25rem' }}>
+        <div className="gallery-grid-3">
           {filtered.map(item => <Card key={item._id} item={item} ratio="1/1" />)}
         </div>
       )}
@@ -140,7 +140,8 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
             <div
               key={item._id}
               onClick={() => setLightbox(item)}
-              style={{ position: 'relative', height: 280, flexGrow: 1, minWidth: 180, borderRadius: '1rem', overflow: 'hidden', cursor: 'zoom-in', background: 'var(--cream-dark)' }}
+              className="gallery-rows-item"
+              style={{ position: 'relative', flexGrow: 1, minWidth: 180, borderRadius: '1rem', overflow: 'hidden', cursor: 'zoom-in', background: 'var(--cream-dark)' }}
             >
               <Image
                 src={imgUrl(item, 800)}
