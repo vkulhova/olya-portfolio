@@ -17,27 +17,30 @@ export default function About() {
         alignItems: 'center',
       }}>
 
-        {/* polaroid avatar */}
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
+        {/* avatar */}
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1rem' }}>
           <div style={{
-            background: 'white',
-            padding: '1.25rem 1.25rem 3rem',
-            boxShadow: '4px 8px 32px rgba(44,32,24,0.12), -2px 4px 16px rgba(44,32,24,0.06)',
-            borderRadius: '4px',
-            transform: 'rotate(-2.5deg)',
-            maxWidth: 280,
-            width: '100%',
+            width: 260, height: 260,
+            borderRadius: '50%',
+            overflow: 'hidden',
+            boxShadow: '4px 8px 32px rgba(44,32,24,0.12)',
           }}>
-            <div style={{ borderRadius: '2px', overflow: 'hidden', aspectRatio: '1/1', background: 'var(--cream-dark)' }}>
-              <Image
-                src="/avatar.png"
-                alt="Olya — lolikar"
-                width={400}
-                height={400}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-            </div>
+            <Image
+              src="/avatar.png"
+              alt="Olya — lolikar"
+              width={400}
+              height={400}
+              style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+            />
           </div>
+          <p style={{
+            fontFamily: "'Caveat', cursive",
+            fontSize: '1.2rem',
+            color: 'var(--brown-light)',
+            letterSpacing: '0.02em',
+          }}>
+            this is me ✨
+          </p>
         </div>
 
         {/* text */}
