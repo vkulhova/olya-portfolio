@@ -87,7 +87,7 @@ export default function Nav() {
         </a>
 
         {/* desktop nav + lang toggle */}
-        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        <div className="nav-links" style={{ alignItems: 'center', gap: '2rem' }}>
           {links.map(({ label, href }) => (
             <a
               key={href}

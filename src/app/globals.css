@@ -82,6 +82,8 @@ html[lang="ua"] h4 {
 
 .nav-mobile-right {
   display: none;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .hamburger {
