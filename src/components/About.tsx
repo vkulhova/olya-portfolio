@@ -1,52 +1,77 @@
 'use client'
 
+import Image from 'next/image'
+
 export default function About() {
   return (
     <section
       id="about"
-      style={{
-        padding: '6rem 2rem',
-        background: 'var(--cream-dark)',
-      }}
+      style={{ padding: '6rem 2rem', background: 'var(--cream-dark)' }}
     >
-      <div style={{ maxWidth: 900, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: '4rem', alignItems: 'center' }}>
-        {/* decorative avatar placeholder */}
-        <div style={{ position: 'relative' }}>
+      <div style={{
+        maxWidth: 900,
+        margin: '0 auto',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1.5fr',
+        gap: '5rem',
+        alignItems: 'center',
+      }}>
+
+        {/* polaroid avatar */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <div style={{
-            width: '100%',
-            aspectRatio: '1',
-            borderRadius: '40% 60% 50% 50% / 50% 40% 60% 50%',
-            background: 'linear-gradient(135deg, var(--rose-light) 0%, var(--sage-light) 60%, var(--gold-light) 100%)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            <span style={{ fontSize: '5rem' }}>🎨</span>
-          </div>
-          {/* floating badge */}
-          <div style={{
-            position: 'absolute', bottom: '-1rem', right: '-1rem',
             background: 'white',
-            borderRadius: '1rem',
-            padding: '0.75rem 1.25rem',
-            boxShadow: '0 8px 32px rgba(44,32,24,0.1)',
-            fontSize: '0.8rem',
-            color: 'var(--brown-light)',
-            whiteSpace: 'nowrap',
+            padding: '1.25rem 1.25rem 3rem',
+            boxShadow: '4px 8px 32px rgba(44,32,24,0.12), -2px 4px 16px rgba(44,32,24,0.06)',
+            borderRadius: '4px',
+            transform: 'rotate(-2.5deg)',
+            maxWidth: 280,
+            width: '100%',
           }}>
-            ✨ open for commissions
+            <div style={{ borderRadius: '2px', overflow: 'hidden', aspectRatio: '1/1', background: 'var(--cream-dark)' }}>
+              <Image
+                src="/avatar.png"
+                alt="Olya — lolikar"
+                width={400}
+                height={400}
+                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+              />
+            </div>
+            <p style={{
+              textAlign: 'center',
+              marginTop: '1rem',
+              fontFamily: "'Caveat', cursive",
+              fontSize: '1.2rem',
+              color: 'var(--brown-light)',
+              letterSpacing: '0.02em',
+            }}>
+              this is me ✨
+            </p>
           </div>
         </div>
 
         {/* text */}
         <div>
-          <p style={{ fontSize: '0.75rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--sage)', marginBottom: '0.8rem' }}>
-            about
-          </p>
-          <h2 style={{ fontSize: 'clamp(2rem, 4vw, 3.5rem)', color: 'var(--brown)', marginBottom: '1.5rem', lineHeight: 1.1 }}>
-            Hi, I&apos;m Olya
+          <h2 style={{
+            fontFamily: "'Caveat', cursive",
+            fontSize: 'clamp(2.8rem, 5vw, 4.5rem)',
+            fontWeight: 600,
+            color: 'var(--brown)',
+            lineHeight: 1.1,
+            marginBottom: '1.5rem',
+          }}>
+            Hello, I&apos;m Olya!
           </h2>
-          <div style={{ fontSize: '1rem', color: 'var(--brown-light)', lineHeight: 1.85, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+
+          <div style={{
+            fontSize: '1rem',
+            color: 'var(--brown-light)',
+            lineHeight: 1.9,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '1rem',
+            fontFamily: "'Quicksand', sans-serif",
+          }}>
             <p>
               I&apos;m an illustrator who loves creating cozy, whimsical worlds full of warm colors, folk-inspired details, and gentle storytelling.
             </p>
@@ -58,39 +83,26 @@ export default function About() {
             </p>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
-            {[
-              { label: 'Instagram', href: 'https://www.instagram.com/by.lolikar', icon: '📷' },
-            ].map(({ label, href, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  padding: '0.6rem 1.4rem',
-                  borderRadius: '100px',
-                  border: '1.5px solid var(--sage)',
-                  color: 'var(--brown)',
-                  textDecoration: 'none',
-                  fontSize: '0.85rem',
-                  transition: 'all 0.2s',
-                }}
-                onMouseEnter={e => {
-                  e.currentTarget.style.background = 'var(--sage)'
-                  e.currentTarget.style.color = 'white'
-                }}
-                onMouseLeave={e => {
-                  e.currentTarget.style.background = 'transparent'
-                  e.currentTarget.style.color = 'var(--brown)'
-                }}
-              >
-                {icon} {label}
-              </a>
-            ))}
+          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            <a
+              href="https://www.instagram.com/by.lolikar"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+                padding: '0.6rem 1.4rem', borderRadius: '100px',
+                border: '1.5px solid var(--sage)', color: 'var(--brown)',
+                textDecoration: 'none', fontSize: '0.85rem', transition: 'all 0.2s',
+                fontFamily: "'Quicksand', sans-serif",
+              }}
+              onMouseEnter={e => { e.currentTarget.style.background = 'var(--sage)'; e.currentTarget.style.color = 'white' }}
+              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--brown)' }}
+            >
+              📷 Instagram
+            </a>
+            <span style={{ fontFamily: "'Caveat', cursive", fontSize: '1rem', color: 'var(--rose)', letterSpacing: '0.02em' }}>
+              ✨ open for commissions
+            </span>
           </div>
         </div>
       </div>
