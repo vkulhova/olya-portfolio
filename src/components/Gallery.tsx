@@ -8,6 +8,7 @@ import { useLang } from '@/lib/i18n'
 interface Illustration {
   _id: string
   title: string
+  title_ua?: string
   image: { asset: { _ref: string } }
   category?: string
   description?: string
@@ -17,8 +18,10 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
   const [activeCategory, setActiveCategory] = useState('all')
   const [layout, setLayout] = useState('masonry')
   const [lightbox, setLightbox] = useState<Illustration | null>(null)
-  const { t } = useLang()
+  const { lang, t } = useLang()
   const g = t.gallery
+  const getTitle = (item: Illustration) =>
+    lang === 'ua' && item.title_ua ? item.title_ua : item.title
 
   const CATEGORIES = [
     { value: 'all', label: g.cats.all },
@@ -55,7 +58,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
         onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
       >
-        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
+        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{getTitle(item)}</p>
       </div>
     </div>
   )
@@ -79,7 +82,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
         onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
       >
-        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
+        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{getTitle(item)}</p>
       </div>
     </div>
   )
@@ -160,7 +163,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
                 onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
                 onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
               >
-                <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
+                <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{getTitle(item)}</p>
               </div>
             </div>
           ))}
@@ -171,9 +174,9 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       {lightbox && (
         <div onClick={() => setLightbox(null)} style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.88)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', cursor: 'zoom-out' }}>
           <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }} onClick={e => e.stopPropagation()}>
-            <Image src={imgUrl(lightbox, 1400)} alt={lightbox.title} width={1400} height={1400} style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }} />
+            <Image src={imgUrl(lightbox, 1400)} alt={getTitle(lightbox)} width={1400} height={1400} style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }} />
             <div style={{ textAlign: 'center', marginTop: '1rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Rozha One', serif", fontSize: '1.25rem' }}>{lightbox.title}</p>
+              <p style={{ fontFamily: "'Rozha One', serif", fontSize: '1.25rem' }}>{getTitle(lightbox)}</p>
               {lightbox.description && <p style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '0.3rem' }}>{lightbox.description}</p>}
             </div>
             <button onClick={() => setLightbox(null)} style={{ position: 'absolute', top: '-1rem', right: '-1rem', width: 36, height: 36, borderRadius: '50%', background: 'var(--rose)', border: 'none', color: 'white', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>

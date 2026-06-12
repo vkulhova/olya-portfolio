@@ -6,6 +6,10 @@ import ScrollToTop from "@/components/ScrollToTop";
 export const metadata: Metadata = {
   title: "lolikar — illustration",
   description: "Portfolio of Olya Lolikar — illustrator. Cozy, whimsical, folk-inspired art.",
+  icons: {
+    icon: '/favicon.png',
+    apple: '/favicon.png',
+  },
   openGraph: {
     title: "lolikar — illustration",
     description: "Portfolio of Olya Lolikar — illustrator",

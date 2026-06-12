@@ -27,6 +27,34 @@ export default function Nav() {
     { label: t.nav.contact, href: '#contact' },
   ]
 
+  const LangBtn = ({ small }: { small?: boolean }) => (
+    <button
+      onClick={toggle}
+      style={{
+        background: 'none',
+        border: '1.5px solid var(--cream-dark)',
+        borderRadius: '100px',
+        padding: small ? '0.2rem 0.55rem' : '0.25rem 0.75rem',
+        fontSize: small ? '0.7rem' : '0.75rem',
+        letterSpacing: '0.1em',
+        color: 'var(--brown-light)',
+        cursor: 'pointer',
+        transition: 'all 0.2s',
+        fontFamily: "'Quicksand', sans-serif",
+      }}
+      onMouseEnter={e => {
+        e.currentTarget.style.borderColor = 'var(--rose)'
+        e.currentTarget.style.color = 'var(--rose)'
+      }}
+      onMouseLeave={e => {
+        e.currentTarget.style.borderColor = 'var(--cream-dark)'
+        e.currentTarget.style.color = 'var(--brown-light)'
+      }}
+    >
+      {lang === 'en' ? 'UA' : 'EN'}
+    </button>
+  )
+
   return (
     <>
       <header
@@ -58,8 +86,8 @@ export default function Nav() {
           lolikar
         </a>
 
-        {/* desktop nav */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="nav-links">
+        {/* desktop nav + lang toggle */}
+        <div className="nav-links" style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
           {links.map(({ label, href }) => (
             <a
               key={href}
@@ -78,54 +106,12 @@ export default function Nav() {
               {label}
             </a>
           ))}
-
-          {/* lang toggle */}
-          <button
-            onClick={toggle}
-            style={{
-              background: 'none',
-              border: '1.5px solid var(--cream-dark)',
-              borderRadius: '100px',
-              padding: '0.25rem 0.75rem',
-              fontSize: '0.75rem',
-              letterSpacing: '0.1em',
-              color: 'var(--brown-light)',
-              cursor: 'pointer',
-              transition: 'all 0.2s',
-              fontFamily: "'Quicksand', sans-serif",
-            }}
-            onMouseEnter={e => {
-              e.currentTarget.style.borderColor = 'var(--rose)'
-              e.currentTarget.style.color = 'var(--rose)'
-            }}
-            onMouseLeave={e => {
-              e.currentTarget.style.borderColor = 'var(--cream-dark)'
-              e.currentTarget.style.color = 'var(--brown-light)'
-            }}
-          >
-            {lang === 'en' ? 'UA' : 'EN'}
-          </button>
+          <LangBtn />
         </div>
 
-        {/* mobile right side */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="nav-mobile-right">
-          <button
-            onClick={toggle}
-            style={{
-              background: 'none',
-              border: '1.5px solid var(--cream-dark)',
-              borderRadius: '100px',
-              padding: '0.2rem 0.6rem',
-              fontSize: '0.7rem',
-              letterSpacing: '0.1em',
-              color: 'var(--brown-light)',
-              cursor: 'pointer',
-              fontFamily: "'Quicksand', sans-serif",
-            }}
-          >
-            {lang === 'en' ? 'UA' : 'EN'}
-          </button>
-
+        {/* mobile: lang toggle + hamburger */}
+        <div className="nav-mobile-right" style={{ alignItems: 'center', gap: '0.75rem' }}>
+          <LangBtn small />
           <button
             className={`hamburger${menuOpen ? ' open' : ''}`}
             onClick={() => setMenuOpen(o => !o)}

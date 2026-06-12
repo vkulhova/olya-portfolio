@@ -39,8 +39,9 @@ export default function Hero() {
         </p>
 
         <h1 style={{
-          fontSize: 'clamp(5rem, 14vw, 11rem)', lineHeight: 0.9,
+          fontSize: 'clamp(5rem, 14vw, 11rem)', lineHeight: 0.85,
           letterSpacing: '-0.02em', color: 'var(--brown)', marginBottom: '2rem',
+          background: 'none',
         }}>
           lolikar
         </h1>

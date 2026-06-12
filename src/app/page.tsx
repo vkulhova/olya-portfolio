@@ -11,7 +11,7 @@ export const revalidate = 0
 async function getIllustrations() {
   return client.fetch(
     `*[_type == "illustration"] | order(order asc, _createdAt desc) {
-      _id, title, image, category, description
+      _id, title, title_ua, image, category, description
     }`,
     {},
     { cache: 'no-store' }

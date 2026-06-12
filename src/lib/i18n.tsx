@@ -45,7 +45,7 @@ export const translations = {
     footer: '© {year} lolikar — all rights reserved',
   },
   ua: {
-    nav: { works: 'роботи', about: 'про мене', contact: 'контакт' },
+    nav: { works: 'роботи', about: 'про мене', contact: 'контакти' },
     hero: {
       tag: 'портфоліо ілюстратора',
       subtitle: 'Затишні світи, лагідні персонажі,\nі трішки магії — у кожній ілюстрації.',
@@ -96,7 +96,11 @@ const LangContext = createContext<LangCtx>({
 
 export function LangProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>('en')
-  const toggle = () => setLang(l => l === 'en' ? 'ua' : 'en')
+  const toggle = () => setLang(l => {
+    const next = l === 'en' ? 'ua' : 'en'
+    document.documentElement.lang = next
+    return next
+  })
   return (
     <LangContext.Provider value={{ lang, t: translations[lang], toggle }}>
       {children}
