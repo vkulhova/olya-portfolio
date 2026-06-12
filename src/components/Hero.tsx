@@ -105,6 +105,20 @@ export default function Hero() {
           View works
         </a>
 
+        <br />
+        <span style={{
+          display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+          color: 'var(--brown-light)', fontSize: '0.7rem', letterSpacing: '0.15em',
+          textTransform: 'uppercase', opacity: 0.5, animation: 'float 2.5s ease-in-out infinite',
+          verticalAlign: 'top',
+        }}>
+          <svg width="18" height="28" viewBox="0 0 24 38" fill="none">
+            <rect x="1" y="1" width="22" height="36" rx="11" stroke="currentColor" strokeWidth="1.5"/>
+            <line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+          </svg>
+          <span>scroll</span>
+        </span>
+
       </div>
     </section>
   )
