@@ -80,7 +80,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     >
       <Image
         src={imgUrl(item)}
-        alt={item.title}
+        alt={getTitle(item)}
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
         style={{ objectFit: 'cover', transition: 'transform 0.4s' }}
@@ -104,7 +104,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     >
       <Image
         src={imgUrl(item)}
-        alt={item.title}
+        alt={getTitle(item)}
         width={800}
         height={800}
         style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.4s' }}
@@ -185,7 +185,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
             >
               <Image
                 src={imgUrl(item, 800)}
-                alt={item.title}
+                alt={getTitle(item)}
                 fill
                 sizes="(max-width: 768px) 100vw, 40vw"
                 style={{ objectFit: 'cover', transition: 'transform 0.4s' }}
