@@ -34,7 +34,7 @@ export default function Nav() {
           top: 0,
           left: 0,
           right: 0,
-          zIndex: 50,
+          zIndex: 60,
           padding: '1.25rem 2.5rem',
           display: 'flex',
           alignItems: 'center',
@@ -98,24 +98,6 @@ export default function Nav() {
 
       {/* mobile overlay */}
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
-        <button
-          onClick={close}
-          aria-label="Close menu"
-          style={{
-            position: 'absolute',
-            top: '1.5rem',
-            right: '2rem',
-            background: 'none',
-            border: 'none',
-            cursor: 'pointer',
-            fontSize: '2rem',
-            color: 'var(--brown)',
-            lineHeight: 1,
-            padding: '4px',
-          }}
-        >
-          ×
-        </button>
         {LINKS.map(({ label, href }) => (
           <a key={label} href={href} onClick={close}>
             {label}
