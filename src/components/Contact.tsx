@@ -1,10 +1,25 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useLang } from '@/lib/i18n'
+
+const STORAGE_KEY = 'contact_form'
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' })
+
+  useEffect(() => {
+    const saved = localStorage.getItem(STORAGE_KEY)
+    if (saved) setForm(JSON.parse(saved))
+  }, [])
+
+  const updateForm = (patch: Partial<typeof form>) => {
+    setForm(prev => {
+      const next = { ...prev, ...patch }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
+      return next
+    })
+  }
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent'>('idle')
   const { t } = useLang()
   const c = t.contact
@@ -21,6 +36,7 @@ export default function Contact() {
       if (!res.ok) throw new Error()
       setStatus('sent')
       setForm({ name: '', email: '', message: '' })
+      localStorage.removeItem(STORAGE_KEY)
     } catch {
       setStatus('idle')
       alert('Something went wrong. Please try again.')
@@ -60,7 +76,7 @@ export default function Contact() {
               placeholder={field.placeholder}
               required
               value={form[field.key]}
-              onChange={e => setForm(prev => ({ ...prev, [field.key]: e.target.value }))}
+              onChange={e => updateForm({ [field.key]: e.target.value })}
               style={inputStyle}
               onFocus={e => (e.target.style.borderColor = 'var(--sage)')}
               onBlur={e => (e.target.style.borderColor = 'var(--cream-dark)')}
@@ -77,7 +93,7 @@ export default function Contact() {
             rows={5}
             required
             value={form.message}
-            onChange={e => setForm(prev => ({ ...prev, message: e.target.value }))}
+            onChange={e => updateForm({ message: e.target.value })}
             style={{ ...inputStyle, resize: 'vertical' }}
             onFocus={e => (e.target.style.borderColor = 'var(--sage)')}
             onBlur={e => (e.target.style.borderColor = 'var(--cream-dark)')}
