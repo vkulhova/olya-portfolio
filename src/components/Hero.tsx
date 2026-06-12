@@ -108,15 +108,15 @@ export default function Hero() {
       {/* scroll hint */}
       <div style={{
         position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        color: 'var(--brown-light)', fontSize: '0.75rem', letterSpacing: '0.1em',
-        opacity: 0.6, animation: 'float 2.5s ease-in-out infinite',
+        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
+        color: 'var(--brown-light)', fontSize: '0.7rem', letterSpacing: '0.15em',
+        textTransform: 'uppercase', opacity: 0.5, animation: 'float 2.5s ease-in-out infinite',
       }}>
-        <span>scroll</span>
-        <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-          <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" strokeWidth="1.5"/>
-          <circle cx="7" cy="6" r="2" fill="currentColor"/>
+        <svg width="24" height="38" viewBox="0 0 24 38" fill="none">
+          <rect x="1" y="1" width="22" height="36" rx="11" stroke="currentColor" strokeWidth="1.5"/>
+          <line x1="12" y1="8" x2="12" y2="16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
         </svg>
+        <span>scroll</span>
       </div>
     </section>
   )
