@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/client'
 import { useLang } from '@/lib/i18n'
@@ -43,13 +43,23 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!lightbox) return
-      if (e.key === 'ArrowLeft' && lbIndex > 0) setLightbox(filtered[lbIndex - 1])
-      if (e.key === 'ArrowRight' && lbIndex < filtered.length - 1) setLightbox(filtered[lbIndex + 1])
+      if (e.key === 'ArrowLeft') navigate('left')
+      if (e.key === 'ArrowRight') navigate('right')
       if (e.key === 'Escape') setLightbox(null)
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [lightbox, lbIndex, filtered])
+
+  // touch swipe
+  const touchStartX = useRef<number | null>(null)
+  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    if (Math.abs(dx) > 50) navigate(dx < 0 ? 'right' : 'left')
+    touchStartX.current = null
+  }
 
   const CATEGORIES = [
     { value: 'all', label: g.cats.all },
@@ -198,6 +208,8 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       {lightbox && (
         <div
           onClick={() => setLightbox(null)}
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
           style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.92)', backdropFilter: 'blur(16px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
         >
           {/* close */}
@@ -212,13 +224,12 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
           <button
             onClick={goPrev}
             disabled={lbIndex === 0}
-            style={{ position: 'fixed', left: '1.5rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'none', border: 'none', cursor: lbIndex === 0 ? 'default' : 'pointer', opacity: lbIndex === 0 ? 0.15 : 1, padding: '0.5rem', transition: 'opacity 0.2s, transform 0.2s' }}
-            onMouseEnter={e => { if (lbIndex > 0) e.currentTarget.style.transform = 'translateY(-50%) translateX(-3px)' }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)' }}
+            style={{ position: 'fixed', left: '1.25rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'rgba(30,20,14,0.55)', border: 'none', borderRadius: '50%', width: 44, height: 44, cursor: lbIndex === 0 ? 'default' : 'pointer', opacity: lbIndex === 0 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)', transition: 'opacity 0.2s, transform 0.2s, background 0.2s' }}
+            onMouseEnter={e => { if (lbIndex > 0) { e.currentTarget.style.transform = 'translateY(-50%) translateX(-2px)'; e.currentTarget.style.background = 'rgba(201,75,122,0.85)' } }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)'; e.currentTarget.style.background = 'rgba(30,20,14,0.55)' }}
           >
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2"/>
-              <path d="M21 11l-7 7 7 7" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M11 4L6 9l5 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
 
@@ -248,13 +259,12 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
           <button
             onClick={goNext}
             disabled={lbIndex === filtered.length - 1}
-            style={{ position: 'fixed', right: '1.5rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'none', border: 'none', cursor: lbIndex === filtered.length - 1 ? 'default' : 'pointer', opacity: lbIndex === filtered.length - 1 ? 0.15 : 1, padding: '0.5rem', transition: 'opacity 0.2s, transform 0.2s' }}
-            onMouseEnter={e => { if (lbIndex < filtered.length - 1) e.currentTarget.style.transform = 'translateY(-50%) translateX(3px)' }}
-            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)' }}
+            style={{ position: 'fixed', right: '1.25rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'rgba(30,20,14,0.55)', border: 'none', borderRadius: '50%', width: 44, height: 44, cursor: lbIndex === filtered.length - 1 ? 'default' : 'pointer', opacity: lbIndex === filtered.length - 1 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 12px rgba(0,0,0,0.35)', backdropFilter: 'blur(4px)', transition: 'opacity 0.2s, transform 0.2s, background 0.2s' }}
+            onMouseEnter={e => { if (lbIndex < filtered.length - 1) { e.currentTarget.style.transform = 'translateY(-50%) translateX(2px)'; e.currentTarget.style.background = 'rgba(201,75,122,0.85)' } }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)'; e.currentTarget.style.background = 'rgba(30,20,14,0.55)' }}
           >
-            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
-              <circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2"/>
-              <path d="M15 11l7 7-7 7" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+              <path d="M7 4l5 5-5 5" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </button>
         </div>
