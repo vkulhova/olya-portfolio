@@ -22,7 +22,7 @@ export default function Contact() {
     width: '100%', padding: '0.85rem 1.25rem', borderRadius: '0.75rem',
     border: '1.5px solid var(--cream-dark)', background: 'white',
     fontSize: '0.95rem', color: 'var(--brown)', outline: 'none',
-    transition: 'border-color 0.2s', fontFamily: "'Quicksand', sans-serif",
+    transition: 'border-color 0.2s', fontFamily: 'inherit',
   }
 
   return (

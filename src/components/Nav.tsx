@@ -40,7 +40,7 @@ export default function Nav() {
         color: 'var(--brown-light)',
         cursor: 'pointer',
         transition: 'all 0.2s',
-        fontFamily: "'Quicksand', sans-serif",
+        fontFamily: 'inherit',
       }}
       onMouseEnter={e => {
         e.currentTarget.style.borderColor = 'var(--rose)'

@@ -33,7 +33,7 @@ export default function About() {
             {a.heading}
           </h2>
 
-          <div style={{ fontSize: '1rem', color: 'var(--brown-light)', lineHeight: 1.9, display: 'flex', flexDirection: 'column', gap: '1rem', fontFamily: "'Quicksand', sans-serif" }}>
+          <div style={{ fontSize: '1rem', color: 'var(--brown-light)', lineHeight: 1.9, display: 'flex', flexDirection: 'column', gap: '1rem', fontFamily: 'inherit' }}>
             <p>{a.p1}</p>
             <p>{a.p2}</p>
             <p>{a.p3}</p>
@@ -50,7 +50,7 @@ export default function About() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.55rem 1.2rem', borderRadius: '100px', border: `1.5px solid ${color}`, color, textDecoration: 'none', fontSize: '0.82rem', transition: 'all 0.2s', fontFamily: "'Quicksand', sans-serif" }}
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.55rem 1.2rem', borderRadius: '100px', border: `1.5px solid ${color}`, color, textDecoration: 'none', fontSize: '0.82rem', transition: 'all 0.2s', fontFamily: 'inherit' }}
                 onMouseEnter={e => { e.currentTarget.style.background = color; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = color }}
                 onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = color; e.currentTarget.style.borderColor = color }}
               >

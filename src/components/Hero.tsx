@@ -33,7 +33,7 @@ export default function Hero() {
       <div className="fade-up" style={{ position: 'relative', zIndex: 1 }}>
         <p style={{
           fontSize: '0.8rem', letterSpacing: '0.25em', textTransform: 'uppercase',
-          color: 'var(--sage)', marginBottom: '1.2rem', fontFamily: "'Quicksand', sans-serif",
+          color: 'var(--sage)', marginBottom: '1.2rem', fontFamily: 'inherit',
         }}>
           {t.hero.tag}
         </p>
