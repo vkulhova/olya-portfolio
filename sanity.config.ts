@@ -8,7 +8,8 @@ export default defineConfig({
   title: 'Olya Portfolio',
   projectId: 'v18r1vne',
   dataset: 'production',
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool({ title: 'Content' }), visionTool()],
+  basePath: '/studio',
   schema: {
     types: schemaTypes,
   },
