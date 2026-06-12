@@ -56,24 +56,30 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       if (e.key === 'ArrowRight') navigate('right')
       if (e.key === 'Escape') setLightbox(null)
     }
-    let wheelTimer: ReturnType<typeof setTimeout>
+    window.addEventListener('keydown', onKey)
+    return () => { window.removeEventListener('keydown', onKey) }
+  }, [lightbox, lbIndex, filtered])
+
+  // trackpad wheel — attached non-passively to overlay so preventDefault works synchronously
+  useEffect(() => {
+    const el = lbOverlayRef.current
+    if (!el || !lightbox) return
+    let lastWheelTime = 0
     const onWheel = (e: WheelEvent) => {
-      if (!lightbox) return
       const dx = Math.abs(e.deltaX)
       const dy = Math.abs(e.deltaY)
-      if (dx < 10 && dy < 10) return
-      if (dx > dy) { // horizontal trackpad swipe
+      if (dx < 5 && dy < 5) return
+      if (dx > dy * 0.5) {
         e.preventDefault()
-        clearTimeout(wheelTimer)
-        wheelTimer = setTimeout(() => { navigate(e.deltaX > 0 ? 'right' : 'left') }, 80)
+        e.stopPropagation()
+        const now = Date.now()
+        if (now - lastWheelTime < 500) return  // throttle
+        lastWheelTime = now
+        navigate(e.deltaX > 0 ? 'right' : 'left')
       }
     }
-    window.addEventListener('keydown', onKey)
-    window.addEventListener('wheel', onWheel, { passive: false })
-    return () => {
-      window.removeEventListener('keydown', onKey)
-      window.removeEventListener('wheel', onWheel)
-    }
+    el.addEventListener('wheel', onWheel, { passive: false })
+    return () => el.removeEventListener('wheel', onWheel)
   }, [lightbox, lbIndex, filtered])
 
   // touch: block page scroll during horizontal swipe
