@@ -20,13 +20,100 @@ const CATEGORIES = [
   { value: 'other', label: 'Other' },
 ]
 
+const LAYOUTS = [
+  {
+    value: 'masonry',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <rect x="0" y="0" width="7" height="9" rx="1"/>
+        <rect x="9" y="0" width="7" height="6" rx="1"/>
+        <rect x="0" y="11" width="7" height="5" rx="1"/>
+        <rect x="9" y="8" width="7" height="8" rx="1"/>
+      </svg>
+    ),
+  },
+  {
+    value: 'grid',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <rect x="0" y="0" width="7" height="7" rx="1"/>
+        <rect x="9" y="0" width="7" height="7" rx="1"/>
+        <rect x="0" y="9" width="7" height="7" rx="1"/>
+        <rect x="9" y="9" width="7" height="7" rx="1"/>
+      </svg>
+    ),
+  },
+  {
+    value: 'featured',
+    icon: (
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+        <rect x="0" y="0" width="10" height="16" rx="1"/>
+        <rect x="12" y="0" width="4" height="7" rx="1"/>
+        <rect x="12" y="9" width="4" height="7" rx="1"/>
+      </svg>
+    ),
+  },
+]
+
+function GalleryItem({ item, onClick, aspectRatio }: {
+  item: Illustration
+  onClick: () => void
+  aspectRatio?: string
+}) {
+  return (
+    <div
+      onClick={onClick}
+      style={{
+        borderRadius: '1rem',
+        overflow: 'hidden',
+        cursor: 'zoom-in',
+        position: 'relative',
+        background: 'var(--cream-dark)',
+        aspectRatio: aspectRatio,
+      }}
+    >
+      <Image
+        src={urlFor(item.image).width(800).url()}
+        alt={item.title}
+        fill={!!aspectRatio}
+        width={aspectRatio ? undefined : 800}
+        height={aspectRatio ? undefined : 800}
+        style={{
+          width: aspectRatio ? undefined : '100%',
+          height: aspectRatio ? undefined : 'auto',
+          objectFit: 'cover',
+          display: 'block',
+          transition: 'transform 0.4s',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
+        onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
+      />
+      <div
+        style={{
+          position: 'absolute', inset: 0,
+          background: 'linear-gradient(to top, rgba(44,32,24,0.6) 0%, transparent 50%)',
+          opacity: 0, transition: 'opacity 0.3s',
+          display: 'flex', alignItems: 'flex-end', padding: '1.25rem',
+        }}
+        onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+        onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
+      >
+        <p style={{ color: 'white', fontSize: '0.95rem', fontFamily: "'Fraunces', serif" }}>
+          {item.title}
+        </p>
+      </div>
+    </div>
+  )
+}
+
 export default function Gallery({ illustrations }: { illustrations: Illustration[] }) {
-  const [active, setActive] = useState('all')
+  const [activeCategory, setActiveCategory] = useState('all')
+  const [layout, setLayout] = useState('masonry')
   const [lightbox, setLightbox] = useState<Illustration | null>(null)
 
-  const filtered = active === 'all'
+  const filtered = activeCategory === 'all'
     ? illustrations
-    : illustrations.filter(i => i.category === active)
+    : illustrations.filter(i => i.category === activeCategory)
 
   const usedCategories = ['all', ...new Set(illustrations.map(i => i.category).filter(Boolean))]
 
@@ -40,28 +127,54 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
           Works
         </h2>
 
-        {/* filter tabs */}
-        <div style={{ display: 'flex', gap: '0.5rem', justifyContent: 'center', flexWrap: 'wrap' }}>
-          {CATEGORIES.filter(c => usedCategories.includes(c.value)).map(cat => (
-            <button
-              key={cat.value}
-              onClick={() => setActive(cat.value)}
-              style={{
-                padding: '0.45rem 1.25rem',
-                borderRadius: '100px',
-                border: '1.5px solid',
-                borderColor: active === cat.value ? 'var(--rose)' : 'var(--cream-dark)',
-                background: active === cat.value ? 'var(--rose)' : 'transparent',
-                color: active === cat.value ? 'white' : 'var(--brown-light)',
-                fontSize: '0.8rem',
-                letterSpacing: '0.08em',
-                cursor: 'pointer',
-                transition: 'all 0.2s',
-              }}
-            >
-              {cat.label}
-            </button>
-          ))}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+          {/* category filters */}
+          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {CATEGORIES.filter(c => usedCategories.includes(c.value)).map(cat => (
+              <button
+                key={cat.value}
+                onClick={() => setActiveCategory(cat.value)}
+                style={{
+                  padding: '0.45rem 1.25rem',
+                  borderRadius: '100px',
+                  border: '1.5px solid',
+                  borderColor: activeCategory === cat.value ? 'var(--rose)' : 'var(--cream-dark)',
+                  background: activeCategory === cat.value ? 'var(--rose)' : 'transparent',
+                  color: activeCategory === cat.value ? 'white' : 'var(--brown-light)',
+                  fontSize: '0.8rem',
+                  letterSpacing: '0.08em',
+                  cursor: 'pointer',
+                  transition: 'all 0.2s',
+                }}
+              >
+                {cat.label}
+              </button>
+            ))}
+          </div>
+
+          {/* layout switcher */}
+          <div style={{ display: 'flex', gap: '0.3rem', background: 'var(--cream-dark)', borderRadius: '0.75rem', padding: '0.3rem' }}>
+            {LAYOUTS.map(l => (
+              <button
+                key={l.value}
+                onClick={() => setLayout(l.value)}
+                title={l.value}
+                style={{
+                  width: 34, height: 34,
+                  borderRadius: '0.5rem',
+                  border: 'none',
+                  background: layout === l.value ? 'white' : 'transparent',
+                  color: layout === l.value ? 'var(--rose)' : 'var(--brown-light)',
+                  cursor: 'pointer',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  transition: 'all 0.2s',
+                  boxShadow: layout === l.value ? '0 2px 8px rgba(44,32,24,0.1)' : 'none',
+                }}
+              >
+                {l.icon}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -71,54 +184,44 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         </div>
       )}
 
-      {/* masonry grid */}
-      <div style={{
-        columns: 'clamp(200px, 30vw, 340px)',
-        columnGap: '1.25rem',
-        columnFill: 'balance',
-      }}>
-        {filtered.map((item, i) => (
-          <div
-            key={item._id}
-            onClick={() => setLightbox(item)}
-            style={{
-              breakInside: 'avoid',
-              marginBottom: '1.25rem',
-              borderRadius: '1rem',
-              overflow: 'hidden',
-              cursor: 'zoom-in',
-              position: 'relative',
-              background: 'var(--cream-dark)',
-              animation: `fadeUp 0.5s ${i * 0.05}s ease both`,
-            }}
-          >
-            <Image
-              src={urlFor(item.image).width(800).url()}
-              alt={item.title}
-              width={800}
-              height={800}
-              style={{ width: '100%', height: 'auto', display: 'block', transition: 'transform 0.4s' }}
-              onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.03)')}
-              onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
-            />
-            <div style={{
-              position: 'absolute', inset: 0,
-              background: 'linear-gradient(to top, rgba(44,32,24,0.55) 0%, transparent 50%)',
-              opacity: 0, transition: 'opacity 0.3s',
-              display: 'flex', alignItems: 'flex-end', padding: '1.25rem',
-            }}
-              onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
-              onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
-            >
-              <p style={{ color: 'white', fontSize: '0.95rem', fontFamily: "'Fraunces', serif" }}>
-                {item.title}
-              </p>
+      {/* MASONRY */}
+      {layout === 'masonry' && (
+        <div style={{ columns: 'clamp(200px, 30vw, 340px)', columnGap: '1.25rem' }}>
+          {filtered.map(item => (
+            <div key={item._id} style={{ breakInside: 'avoid', marginBottom: '1.25rem' }}>
+              <GalleryItem item={item} onClick={() => setLightbox(item)} />
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
 
-      {/* lightbox */}
+      {/* GRID */}
+      {layout === 'grid' && (
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: '1.25rem' }}>
+          {filtered.map(item => (
+            <GalleryItem key={item._id} item={item} onClick={() => setLightbox(item)} aspectRatio="1/1" />
+          ))}
+        </div>
+      )}
+
+      {/* FEATURED */}
+      {layout === 'featured' && filtered.length > 0 && (
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gridTemplateRows: 'auto', gap: '1.25rem' }}>
+          {filtered.map((item, i) => (
+            <div
+              key={item._id}
+              style={{
+                gridColumn: i === 0 ? 'span 2' : 'span 1',
+                gridRow: i === 0 ? 'span 2' : 'span 1',
+              }}
+            >
+              <GalleryItem item={item} onClick={() => setLightbox(item)} aspectRatio={i === 0 ? '4/3' : '1/1'} />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* LIGHTBOX */}
       {lightbox && (
         <div
           onClick={() => setLightbox(null)}
@@ -153,9 +256,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
                 fontSize: '1.1rem', cursor: 'pointer', display: 'flex',
                 alignItems: 'center', justifyContent: 'center',
               }}
-            >
-              ×
-            </button>
+            >×</button>
           </div>
         </div>
       )}
