@@ -13,7 +13,7 @@ export async function POST(req: Request) {
 
     await resend.emails.send({
       from: 'lolikar portfolio <onboarding@resend.dev>',
-      to: 'olikanikolska@gmail.com',
+      to: 'vladyslava.kulhova@gmail.com',
       replyTo: email,
       subject: `Commission from ${name}`,
       text: `Hi Olya!\n\n${message}\n\nFrom: ${name}\nEmail: ${email}`,
