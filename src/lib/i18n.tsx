@@ -21,7 +21,7 @@ export const translations = {
     },
     about: {
       caption: 'this is me ✨',
-      heading: "Hello, I'm Olya!",
+      heading: "Hello, I’m Olya!",
       p1: "I'm an illustrator who loves creating cozy, whimsical worlds full of warm colors, folk-inspired details, and gentle storytelling.",
       p2: "My illustrations live somewhere between a fairytale and your grandmother's kitchen — a place where cats nap on houseplants and magic sparks fly from everyday moments.",
       p3: 'I work with digital tools and love collaborating on books, prints, branding, and anything with a soul.',
