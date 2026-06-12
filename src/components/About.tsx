@@ -39,17 +39,24 @@ export default function About() {
             <p>{a.p3}</p>
           </div>
 
-          <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
-            <a
-              href="https://www.instagram.com/by.lolikar"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', padding: '0.6rem 1.4rem', borderRadius: '100px', border: '1.5px solid var(--sage)', color: 'var(--brown)', textDecoration: 'none', fontSize: '0.85rem', transition: 'all 0.2s', fontFamily: "'Quicksand', sans-serif" }}
-              onMouseEnter={e => { e.currentTarget.style.background = 'var(--sage)'; e.currentTarget.style.color = 'white' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = 'var(--brown)' }}
-            >
-              {a.instagram}
-            </a>
+          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '2rem', flexWrap: 'wrap', alignItems: 'center' }}>
+            {[
+              { href: 'https://www.instagram.com/by.lolikar', label: a.instagram, color: 'var(--rose)' },
+              { href: 'https://www.behance.net/nikolska', label: a.behance, color: 'var(--brown)' },
+              { href: 'https://www.linkedin.com/in/olha-nikolska-5222b23b0/', label: a.linkedin, color: '#0A66C2' },
+            ].map(({ href, label, color }) => (
+              <a
+                key={href}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'inline-flex', alignItems: 'center', gap: '0.4rem', padding: '0.55rem 1.2rem', borderRadius: '100px', border: `1.5px solid ${color}`, color, textDecoration: 'none', fontSize: '0.82rem', transition: 'all 0.2s', fontFamily: "'Quicksand', sans-serif" }}
+                onMouseEnter={e => { e.currentTarget.style.background = color; e.currentTarget.style.color = 'white'; e.currentTarget.style.borderColor = color }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = color; e.currentTarget.style.borderColor = color }}
+              >
+                {label}
+              </a>
+            ))}
             <span style={{ fontFamily: "'Caveat', cursive", fontSize: '1rem', color: 'var(--rose)', letterSpacing: '0.02em' }}>
               {a.commissions}
             </span>

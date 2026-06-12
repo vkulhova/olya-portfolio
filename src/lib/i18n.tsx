@@ -26,6 +26,8 @@ export const translations = {
       p2: "My illustrations live somewhere between a fairytale and your grandmother's kitchen — a place where cats nap on houseplants and magic sparks fly from everyday moments.",
       p3: 'I work with digital tools and love collaborating on books, prints, branding, and anything with a soul.',
       instagram: '📷 Instagram',
+      behance: '✦ Behance',
+      linkedin: 'in LinkedIn',
       commissions: '✨ open for commissions',
     },
     contact: {
@@ -65,6 +67,8 @@ export const translations = {
       p2: 'Мої ілюстрації — десь між казкою і бабусиною кухнею: де коти дрімають на підвіконнях, а магія спалахує в буденних моментах.',
       p3: 'Працюю з цифровими інструментами і люблю співпрацювати над книжками, принтами, брендингом та всім, що має душу.',
       instagram: '📷 Instagram',
+      behance: '✦ Behance',
+      linkedin: 'in LinkedIn',
       commissions: '✨ відкрита до замовлень',
     },
     contact: {
