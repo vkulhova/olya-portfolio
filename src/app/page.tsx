@@ -6,11 +6,15 @@ import Contact from '@/components/Contact'
 import Footer from '@/components/Footer'
 import { client } from '@/sanity/client'
 
+export const revalidate = 0
+
 async function getIllustrations() {
   return client.fetch(
     `*[_type == "illustration"] | order(order asc, _createdAt desc) {
       _id, title, image, category, description
-    }`
+    }`,
+    {},
+    { cache: 'no-store' }
   )
 }
 
