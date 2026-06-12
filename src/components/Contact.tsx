@@ -27,20 +27,10 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setStatus('sending')
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      })
-      if (!res.ok) throw new Error()
-      setStatus('sent')
-      setForm({ name: '', email: '', message: '' })
-      localStorage.removeItem(STORAGE_KEY)
-    } catch {
-      setStatus('idle')
-      alert('Something went wrong. Please try again.')
-    }
+    const subject = encodeURIComponent(`Commission from ${form.name}`)
+    const body = encodeURIComponent(`Hi Olya!\n\n${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`)
+    window.location.href = `mailto:olikanikolska@gmail.com?subject=${subject}&body=${body}`
+    setTimeout(() => setStatus('sent'), 500)
   }
 
   const inputStyle = {
