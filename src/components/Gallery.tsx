@@ -133,22 +133,30 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         </div>
       )}
 
-      {/* ROWS — горизонтальні рядки, фіксована висота */}
+      {/* ROWS — горизонтальний masonry: фіксована висота, ширина за пропорціями */}
       {layout === 'rows' && (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.25rem' }}>
           {filtered.map(item => (
-            <div key={item._id} onClick={() => setLightbox(item)} style={{ position: 'relative', height: 320, borderRadius: '1rem', overflow: 'hidden', cursor: 'zoom-in', background: 'var(--cream-dark)' }}>
+            <div
+              key={item._id}
+              onClick={() => setLightbox(item)}
+              style={{ position: 'relative', height: 280, flexGrow: 1, minWidth: 180, borderRadius: '1rem', overflow: 'hidden', cursor: 'zoom-in', background: 'var(--cream-dark)' }}
+            >
               <Image
-                src={imgUrl(item, 1400)}
+                src={imgUrl(item, 800)}
                 alt={item.title}
                 fill
-                sizes="100vw"
+                sizes="(max-width: 768px) 100vw, 40vw"
                 style={{ objectFit: 'cover', transition: 'transform 0.4s' }}
-                onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
+                onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.04)')}
                 onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}
               />
-              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to right, rgba(44,32,24,0.55) 0%, transparent 50%)', display: 'flex', alignItems: 'center', padding: '2rem' }}>
-                <p style={{ color: 'white', fontSize: '1.5rem', fontFamily: "'Fraunces', serif" }}>{item.title}</p>
+              <div
+                style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(44,32,24,0.6) 0%, transparent 55%)', opacity: 0, transition: 'opacity 0.3s', display: 'flex', alignItems: 'flex-end', padding: '1rem' }}
+                onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
+                onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
+              >
+                <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Fraunces', serif" }}>{item.title}</p>
               </div>
             </div>
           ))}
