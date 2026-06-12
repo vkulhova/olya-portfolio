@@ -28,8 +28,16 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     : illustrations.filter(i => i.category === activeCategory)
 
   const lbIndex = lightbox ? filtered.findIndex(i => i._id === lightbox._id) : -1
-  const goPrev = (e: React.MouseEvent) => { e.stopPropagation(); if (lbIndex > 0) setLightbox(filtered[lbIndex - 1]) }
-  const goNext = (e: React.MouseEvent) => { e.stopPropagation(); if (lbIndex < filtered.length - 1) setLightbox(filtered[lbIndex + 1]) }
+  const [slideDir, setSlideDir] = useState<'left' | 'right' | null>(null)
+
+  const navigate = (dir: 'left' | 'right') => {
+    const nextIdx = dir === 'right' ? lbIndex + 1 : lbIndex - 1
+    if (nextIdx < 0 || nextIdx >= filtered.length) return
+    setSlideDir(dir)
+    setTimeout(() => { setLightbox(filtered[nextIdx]); setSlideDir(null) }, 320)
+  }
+  const goPrev = (e: React.MouseEvent) => { e.stopPropagation(); navigate('left') }
+  const goNext = (e: React.MouseEvent) => { e.stopPropagation(); navigate('right') }
 
   // keyboard navigation
   useEffect(() => {
@@ -190,38 +198,65 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       {lightbox && (
         <div
           onClick={() => setLightbox(null)}
-          style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.88)', backdropFilter: 'blur(10px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', cursor: 'zoom-out' }}
+          style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.92)', backdropFilter: 'blur(16px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
         >
-          {/* prev */}
+          {/* close */}
+          <button
+            onClick={e => { e.stopPropagation(); setLightbox(null) }}
+            style={{ position: 'fixed', top: '1.5rem', right: '1.5rem', width: 40, height: 40, borderRadius: '50%', background: 'rgba(255,255,255,0.12)', border: '1px solid rgba(255,255,255,0.25)', color: 'white', fontSize: '1.1rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background 0.2s', zIndex: 102 }}
+            onMouseEnter={e => (e.currentTarget.style.background = 'var(--rose)')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.12)')}
+          >✕</button>
+
+          {/* prev arrow */}
           <button
             onClick={goPrev}
             disabled={lbIndex === 0}
-            style={{ position: 'fixed', left: '1.5rem', top: '50%', transform: 'translateY(-50%)', width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '1.4rem', cursor: lbIndex === 0 ? 'default' : 'pointer', opacity: lbIndex === 0 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s', zIndex: 101 }}
-          >‹</button>
+            style={{ position: 'fixed', left: '1.5rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'none', border: 'none', cursor: lbIndex === 0 ? 'default' : 'pointer', opacity: lbIndex === 0 ? 0.15 : 1, padding: '0.5rem', transition: 'opacity 0.2s, transform 0.2s' }}
+            onMouseEnter={e => { if (lbIndex > 0) e.currentTarget.style.transform = 'translateY(-50%) translateX(-3px)' }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)' }}
+          >
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2"/>
+              <path d="M21 11l-7 7 7 7" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
 
-          <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }} onClick={e => e.stopPropagation()}>
+          {/* image + slide animation */}
+          <div
+            onClick={e => e.stopPropagation()}
+            style={{
+              display: 'flex', flexDirection: 'column', alignItems: 'center',
+              transition: 'transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s',
+              transform: slideDir === 'right' ? 'translateX(-60px)' : slideDir === 'left' ? 'translateX(60px)' : 'translateX(0)',
+              opacity: slideDir ? 0 : 1,
+            }}
+          >
             <Image
               src={imgUrl(lightbox, 1400)}
               alt={getTitle(lightbox)}
               width={1400} height={1400}
-              style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }}
+              style={{ maxWidth: '82vw', maxHeight: '78vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
             />
-            <div style={{ textAlign: 'center', marginTop: '1rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.3rem' }}>{getTitle(lightbox)}</p>
-              <p style={{ fontSize: '0.78rem', opacity: 0.45, marginTop: '0.3rem' }}>{lbIndex + 1} / {filtered.length}</p>
+            <div style={{ textAlign: 'center', marginTop: '1.25rem', color: 'white' }}>
+              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.35rem', letterSpacing: '0.01em' }}>{getTitle(lightbox)}</p>
+              <p style={{ fontSize: '0.75rem', opacity: 0.4, marginTop: '0.4rem', letterSpacing: '0.1em' }}>{lbIndex + 1} / {filtered.length}</p>
             </div>
-            <button
-              onClick={() => setLightbox(null)}
-              style={{ position: 'absolute', top: '-1rem', right: '-1rem', width: 36, height: 36, borderRadius: '50%', background: 'var(--rose)', border: 'none', color: 'white', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-            >×</button>
           </div>
 
-          {/* next */}
+          {/* next arrow */}
           <button
             onClick={goNext}
             disabled={lbIndex === filtered.length - 1}
-            style={{ position: 'fixed', right: '1.5rem', top: '50%', transform: 'translateY(-50%)', width: 44, height: 44, borderRadius: '50%', background: 'rgba(255,255,255,0.15)', border: '1.5px solid rgba(255,255,255,0.3)', color: 'white', fontSize: '1.4rem', cursor: lbIndex === filtered.length - 1 ? 'default' : 'pointer', opacity: lbIndex === filtered.length - 1 ? 0.2 : 1, display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s', zIndex: 101 }}
-          >›</button>
+            style={{ position: 'fixed', right: '1.5rem', top: '50%', transform: 'translateY(-50%)', zIndex: 101, background: 'none', border: 'none', cursor: lbIndex === filtered.length - 1 ? 'default' : 'pointer', opacity: lbIndex === filtered.length - 1 ? 0.15 : 1, padding: '0.5rem', transition: 'opacity 0.2s, transform 0.2s' }}
+            onMouseEnter={e => { if (lbIndex < filtered.length - 1) e.currentTarget.style.transform = 'translateY(-50%) translateX(3px)' }}
+            onMouseLeave={e => { e.currentTarget.style.transform = 'translateY(-50%)' }}
+          >
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="17" stroke="rgba(255,255,255,0.35)" strokeWidth="1.2"/>
+              <path d="M15 11l7 7-7 7" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </button>
         </div>
       )}
     </section>
