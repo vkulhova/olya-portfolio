@@ -91,7 +91,7 @@ export default function Hero() {
             textTransform: 'uppercase',
             transition: 'transform 0.2s, box-shadow 0.2s',
             boxShadow: '0 4px 20px rgba(201,75,122,0.3)',
-            marginBottom: '5rem',
+            marginBottom: '2.5rem',
           }}
           onMouseEnter={e => {
             e.currentTarget.style.transform = 'translateY(-2px)'
@@ -104,20 +104,7 @@ export default function Hero() {
         >
           View works
         </a>
-      </div>
 
-      {/* scroll hint */}
-      <div style={{
-        position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8,
-        color: 'var(--brown-light)', fontSize: '0.75rem', letterSpacing: '0.1em',
-        opacity: 0.6, animation: 'float 2.5s ease-in-out infinite',
-      }}>
-        <span>scroll</span>
-        <svg width="14" height="20" viewBox="0 0 14 20" fill="none">
-          <rect x="1" y="1" width="12" height="18" rx="6" stroke="currentColor" strokeWidth="1.5"/>
-          <circle cx="7" cy="7" r="2" fill="currentColor"/>
-        </svg>
       </div>
     </section>
   )
