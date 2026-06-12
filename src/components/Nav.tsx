@@ -9,6 +9,7 @@ export default function Nav() {
   const { lang, t, toggle } = useLang()
 
   useEffect(() => {
+    setScrolled(window.scrollY > 40)
     const onScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
@@ -67,8 +68,8 @@ export default function Nav() {
           alignItems: 'center',
           justifyContent: 'space-between',
           transition: 'background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s',
-          background: menuOpen ? 'rgba(250,248,244,0.88)' : scrolled ? 'rgba(250,248,244,0.88)' : 'rgba(250,248,244,0.72)',
-          backdropFilter: 'blur(12px)',
+          background: scrolled || menuOpen ? 'rgba(250,248,244,0.88)' : 'transparent',
+          backdropFilter: scrolled || menuOpen ? 'blur(12px)' : 'none',
           boxShadow: scrolled && !menuOpen ? '0 1px 0 rgba(44,32,24,0.08)' : 'none',
         }}
       >
