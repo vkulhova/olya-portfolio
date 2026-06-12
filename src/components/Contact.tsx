@@ -57,7 +57,7 @@ export default function Contact() {
                 color: 'var(--brown)',
                 outline: 'none',
                 transition: 'border-color 0.2s',
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Nunito', sans-serif",
               }}
               onFocus={e => (e.target.style.borderColor = 'var(--sage)')}
               onBlur={e => (e.target.style.borderColor = 'var(--cream-dark)')}
@@ -86,7 +86,7 @@ export default function Contact() {
               outline: 'none',
               resize: 'vertical',
               transition: 'border-color 0.2s',
-              fontFamily: "'DM Sans', sans-serif",
+              fontFamily: "'Nunito', sans-serif",
             }}
             onFocus={e => (e.target.style.borderColor = 'var(--sage)')}
             onBlur={e => (e.target.style.borderColor = 'var(--cream-dark)')}

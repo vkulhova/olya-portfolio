@@ -32,7 +32,7 @@ export default function Nav() {
       <a
         href="#top"
         style={{
-          fontFamily: "'Cormorant Garamond', serif",
+          fontFamily: "'Fraunces', serif",
           fontSize: '1.5rem',
           fontWeight: 500,
           color: 'var(--brown)',

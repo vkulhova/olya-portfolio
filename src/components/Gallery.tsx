@@ -110,7 +110,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
               onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
               onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
             >
-              <p style={{ color: 'white', fontSize: '0.95rem', fontFamily: "'Cormorant Garamond', serif" }}>
+              <p style={{ color: 'white', fontSize: '0.95rem', fontFamily: "'Fraunces', serif" }}>
                 {item.title}
               </p>
             </div>
@@ -139,7 +139,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
               style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }}
             />
             <div style={{ textAlign: 'center', marginTop: '1rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem' }}>{lightbox.title}</p>
+              <p style={{ fontFamily: "'Fraunces', serif", fontSize: '1.25rem' }}>{lightbox.title}</p>
               {lightbox.description && (
                 <p style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '0.3rem' }}>{lightbox.description}</p>
               )}
