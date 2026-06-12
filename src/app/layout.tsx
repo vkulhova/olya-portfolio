@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { LangProvider } from "@/lib/i18n";
+import ScrollToTop from "@/components/ScrollToTop";
 
 export const metadata: Metadata = {
   title: "lolikar — illustration",
@@ -19,7 +21,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className="min-h-screen flex flex-col">{children}</body>
+      <body className="min-h-screen flex flex-col">
+        <LangProvider>
+          {children}
+          <ScrollToTop />
+        </LangProvider>
+      </body>
     </html>
   );
 }

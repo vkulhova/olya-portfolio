@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import { urlFor } from '@/sanity/client'
+import { useLang } from '@/lib/i18n'
 
 interface Illustration {
   _id: string
@@ -12,18 +13,20 @@ interface Illustration {
   description?: string
 }
 
-const CATEGORIES = [
-  { value: 'all', label: 'All' },
-  { value: 'characters', label: 'Characters' },
-  { value: 'landscapes', label: 'Landscapes' },
-  { value: 'covers', label: 'Covers' },
-  { value: 'other', label: 'Other' },
-]
-
 export default function Gallery({ illustrations }: { illustrations: Illustration[] }) {
   const [activeCategory, setActiveCategory] = useState('all')
   const [layout, setLayout] = useState('masonry')
   const [lightbox, setLightbox] = useState<Illustration | null>(null)
+  const { t } = useLang()
+  const g = t.gallery
+
+  const CATEGORIES = [
+    { value: 'all', label: g.cats.all },
+    { value: 'characters', label: g.cats.characters },
+    { value: 'landscapes', label: g.cats.landscapes },
+    { value: 'covers', label: g.cats.covers },
+    { value: 'other', label: g.cats.other },
+  ]
 
   const filtered = activeCategory === 'all'
     ? illustrations
@@ -85,8 +88,8 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     <section id="works" style={{ padding: '6rem 2rem', maxWidth: 1280, margin: '0 auto' }}>
       {/* header */}
       <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-        <p style={{ fontSize: '0.75rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--sage)', marginBottom: '0.8rem' }}>portfolio</p>
-        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--brown)', marginBottom: '2rem' }}>Works</h2>
+        <p style={{ fontSize: '0.75rem', letterSpacing: '0.25em', textTransform: 'uppercase', color: 'var(--sage)', marginBottom: '0.8rem' }}>{g.tag}</p>
+        <h2 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', color: 'var(--brown)', marginBottom: '2rem' }}>{g.heading}</h2>
 
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
           {/* categories */}
@@ -115,7 +118,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
 
       {filtered.length === 0 && (
         <div style={{ textAlign: 'center', color: 'var(--brown-light)', padding: '4rem 0' }}>
-          <p style={{ fontSize: '1.1rem' }}>Ілюстрації скоро з&apos;являться ✨</p>
+          <p style={{ fontSize: '1.1rem' }}>{g.empty}</p>
         </div>
       )}
 

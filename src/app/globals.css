@@ -62,7 +62,12 @@ h1, h2, h3, h4 {
 /* ── Nav ── */
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 2rem;
+}
+
+.nav-mobile-right {
+  display: none;
 }
 
 .hamburger {
@@ -137,6 +142,7 @@ h1, h2, h3, h4 {
 /* ── Mobile ── */
 @media (max-width: 768px) {
   .nav-links { display: none; }
+  .nav-mobile-right { display: flex; }
   .hamburger { display: flex; }
 
   .about-grid {

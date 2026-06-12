@@ -1,16 +1,12 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-
-const LINKS = [
-  { label: 'works', href: '#works' },
-  { label: 'about', href: '#about' },
-  { label: 'contact', href: '#contact' },
-]
+import { useLang } from '@/lib/i18n'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { lang, t, toggle } = useLang()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
@@ -18,7 +14,6 @@ export default function Nav() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // lock scroll when menu open
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : ''
     return () => { document.body.style.overflow = '' }
@@ -26,14 +21,18 @@ export default function Nav() {
 
   const close = () => setMenuOpen(false)
 
+  const links = [
+    { label: t.nav.works, href: '#works' },
+    { label: t.nav.about, href: '#about' },
+    { label: t.nav.contact, href: '#contact' },
+  ]
+
   return (
     <>
       <header
         style={{
           position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
+          top: 0, left: 0, right: 0,
           zIndex: 60,
           padding: '1.25rem 2.5rem',
           display: 'flex',
@@ -51,22 +50,19 @@ export default function Nav() {
           style={{
             fontFamily: "'Rozha One', serif",
             fontSize: '1.5rem',
-            fontWeight: 500,
             color: 'var(--brown)',
             textDecoration: 'none',
             letterSpacing: '0.04em',
-            position: 'relative',
-            zIndex: 60,
           }}
         >
           lolikar
         </a>
 
-        {/* desktop */}
-        <nav className="nav-links">
-          {LINKS.map(({ label, href }) => (
+        {/* desktop nav */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }} className="nav-links">
+          {links.map(({ label, href }) => (
             <a
-              key={label}
+              key={href}
               href={href}
               style={{
                 fontSize: '0.85rem',
@@ -82,24 +78,70 @@ export default function Nav() {
               {label}
             </a>
           ))}
-        </nav>
 
-        {/* hamburger */}
-        <button
-          className={`hamburger${menuOpen ? ' open' : ''}`}
-          onClick={() => setMenuOpen(o => !o)}
-          aria-label="Menu"
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+          {/* lang toggle */}
+          <button
+            onClick={toggle}
+            style={{
+              background: 'none',
+              border: '1.5px solid var(--cream-dark)',
+              borderRadius: '100px',
+              padding: '0.25rem 0.75rem',
+              fontSize: '0.75rem',
+              letterSpacing: '0.1em',
+              color: 'var(--brown-light)',
+              cursor: 'pointer',
+              transition: 'all 0.2s',
+              fontFamily: "'Quicksand', sans-serif",
+            }}
+            onMouseEnter={e => {
+              e.currentTarget.style.borderColor = 'var(--rose)'
+              e.currentTarget.style.color = 'var(--rose)'
+            }}
+            onMouseLeave={e => {
+              e.currentTarget.style.borderColor = 'var(--cream-dark)'
+              e.currentTarget.style.color = 'var(--brown-light)'
+            }}
+          >
+            {lang === 'en' ? 'UA' : 'EN'}
+          </button>
+        </div>
+
+        {/* mobile right side */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }} className="nav-mobile-right">
+          <button
+            onClick={toggle}
+            style={{
+              background: 'none',
+              border: '1.5px solid var(--cream-dark)',
+              borderRadius: '100px',
+              padding: '0.2rem 0.6rem',
+              fontSize: '0.7rem',
+              letterSpacing: '0.1em',
+              color: 'var(--brown-light)',
+              cursor: 'pointer',
+              fontFamily: "'Quicksand', sans-serif",
+            }}
+          >
+            {lang === 'en' ? 'UA' : 'EN'}
+          </button>
+
+          <button
+            className={`hamburger${menuOpen ? ' open' : ''}`}
+            onClick={() => setMenuOpen(o => !o)}
+            aria-label="Menu"
+          >
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
       </header>
 
       {/* mobile overlay */}
       <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
-        {LINKS.map(({ label, href }) => (
-          <a key={label} href={href} onClick={close}>
+        {links.map(({ label, href }) => (
+          <a key={href} href={href} onClick={close}>
             {label}
           </a>
         ))}
