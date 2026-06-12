@@ -51,7 +51,7 @@ export default function Hero() {
           textTransform: 'uppercase',
           color: 'var(--sage)',
           marginBottom: '1.2rem',
-          fontFamily: "'Nunito', sans-serif",
+          fontFamily: "'Quicksand', sans-serif",
         }}>
           illustration portfolio
         </p>

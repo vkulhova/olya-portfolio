@@ -52,7 +52,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
         onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
       >
-        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Fraunces', serif" }}>{item.title}</p>
+        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
       </div>
     </div>
   )
@@ -76,7 +76,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
         onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
         onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
       >
-        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Fraunces', serif" }}>{item.title}</p>
+        <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
       </div>
     </div>
   )
@@ -156,7 +156,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
                 onMouseEnter={e => (e.currentTarget.style.opacity = '1')}
                 onMouseLeave={e => (e.currentTarget.style.opacity = '0')}
               >
-                <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Fraunces', serif" }}>{item.title}</p>
+                <p style={{ color: 'white', fontSize: '0.9rem', fontFamily: "'Rozha One', serif" }}>{item.title}</p>
               </div>
             </div>
           ))}
@@ -169,7 +169,7 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
           <div style={{ position: 'relative', maxWidth: '90vw', maxHeight: '90vh' }} onClick={e => e.stopPropagation()}>
             <Image src={imgUrl(lightbox, 1400)} alt={lightbox.title} width={1400} height={1400} style={{ maxWidth: '90vw', maxHeight: '85vh', width: 'auto', height: 'auto', borderRadius: '0.75rem', display: 'block' }} />
             <div style={{ textAlign: 'center', marginTop: '1rem', color: 'white' }}>
-              <p style={{ fontFamily: "'Fraunces', serif", fontSize: '1.25rem' }}>{lightbox.title}</p>
+              <p style={{ fontFamily: "'Rozha One', serif", fontSize: '1.25rem' }}>{lightbox.title}</p>
               {lightbox.description && <p style={{ fontSize: '0.85rem', opacity: 0.7, marginTop: '0.3rem' }}>{lightbox.description}</p>}
             </div>
             <button onClick={() => setLightbox(null)} style={{ position: 'absolute', top: '-1rem', right: '-1rem', width: 36, height: 36, borderRadius: '50%', background: 'var(--rose)', border: 'none', color: 'white', fontSize: '1.2rem', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>×</button>
