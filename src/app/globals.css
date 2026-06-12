@@ -55,6 +55,28 @@ h1, h2, h3, h4 {
   animation: fadeUp 0.7s ease both;
 }
 
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); opacity: 0; }
+  to   { transform: translateX(0);     opacity: 1; }
+}
+@keyframes slideOutLeft {
+  from { transform: translateX(0);    opacity: 1; }
+  to   { transform: translateX(-100%); opacity: 0; }
+}
+@keyframes slideOutRight {
+  from { transform: translateX(0);   opacity: 1; }
+  to   { transform: translateX(100%); opacity: 0; }
+}
+
+.lb-slide-in-right  { animation: slideInRight  0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.lb-slide-in-left   { animation: slideInLeft   0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.lb-slide-out-left  { animation: slideOutLeft  0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+.lb-slide-out-right { animation: slideOutRight 0.35s cubic-bezier(0.4,0,0.2,1) forwards; }
+
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-8px); }

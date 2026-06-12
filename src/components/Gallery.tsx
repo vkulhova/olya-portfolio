@@ -28,18 +28,27 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     : illustrations.filter(i => i.category === activeCategory)
 
   const lbIndex = lightbox ? filtered.findIndex(i => i._id === lightbox._id) : -1
-  const [slideDir, setSlideDir] = useState<'left' | 'right' | null>(null)
+
+  // outgoing item for simultaneous slide animation
+  const [outgoing, setOutgoing] = useState<{ item: Illustration; dir: 'left' | 'right' } | null>(null)
+  const [inDir, setInDir] = useState<'left' | 'right' | null>(null)
+  const isAnimating = useRef(false)
+  const lbOverlayRef = useRef<HTMLDivElement>(null)
 
   const navigate = (dir: 'left' | 'right') => {
+    if (isAnimating.current || !lightbox) return
     const nextIdx = dir === 'right' ? lbIndex + 1 : lbIndex - 1
     if (nextIdx < 0 || nextIdx >= filtered.length) return
-    setSlideDir(dir)
-    setTimeout(() => { setLightbox(filtered[nextIdx]); setSlideDir(null) }, 320)
+    isAnimating.current = true
+    setOutgoing({ item: lightbox, dir })
+    setInDir(dir)
+    setLightbox(filtered[nextIdx])
+    setTimeout(() => { setOutgoing(null); setInDir(null); isAnimating.current = false }, 360)
   }
   const goPrev = (e: React.MouseEvent) => { e.stopPropagation(); navigate('left') }
   const goNext = (e: React.MouseEvent) => { e.stopPropagation(); navigate('right') }
 
-  // keyboard navigation
+  // keyboard + wheel (trackpad horizontal swipe)
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       if (!lightbox) return
@@ -47,19 +56,61 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       if (e.key === 'ArrowRight') navigate('right')
       if (e.key === 'Escape') setLightbox(null)
     }
+    let wheelTimer: ReturnType<typeof setTimeout>
+    const onWheel = (e: WheelEvent) => {
+      if (!lightbox) return
+      const dx = Math.abs(e.deltaX)
+      const dy = Math.abs(e.deltaY)
+      if (dx < 10 && dy < 10) return
+      if (dx > dy) { // horizontal trackpad swipe
+        e.preventDefault()
+        clearTimeout(wheelTimer)
+        wheelTimer = setTimeout(() => { navigate(e.deltaX > 0 ? 'right' : 'left') }, 80)
+      }
+    }
     window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
+    window.addEventListener('wheel', onWheel, { passive: false })
+    return () => {
+      window.removeEventListener('keydown', onKey)
+      window.removeEventListener('wheel', onWheel)
+    }
   }, [lightbox, lbIndex, filtered])
 
-  // touch swipe
+  // touch: block page scroll during horizontal swipe
   const touchStartX = useRef<number | null>(null)
-  const onTouchStart = (e: React.TouchEvent) => { touchStartX.current = e.touches[0].clientX }
-  const onTouchEnd = (e: React.TouchEvent) => {
-    if (touchStartX.current === null) return
-    const dx = e.changedTouches[0].clientX - touchStartX.current
-    if (Math.abs(dx) > 50) navigate(dx < 0 ? 'right' : 'left')
-    touchStartX.current = null
-  }
+  const touchStartY = useRef<number | null>(null)
+  const isHorizontal = useRef(false)
+
+  useEffect(() => {
+    const el = lbOverlayRef.current
+    if (!el) return
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX
+      touchStartY.current = e.touches[0].clientY
+      isHorizontal.current = false
+    }
+    const onTouchMove = (e: TouchEvent) => {
+      if (touchStartX.current === null || touchStartY.current === null) return
+      const dx = Math.abs(e.touches[0].clientX - touchStartX.current)
+      const dy = Math.abs(e.touches[0].clientY - touchStartY.current)
+      if (!isHorizontal.current && dx > dy && dx > 8) isHorizontal.current = true
+      if (isHorizontal.current) e.preventDefault()
+    }
+    const onTouchEnd = (e: TouchEvent) => {
+      if (touchStartX.current === null) return
+      const dx = e.changedTouches[0].clientX - touchStartX.current
+      if (isHorizontal.current && Math.abs(dx) > 50) navigate(dx < 0 ? 'right' : 'left')
+      touchStartX.current = null; touchStartY.current = null; isHorizontal.current = false
+    }
+    el.addEventListener('touchstart', onTouchStart, { passive: true })
+    el.addEventListener('touchmove', onTouchMove, { passive: false })
+    el.addEventListener('touchend', onTouchEnd, { passive: true })
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart)
+      el.removeEventListener('touchmove', onTouchMove)
+      el.removeEventListener('touchend', onTouchEnd)
+    }
+  }, [lightbox, lbIndex, filtered])
 
   const CATEGORIES = [
     { value: 'all', label: g.cats.all },
@@ -207,10 +258,9 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
       {/* LIGHTBOX */}
       {lightbox && (
         <div
+          ref={lbOverlayRef}
           onClick={() => setLightbox(null)}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-          style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.92)', backdropFilter: 'blur(16px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem' }}
+          style={{ position: 'fixed', inset: 0, zIndex: 100, background: 'rgba(44,32,24,0.92)', backdropFilter: 'blur(16px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '2rem', overflow: 'hidden' }}
         >
           {/* close */}
           <button
@@ -233,15 +283,27 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
             </svg>
           </button>
 
-          {/* image + slide animation */}
+          {/* outgoing image */}
+          {outgoing && (
+            <div
+              className={outgoing.dir === 'right' ? 'lb-slide-out-left' : 'lb-slide-out-right'}
+              style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', pointerEvents: 'none' }}
+            >
+              <Image
+                src={imgUrl(outgoing.item, 1400)}
+                alt={getTitle(outgoing.item)}
+                width={1400} height={1400}
+                style={{ maxWidth: '82vw', maxHeight: '78vh', width: 'auto', height: 'auto', borderRadius: '1rem', display: 'block', boxShadow: '0 24px 80px rgba(0,0,0,0.4)' }}
+              />
+            </div>
+          )}
+
+          {/* incoming image */}
           <div
+            key={lightbox._id}
+            className={inDir === 'right' ? 'lb-slide-in-right' : inDir === 'left' ? 'lb-slide-in-left' : ''}
             onClick={e => e.stopPropagation()}
-            style={{
-              display: 'flex', flexDirection: 'column', alignItems: 'center',
-              transition: 'transform 0.32s cubic-bezier(0.4,0,0.2,1), opacity 0.32s',
-              transform: slideDir === 'right' ? 'translateX(-60px)' : slideDir === 'left' ? 'translateX(60px)' : 'translateX(0)',
-              opacity: slideDir ? 0 : 1,
-            }}
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
           >
             <Image
               src={imgUrl(lightbox, 1400)}
