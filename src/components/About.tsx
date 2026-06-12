@@ -37,16 +37,6 @@ export default function About() {
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               />
             </div>
-            <p style={{
-              textAlign: 'center',
-              marginTop: '1rem',
-              fontFamily: "'Caveat', cursive",
-              fontSize: '1.2rem',
-              color: 'var(--brown-light)',
-              letterSpacing: '0.02em',
-            }}>
-              this is me ✨
-            </p>
           </div>
         </div>
 
