@@ -71,7 +71,7 @@ export default function Hero() {
           color: 'var(--brown-light)',
           maxWidth: 440,
           lineHeight: 1.7,
-          margin: '0 auto 3rem',
+          margin: '0 auto 2rem',
         }}>
           Cozy worlds, gentle characters,<br />
           and a little bit of magic — in every illustration.
@@ -91,6 +91,7 @@ export default function Hero() {
             textTransform: 'uppercase',
             transition: 'transform 0.2s, box-shadow 0.2s',
             boxShadow: '0 4px 20px rgba(201,75,122,0.3)',
+            marginBottom: '5rem',
           }}
           onMouseEnter={e => {
             e.currentTarget.style.transform = 'translateY(-2px)'
@@ -107,7 +108,7 @@ export default function Hero() {
 
       {/* scroll hint */}
       <div style={{
-        position: 'absolute', bottom: '2.5rem', left: '50%', transform: 'translateX(-50%)',
+        position: 'absolute', bottom: '1.5rem', left: '50%', transform: 'translateX(-50%)',
         display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
         color: 'var(--brown-light)', fontSize: '0.7rem', letterSpacing: '0.15em',
         textTransform: 'uppercase', opacity: 0.5, animation: 'float 2.5s ease-in-out infinite',
