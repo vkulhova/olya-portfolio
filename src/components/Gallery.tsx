@@ -60,23 +60,25 @@ export default function Gallery({ illustrations }: { illustrations: Illustration
     return () => { window.removeEventListener('keydown', onKey) }
   }, [lightbox, lbIndex, filtered])
 
-  // trackpad wheel — attached non-passively to overlay so preventDefault works synchronously
+  // trackpad wheel — ref-based throttle so it doesn't reset on re-render
+  const lastWheelTime = useRef(0)
   useEffect(() => {
     const el = lbOverlayRef.current
-    if (!el || !lightbox) return
-    let lastWheelTime = 0
+    if (!el) return
     const onWheel = (e: WheelEvent) => {
-      const dx = Math.abs(e.deltaX)
-      const dy = Math.abs(e.deltaY)
-      if (dx < 5 && dy < 5) return
-      if (dx > dy * 0.5) {
+      // always block horizontal scroll to prevent browser back/forward
+      if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.3 || Math.abs(e.deltaX) > 10) {
         e.preventDefault()
         e.stopPropagation()
-        const now = Date.now()
-        if (now - lastWheelTime < 500) return  // throttle
-        lastWheelTime = now
-        navigate(e.deltaX > 0 ? 'right' : 'left')
       }
+      if (!lightbox) return
+      const dx = Math.abs(e.deltaX)
+      const dy = Math.abs(e.deltaY)
+      if (dx < 15 || dy > dx) return  // ignore diagonal/vertical
+      const now = Date.now()
+      if (now - lastWheelTime.current < 700) return  // throttle per-swipe
+      lastWheelTime.current = now
+      navigate(e.deltaX > 0 ? 'right' : 'left')
     }
     el.addEventListener('wheel', onWheel, { passive: false })
     return () => el.removeEventListener('wheel', onWheel)
