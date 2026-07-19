@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lolikar — Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="home">
+    <div class="hero__stripes">
+      <!-- alternating pink stripes pattern -->
+    </div>
+    <div class="hero__ellipse"></div>
+    <nav class="nav">
+      <a href="#portfolio" class="nav__link nav__link--active">portfolio</a>
+      <a href="#about" class="nav__link">about</a>
+      <a href="#contact" class="nav__link">contact</a>
+    </nav>
+    <div class="hero__logo">
+      <img src="images/IMG_8174 2.png" alt="Lolikar" class="hero__logo-img" />
+    </div>
+    <div class="hero__portrait">
+      <img src="images/IMG_8174.png" alt="Olika" />
+    </div>
+    <div class="hero__bio-card">
+      <div class="hero__bio-name">
+        <img src="images/IMG_8174 6.png" alt="Olika name" />
+      </div>
+      <p class="hero__bio-text">
+        My name is Olika, and the art lives under Lolikar. I make warm, cozy, detailed illustrations, mainly children's book art, character design, and custom portraits. Every piece is meant to feel like a small world you'd want to step into, filled with little objects, cozy homes, and characters that feel lived in. I have a love for small details, vintage aesthetics, and soft textures that reward a second look.
+      </p>
+      <div class="hero__bio-portrait">
+        <img src="images/IMG_8174 7.png" alt="Portrait frame" />
+        <img src="images/Untitled_Artwork 12.png" alt="Portrait" class="hero__bio-portrait-inner" />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ABOUT ===== -->
+  <section class="about" id="about">
+    <div class="about__bg"></div>
+    <div class="about__card">
+      <div class="about__photo">
+        <img src="images/IMG_6164.jpg" alt="Olika photo" />
+      </div>
+      <div class="about__texts">
+        <p class="about__text about__text--main">
+          I'm a Ukrainian illustrator based in Odesa, with a background that includes four years at a mobile game studio and years of freelance work across books, stickers, portraits, and brand illustration. For me, a good illustration should make you feel something. I care a lot about character and atmosphere, and that shows up in everything I make.
+        </p>
+        <p class="about__text about__text--personal">
+          Outside of work I'm a matcha and cocoa person with a real weakness for tiramisu and anything with cinnamon. I have a soft spot for collectible figures and constructors, my shelves will confirm. I sketch in a paper sketchbook and share my space with a cat I also walk on a leash. He stops at every flower and leaf like it's the most important thing in the world, and honestly he's not wrong. A good series, YouTube video, or TikTok rabbit hole can easily take over an evening. Home is where I feel most at ease, which is probably why I do my best work there. Living in Odesa means life comes with surprises, not always pleasant ones. But believing in better days and good endings is what keeps me drawing.
+        </p>
+      </div>
+    </div>
+    <div class="about__tag">
+      <span>ілюстрація</span>
+    </div>
+    <div class="about__photos">
+      <img src="images/IMG_8227.jpg" alt="" />
+      <img src="images/IMG_8226.jpg" alt="" />
+      <img src="images/IMG_8228.jpg" alt="" />
+    </div>
+    <a href="https://www.instagram.com/by.lolikar" target="_blank" class="btn btn--gold">@by.lolikar</a>
+  </section>
+
+  <!-- ===== WORKS ===== -->
+  <section class="works" id="portfolio">
+    <div class="works__grid">
+      <img src="images/7 2.png"                  alt="work" class="works__item works__item--tall" />
+      <img src="images/6 3.png"                  alt="work" class="works__item works__item--short" />
+      <img src="images/Untitled_Artwork 7.png"   alt="work" class="works__item works__item--tall" />
+      <img src="images/9 2.png"                  alt="work" class="works__item works__item--mid" />
+      <img src="images/Untitled_Artwork 6.png"   alt="work" class="works__item works__item--tall works__item--hidden-sm" />
+      <img src="images/1.png"                    alt="work" class="works__item works__item--tall" />
+    </div>
+  </section>
+
+  <!-- ===== CONTACT ===== -->
+  <section class="contact" id="contact">
+    <form class="contact__form" onsubmit="return false;">
+      <div class="contact__row">
+        <div class="contact__field">
+          <label>First name</label>
+          <input type="text" placeholder="" />
+        </div>
+        <div class="contact__field">
+          <label>Last name</label>
+          <input type="text" placeholder="" />
+        </div>
+      </div>
+      <div class="contact__field contact__field--full">
+        <label>Email</label>
+        <input type="email" placeholder="" />
+      </div>
+      <div class="contact__field contact__field--full">
+        <label>Your message</label>
+        <textarea rows="6"></textarea>
+      </div>
+      <button type="submit" class="btn btn--pink">Submit</button>
+    </form>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer__socials">
+      <a href="#"><img src="images/11062b_07e3fcc7259b4575af023d486157cc4e~mv2.png.png" alt="social" /></a>
+      <a href="#"><img src="images/11062b_084cbbff6ae446c1b03dc3637193e77a~mv2.png.png" alt="social" /></a>
+      <a href="#"><img src="images/11062b_283a2164806c4d4fb90048b444dec715~mv2.png.png" alt="social" /></a>
+      <a href="#"><img src="images/11062b_a06d85fa94d64ef68680321f5a043a8c~mv2.png.png" alt="social" /></a>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,401 @@
+@import url('https://fonts.cdnfonts.com/css/futura-pt');
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Futura PT', 'Futura', sans-serif;
+  background: #fff;
+  color: #000;
+  overflow-x: hidden;
+}
+
+/* ── UTILITIES ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 192px;
+  height: 78px;
+  border-radius: 47px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #fff;
+}
+.btn--gold  { background: #BD9E30; }
+.btn--pink  { background: #C94B7A; }
+
+/* ── NAV ── */
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding-top: 357px; /* matches Figma top offset */
+  position: relative;
+  z-index: 10;
+}
+.nav__link {
+  font-weight: 500;
+  font-size: 18px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #240505;
+}
+.nav__link--active { color: #BD9E30; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  width: 100%;
+  min-height: 1360px;
+  background: #fff;
+  overflow: hidden;
+}
+
+/* Striped header band */
+.hero__stripes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 292px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FED7C6 0px,
+    #FED7C6 55.38px,
+    #FFC3A9 55.38px,
+    #FFC3A9 110.77px
+  );
+  z-index: 0;
+}
+
+/* White oval on top of stripes (logo area) */
+.hero__ellipse {
+  position: absolute;
+  top: 49px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 305px;
+  height: 203px;
+  background: #fff;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+/* Logo text image */
+.hero__logo {
+  position: absolute;
+  top: 409px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+  overflow: hidden;
+}
+.hero__logo-img {
+  width: 100%;
+  max-width: 1082px;
+  height: 49px;
+  object-fit: cover;
+}
+
+/* Yellow background band */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 960px;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: #DFC563;
+  z-index: 0;
+}
+
+/* Portrait above the yellow band */
+.hero__portrait {
+  position: absolute;
+  top: 19px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 337px;
+  height: 249px;
+  z-index: 2;
+}
+.hero__portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Bio card */
+.hero__bio-card {
+  position: absolute;
+  top: 657px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 925px;
+  min-height: 418px;
+  background: #fff;
+  border-radius: 23px;
+  padding: 44px 70px 44px 70px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 3;
+}
+
+.hero__bio-name img {
+  max-width: 426px;
+  height: 79px;
+  object-fit: contain;
+}
+
+.hero__bio-text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 4px;
+  text-align: justify;
+  color: #000;
+  max-width: 439px;
+}
+
+.hero__bio-portrait {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 314px;
+  height: 349px;
+  overflow: hidden;
+  border-radius: 0 23px 0 0;
+}
+.hero__bio-portrait img:first-child {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__bio-portrait-inner {
+  position: absolute;
+  top: 52px;
+  left: 9.24%;
+  right: 7.96%;
+  height: 260px;
+  object-fit: cover;
+}
+
+/* ── ABOUT ── */
+.about {
+  position: relative;
+  width: 100%;
+  min-height: 2264px;
+  background: #fff;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about__bg {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  width: 100%;
+  height: 1519px;
+  background: url('images/sj-objio-XFWiZTa2Ub0-unsplash.jpg') center/cover no-repeat;
+  z-index: 0;
+}
+
+.about__card {
+  position: relative;
+  margin-top: 393px; /* 325 + 68 */
+  width: 925px;
+  min-height: 981px;
+  background: #fff;
+  border-radius: 22px;
+  padding: 90px 84px 90px 84px;
+  display: grid;
+  grid-template-columns: 321px 1fr;
+  gap: 32px;
+  z-index: 2;
+}
+
+.about__photo img {
+  width: 321px;
+  height: 369px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.about__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.about__text {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 21px;
+  letter-spacing: 4px;
+  text-align: justify;
+  color: #000;
+}
+
+.about__tag {
+  margin-top: 48px;
+  width: 264px;
+  height: 120px;
+  background: #D9D9D9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+.about__tag span {
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: #000;
+}
+
+.about__photos {
+  display: flex;
+  gap: 0;
+  margin-top: 48px;
+  z-index: 2;
+}
+.about__photos img {
+  width: 381px;
+  height: 362px;
+  object-fit: cover;
+}
+
+.about > .btn--gold {
+  margin-top: 48px;
+  z-index: 2;
+}
+
+/* ── WORKS ── */
+.works {
+  width: 100%;
+  min-height: 920px;
+  background: #fff;
+  padding: 37px 86px 0;
+}
+
+.works__grid {
+  display: grid;
+  grid-template-columns: 400px 400px 400px;
+  grid-template-rows: auto auto;
+  gap: 0 54px;
+  justify-content: center;
+}
+
+.works__item {
+  object-fit: cover;
+  display: block;
+  width: 100%;
+}
+.works__item--tall  { height: 499px; }
+.works__item--short { height: 324px; margin-top: 0; }
+.works__item--mid   { height: 389px; }
+
+/* ── CONTACT ── */
+.contact {
+  width: 100%;
+  min-height: 939px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  padding: 174px 0 0;
+}
+
+.contact__form {
+  width: 792px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.contact__row {
+  display: flex;
+  gap: 26px;
+  margin-bottom: 120px;
+}
+
+.contact__field {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+.contact__field--full {
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+.contact__field label {
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: #2C2018;
+}
+
+.contact__field input,
+.contact__field textarea {
+  width: 100%;
+  border: 2px solid #BD9E30;
+  border-radius: 10px;
+  background: #fff;
+  padding: 18px 20px;
+  font-family: inherit;
+  font-size: 16px;
+  letter-spacing: 2px;
+  outline: none;
+  resize: none;
+}
+.contact__field input { height: 61px; }
+.contact__field textarea { height: 207px; }
+
+.contact__form > .btn {
+  align-self: center;
+  margin-top: 28px;
+}
+
+/* ── FOOTER ── */
+.footer {
+  width: 100%;
+  height: 186px;
+  background: #CAE8E6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer__socials {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+.footer__socials img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}

@@ -1,0 +1,78 @@
+@import url('https://fonts.cdnfonts.com/css/futura-pt');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Outfit:wght@300;400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Futura PT', 'Futura', sans-serif;
+  overflow-x: hidden;
+}
+
+/* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */
+/* Tile height = 20% = 1/5 of card height → always 5 bumps regardless of card height */
+/* --s controls bump depth (pseudo-element width = bump radius) */
+.scalloped-all {
+  --s: 38px;
+  position: relative;
+  background: white;
+}
+
+.scalloped-all::before,
+.scalloped-all::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--s);
+  pointer-events: none;
+}
+
+/* Left bumps — overlap card by 1px to close subpixel gap */
+.scalloped-all::before {
+  right: calc(100% - 1px);
+  background:
+    radial-gradient(circle at 100% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
+    0 0 / var(--s) 20% repeat-y;
+}
+
+/* Right bumps — overlap card by 1px to close subpixel gap */
+.scalloped-all::after {
+  left: calc(100% - 1px);
+  background:
+    radial-gradient(circle at 0% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
+    0 0 / var(--s) 20% repeat-y;
+}
+
+/* Contact card — bumps tile = 2×radius → always gap-free regardless of card height */
+.scalloped-15 {
+  --s: 27px;
+  position: relative;
+  background: white;
+}
+.scalloped-15::before,
+.scalloped-15::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: var(--s);
+  pointer-events: none;
+}
+.scalloped-15::before {
+  right: calc(100% - 1px);
+  background:
+    radial-gradient(circle at 100% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
+    0 0 / var(--s) calc(100% / 15) repeat-y;
+}
+.scalloped-15::after {
+  left: calc(100% - 1px);
+  background:
+    radial-gradient(circle at 0% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
+    0 0 / var(--s) calc(100% / 15) repeat-y;
+}
