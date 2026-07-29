@@ -83,7 +83,7 @@ export default function Contact() {
                   type="text"
                   name="firstName"
                   required
-                  className="border border-gold rounded-lg px-4 py-4 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                  className="border border-gold rounded-lg px-4 py-2.5 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
                 />
               </div>
               <div className="flex flex-col gap-2">
@@ -94,7 +94,7 @@ export default function Contact() {
                   type="text"
                   name="lastName"
                   required
-                  className="border border-gold rounded-lg px-4 py-4 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                  className="border border-gold rounded-lg px-4 py-2.5 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
                 />
               </div>
             </div>
@@ -107,7 +107,7 @@ export default function Contact() {
                 type="email"
                 name="email"
                 required
-                className="border border-gold rounded-lg px-4 py-4 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                className="border border-gold rounded-lg px-4 py-2.5 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
               />
             </div>
 
