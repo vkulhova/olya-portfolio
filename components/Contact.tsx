@@ -47,7 +47,7 @@ export default function Contact() {
   return (
     <>
       {/* Dots bar on white background with gap before beige section */}
-      <div className="w-full bg-white pb-6">
+      <div className="w-full bg-white pb-9">
         <DecorativeDots />
       </div>
 
