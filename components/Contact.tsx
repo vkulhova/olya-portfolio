@@ -117,9 +117,8 @@ export default function Contact() {
               </label>
               <textarea
                 name="message"
-                rows={5}
                 required
-                className="border border-gold rounded-lg px-4 py-3 font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white resize-none"
+                className="border border-gold rounded-lg px-4 py-3 h-[84px] font-futura text-sm tracking-wider outline-none focus:border-gold/80 bg-white resize-none"
               />
             </div>
 
