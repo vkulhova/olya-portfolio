@@ -10,7 +10,7 @@ export default async function Portfolio() {
   }
 
   return (
-    <section id="portfolio" className="w-full bg-white py-10">
+    <section id="portfolio" className="w-full bg-white pt-20 pb-10">
       <div className="w-[86%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-8">
         {works.map((work) => (
           <div key={work._id} className="w-full">
