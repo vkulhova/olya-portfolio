@@ -19,7 +19,7 @@ export default function About() {
       />
 
       {/* Main content */}
-      <div className="w-[78%] mx-auto pt-20 pb-10">
+      <div className="w-[78%] mx-auto pt-[104px] pb-10">
         {/* Photo + text grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
