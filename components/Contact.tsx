@@ -130,7 +130,7 @@ export default function Contact() {
                 alt="Illustration"
                 width={800}
                 height={600}
-                className="w-[79%] h-auto object-contain"
+                className="w-[52.7%] h-auto object-contain"
               />
             </div>
           </form>
