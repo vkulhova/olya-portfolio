@@ -7,7 +7,7 @@ export default function About() {
       <DecorativeDots />
 
       {/* White gap between dots and mint stripe */}
-      <div className="h-6 bg-white" />
+      <div className="h-9 bg-white" />
 
       {/* Mint stripe with vector illustrations — decoration-about.svg IS the stripe */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -31,7 +31,7 @@ export default function About() {
               src="/svg/star-gold.svg"
               alt=""
               aria-hidden="true"
-              className="absolute -top-14 -left-14 w-[85px] h-[85px] z-10 pointer-events-none"
+              className="absolute -top-14 -left-10 w-[85px] h-[85px] z-10 pointer-events-none"
             />
             {/* Photo */}
             <div className="relative w-full h-[320px] lg:h-full min-h-[380px] overflow-hidden">
