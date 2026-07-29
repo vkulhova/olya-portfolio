@@ -4,10 +4,10 @@ export default function DecorativeDots() {
     <div
       className="w-full"
       style={{
-        height: "29px",
+        height: "23px",
         backgroundImage: "url('/svg/pattern-tile.svg')",
         backgroundRepeat: "repeat-x",
-        backgroundSize: "246px 29px",
+        backgroundSize: "197px 23px",
       }}
       aria-hidden="true"
     />

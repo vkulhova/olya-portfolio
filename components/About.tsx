@@ -19,9 +19,9 @@ export default function About() {
       />
 
       {/* Main content */}
-      <div className="w-[78%] mx-auto py-10">
+      <div className="w-[78%] mx-auto pt-20 pb-10">
         {/* Photo + text grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[377px_1fr] gap-10 items-stretch mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
           {/* Photo column with stars */}
           <div className="relative">
@@ -31,7 +31,7 @@ export default function About() {
               src="/svg/star-gold.svg"
               alt=""
               aria-hidden="true"
-              className="absolute -top-14 -left-14 w-32 h-32 z-10 pointer-events-none"
+              className="absolute -top-14 -left-14 w-[85px] h-[85px] z-10 pointer-events-none"
             />
             {/* Photo */}
             <div className="relative w-full h-[320px] lg:h-full min-h-[380px] overflow-hidden">
@@ -39,7 +39,7 @@ export default function About() {
                 src="/images/photo-olya.jpg"
                 alt="Olika Nikolska"
                 fill
-                className="object-cover object-top"
+                className="object-contain object-top"
               />
             </div>
             {/* Salmon star — bottom-left, overlapping photo corner */}
@@ -48,7 +48,7 @@ export default function About() {
               src="/svg/star-salmon.svg"
               alt=""
               aria-hidden="true"
-              className="absolute -bottom-9 left-4 w-[88px] h-[88px] z-10 pointer-events-none"
+              className="absolute -bottom-9 left-4 w-[59px] h-[59px] z-10 pointer-events-none"
             />
           </div>
 
@@ -67,7 +67,7 @@ export default function About() {
                 src="/svg/star-olive.svg"
                 alt=""
                 aria-hidden="true"
-                className="w-20 h-20"
+                className="w-[53px] h-[53px]"
               />
             </div>
 

@@ -7,12 +7,12 @@ export default function Hero() {
     <section id="home" className="w-full">
       <StripeBar />
 
-      {/* White logo + nav area — pb-8 gives white gap below визерунок before gold */}
-      <div className="bg-white pt-8 pb-8 flex flex-col items-center gap-6">
+      {/* White logo + nav area — pb-8 gives white gap below візерунок before gold */}
+      <div className="bg-white pt-[53px] pb-8 flex flex-col items-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-16 w-auto" />
+        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
 
-        <nav className="flex gap-10">
+        <nav className="flex gap-10 mt-[43px]">
           {(["portfolio", "about", "contact"] as const).map((link, i) => (
             <a
               key={link}
@@ -24,12 +24,14 @@ export default function Hero() {
           ))}
         </nav>
 
-        <DecorativeDots />
+        <div className="mt-10 w-full">
+          <DecorativeDots />
+        </div>
       </div>
 
-      {/* Gold hero section — fixed height so child % sizing works */}
+      {/* Gold hero section — height follows card content so nothing overflows on small screens */}
       <div
-        className="relative w-full h-[580px] flex items-center justify-center"
+        className="relative w-full py-16 md:py-20 flex items-center justify-center"
         style={{ background: "#D5BA54" }}
       >
         {/* Background decorative patterns */}
@@ -49,16 +51,16 @@ export default function Hero() {
           className="absolute -bottom-8 left-10 w-20 h-20 pointer-events-none z-10"
         />
 
-        {/* Card wrapper — 69% width × 65% height of gold section */}
-        <div className="relative z-10 w-[69%] h-[65%]">
+        {/* Card wrapper — width narrows on small screens, height follows content */}
+        <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
 
-          {/* Star 1 — attached to card, overlaps top edge slightly left of center */}
+          {/* Star 1 — straddles the card's top edge, centered above the avatar */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/svg/star-cream.svg"
             alt=""
             aria-hidden="true"
-            className="absolute -top-10 left-[28%] w-20 h-20 pointer-events-none z-20"
+            className="absolute top-0 left-[27%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
           />
 
           {/* Star 2 — attached to card, overlaps bottom-right corner */}
@@ -67,14 +69,14 @@ export default function Hero() {
             src="/svg/star-cream.svg"
             alt=""
             aria-hidden="true"
-            className="absolute -bottom-10 -right-10 w-16 h-16 pointer-events-none z-20"
+            className="absolute -bottom-10 right-4 w-16 h-16 pointer-events-none z-20"
           />
 
           {/* Hero card */}
-          <div className="scalloped-all w-full h-full bg-white">
-            <div className="w-full h-full px-12 flex flex-row items-center gap-8 overflow-hidden">
-            {/* Avatar circle — 83% of card height, no border */}
-            <div className="shrink-0 h-[83%] aspect-square rounded-full overflow-hidden">
+          <div className="w-full bg-white rounded-3xl">
+            <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+            {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
+            <div className="shrink-0 w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
               <Image
                 src="/images/avatar.png"
                 alt="Olika"
@@ -85,12 +87,12 @@ export default function Hero() {
             </div>
 
             {/* Text content */}
-            <div className="flex flex-col gap-4 items-start">
+            <div className="flex flex-col gap-6 items-center text-center md:items-start md:text-left min-w-0">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/hello-and-welcome.svg"
                 alt="Hello and welcome"
-                className="h-[62px] w-auto"
+                className="h-[37px] md:h-[48px] w-auto max-w-full"
               />
 
               <p className="font-outfit font-normal text-sm leading-[1.6] tracking-[0.04em] text-dark">
