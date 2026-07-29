@@ -96,8 +96,8 @@ export default function About() {
 
       </div>
 
-      {/* Desk illustration — 90% page width, outside the narrow container */}
-      <div className="w-[90%] mx-auto pb-16">
+      {/* Desk illustration — 60% page width, outside the narrow container */}
+      <div className="w-[60%] mx-auto pb-16">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/illustration.png"
