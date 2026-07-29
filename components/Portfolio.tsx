@@ -11,9 +11,11 @@ export default async function Portfolio() {
 
   return (
     <section id="portfolio" className="w-full bg-white pt-20 pb-10">
-      <div className="w-[86%] mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-14 gap-y-8">
+      {/* Masonry via CSS columns: items flow to their natural height, so the gap
+          between one image and the next is always the same regardless of ratio. */}
+      <div className="w-[86%] mx-auto columns-1 sm:columns-2 lg:columns-3 gap-x-14">
         {works.map((work) => (
-          <div key={work._id} className="w-full">
+          <div key={work._id} className="mb-8 break-inside-avoid">
             <Image
               src={work.imageUrl}
               alt={work.title}
