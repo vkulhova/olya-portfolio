@@ -23,6 +23,9 @@ export async function getIllustrations(): Promise<Illustration[]> {
       "imageUrl": image.asset->url,
       "width": image.asset->metadata.dimensions.width,
       "height": image.asset->metadata.dimensions.height,
-    }`
+    }`,
+    {},
+    // Without this Next caches the result forever, so edits in Studio never show up.
+    { next: { revalidate: 60 } }
   );
 }

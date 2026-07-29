@@ -34,23 +34,6 @@ export default function Hero() {
         className="relative w-full py-16 md:py-20 flex items-center justify-center"
         style={{ background: "#D5BA54" }}
       >
-        {/* Background decorative patterns */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/svg/hero-pattern.svg"
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 w-full h-full object-cover pointer-events-none opacity-80"
-        />
-        {/* Star 3 — floats on gold background, bottom-left area */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/svg/star-cream.svg"
-          alt=""
-          aria-hidden="true"
-          className="absolute -bottom-8 left-10 w-20 h-20 pointer-events-none z-10"
-        />
-
         {/* Card wrapper — width narrows on small screens, height follows content */}
         <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
 
@@ -60,7 +43,7 @@ export default function Hero() {
             src="/svg/star-cream.svg"
             alt=""
             aria-hidden="true"
-            className="absolute top-0 left-[27%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
+            className="absolute top-0 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
           />
 
           {/* Star 2 — attached to card, overlaps bottom-right corner */}
