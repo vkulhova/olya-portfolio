@@ -31,7 +31,7 @@ export default function About() {
               src="/svg/star-gold.svg"
               alt=""
               aria-hidden="true"
-              className="absolute -top-14 -left-10 w-[85px] h-[85px] z-10 pointer-events-none"
+              className="absolute -top-10 -left-10 w-[85px] h-[85px] z-10 pointer-events-none"
             />
             {/* Photo */}
             <div className="relative w-full h-[320px] lg:h-full min-h-[380px] overflow-hidden">
