@@ -10,7 +10,7 @@ const socials = [
 export default function Footer() {
   return (
     <footer className="w-full bg-white">
-      <div className="h-6 bg-white" />
+      <div className="h-9 bg-white" />
       <DecorativeDots />
 
       <div className="flex justify-center gap-4 py-12">
