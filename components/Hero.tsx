@@ -1,32 +1,31 @@
 import Image from "next/image";
 import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
+import Nav from "./Nav";
 
 export default function Hero() {
   return (
-    <section id="home" className="w-full">
-      <StripeBar />
+    /* Fragment, not a wrapper element: the nav below has to be a direct child of
+       <main> for `sticky` to hold all the way down the page. Nested in a section
+       it would unstick as soon as that section scrolled past. */
+    <>
+      <div id="home">
+        <StripeBar />
 
-      {/* White logo + nav area — pb-8 gives white gap below візерунок before gold */}
-      <div className="bg-white pt-[53px] pb-8 flex flex-col items-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
-
-        <nav className="flex gap-10 mt-[43px]">
-          {(["portfolio", "about", "contact"] as const).map((link, i) => (
-            <a
-              key={link}
-              href={`#${link}`}
-              className={`font-futura text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${i === 0 ? "text-gold font-extrabold" : "text-dark font-bold"}`}
-            >
-              {link}
-            </a>
-          ))}
-        </nav>
-
-        <div className="mt-10 w-full">
-          <DecorativeDots />
+        {/* Logo. pb here + the nav's own py keep the original 43px gap. */}
+        <div className="bg-white pt-[53px] pb-[23px] flex flex-col items-center">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
         </div>
+      </div>
+
+      {/* Pins to the top of the viewport once scrolled to, and lights up the
+          section currently in view */}
+      <Nav />
+
+      {/* pt here + the nav's py keep the original 40px gap; pb-8 the white gap before gold */}
+      <div className="bg-white pt-[20px] pb-8">
+        <DecorativeDots />
       </div>
 
       {/* Gold hero section — height follows card content so nothing overflows on small screens */}
@@ -90,6 +89,6 @@ export default function Hero() {
           </div>
         </div>
       </div>
-    </section>
+    </>
   );
 }

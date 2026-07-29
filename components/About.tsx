@@ -3,7 +3,7 @@ import DecorativeDots from "./DecorativeDots";
 
 export default function About() {
   return (
-    <section id="about" className="w-full bg-white">
+    <section id="about" className="w-full bg-white scroll-mt-[60px]">
       <DecorativeDots />
 
       {/* White gap between dots and mint stripe */}
