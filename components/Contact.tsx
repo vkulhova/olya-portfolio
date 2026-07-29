@@ -135,7 +135,9 @@ export default function Contact() {
           </form>
         </div>
 
-        {/* Submit button outside card */}
+        {/* Submit button outside card. The pl offsets the trailing letter-space
+            tracking leaves after the last glyph, which otherwise pulls the
+            centred label visibly left. */}
         <button
           type="submit"
           form="contact-form"
@@ -144,7 +146,7 @@ export default function Contact() {
             form?.requestSubmit();
           }}
           disabled={status === "sending" || status === "sent"}
-          className="mt-10 w-48 h-14 rounded-full bg-pink text-white font-futura font-medium text-sm tracking-[0.2em] uppercase hover:bg-pink/90 transition-colors disabled:opacity-60"
+          className="mt-10 w-48 h-14 pl-[0.2em] rounded-full bg-pink text-white font-futura font-medium text-sm tracking-[0.2em] uppercase hover:bg-pink/90 transition-colors disabled:opacity-60"
         >
           {status === "sent" ? "Sent ✓" : status === "sending" ? "Sending..." : "Post it!"}
         </button>
