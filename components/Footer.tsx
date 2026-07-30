@@ -13,7 +13,8 @@ export default function Footer() {
       <div className="h-9 bg-white" />
       <DecorativeDots />
 
-      <div className="flex justify-center gap-4 py-12">
+      {/* icon and gap both scaled by 1.8, so the row keeps its proportions */}
+      <div className="flex justify-center gap-[9px] py-12">
         {socials.map((s) => (
           <a
             key={s.name}
@@ -21,7 +22,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.name}
-            className="w-10 h-10 hover:opacity-80 transition-opacity"
+            className="w-[22px] h-[22px] hover:opacity-80 transition-opacity"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={s.icon} alt={s.name} className="w-full h-full object-contain" />

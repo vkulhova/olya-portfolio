@@ -45,15 +45,15 @@ export default function Contact() {
   }
 
   return (
-    <>
-      {/* Dots bar on white background with gap before beige section */}
+    <section id="contact" className="w-full scroll-mt-[60px]">
+      {/* Dots bar on white, inside the section so Contact begins at the pattern
+          — same as About — rather than at the beige band below it */}
       <div className="w-full bg-white pb-9">
         <DecorativeDots />
       </div>
 
-    <section
-      id="contact"
-      className="w-full relative scroll-mt-[60px]"
+    <div
+      className="w-full relative"
       style={{
         backgroundColor: "#F0E8DA",
         backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
@@ -157,7 +157,7 @@ export default function Contact() {
           </p>
         )}
       </div>
+    </div>
     </section>
-    </>
   );
 }
