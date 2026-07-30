@@ -39,22 +39,11 @@ export default function Nav() {
           key={link}
           href={`#${link}`}
           aria-current={active === link ? "page" : undefined}
-          className={`grid justify-items-center font-futura text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${
+          className={`font-futura font-bold text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${
             active === link ? "text-gold" : "text-dark"
           }`}
         >
-          {/* Invisible bold twin holds the width, so the row doesn't jump
-              when the active link switches weight */}
-          <span aria-hidden className="col-start-1 row-start-1 invisible font-extrabold">
-            {link}
-          </span>
-          <span
-            className={`col-start-1 row-start-1 ${
-              active === link ? "font-extrabold" : "font-bold"
-            }`}
-          >
-            {link}
-          </span>
+          {link}
         </a>
       ))}
     </nav>
