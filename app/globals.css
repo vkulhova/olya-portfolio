@@ -7,11 +7,34 @@
 
 html {
   scroll-behavior: smooth;
+  /* Firefox. Inherited, so nested scrollers (the message field) match too. */
+  scrollbar-color: #6ACCC4 #EAF7F6;
+  scrollbar-width: thin;
 }
 
 body {
   font-family: 'Futura PT', 'Futura', sans-serif;
   overflow-x: hidden;
+}
+
+/* Turquoise scrollbar — #6ACCC4 is the teal already in the Lolikar logo.
+   WebKit ignores scrollbar-color, so it needs its own rules. */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #EAF7F6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6ACCC4;
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #4FBDB4;
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */
