@@ -8,7 +8,7 @@
 html {
   scroll-behavior: smooth;
   /* Firefox. Inherited, so nested scrollers (the message field) match too. */
-  scrollbar-color: #D5BA54 #F5EDE0;
+  scrollbar-color: #F1E2B8 #FFFFFF;
   scrollbar-width: thin;
 }
 
@@ -17,24 +17,25 @@ body {
   overflow-x: hidden;
 }
 
-/* Mustard scrollbar — #D5BA54 is the hero band's mustard, #F5EDE0 the beige
-   token. WebKit ignores scrollbar-color, so it needs its own rules. */
+/* Cream scrollbar — #F1E2B8 is the decorative stars' cream. The track stays
+   white: the beige token sits too close to the thumb to tell them apart.
+   WebKit ignores scrollbar-color, so it needs its own rules. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F5EDE0;
+  background: #FFFFFF;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D5BA54;
+  background: #F1E2B8;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #BD9E30;
+  background: #DFC563;
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */
