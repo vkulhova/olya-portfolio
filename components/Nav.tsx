@@ -5,8 +5,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 const LINKS = ["portfolio", "about", "contact"] as const;
 type Section = (typeof LINKS)[number];
 
-/** Height of the pinned bar — the line that decides which section we are "on". */
-const BAR_HEIGHT = 60;
+/** Height of the pinned bar — the line that decides which section we are "on".
+ *  Kept in step with the nav's py and the sections' scroll-mt. */
+const BAR_HEIGHT = 78;
 
 /** How close to the target counts as "arrived", in px. */
 const ARRIVED_WITHIN = 2;
@@ -103,7 +104,7 @@ export default function Nav() {
     // appears once the bar is pinned — before that it has nothing to cast onto.
     <nav
       ref={navRef}
-      className={`sticky top-0 z-40 bg-white flex justify-center gap-10 py-5 transition-shadow duration-300 ${
+      className={`sticky top-0 z-40 bg-white flex justify-center gap-10 py-[29px] transition-shadow duration-300 ${
         stuck ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)]" : "shadow-none"
       }`}
     >
@@ -117,7 +118,7 @@ export default function Nav() {
         }`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-9 w-auto" />
+        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[47px] w-auto" />
       </a>
 
       {LINKS.map((link) => (

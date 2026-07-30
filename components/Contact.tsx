@@ -45,7 +45,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="w-full scroll-mt-[60px]">
+    <section id="contact" className="w-full scroll-mt-[78px]">
       {/* Dots bar on white, inside the section so Contact begins at the pattern
           — same as About — rather than at the beige band below it */}
       <div className="w-full bg-white pt-6 pb-9">

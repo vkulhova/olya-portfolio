@@ -4,7 +4,7 @@ import DecorativeDots from "./DecorativeDots";
 export default function About() {
   return (
     /* pt-6 is space handed over from Portfolio's bottom padding, not added on top */
-    <section id="about" className="w-full bg-white pt-6 scroll-mt-[60px]">
+    <section id="about" className="w-full bg-white pt-6 scroll-mt-[78px]">
       <DecorativeDots />
 
       {/* White gap between dots and mint stripe */}
