@@ -29,6 +29,9 @@ function currentSection(): Section {
 
 export default function Nav() {
   const [active, setActive] = useState<Section>(LINKS[0]);
+  // Once the bar is pinned, a small logo joins it — the big one has scrolled away by then.
+  const [stuck, setStuck] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
 
   // While a nav link is being followed, the clicked section stays lit instead of
   // flickering through every section the page glides past on the way there.
@@ -55,6 +58,10 @@ export default function Nav() {
 
   useEffect(() => {
     const onScroll = () => {
+      // Kept above the lock check, so the small logo still appears while a
+      // clicked link is being followed.
+      setStuck((navRef.current?.getBoundingClientRect().top ?? 1) <= 0);
+
       const locked = lockedRef.current;
       if (locked) {
         const el = document.getElementById(locked);
@@ -92,7 +99,23 @@ export default function Nav() {
   }, [release]);
 
   return (
-    <nav className="sticky top-0 z-40 bg-white flex justify-center gap-10 py-5">
+    <nav
+      ref={navRef}
+      className="sticky top-0 z-40 bg-white flex justify-center gap-10 py-5"
+    >
+      {/* Absolutely placed so it never nudges the centred links. Hidden on small
+          screens, where the links already fill the width. */}
+      <a
+        href="#home"
+        aria-label="Lolikar — back to top"
+        className={`absolute left-8 top-1/2 -translate-y-1/2 hidden sm:block transition-opacity duration-300 ${
+          stuck ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-9 w-auto" />
+      </a>
+
       {LINKS.map((link) => (
         <a
           key={link}
