@@ -3,8 +3,8 @@ import DecorativeDots from "./DecorativeDots";
 
 export default function About() {
   return (
-    /* pt-4 is space handed over from Portfolio's bottom padding, not added on top */
-    <section id="about" className="w-full bg-white pt-4 scroll-mt-[60px]">
+    /* pt-6 is space handed over from Portfolio's bottom padding, not added on top */
+    <section id="about" className="w-full bg-white pt-6 scroll-mt-[60px]">
       <DecorativeDots />
 
       {/* White gap between dots and mint stripe */}
@@ -98,8 +98,8 @@ export default function About() {
       </div>
 
       {/* Desk illustration — 60% page width, outside the narrow container */}
-      {/* pb-12 rather than pb-16: Contact takes the other 16px above its dot trim */}
-      <div className="w-[60%] mx-auto pb-12">
+      {/* pb-10 rather than pb-16: Contact takes the other 24px above its dot trim */}
+      <div className="w-[60%] mx-auto pb-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/illustration.png"

@@ -10,9 +10,9 @@ export default async function Portfolio() {
   }
 
   return (
-    /* pb-6 rather than pb-10: About takes the other 16px as breathing room
+    /* pb-4 rather than pb-10: About takes the other 24px as breathing room
        above its dot trim, so the seam is unchanged in total */
-    <section id="portfolio" className="w-full bg-white pt-20 pb-6 scroll-mt-[60px]">
+    <section id="portfolio" className="w-full bg-white pt-20 pb-4 scroll-mt-[60px]">
       {/* Masonry via CSS columns: items flow to their natural height, so the gap
           between one image and the next is always the same regardless of ratio. */}
       <div className="w-[86%] mx-auto columns-1 sm:columns-2 lg:columns-3 gap-x-14">
