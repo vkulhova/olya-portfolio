@@ -99,9 +99,13 @@ export default function Nav() {
   }, [release]);
 
   return (
+    // The shadow is tinted with the site's brown rather than black, and only
+    // appears once the bar is pinned — before that it has nothing to cast onto.
     <nav
       ref={navRef}
-      className="sticky top-0 z-40 bg-white flex justify-center gap-10 py-5"
+      className={`sticky top-0 z-40 bg-white flex justify-center gap-10 py-5 transition-shadow duration-300 ${
+        stuck ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)]" : "shadow-none"
+      }`}
     >
       {/* Absolutely placed so it never nudges the centred links. Hidden on small
           screens, where the links already fill the width. */}
