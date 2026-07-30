@@ -8,7 +8,7 @@
 html {
   scroll-behavior: smooth;
   /* Firefox. Inherited, so nested scrollers (the message field) match too. */
-  scrollbar-color: #E7D495 #FFFFFF;
+  scrollbar-color: #3C1A05 #FFFFFF;
   scrollbar-width: thin;
 }
 
@@ -17,10 +17,9 @@ body {
   overflow-x: hidden;
 }
 
-/* Beige scrollbar — #E7D495 sits about a third of the way from the stars'
-   cream (#F1E2B8) towards the hero mustard (#D5BA54): still beige, but with
-   enough blue taken out to read against white at 10px wide.
-   WebKit ignores scrollbar-color, so it needs its own rules. */
+/* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit
+   of text on the page. WebKit ignores scrollbar-color, so it needs its own
+   rules. */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -31,12 +30,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #E7D495;
+  background: #3C1A05;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #D5BA54;
+  background: #57280C;
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */
