@@ -99,7 +99,7 @@ export default function Nav() {
           href={`#${link}`}
           onClick={() => handleClick(link)}
           aria-current={active === link ? "page" : undefined}
-          className={`font-futura font-medium text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${
+          className={`font-futura font-semibold text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${
             active === link ? "text-gold" : "text-dark"
           }`}
         >

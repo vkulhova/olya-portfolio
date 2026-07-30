@@ -76,7 +76,7 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-base font-medium tracking-[0.05em] text-[#2c2018]">
+                <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
                   Your name
                 </label>
                 <input
@@ -87,7 +87,7 @@ export default function Contact() {
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-base font-medium tracking-[0.05em] text-[#2c2018]">
+                <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
                   Your surname
                 </label>
                 <input
@@ -100,7 +100,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-base font-medium tracking-[0.05em] text-[#2c2018]">
+              <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
                 Email
               </label>
               <input
@@ -112,7 +112,7 @@ export default function Contact() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-base font-medium tracking-[0.05em] text-[#2c2018]">
+              <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
                 Write your letter here...
               </label>
               <textarea

@@ -71,13 +71,13 @@ export default function About() {
               />
             </div>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-black text-justify">
+            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
               My name is Olika Nikolska. I&apos;m a Ukrainian illustrator based in Odesa, with a background
               that includes four years at a mobile game studio and years of freelance work spanning books,
               stickers, portraits, and brand illustration.
             </p>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-black text-justify">
+            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
               Outside of work, I&apos;m a matcha and cocoa person with a real weakness for tiramisu and
               anything with cinnamon or strawberry. I also have a soft spot for collectible figures and
               building sets — my shelves will confirm that. I love sketching in a paper sketchbook and
@@ -87,7 +87,7 @@ export default function About() {
               evening. Home is where I feel most at ease, which is probably why I do my best work there.
             </p>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-black text-justify">
+            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
               Living in Odesa means life comes with surprises, and not always pleasant ones. But
               believing in better days and good endings is what keeps me drawing.
             </p>
