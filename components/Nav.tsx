@@ -116,8 +116,11 @@ export default function Nav() {
           stuck ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
+        {/* The round L mark rather than the wordmark — it stays legible at the
+            bar's height, where the full logo would have to shrink too far.
+            Same vector as app/icon.svg, copied so the favicon route stays intact. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-9 w-auto" />
+        <img src="/svg/lolikar-mark.svg" alt="Lolikar" className="h-11 w-11" />
       </a>
 
       {LINKS.map((link) => (
