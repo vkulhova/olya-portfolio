@@ -2,6 +2,7 @@ import Image from "next/image";
 import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
+import { LanguageSwitcher } from "./Language";
 
 export default function Hero() {
   return (
@@ -13,9 +14,13 @@ export default function Hero() {
         <StripeBar />
 
         {/* Logo. pb here + the nav's own py keep the original 43px gap. */}
-        <div className="bg-white pt-[53px] pb-[23px] flex flex-col items-center">
+        <div className="relative bg-white pt-[53px] pb-[23px] flex flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
+
+          {/* Top-right of the header, above the nav row. Its twin in the pinned
+              bar takes over once this one scrolls away. */}
+          <LanguageSwitcher className="absolute right-8 top-6 hidden sm:flex" />
         </div>
       </div>
 

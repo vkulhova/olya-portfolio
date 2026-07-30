@@ -1,9 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { LanguageSwitcher } from "./Language";
 
 const LINKS = ["portfolio", "about", "contact"] as const;
 type Section = (typeof LINKS)[number];
+
 
 /** Height of the pinned bar — the line that decides which section we are "on".
  *  Kept in step with the nav's py and the sections' scroll-mt. */
@@ -134,6 +136,14 @@ export default function Nav() {
           {link}
         </a>
       ))}
+
+      {/* Mirrors the logo on the left, and fades in with it: before the bar
+          pins, the switcher at the top of the header is the visible one. */}
+      <LanguageSwitcher
+        className={`absolute right-8 top-1/2 -translate-y-1/2 hidden sm:flex transition-opacity duration-300 ${
+          stuck ? "opacity-100" : "pointer-events-none opacity-0"
+        }`}
+      />
     </nav>
   );
 }
