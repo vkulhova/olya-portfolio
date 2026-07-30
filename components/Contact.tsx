@@ -123,9 +123,9 @@ export default function Contact() {
             </div>
 
             {/* Illustration inside card */}
-            {/* mt-8 (on top of the form's gap-6) matches the 56px the card's
-                bottom padding leaves under the illustration */}
-            <div className="flex justify-center mt-8 mb-2">
+            {/* mt-7 sits with the form's gap-6 just under the 56px the card's
+                bottom padding leaves below the illustration */}
+            <div className="flex justify-center mt-7 mb-2">
               <Image
                 src="/images/work-1.png"
                 alt="Illustration"
