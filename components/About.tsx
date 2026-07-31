@@ -16,12 +16,14 @@ export default function About() {
         {/* Photo + text grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
-          {/* Photo column. The inner box carries the photo's own 3:4 ratio, so
-              it is exactly the picture at every width — no letterboxing left
-              over for the stars to float in. They hang off its corners, not off
-              the grid cell, which the taller text column stretches. */}
-          <div>
-            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4]">
+          {/* Photo column. Side by side, the box takes the row's full height so
+              the text can never run past the bottom of the picture, and
+              object-cover fills it — object-contain would letterbox and the
+              stars, which hang off this box, would drift off the picture again.
+              Stacked, there is no row to match, so the box falls back to the
+              photo's own 3:4 ratio. */}
+          <div className="lg:h-full">
+            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4] lg:aspect-auto lg:h-full">
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
                   than the picture; desktop is meant to look exactly as before. */}
@@ -38,7 +40,7 @@ export default function About() {
                 alt="Olika Nikolska"
                 fill
                 sizes="(max-width: 1024px) 272px, 300px"
-                className="object-contain object-top"
+                className="object-cover object-top"
               />
               {/* Salmon star — bottom-left, overlapping photo corner */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
