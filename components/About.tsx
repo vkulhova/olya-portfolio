@@ -24,36 +24,39 @@ export default function About() {
         {/* Photo + text grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
-          {/* Photo column with stars. The stars are positioned against this box,
-              so once the columns stack it has to hug the photo — otherwise
-              object-contain letterboxes the portrait inside a full-width box and
-              the stars end up floating in the empty margin beside it. */}
-          <div className="relative w-full max-w-[272px] mx-auto lg:max-w-none lg:mx-0">
-            {/* Gold star — top-left, overlapping photo corner */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/svg/star-gold.svg"
-              alt=""
-              aria-hidden="true"
-              className="absolute -top-10 -left-10 w-[85px] h-[85px] z-10 pointer-events-none"
-            />
-            {/* Photo */}
-            <div className="relative w-full h-[320px] lg:h-full min-h-[380px] overflow-hidden">
+          {/* Photo column. The inner box carries the photo's own 377:528 ratio,
+              so it is exactly the picture at every width — no letterboxing left
+              over for the stars to float in. They hang off its corners, not off
+              the grid cell, which the taller text column stretches. */}
+          <div>
+            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[377/528]">
+              {/* Gold star — top-left, overlapping photo corner. The lg offsets
+                  sit 10px further out because the old box was that much wider
+                  than the picture; desktop is meant to look exactly as before. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/svg/star-gold.svg"
+                alt=""
+                aria-hidden="true"
+                className="absolute -top-10 -left-10 lg:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+              />
+              {/* Photo */}
               <Image
                 src="/images/photo-olya.jpg"
                 alt="Olika Nikolska"
                 fill
+                sizes="(max-width: 1024px) 272px, 300px"
                 className="object-contain object-top"
               />
+              {/* Salmon star — bottom-left, overlapping photo corner */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/svg/star-salmon.svg"
+                alt=""
+                aria-hidden="true"
+                className="absolute -bottom-9 left-4 lg:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
+              />
             </div>
-            {/* Salmon star — bottom-left, overlapping photo corner */}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/svg/star-salmon.svg"
-              alt=""
-              aria-hidden="true"
-              className="absolute -bottom-9 left-4 w-[59px] h-[59px] z-10 pointer-events-none"
-            />
           </div>
 
           {/* Text column — stretches to photo height */}
