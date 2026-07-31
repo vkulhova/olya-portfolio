@@ -73,24 +73,26 @@ export default function About() {
             </div>
 
             <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
-              My name is Olika Nikolska. I&apos;m a Ukrainian illustrator based in Odesa, with a background
-              that includes four years at a mobile game studio and years of freelance work spanning books,
-              stickers, portraits, and brand illustration.
+              My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a
+              Ukrainian illustrator based in Odesa, and these days that looks like freelance
+              illustration across books, stickers, portraits, and brand work, with four years at a
+              mobile game studio somewhere along the way.
             </p>
 
             <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
-              Outside of work, I&apos;m a matcha and cocoa person with a real weakness for tiramisu and
-              anything with cinnamon or strawberry. I also have a soft spot for collectible figures and
-              building sets — my shelves will confirm that. I love sketching in a paper sketchbook and
-              sharing my space with a cat, whom I also walk on a leash. He stops at every flower and
-              leaf like it&apos;s the most important thing in the world, and honestly, he&apos;s not
-              wrong. A good series, a YouTube video, or a TikTok rabbit hole can easily take over my
-              evening. Home is where I feel most at ease, which is probably why I do my best work there.
+              Outside of work, I’m a matcha and cocoa person with a real weakness for tiramisu and
+              anything with cinnamon or strawberry. I have a soft spot for collectible figures and
+              building kits that are already making my shelves groan. I still draw by hand in paper
+              sketchbooks too. In the evenings, I might read some fantasy or something about
+              illustration, watch a series, check out YouTube, or just get lost in my feed. Home is
+              the only place where I can truly exhale, which is probably why I do my best work right
+              here.
             </p>
 
             <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
-              Living in Odesa means life comes with surprises, and not always pleasant ones. But
-              believing in better days and good endings is what keeps me drawing.
+              Living in Odesa means life comes with surprises, not always pleasant ones. But
+              believing in better days and good endings is what keeps me going and gives me the
+              energy to create.
             </p>
           </div>
         </div>

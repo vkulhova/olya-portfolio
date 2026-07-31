@@ -86,10 +86,11 @@ export default function Hero() {
 
               <p className="font-outfit font-normal text-sm leading-[1.6] tracking-[0.04em] text-dark">
                 My name is Olika, and my art lives under Lolikar. I make warm, cozy, detailed
-                illustrations — mainly children&apos;s book art, character design, and custom portraits.
-                Every piece is meant to feel like a small world you&apos;d want to step into, filled
-                with little objects, cozy homes, and characters that feel lived in. I have a love for
-                small details, vintage aesthetics, and soft textures that reward a second look.
+                illustrations for games and books, design characters, and create custom portraits.
+                I love building small worlds you want to get lost in, filling them with little
+                objects, cozy details, and characters that feel like they have their own story.
+                I’m drawn to vintage aesthetics, rich colors, soft textures, and the kind of detail
+                you keep discovering on every look.
               </p>
             </div>
             </div>
