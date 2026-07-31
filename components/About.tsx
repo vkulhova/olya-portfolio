@@ -7,17 +7,9 @@ export default function About() {
     <section id="about" className="w-full bg-white pt-6 scroll-mt-[78px]">
       <DecorativeDots />
 
-      {/* White gap between dots and mint stripe */}
-      <div className="h-9 bg-white" />
-
-      {/* Mint stripe with vector illustrations — decoration-about.svg IS the stripe */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/svg/decoration-about.svg"
-        alt=""
-        aria-hidden="true"
-        className="w-full h-auto block"
-      />
+      {/* The mint stripe used to sit here. It is gone at every width, and the
+          white spacer that separated it from the dots went with it — otherwise
+          its height would have stayed behind as a gap. */}
 
       {/* Main content */}
       <div className="w-[78%] mx-auto pt-[104px] pb-10">
