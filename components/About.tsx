@@ -16,12 +16,12 @@ export default function About() {
         {/* Photo + text grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
-          {/* Photo column. The inner box carries the photo's own 377:528 ratio,
-              so it is exactly the picture at every width — no letterboxing left
+          {/* Photo column. The inner box carries the photo's own 3:4 ratio, so
+              it is exactly the picture at every width — no letterboxing left
               over for the stars to float in. They hang off its corners, not off
               the grid cell, which the taller text column stretches. */}
           <div>
-            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[377/528]">
+            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4]">
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
                   than the picture; desktop is meant to look exactly as before. */}
