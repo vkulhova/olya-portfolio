@@ -107,7 +107,7 @@ export default function About() {
 
       {/* Desk illustration — 60% page width, outside the narrow container */}
       {/* pb-10 rather than pb-16: Contact takes the other 24px above its dot trim */}
-      <div className="w-[60%] mx-auto pb-10">
+      <div className="w-full sm:w-[60%] mx-auto pb-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src="/images/illustration.png"

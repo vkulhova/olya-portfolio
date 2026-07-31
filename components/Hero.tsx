@@ -13,8 +13,10 @@ export default function Hero() {
       <div id="home">
         <StripeBar />
 
-        {/* Logo. pb here + the nav's own py keep the original 43px gap. */}
-        <div className="relative bg-white pt-[53px] pb-[23px] flex flex-col items-center">
+        {/* Logo. pb here + the nav's own py keep the original 43px gap.
+            Phones skip this block entirely — there the bar itself carries the
+            logo and the burger from the very top of the page. */}
+        <div className="relative bg-white pt-[53px] pb-[23px] hidden sm:flex flex-col items-center">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
 
@@ -63,7 +65,7 @@ export default function Hero() {
           <div className="w-full bg-white rounded-3xl">
             <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
-            <div className="shrink-0 w-32 h-32 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
+            <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
               <Image
                 src="/images/avatar.png"
                 alt="Olika"
