@@ -24,8 +24,11 @@ export default function About() {
         {/* Photo + text grid */}
         <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
-          {/* Photo column with stars */}
-          <div className="relative">
+          {/* Photo column with stars. The stars are positioned against this box,
+              so once the columns stack it has to hug the photo — otherwise
+              object-contain letterboxes the portrait inside a full-width box and
+              the stars end up floating in the empty margin beside it. */}
+          <div className="relative w-full max-w-[272px] mx-auto lg:max-w-none lg:mx-0">
             {/* Gold star — top-left, overlapping photo corner */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -56,19 +59,21 @@ export default function About() {
           {/* Text column — stretches to photo height */}
           <div className="flex flex-col gap-5 pt-2">
             {/* Heading + star */}
-            <div className="flex items-center gap-3 flex-wrap">
+            {/* nowrap keeps the star beside the heading; both shrink together on
+                narrow screens rather than the star dropping to its own line */}
+            <div className="flex items-center gap-3 flex-nowrap">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/a-few-words-about-me.svg"
                 alt="A few words about me"
-                className="h-[52px] w-auto"
+                className="h-[34px] sm:h-[52px] w-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/star-olive.svg"
                 alt=""
                 aria-hidden="true"
-                className="w-[53px] h-[53px]"
+                className="w-[36px] h-[36px] sm:w-[53px] sm:h-[53px] shrink-0"
               />
             </div>
 
