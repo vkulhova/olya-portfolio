@@ -17,14 +17,17 @@ export default async function Home() {
     // child of <main> and its sticky positioning is unaffected.
     <LanguageProvider>
       <main>
-        <Hero avatar={images.avatar} text={text} />
+        <Hero avatar={images.avatar} background={images.heroBackground} text={text} />
         <Portfolio />
         <About
           photo={images.aboutPhoto}
           illustration={images.aboutIllustration}
           text={text}
         />
-        <Contact illustration={images.contactImage} />
+        <Contact
+          illustration={images.contactImage}
+          background={images.contactBackground}
+        />
         <Footer />
         <BackToTop />
       </main>

@@ -11,9 +11,11 @@ const DEFAULT_HERO_EN = `My name is Olika, and my art lives under Lolikar. I mak
 
 export default function Hero({
   avatar,
+  background,
   text,
 }: {
   avatar: SiteImage;
+  background?: SiteImage;
   text?: SiteText;
 }) {
   return (
@@ -46,10 +48,21 @@ export default function Hero({
         <DecorativeDots />
       </div>
 
-      {/* Gold hero section — height follows card content so nothing overflows on small screens */}
+      {/* Gold hero section — height follows card content so nothing overflows on
+          small screens. An uploaded backdrop covers the band; the mustard stays
+          underneath so the area is never bare while the image loads. */}
       <div
         className="relative w-full py-16 md:py-20 flex items-center justify-center"
-        style={{ background: "#D5BA54" }}
+        style={{
+          backgroundColor: "#D5BA54",
+          ...(background?.url
+            ? {
+                backgroundImage: `url(${background.url})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : null),
+        }}
       >
         {/* Card wrapper — width narrows on small screens, height follows content */}
         <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">

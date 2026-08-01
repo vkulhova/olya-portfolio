@@ -158,6 +158,22 @@ export default defineConfig({
             description: "The drawing inside the contact card, under the message field.",
             options: { hotspot: true },
           },
+          {
+            name: "heroBackground",
+            type: "image",
+            title: "Background behind the hero card",
+            description:
+              "The band that is mustard today. Covers the area, so a wide image suits it best. Empty keeps the flat colour.",
+            options: { hotspot: true },
+          },
+          {
+            name: "contactBackground",
+            type: "image",
+            title: "Background behind the contact form",
+            description:
+              "The block that is beige today. Covers the area. Empty keeps the flat colour and its paper texture.",
+            options: { hotspot: true },
+          },
         ],
         preview: {
           prepare: () => ({ title: "Site images" }),

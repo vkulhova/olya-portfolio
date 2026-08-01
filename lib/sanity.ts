@@ -24,6 +24,8 @@ export type SiteImages = {
   aboutPhoto: SiteImage;
   aboutIllustration: SiteImage;
   contactImage: SiteImage;
+  heroBackground: SiteImage;
+  contactBackground: SiteImage;
 };
 
 const EMPTY_SITE_IMAGES: SiteImages = {
@@ -31,9 +33,18 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   aboutPhoto: null,
   aboutIllustration: null,
   contactImage: null,
+  heroBackground: null,
+  contactBackground: null,
 };
 
-const IMAGE_FIELDS = ["avatar", "aboutPhoto", "aboutIllustration", "contactImage"];
+const IMAGE_FIELDS = [
+  "avatar",
+  "aboutPhoto",
+  "aboutIllustration",
+  "contactImage",
+  "heroBackground",
+  "contactBackground",
+];
 
 export async function getSiteImages(): Promise<SiteImages> {
   const projection = IMAGE_FIELDS.map(

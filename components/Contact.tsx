@@ -5,7 +5,13 @@ import DecorativeDots from "./DecorativeDots";
 import Image from "next/image";
 import type { SiteImage } from "@/lib/sanity";
 
-export default function Contact({ illustration }: { illustration: SiteImage }) {
+export default function Contact({
+  illustration,
+  background,
+}: {
+  illustration: SiteImage;
+  background?: SiteImage;
+}) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -53,11 +59,19 @@ export default function Contact({ illustration }: { illustration: SiteImage }) {
         <DecorativeDots />
       </div>
 
+    {/* An uploaded backdrop replaces the paper texture rather than sitting under
+        it — the grain would only fight a real picture. The beige stays as the
+        base colour so the block is never bare while the image loads. */}
     <div
       className="w-full relative"
       style={{
         backgroundColor: "#F0E8DA",
-        backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
+        backgroundImage: background?.url
+          ? `url(${background.url})`
+          : `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E")`,
+        ...(background?.url
+          ? { backgroundSize: "cover", backgroundPosition: "center" }
+          : null),
       }}
     >
 
