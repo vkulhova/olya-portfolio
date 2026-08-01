@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import DecorativeDots from "./DecorativeDots";
 import Image from "next/image";
 import type { SiteImage } from "@/lib/sanity";
@@ -13,20 +13,6 @@ export default function Contact({
   background?: SiteImage;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
-  const cardRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const el = cardRef.current;
-    if (!el) return;
-    const update = () => {
-      const s = el.offsetHeight / 30;
-      el.style.setProperty("--s", `${s}px`);
-    };
-    update();
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, []);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -80,7 +66,7 @@ export default function Contact({
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
-        <div ref={cardRef} className="scalloped-15 w-full sm:w-[70%] bg-white px-5 sm:px-10 py-12">
+        <div className="w-full sm:w-[70%] bg-white px-5 sm:px-10 py-12">
           {/* "Drop a letter in my mailbox" SVG heading from Figma */}
           <div className="mb-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -149,7 +135,7 @@ export default function Contact({
                 alt="Illustration"
                 width={illustration?.width ?? 800}
                 height={illustration?.height ?? 600}
-                className="w-full sm:w-[26.35%] h-auto object-contain"
+                className="w-full sm:w-[52.7%] h-auto object-contain"
               />
             </div>
           </form>

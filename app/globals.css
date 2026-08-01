@@ -87,30 +87,3 @@ body {
     0 0 / var(--s) 20% repeat-y;
 }
 
-/* Contact card — bumps tile = 2×radius → always gap-free regardless of card height */
-.scalloped-15 {
-  --s: 27px;
-  position: relative;
-  background: white;
-}
-.scalloped-15::before,
-.scalloped-15::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: var(--s);
-  pointer-events: none;
-}
-.scalloped-15::before {
-  right: calc(100% - 1px);
-  background:
-    radial-gradient(circle at 100% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
-    0 0 / var(--s) calc(100% / 15) repeat-y;
-}
-.scalloped-15::after {
-  left: calc(100% - 1px);
-  background:
-    radial-gradient(circle at 0% 50%, white var(--s), transparent calc(var(--s) + 0.5px))
-    0 0 / var(--s) calc(100% / 15) repeat-y;
-}
