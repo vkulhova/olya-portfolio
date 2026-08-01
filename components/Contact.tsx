@@ -68,7 +68,8 @@ export default function Contact({
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
-        <div className="w-full sm:w-[70%] bg-white px-5 sm:px-10 py-12">
+        {/* Same radius as the hero card, so the two white blocks match */}
+        <div className="w-full sm:w-[70%] bg-white rounded-3xl px-5 sm:px-10 py-12">
           {/* "Drop a letter in my mailbox" SVG heading from Figma */}
           <div className="mb-8">
             {/* eslint-disable-next-line @next/next/no-img-element */}
