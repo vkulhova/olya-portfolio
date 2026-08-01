@@ -1,7 +1,14 @@
 import Image from "next/image";
 import DecorativeDots from "./DecorativeDots";
+import type { SiteImage } from "@/lib/sanity";
 
-export default function About() {
+export default function About({
+  photo,
+  illustration,
+}: {
+  photo: SiteImage;
+  illustration: SiteImage;
+}) {
   return (
     /* pt-6 is space handed over from Portfolio's bottom padding, not added on top */
     <section id="about" className="w-full bg-white pt-6 scroll-mt-[78px]">
@@ -35,7 +42,7 @@ export default function About() {
               />
               {/* Photo */}
               <Image
-                src="/images/photo-olya.jpg"
+                src={photo?.url ?? "/images/photo-olya.jpg"}
                 alt="Olika Nikolska"
                 fill
                 sizes="(max-width: 1280px) 272px, 300px"
@@ -105,7 +112,7 @@ export default function About() {
       <div className="w-full sm:w-[60%] mx-auto pb-10">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/illustration.png"
+          src={illustration?.url ?? "/images/illustration.png"}
           alt="Cozy desk illustration"
           className="w-full h-auto"
         />

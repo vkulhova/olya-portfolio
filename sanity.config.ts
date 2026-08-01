@@ -1,6 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
+import { ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
 import ImportTool from "./sanity/ImportTool";
 import OrderInput from "./sanity/OrderInput";
@@ -31,6 +31,18 @@ export default defineConfig({
                   .title("Illustration")
                   .defaultOrdering([{ field: "order", direction: "asc" }])
               ),
+            // A single fixed document rather than a list — there is only ever
+            // one of each of these images.
+            S.listItem()
+              .title("Site images")
+              .id("siteImages")
+              .icon(ImagesIcon)
+              .child(
+                S.document()
+                  .schemaType("siteImages")
+                  .documentId("siteImages")
+                  .title("Site images")
+              ),
           ]),
     }),
   ],
@@ -59,6 +71,47 @@ export default defineConfig({
   ],
   schema: {
     types: [
+      {
+        name: "siteImages",
+        type: "document",
+        title: "Site images",
+        // The four one-off pictures. Leaving one empty keeps the file that
+        // ships with the site, so the page never ends up with a hole in it.
+        fields: [
+          {
+            name: "avatar",
+            type: "image",
+            title: "Hero avatar",
+            description: "The round portrait in the card at the top of the page.",
+            options: { hotspot: true },
+          },
+          {
+            name: "aboutPhoto",
+            type: "image",
+            title: "About photo",
+            description:
+              "Your photo beside the About text. Shown in a 3:4 frame — anything wider is cropped from the sides.",
+            options: { hotspot: true },
+          },
+          {
+            name: "aboutIllustration",
+            type: "image",
+            title: "Illustration under About",
+            description: "The wide drawing below the About text.",
+            options: { hotspot: true },
+          },
+          {
+            name: "contactImage",
+            type: "image",
+            title: "Contact form illustration",
+            description: "The drawing inside the contact card, under the message field.",
+            options: { hotspot: true },
+          },
+        ],
+        preview: {
+          prepare: () => ({ title: "Site images" }),
+        },
+      },
       {
         name: "illustration",
         type: "document",

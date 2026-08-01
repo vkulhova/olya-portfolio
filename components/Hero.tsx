@@ -3,8 +3,9 @@ import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
+import type { SiteImage } from "@/lib/sanity";
 
-export default function Hero() {
+export default function Hero({ avatar }: { avatar: SiteImage }) {
   return (
     /* Fragment, not a wrapper element: the nav below has to be a direct child of
        <main> for `sticky` to hold all the way down the page. Nested in a section
@@ -67,7 +68,7 @@ export default function Hero() {
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
             <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
               <Image
-                src="/images/avatar.png"
+                src={avatar?.url ?? "/images/avatar.png"}
                 alt="Olika"
                 width={176}
                 height={176}

@@ -3,8 +3,9 @@
 import { useState, useEffect, useRef } from "react";
 import DecorativeDots from "./DecorativeDots";
 import Image from "next/image";
+import type { SiteImage } from "@/lib/sanity";
 
-export default function Contact() {
+export default function Contact({ illustration }: { illustration: SiteImage }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -130,10 +131,10 @@ export default function Contact() {
                 bottom padding leaves below the illustration */}
             <div className="flex justify-center mt-7 mb-2">
               <Image
-                src="/images/work-1.png"
+                src={illustration?.url ?? "/images/work-1.png"}
                 alt="Illustration"
-                width={800}
-                height={600}
+                width={illustration?.width ?? 800}
+                height={illustration?.height ?? 600}
                 className="w-full sm:w-[52.7%] h-auto object-contain"
               />
             </div>
