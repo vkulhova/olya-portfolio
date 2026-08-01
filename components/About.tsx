@@ -14,16 +14,15 @@ export default function About() {
       {/* Main content */}
       <div className="w-[78%] mx-auto pt-[104px] pb-10">
         {/* Photo + text grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
+        <div className="grid grid-cols-1 xl:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
-          {/* Photo column. Side by side, the box takes the row's full height so
-              the text can never run past the bottom of the picture, and
-              object-cover fills it — object-contain would letterbox and the
-              stars, which hang off this box, would drift off the picture again.
-              Stacked, there is no row to match, so the box falls back to the
-              photo's own 3:4 ratio. */}
-          <div className="lg:h-full">
-            <div className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4] lg:aspect-auto lg:h-full">
+          {/* Photo column. The box carries the photo's own 3:4 ratio at every
+              width, so it is exactly the picture — nothing is cropped and no
+              letterboxing is left for the stars to float in. Keeping the text
+              inside this height is the copy's job, not the photo's: see the
+              fluid size on .about-copy. */}
+          <div>
+            <div className="relative w-full max-w-[272px] xl:max-w-[300px] mx-auto aspect-[3/4]">
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
                   than the picture; desktop is meant to look exactly as before. */}
@@ -32,14 +31,14 @@ export default function About() {
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -top-10 -left-10 lg:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+                className="absolute -top-10 -left-10 xl:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
                 src="/images/photo-olya.jpg"
                 alt="Olika Nikolska"
                 fill
-                sizes="(max-width: 1024px) 272px, 300px"
+                sizes="(max-width: 1280px) 272px, 300px"
                 className="object-cover object-top"
               />
               {/* Salmon star — bottom-left, overlapping photo corner */}
@@ -48,7 +47,7 @@ export default function About() {
                 src="/svg/star-salmon.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -bottom-9 left-4 lg:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
+                className="absolute -bottom-9 left-4 xl:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
               />
             </div>
           </div>
@@ -74,14 +73,14 @@ export default function About() {
               />
             </div>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
+            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
               My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a
               Ukrainian illustrator based in Odesa, and these days that looks like freelance
               illustration across books, stickers, portraits, and brand work, with four years at a
               mobile game studio somewhere along the way.
             </p>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
+            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
               Outside of work, I’m a matcha and cocoa person with a real weakness for tiramisu and
               anything with cinnamon or strawberry. I have a soft spot for collectible figures and
               building kits that are already making my shelves groan. I still draw by hand in paper
@@ -91,7 +90,7 @@ export default function About() {
               here.
             </p>
 
-            <p className="font-['Outfit'] font-light text-base leading-[1.7] text-dark text-justify">
+            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
               Living in Odesa means life comes with surprises, not always pleasant ones. But
               believing in better days and good endings is what keeps me going and gives me the
               energy to create.
