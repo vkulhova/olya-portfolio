@@ -1,8 +1,5 @@
 import Image from "next/image";
-import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
-import Nav from "./Nav";
-import { LanguageSwitcher } from "./Language";
 import LocalisedText from "./LocalisedText";
 import { backdropUrl } from "@/lib/sanity";
 import type { SiteImage, SiteText } from "@/lib/sanity";
@@ -22,33 +19,12 @@ export default function Hero({
   const backdrop = backdropUrl(background);
 
   return (
-    /* Fragment, not a wrapper element: the nav below has to be a direct child of
-       <main> for `sticky` to hold all the way down the page. Nested in a section
-       it would unstick as soon as that section scrolled past. */
+    /* The stripe, the logo and the nav are in SiteHeader — they stay put while
+       this section is swapped for another one. */
     <>
       {/* The band is the first thing below the fold's edge, so its backdrop is
           asked for straight away rather than when the style is applied. */}
       {backdrop && <link rel="preload" as="image" href={backdrop} fetchPriority="high" />}
-
-      <div id="home">
-        <StripeBar />
-
-        {/* Logo. pb here + the nav's own py keep the original 43px gap.
-            Phones skip this block entirely — there the bar itself carries the
-            logo and the burger from the very top of the page. */}
-        <div className="relative bg-white pt-[53px] pb-[23px] hidden sm:flex flex-col items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
-
-          {/* Top-right of the header, above the nav row. Its twin in the pinned
-              bar takes over once this one scrolls away. */}
-          <LanguageSwitcher className="absolute right-8 top-6 hidden sm:flex" />
-        </div>
-      </div>
-
-      {/* Pins to the top of the viewport once scrolled to, and lights up the
-          section currently in view */}
-      <Nav />
 
       {/* pt here + the nav's py keep the original 40px gap; pb-8 the white gap before gold */}
       <div className="bg-white pt-[20px] pb-8">
