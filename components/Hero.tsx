@@ -4,6 +4,7 @@ import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
 import LocalisedText from "./LocalisedText";
+import { backdropUrl } from "@/lib/sanity";
 import type { SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. */
@@ -18,11 +19,17 @@ export default function Hero({
   background?: SiteImage;
   text?: SiteText;
 }) {
+  const backdrop = backdropUrl(background);
+
   return (
     /* Fragment, not a wrapper element: the nav below has to be a direct child of
        <main> for `sticky` to hold all the way down the page. Nested in a section
        it would unstick as soon as that section scrolled past. */
     <>
+      {/* The band is the first thing below the fold's edge, so its backdrop is
+          asked for straight away rather than when the style is applied. */}
+      {backdrop && <link rel="preload" as="image" href={backdrop} fetchPriority="high" />}
+
       <div id="home">
         <StripeBar />
 
@@ -55,9 +62,9 @@ export default function Hero({
         className="relative w-full py-16 md:py-20 flex items-center justify-center"
         style={{
           backgroundColor: "#D5BA54",
-          ...(background?.url
+          ...(backdrop
             ? {
-                backgroundImage: `url(${background.url})`,
+                backgroundImage: `url(${backdrop})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }

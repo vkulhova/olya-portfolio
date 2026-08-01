@@ -65,6 +65,15 @@ export async function getSiteImages(): Promise<SiteImages> {
   }
 }
 
+/** A CSS backdrop is not run through next/image, so without this it downloads
+ *  whatever was uploaded — the current ones are 9300px PNGs of 11–14 MB, which
+ *  is why they used to crawl in after the rest of the page. The CDN resizes and
+ *  re-encodes on the fly, so the browser gets a viewport-sized WebP instead. */
+export function backdropUrl(image?: SiteImage, width = 1920): string | null {
+  if (!image?.url) return null;
+  return `${image.url}?w=${width}&q=70&auto=format&fit=max`;
+}
+
 /** Copy for the two blocks that have a Ukrainian version. Empty fields fall
  *  back to the text written into the components. */
 export type SiteText = {
