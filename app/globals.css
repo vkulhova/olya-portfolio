@@ -38,20 +38,12 @@ body {
   background: #57280C;
 }
 
-/* About copy, while it sits beside the photo. The photo keeps its 3:4 ratio,
-   so its height shrinks with the column, while the narrowing text column grows
-   taller — left alone the text runs past the bottom of the picture. Rather than
-   cropping the photo to match, the copy scales down as the viewport narrows:
-   a full 16px at 1440 and up, easing off towards 1280. Below that the columns
-   stack, there is no photo to sit beside, and the size goes back to 16px. */
+/* About copy. AboutCopyFit measures the block against the photo and sets
+   --about-fs so the text stops at the bottom of the picture without the photo
+   ever being cropped. 16px is the full size, used whenever it fits and
+   whenever the columns are stacked. */
 .about-copy {
-  font-size: 16px;
-}
-
-@media (min-width: 1280px) {
-  .about-copy {
-    font-size: clamp(14.2px, calc(1.125vw - 0.2px), 16px);
-  }
+  font-size: var(--about-fs, 16px);
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */

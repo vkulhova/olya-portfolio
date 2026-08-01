@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DecorativeDots from "./DecorativeDots";
 import LocalisedText from "./LocalisedText";
+import AboutCopyFit from "./AboutCopyFit";
 import type { SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs. */
@@ -31,7 +32,7 @@ export default function About({
       {/* Main content */}
       <div className="w-[78%] mx-auto pt-[104px] pb-10">
         {/* Photo + text grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
+        <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
 
           {/* Photo column. The box carries the photo's own 3:4 ratio at every
               width, so it is exactly the picture — nothing is cropped and no
@@ -39,7 +40,11 @@ export default function About({
               inside this height is the copy's job, not the photo's: see the
               fluid size on .about-copy. */}
           <div>
-            <div className="relative w-full max-w-[272px] xl:max-w-[300px] mx-auto aspect-[3/4]">
+            {/* data-about-photo is what AboutCopyFit measures the copy against. */}
+            <div
+              data-about-photo
+              className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4]"
+            >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
                   than the picture; desktop is meant to look exactly as before. */}
@@ -48,14 +53,14 @@ export default function About({
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -top-10 -left-10 xl:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+                className="absolute -top-10 -left-10 lg:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
                 src={photo?.url ?? "/images/photo-olya.jpg"}
                 alt="Olika Nikolska"
                 fill
-                sizes="(max-width: 1280px) 272px, 300px"
+                sizes="(max-width: 1024px) 272px, 300px"
                 className="object-cover object-top"
               />
               {/* Salmon star — bottom-left, overlapping photo corner */}
@@ -64,12 +69,13 @@ export default function About({
                 src="/svg/star-salmon.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -bottom-9 left-4 xl:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
+                className="absolute -bottom-9 left-4 lg:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
               />
             </div>
           </div>
 
-          {/* Text column — stretches to photo height */}
+          {/* Text column — stretches to photo height; AboutCopyFit keeps the
+              copy inside it. */}
           <div className="flex flex-col gap-5 pt-2">
             {/* Heading + star */}
             {/* nowrap keeps the star beside the heading; both shrink together on
@@ -90,11 +96,13 @@ export default function About({
               />
             </div>
 
-            <LocalisedText
-              en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
-              uk={text?.aboutUk ?? null}
-              className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify"
-            />
+            <AboutCopyFit>
+              <LocalisedText
+                en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
+                uk={text?.aboutUk ?? null}
+                className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify"
+              />
+            </AboutCopyFit>
           </div>
         </div>
 
