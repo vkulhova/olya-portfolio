@@ -1,9 +1,10 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { TrashIcon, UploadIcon } from "@sanity/icons";
+import { SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
 import ImportTool from "./sanity/ImportTool";
 import OrderInput from "./sanity/OrderInput";
+import ReorderTool from "./sanity/ReorderTool";
 
 export default defineConfig({
   name: "lolikar-portfolio",
@@ -37,6 +38,12 @@ export default defineConfig({
   // alongside Content for clearing several illustrations at once.
   tools: (prev) => [
     ...prev,
+    {
+      name: "order",
+      title: "Order",
+      icon: SortIcon,
+      component: ReorderTool,
+    },
     {
       name: "import",
       title: "Import",
