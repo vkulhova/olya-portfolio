@@ -32,7 +32,14 @@ export default function About({
       {/* Main content */}
       <div className="w-[78%] mx-auto pt-[104px] pb-10">
         {/* Photo + text grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10">
+        {/* Between md and lg the photo takes a wider share: it is the taller
+            column there, and giving it room is what lets the copy stay beside
+            it at a readable size instead of stacking. From lg up the split is
+            the original 3:7. */}
+        <div
+          data-about-grid
+          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10"
+        >
 
           {/* Photo column. The box carries the photo's own 3:4 ratio at every
               width, so it is exactly the picture — nothing is cropped and no
@@ -43,7 +50,7 @@ export default function About({
             {/* data-about-photo is what AboutCopyFit measures the copy against. */}
             <div
               data-about-photo
-              className="relative w-full max-w-[272px] lg:max-w-[300px] mx-auto aspect-[3/4]"
+              className="relative w-full max-w-[272px] md:max-w-[300px] mx-auto aspect-[3/4]"
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
@@ -53,14 +60,14 @@ export default function About({
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -top-10 -left-10 lg:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+                className="absolute -top-10 -left-10 md:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
                 src={photo?.url ?? "/images/photo-olya.jpg"}
                 alt="Olika Nikolska"
                 fill
-                sizes="(max-width: 1024px) 272px, 300px"
+                sizes="(max-width: 768px) 272px, 300px"
                 className="object-cover object-top"
               />
               {/* Salmon star — bottom-left, overlapping photo corner */}
@@ -69,7 +76,7 @@ export default function About({
                 src="/svg/star-salmon.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -bottom-9 left-4 lg:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
+                className="absolute -bottom-9 left-4 md:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
               />
             </div>
           </div>

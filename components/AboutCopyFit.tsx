@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 
-/** Sizes the About copy so it never runs past the bottom of the photo.
+/** Sizes the About copy so it never runs past the bottom of the photo, and
+ *  decides when the two have to stop sitting side by side.
  *
  *  The photo keeps its own 3:4 ratio at every width — it is never cropped — so
  *  as the column narrows the picture gets shorter while the text gets taller.
@@ -10,14 +11,15 @@ import { useEffect, useRef } from "react";
  *  Studio would invalidate), the copy is measured: it starts at MAX and steps
  *  down until it fits, or until MIN, whichever comes first.
  *
- *  Only while the two sit side by side. Once the columns stack there is no
- *  photo to stay inside and the copy goes back to full size.
+ *  Below MIN the text would be too small to read, so the columns stack instead
+ *  and the copy goes back to full size. That threshold is measured too — it is
+ *  wherever this particular text stops fitting, not a width guessed in advance.
  */
 const MAX = 16;
 const MIN = 11;
 const STEP = 0.25;
-/** Matches Tailwind's lg:, where About switches to two columns. */
-const SIDE_BY_SIDE = 1024;
+/** Tailwind's md:, below which the grid is a single column anyway. */
+const SIDE_BY_SIDE = 768;
 
 export default function AboutCopyFit({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -26,12 +28,20 @@ export default function AboutCopyFit({ children }: { children: React.ReactNode }
     const el = ref.current;
     if (!el) return;
     const photo = document.querySelector<HTMLElement>("[data-about-photo]");
+    const grid = photo?.closest<HTMLElement>("[data-about-grid]");
 
     const fit = () => {
-      if (!photo || window.innerWidth < SIDE_BY_SIDE) {
+      if (!photo || !grid) return;
+
+      // Always measure from the side-by-side layout, so a window that widens
+      // again is given the chance to come out of the stacked one.
+      grid.removeAttribute("data-about-stacked");
+
+      if (window.innerWidth < SIDE_BY_SIDE) {
         el.style.removeProperty("--about-fs");
         return;
       }
+
       // The photo's height comes from its column width, not from the row, so
       // shrinking the text below never moves this limit — no feedback loop.
       const limit = photo.getBoundingClientRect().bottom;
@@ -40,6 +50,12 @@ export default function AboutCopyFit({ children }: { children: React.ReactNode }
       while (size > MIN && el.getBoundingClientRect().bottom > limit) {
         size -= STEP;
         el.style.setProperty("--about-fs", `${size}px`);
+      }
+
+      if (el.getBoundingClientRect().bottom > limit) {
+        // Even at MIN it does not fit: stack, at full size.
+        grid.setAttribute("data-about-stacked", "");
+        el.style.removeProperty("--about-fs");
       }
     };
 

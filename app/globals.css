@@ -46,6 +46,12 @@ body {
   font-size: var(--about-fs, 16px);
 }
 
+/* Set by AboutCopyFit when the copy will not fit beside the photo even at its
+   smallest size — the point where stacking beats shrinking further. */
+[data-about-grid][data-about-stacked] {
+  grid-template-columns: 1fr;
+}
+
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */
 /* Tile height = 20% = 1/5 of card height → always 5 bumps regardless of card height */
 /* --s controls bump depth (pseudo-element width = bump radius) */
