@@ -19,8 +19,11 @@ export default function SiteHeader() {
             Phones skip this block entirely — there the bar itself carries the
             logo and the burger from the very top of the page. */}
         <div className="relative bg-white pt-[53px] pb-[23px] hidden sm:flex flex-col items-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
+          {/* Same target as its small twin in the pinned bar */}
+          <a href="#home" aria-label="Lolikar — home">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
+          </a>
 
           {/* Top-right of the header, above the nav row. Its twin in the pinned
               bar takes over once this one scrolls away. */}
