@@ -58,12 +58,22 @@ export default function OrderInput(props: NumberInputProps) {
         (a, b) => (a[1].order ?? Infinity) - (b[1].order ?? Infinity)
       );
 
+      // The document being edited may never have been published, in which case
+      // only `drafts.x` exists and patching the bare id fails the whole
+      // transaction. Patch the id the form is actually on, plus the published
+      // copy only when the query proves it exists.
+      const self = sorted.find(([key]) => key === publishedId);
+      const selfIds = [docId].concat(
+        (self?.[1].ids ?? []).filter((id) => id !== docId)
+      );
+      const selfEntry: [string, { ids: string[]; order: number | null }] = [
+        publishedId,
+        { ids: selfIds, order: self?.[1].order ?? null },
+      ];
+
       // Pull this one out, then drop it back in at the requested position.
       const others = sorted.filter(([key]) => key !== publishedId);
       const index = Math.min(Math.max(Math.round(target) - 1, 0), others.length);
-      const self = sorted.find(([key]) => key === publishedId);
-      const selfEntry: [string, { ids: string[]; order: number | null }] =
-        self ?? [publishedId, { ids: [publishedId], order: target }];
       const ordered = others.slice(0, index).concat([selfEntry], others.slice(index));
 
       const tx = client.transaction();
