@@ -1,6 +1,6 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
+import { EditIcon, ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
 import ImportTool from "./sanity/ImportTool";
 import OrderInput from "./sanity/OrderInput";
@@ -33,6 +33,16 @@ export default defineConfig({
               ),
             // A single fixed document rather than a list — there is only ever
             // one of each of these images.
+            S.listItem()
+              .title("Site text")
+              .id("siteText")
+              .icon(EditIcon)
+              .child(
+                S.document()
+                  .schemaType("siteText")
+                  .documentId("siteText")
+                  .title("Site text")
+              ),
             S.listItem()
               .title("Site images")
               .id("siteImages")
@@ -71,6 +81,47 @@ export default defineConfig({
   ],
   schema: {
     types: [
+      {
+        name: "siteText",
+        type: "document",
+        title: "Site text",
+        // Paragraphs are separated by a blank line. Leaving a field empty keeps
+        // the text that ships with the site, so a half-finished translation
+        // never shows up as a gap.
+        fields: [
+          {
+            name: "heroEn",
+            type: "text",
+            rows: 6,
+            title: "Hero card — English",
+            description: "The short intro in the card at the top of the page.",
+          },
+          {
+            name: "heroUk",
+            type: "text",
+            rows: 6,
+            title: "Hero card — Ukrainian",
+            description: "Shown when UA is selected. Empty falls back to English.",
+          },
+          {
+            name: "aboutEn",
+            type: "text",
+            rows: 14,
+            title: "About — English",
+            description: "Separate paragraphs with a blank line between them.",
+          },
+          {
+            name: "aboutUk",
+            type: "text",
+            rows: 14,
+            title: "About — Ukrainian",
+            description: "Shown when UA is selected. Empty falls back to English.",
+          },
+        ],
+        preview: {
+          prepare: () => ({ title: "Site text" }),
+        },
+      },
       {
         name: "siteImages",
         type: "document",

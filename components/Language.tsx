@@ -23,6 +23,12 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   );
 }
 
+export function useLanguage(): Language {
+  const ctx = useContext(LanguageContext);
+  if (!ctx) throw new Error("useLanguage must be used inside LanguageProvider");
+  return ctx.language;
+}
+
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const ctx = useContext(LanguageContext);
   if (!ctx) throw new Error("LanguageSwitcher must be used inside LanguageProvider");

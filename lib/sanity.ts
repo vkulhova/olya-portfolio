@@ -54,6 +54,35 @@ export async function getSiteImages(): Promise<SiteImages> {
   }
 }
 
+/** Copy for the two blocks that have a Ukrainian version. Empty fields fall
+ *  back to the text written into the components. */
+export type SiteText = {
+  heroEn: string | null;
+  heroUk: string | null;
+  aboutEn: string | null;
+  aboutUk: string | null;
+};
+
+const EMPTY_SITE_TEXT: SiteText = {
+  heroEn: null,
+  heroUk: null,
+  aboutEn: null,
+  aboutUk: null,
+};
+
+export async function getSiteText(): Promise<SiteText> {
+  try {
+    const result = await sanityClient.fetch<SiteText | null>(
+      `*[_id == "siteText"][0]{ heroEn, heroUk, aboutEn, aboutUk }`,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    return { ...EMPTY_SITE_TEXT, ...(result ?? {}) };
+  } catch {
+    return EMPTY_SITE_TEXT;
+  }
+}
+
 export async function getIllustrations(): Promise<Illustration[]> {
   return sanityClient.fetch(
     `*[_type == "illustration"] | order(order asc, _createdAt desc) {

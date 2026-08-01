@@ -1,13 +1,23 @@
 import Image from "next/image";
 import DecorativeDots from "./DecorativeDots";
-import type { SiteImage } from "@/lib/sanity";
+import LocalisedText from "./LocalisedText";
+import type { SiteImage, SiteText } from "@/lib/sanity";
+
+/** Used until the Studio field is filled in. Blank lines split the paragraphs. */
+const DEFAULT_ABOUT_EN = `My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a Ukrainian illustrator based in Odesa, and these days that looks like freelance illustration across books, stickers, portraits, and brand work, with four years at a mobile game studio somewhere along the way.
+
+Outside of work, I’m a matcha and cocoa person with a real weakness for tiramisu and anything with cinnamon or strawberry. I have a soft spot for collectible figures and building kits that are already making my shelves groan. I still draw by hand in paper sketchbooks too. In the evenings, I might read some fantasy or something about illustration, watch a series, check out YouTube, or just get lost in my feed. Home is the only place where I can truly exhale, which is probably why I do my best work right here.
+
+Living in Odesa means life comes with surprises, not always pleasant ones. But believing in better days and good endings is what keeps me going and gives me the energy to create.`;
 
 export default function About({
   photo,
   illustration,
+  text,
 }: {
   photo: SiteImage;
   illustration: SiteImage;
+  text?: SiteText;
 }) {
   return (
     /* pt-6 is space handed over from Portfolio's bottom padding, not added on top */
@@ -80,28 +90,11 @@ export default function About({
               />
             </div>
 
-            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
-              My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a
-              Ukrainian illustrator based in Odesa, and these days that looks like freelance
-              illustration across books, stickers, portraits, and brand work, with four years at a
-              mobile game studio somewhere along the way.
-            </p>
-
-            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
-              Outside of work, I’m a matcha and cocoa person with a real weakness for tiramisu and
-              anything with cinnamon or strawberry. I have a soft spot for collectible figures and
-              building kits that are already making my shelves groan. I still draw by hand in paper
-              sketchbooks too. In the evenings, I might read some fantasy or something about
-              illustration, watch a series, check out YouTube, or just get lost in my feed. Home is
-              the only place where I can truly exhale, which is probably why I do my best work right
-              here.
-            </p>
-
-            <p className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify">
-              Living in Odesa means life comes with surprises, not always pleasant ones. But
-              believing in better days and good endings is what keeps me going and gives me the
-              energy to create.
-            </p>
+            <LocalisedText
+              en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
+              uk={text?.aboutUk ?? null}
+              className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify"
+            />
           </div>
         </div>
 

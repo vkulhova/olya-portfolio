@@ -3,9 +3,19 @@ import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
-import type { SiteImage } from "@/lib/sanity";
+import LocalisedText from "./LocalisedText";
+import type { SiteImage, SiteText } from "@/lib/sanity";
 
-export default function Hero({ avatar }: { avatar: SiteImage }) {
+/** Used until the Studio field is filled in. */
+const DEFAULT_HERO_EN = `My name is Olika, and my art lives under Lolikar. I make warm, cozy, detailed illustrations for games and books, design characters, and create custom portraits. I love building small worlds you want to get lost in, filling them with little objects, cozy details, and characters that feel like they have their own story. I’m drawn to vintage aesthetics, rich colors, soft textures, and the kind of detail you keep discovering on every look.`;
+
+export default function Hero({
+  avatar,
+  text,
+}: {
+  avatar: SiteImage;
+  text?: SiteText;
+}) {
   return (
     /* Fragment, not a wrapper element: the nav below has to be a direct child of
        <main> for `sticky` to hold all the way down the page. Nested in a section
@@ -85,14 +95,11 @@ export default function Hero({ avatar }: { avatar: SiteImage }) {
                 className="h-[37px] md:h-[48px] w-auto max-w-full"
               />
 
-              <p className="font-outfit font-normal text-sm leading-[1.6] tracking-[0.04em] text-dark">
-                My name is Olika, and my art lives under Lolikar. I make warm, cozy, detailed
-                illustrations for games and books, design characters, and create custom portraits.
-                I love building small worlds you want to get lost in, filling them with little
-                objects, cozy details, and characters that feel like they have their own story.
-                I’m drawn to vintage aesthetics, rich colors, soft textures, and the kind of detail
-                you keep discovering on every look.
-              </p>
+              <LocalisedText
+                en={text?.heroEn?.trim() || DEFAULT_HERO_EN}
+                uk={text?.heroUk ?? null}
+                className="font-outfit font-normal text-sm leading-[1.6] tracking-[0.04em] text-dark"
+              />
             </div>
             </div>
           </div>
