@@ -1,7 +1,8 @@
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { TrashIcon } from "@sanity/icons";
+import { TrashIcon, UploadIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
+import ImportTool from "./sanity/ImportTool";
 import OrderInput from "./sanity/OrderInput";
 
 export default defineConfig({
@@ -36,6 +37,12 @@ export default defineConfig({
   // alongside Content for clearing several illustrations at once.
   tools: (prev) => [
     ...prev,
+    {
+      name: "import",
+      title: "Import",
+      icon: UploadIcon,
+      component: ImportTool,
+    },
     {
       name: "bulk-delete",
       title: "Bulk delete",

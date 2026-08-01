@@ -170,7 +170,13 @@ export default function BulkDeleteTool() {
                 >
                   <Stack space={3}>
                     <Flex align="center" gap={3}>
-                      <Checkbox checked={checked} readOnly />
+                      {/* Display only. A read-only checkbox swallows its own
+                          click without toggling, so hits on the box itself did
+                          nothing; letting them fall through to the card means
+                          the whole tile is one target. */}
+                      <Box style={{ pointerEvents: "none" }}>
+                        <Checkbox checked={checked} readOnly />
+                      </Box>
                       <Box flex={1}>
                         <Text size={1} weight="medium" textOverflow="ellipsis">
                           {row.title || "(untitled)"}
