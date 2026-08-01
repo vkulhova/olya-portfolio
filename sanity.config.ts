@@ -49,10 +49,16 @@ export default defineConfig({
         name: "illustration",
         type: "document",
         title: "Illustration",
-        // A new illustration lands at the end of the gallery. math::max returns
-        // null on an empty dataset, so the first one becomes 1.
+        // A new illustration lands at the end of the gallery. The raw
+        // perspective is what makes unpublished ones count: without it an
+        // unpublished position would be handed out twice, and the two documents
+        // would collide the moment both were published. An unpublished number
+        // is simply missing from the site until it goes live.
+        // math::max returns null on an empty dataset, so the first one gets 1.
         initialValue: async (_params: unknown, context: any) => {
-          const client = context.getClient({ apiVersion: "2024-01-01" });
+          const client = context
+            .getClient({ apiVersion: "2024-01-01" })
+            .withConfig({ perspective: "raw" });
           const highest: number | null = await client.fetch(
             `math::max(*[_type == "illustration"].order)`
           );

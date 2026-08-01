@@ -32,27 +32,48 @@ export default function OrderInput(props: NumberInputProps) {
     if (target === null) return;
     setBusy(true);
     try {
-      const rows: Row[] = await client.fetch(
-        `*[_type == "illustration"] | order(order asc, _createdAt asc){ _id, order }`
+      // Raw, so unpublished illustrations keep their place in the sequence
+      // instead of having their number handed to someone else.
+      const rows: Row[] = await client
+        .withConfig({ perspective: "raw" })
+        .fetch(`*[_type == "illustration"]{ _id, order }`);
+
+      // A document with unpublished edits shows up twice, as `drafts.x` and `x`.
+      // Group them so the pair takes one position, and let the draft's own value
+      // decide where that is — it is the newer of the two.
+      const groups = new Map<string, { ids: string[]; order: number | null }>();
+      rows.forEach((row) => {
+        const key = row._id.replace(/^drafts\./, "");
+        const isDraft = row._id.startsWith("drafts.");
+        const existing = groups.get(key);
+        if (!existing) {
+          groups.set(key, { ids: [row._id], order: row.order ?? null });
+        } else {
+          existing.ids.push(row._id);
+          if (isDraft) existing.order = row.order ?? existing.order;
+        }
+      });
+
+      const sorted = Array.from(groups.entries()).sort(
+        (a, b) => (a[1].order ?? Infinity) - (b[1].order ?? Infinity)
       );
 
       // Pull this one out, then drop it back in at the requested position.
-      const others = rows.filter((r) => r._id !== publishedId);
+      const others = sorted.filter(([key]) => key !== publishedId);
       const index = Math.min(Math.max(Math.round(target) - 1, 0), others.length);
-      const ordered = others
-        .slice(0, index)
-        .concat([{ _id: publishedId, order: target }], others.slice(index));
+      const self = sorted.find(([key]) => key === publishedId);
+      const selfEntry: [string, { ids: string[]; order: number | null }] =
+        self ?? [publishedId, { ids: [publishedId], order: target }];
+      const ordered = others.slice(0, index).concat([selfEntry], others.slice(index));
 
       const tx = client.transaction();
       let changed = 0;
-      ordered.forEach((row, i) => {
+      ordered.forEach(([key, group], i) => {
         const next = i + 1;
-        const before = rows.find((r) => r._id === row._id)?.order ?? null;
-        // The edited document always gets written, so its new position lands on
-        // the published copy rather than waiting in a draft.
-        if (before !== next || row._id === publishedId) {
-          tx.patch(row._id, { set: { order: next } });
-          if (before !== next) changed++;
+        if (group.order !== next || key === publishedId) {
+          // Both copies get the number, so publishing a draft never moves it.
+          group.ids.forEach((id) => tx.patch(id, { set: { order: next } }));
+          if (group.order !== next) changed++;
         }
       });
 
