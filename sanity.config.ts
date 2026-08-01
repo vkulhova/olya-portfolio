@@ -2,6 +2,7 @@ import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
 import { TrashIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
+import OrderInput from "./sanity/OrderInput";
 
 export default defineConfig({
   name: "lolikar-portfolio",
@@ -33,7 +34,14 @@ export default defineConfig({
         fields: [
           { name: "title", type: "string", title: "Title" },
           { name: "image", type: "image", title: "Image", options: { hotspot: true } },
-          { name: "order", type: "number", title: "Order" },
+          {
+            name: "order",
+            type: "number",
+            title: "Order",
+            description:
+              "Position in the gallery. Applying a position pushes the rest down.",
+            components: { input: OrderInput },
+          },
         ],
       },
     ],
