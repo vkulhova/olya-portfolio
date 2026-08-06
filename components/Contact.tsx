@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import DecorativeDots from "./DecorativeDots";
+import LocalisedHeading from "./LocalisedHeading";
 import Image from "next/image";
 import { backdropUrl } from "@/lib/sanity";
 import type { SiteImage } from "@/lib/sanity";
@@ -72,10 +73,11 @@ export default function Contact({
         <div className="w-full sm:w-[70%] bg-white rounded-3xl px-5 sm:px-10 py-12">
           {/* "Drop a letter in my mailbox" SVG heading from Figma */}
           <div className="mb-8">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/svg/drop-a-letter.svg"
-              alt="Drop a letter in my mailbox"
+            <LocalisedHeading
+              en="/svg/drop-a-letter.svg"
+              uk="/svg/drop-a-letter-uk.svg"
+              altEn="Drop a letter in my mailbox"
+              altUk="Залиште лист у моїй скриньці"
               className="w-full max-w-[510px] h-auto"
             />
           </div>

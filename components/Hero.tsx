@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DecorativeDots from "./DecorativeDots";
 import LocalisedText from "./LocalisedText";
+import LocalisedHeading from "./LocalisedHeading";
 import { backdropUrl } from "@/lib/sanity";
 import type { SiteImage, SiteText } from "@/lib/sanity";
 
@@ -84,10 +85,11 @@ export default function Hero({
 
             {/* Text content */}
             <div className="flex flex-col gap-6 items-center text-center md:items-start md:text-left min-w-0">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/svg/hello-and-welcome.svg"
-                alt="Hello and welcome"
+              <LocalisedHeading
+                en="/svg/hello-and-welcome.svg"
+                uk="/svg/hello-and-welcome-uk.svg"
+                altEn="Hello and welcome"
+                altUk="Привіт, рада що ви тут"
                 className="h-[37px] md:h-[48px] w-auto max-w-full"
               />
 

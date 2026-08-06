@@ -1,6 +1,7 @@
 import Image from "next/image";
 import DecorativeDots from "./DecorativeDots";
 import LocalisedText from "./LocalisedText";
+import LocalisedHeading from "./LocalisedHeading";
 import AboutCopyFit from "./AboutCopyFit";
 import type { SiteImage, SiteText } from "@/lib/sanity";
 
@@ -88,10 +89,11 @@ export default function About({
             {/* nowrap keeps the star beside the heading; both shrink together on
                 narrow screens rather than the star dropping to its own line */}
             <div className="flex items-center gap-3 flex-nowrap">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/svg/a-few-words-about-me.svg"
-                alt="A few words about me"
+              <LocalisedHeading
+                en="/svg/a-few-words-about-me.svg"
+                uk="/svg/a-few-words-about-me-uk.svg"
+                altEn="A few words about me"
+                altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[52px] w-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
