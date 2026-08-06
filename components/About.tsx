@@ -117,12 +117,16 @@ export default function About({
 
       {/* Desk illustration — 60% page width, outside the narrow container */}
       {/* pb-10 rather than pb-16: Contact takes the other 24px above its dot trim */}
-      <div className="w-full sm:w-[60%] mx-auto pb-10">
+      {/* The picture file carries wide empty margins — the drawing itself is
+          only about two thirds of its width. On phones it is scaled up and the
+          empty sides run off the edge, so the desk fills the screen; overflow
+          is clipped here so the page never scrolls sideways. */}
+      <div className="w-full sm:w-[60%] mx-auto pb-10 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={illustration?.url ?? "/images/illustration.png"}
           alt="Cozy desk illustration"
-          className="w-full h-auto"
+          className="w-[150%] max-w-none -ml-[25%] sm:w-full sm:ml-0 h-auto"
         />
       </div>
     </section>
