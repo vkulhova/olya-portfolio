@@ -110,7 +110,7 @@ export default function About({
               <LocalisedText
                 en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
                 uk={text?.aboutUk ?? null}
-                className="about-copy font-['Outfit'] font-light leading-[1.7] text-dark text-justify"
+                className="about-copy font-outfit font-light leading-[1.7] text-dark text-justify"
               />
             </AboutCopyFit>
           </div>

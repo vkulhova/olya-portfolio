@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
 
 const LANGUAGES = ["UA", "EN"] as const;
 export type Language = (typeof LANGUAGES)[number];
@@ -14,6 +14,13 @@ const LanguageContext = createContext<LanguageState | null>(null);
  *  on screen, but shared state keeps them from drifting apart. */
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>("EN");
+
+  // Published on <html> so the stylesheet can swap the body font for one that
+  // has Cyrillic — see globals.css.
+  useEffect(() => {
+    document.documentElement.dataset.lang = language;
+  }, [language]);
+
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>
       {children}

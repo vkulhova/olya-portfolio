@@ -69,13 +69,17 @@ export default function AboutCopyFit({ children }: { children: React.ReactNode }
     // The language switch swaps the copy for a translation of a different length.
     const mo = new MutationObserver(fit);
     mo.observe(el, { childList: true, subtree: true, characterData: true });
-    // Text measured in a fallback font wraps differently once Outfit arrives.
+    // Text measured in a fallback font wraps differently once the real one
+    // arrives — including the Ukrainian face, which is only fetched when the
+    // language is first switched, well after the initial fit.
     document.fonts?.ready.then(fit);
+    document.fonts?.addEventListener("loadingdone", fit);
 
     return () => {
       ro.disconnect();
       mo.disconnect();
       window.removeEventListener("resize", fit);
+      document.fonts?.removeEventListener("loadingdone", fit);
     };
   }, []);
 
