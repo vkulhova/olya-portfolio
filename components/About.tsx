@@ -129,7 +129,7 @@ export default function About({
         <img
           src={illustration?.url ?? "/images/illustration.png"}
           alt="Cozy desk illustration"
-          className="w-[150%] max-w-none -ml-[25%] sm:w-full sm:ml-0 h-auto"
+          className="w-[130%] max-w-none -ml-[15%] sm:w-full sm:ml-0 h-auto"
         />
       </div>
     </section>
