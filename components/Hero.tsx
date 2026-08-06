@@ -57,7 +57,7 @@ export default function Hero({
             src="/svg/star-cream.svg"
             alt=""
             aria-hidden="true"
-            className="absolute -top-2 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
+            className="absolute -top-6 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
           />
 
           {/* Star 2 — attached to card, overlaps bottom-right corner */}
