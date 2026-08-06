@@ -13,8 +13,6 @@ const LanguageContext = createContext<LanguageState | null>(null);
  *  at the top of the header, once in the pinned bar — and they are never both
  *  on screen, but shared state keeps them from drifting apart. */
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  // Visual only for now — nothing on the page is translated yet, so EN is the
-  // honest starting state.
   const [language, setLanguage] = useState<Language>("EN");
   return (
     <LanguageContext.Provider value={{ language, setLanguage }}>

@@ -4,8 +4,34 @@ import { useState } from "react";
 import DecorativeDots from "./DecorativeDots";
 import LocalisedHeading from "./LocalisedHeading";
 import Image from "next/image";
+import { useLanguage } from "./Language";
 import { backdropUrl } from "@/lib/sanity";
 import type { SiteImage } from "@/lib/sanity";
+
+/** The form is the only block whose text lives in the code rather than in
+ *  Studio — it is labels, not copy, so it is translated here. */
+const COPY = {
+  EN: {
+    name: "Your name",
+    surname: "Your surname",
+    email: "Email",
+    message: "Write your letter here...",
+    send: "Post it!",
+    sending: "Sending...",
+    sent: "Sent ✓",
+    error: "Something went wrong. Please try again.",
+  },
+  UA: {
+    name: "Ваше імʼя",
+    surname: "Ваше прізвище",
+    email: "Email",
+    message: "Напишіть тут свій лист",
+    send: "Відправити",
+    sending: "Надсилаємо...",
+    sent: "Надіслано ✓",
+    error: "Щось пішло не так. Спробуйте ще раз.",
+  },
+} as const;
 
 export default function Contact({
   illustration,
@@ -16,6 +42,7 @@ export default function Contact({
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
+  const copy = COPY[useLanguage()];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -86,7 +113,7 @@ export default function Contact({
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
                 <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
-                  Your name
+                  {copy.name}
                 </label>
                 <input
                   type="text"
@@ -97,7 +124,7 @@ export default function Contact({
               </div>
               <div className="flex flex-col gap-2">
                 <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
-                  Your surname
+                  {copy.surname}
                 </label>
                 <input
                   type="text"
@@ -110,7 +137,7 @@ export default function Contact({
 
             <div className="flex flex-col gap-2">
               <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
-                Email
+                {copy.email}
               </label>
               <input
                 type="email"
@@ -122,7 +149,7 @@ export default function Contact({
 
             <div className="flex flex-col gap-2">
               <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
-                Write your letter here...
+                {copy.message}
               </label>
               <textarea
                 name="message"
@@ -159,12 +186,12 @@ export default function Contact({
           disabled={status === "sending" || status === "sent"}
           className="mt-14 w-48 h-14 pl-[0.2em] rounded-full bg-pink text-white font-futura font-medium text-sm tracking-[0.2em] uppercase hover:bg-pink/90 transition-colors disabled:opacity-60"
         >
-          {status === "sent" ? "Sent ✓" : status === "sending" ? "Sending..." : "Post it!"}
+          {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
         </button>
 
         {status === "error" && (
           <p className="mt-3 text-red-500 font-futura text-xs tracking-wider">
-            Something went wrong. Please try again.
+            {copy.error}
           </p>
         )}
       </div>

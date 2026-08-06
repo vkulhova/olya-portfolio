@@ -1,15 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LanguageSwitcher } from "./Language";
+import { LanguageSwitcher, useLanguage } from "./Language";
 import { useView } from "./View";
 
 const LINKS = ["portfolio", "about", "contact"] as const;
+
+/** Lower case: the links are uppercased by their own styling. */
+const LABELS = {
+  EN: { portfolio: "portfolio", about: "about", contact: "contact" },
+  UA: { portfolio: "портфоліо", about: "знайомство", contact: "співпраця" },
+} as const;
 
 export default function Nav() {
   // Which section is on screen — the links are plain hash links, and the view
   // follows the hash, so nothing here has to intercept the click.
   const view = useView();
+  const labels = LABELS[useLanguage()];
   // Once the bar is pinned, a small logo joins it — the big one has scrolled away by then.
   const [stuck, setStuck] = useState(false);
   // Phones only: the links fold into a burger while the bar is pinned.
@@ -59,18 +66,21 @@ export default function Nav() {
         <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[47px] w-auto" />
       </a>
 
-      {/* Inline links — from sm up. On phones they live in the burger menu. */}
-      <div className="hidden sm:flex gap-10">
+      {/* Inline links — from sm up. On phones they live in the burger menu.
+          Between sm and md the row is tightened: the Ukrainian labels are half
+          again as wide as the English ones and would otherwise run into the
+          pinned logo. From md up the spacing is the original. */}
+      <div className="hidden sm:flex gap-6 md:gap-10">
         {LINKS.map((link) => (
           <a
             key={link}
             href={`#${link}`}
             aria-current={view === link ? "page" : undefined}
-            className={`font-futura font-semibold text-sm tracking-[0.25em] uppercase transition-colors hover:text-gold ${
+            className={`font-futura font-semibold text-sm tracking-[0.15em] md:tracking-[0.25em] uppercase transition-colors hover:text-gold ${
               view === link ? "text-gold" : "text-dark"
             }`}
           >
-            {link}
+            {labels[link]}
           </a>
         ))}
       </div>
@@ -126,7 +136,7 @@ export default function Nav() {
                   view === link ? "text-gold" : "text-dark"
                 }`}
               >
-                {link}
+                {labels[link]}
               </a>
             ))}
             <LanguageSwitcher />
