@@ -95,6 +95,7 @@ export default function About({
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[52px] w-auto min-w-0 shrink"
+                ukClassName="h-[40px] sm:h-[62px] w-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

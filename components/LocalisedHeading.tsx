@@ -13,17 +13,26 @@ export default function LocalisedHeading({
   altEn,
   altUk,
   className = "",
+  ukClassName,
 }: {
   en: string;
   uk: string;
   altEn: string;
   altUk: string;
   className?: string;
+  /** The Ukrainian lettering has taller ascenders and descenders, so at an
+   *  equal box height it reads smaller than the English. Each heading passes
+   *  its own size here to even them out. */
+  ukClassName?: string;
 }) {
   const isUk = useLanguage() === "UA";
 
   return (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={isUk ? uk : en} alt={isUk ? altUk : altEn} className={className} />
+    <img
+      src={isUk ? uk : en}
+      alt={isUk ? altUk : altEn}
+      className={isUk ? ukClassName ?? className : className}
+    />
   );
 }

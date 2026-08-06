@@ -106,6 +106,7 @@ export default function Contact({
               altEn="Drop a letter in my mailbox"
               altUk="Залиште лист у моїй скриньці"
               className="w-full max-w-[510px] h-auto"
+              ukClassName="w-full max-w-[600px] h-auto"
             />
           </div>
 

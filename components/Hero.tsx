@@ -91,6 +91,7 @@ export default function Hero({
                 altEn="Hello and welcome"
                 altUk="Привіт, рада що ви тут"
                 className="h-[37px] md:h-[48px] w-auto max-w-full"
+                ukClassName="h-[44px] md:h-[57px] w-auto max-w-full"
               />
 
               <LocalisedText
