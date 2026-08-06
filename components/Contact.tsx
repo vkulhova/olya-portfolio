@@ -113,7 +113,7 @@ export default function Contact({
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
             <div className="grid grid-cols-2 gap-4">
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
+                <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
                   {copy.name}
                 </label>
                 <input
@@ -124,7 +124,7 @@ export default function Contact({
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
+                <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
                   {copy.surname}
                 </label>
                 <input
@@ -137,7 +137,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
+              <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
                 {copy.email}
               </label>
               <input
@@ -149,7 +149,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-base font-medium tracking-[0.05em] text-dark">
+              <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
                 {copy.message}
               </label>
               <textarea
