@@ -14,7 +14,7 @@ export default function Footer() {
       <DecorativeDots />
 
       {/* icon and gap both scaled by 1.8, so the row keeps its proportions */}
-      <div className="flex justify-center gap-[9px] py-12">
+      <div className="flex justify-center gap-[9px] pt-12 pb-6">
         {socials.map((s) => (
           <a
             key={s.name}
@@ -29,6 +29,12 @@ export default function Footer() {
           </a>
         ))}
       </div>
+
+      {/* Signature line. The year comes from the build, so it moves on with
+          each deploy rather than being written into the markup. */}
+      <p className="pb-12 text-center font-serif italic tracking-[0.12em] text-sm text-dark">
+        Made with love by Lolikar © {new Date().getFullYear()}
+      </p>
     </footer>
   );
 }
