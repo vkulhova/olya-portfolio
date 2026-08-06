@@ -38,7 +38,7 @@ export default function About({
             the original 3:7. */}
         <div
           data-about-grid
-          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-10 items-stretch mb-10"
+          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-x-10 gap-y-16 md:gap-y-10 items-stretch mb-10"
         >
 
           {/* Photo column. The box carries the photo's own 3:4 ratio at every
