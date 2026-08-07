@@ -97,7 +97,7 @@ export default function Contact({
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[70%] bg-white rounded-3xl px-5 sm:px-10 py-12">
+        <div className="flex flex-col w-full sm:w-[70%] bg-white rounded-3xl px-5 sm:px-10 py-6 sm:py-12">
           {/* "Drop a letter in my mailbox" SVG heading from Figma */}
           <div className="mb-8">
             <LocalisedHeading
@@ -165,7 +165,7 @@ export default function Contact({
               it closes it, as before. It sits outside the form so the order can
               be swapped — the 52px top margin is what the form's gap-6 and the
               old mt-7 added up to there. */}
-          <div className="flex justify-center order-first mb-8 sm:order-none sm:mt-[52px] sm:mb-2">
+          <div className="flex justify-center order-first mb-6 sm:order-none sm:mt-[52px] sm:mb-2">
             <Image
               src={illustration?.url ?? "/images/work-1.png"}
               alt="Illustration"
