@@ -124,21 +124,23 @@ export default function Nav() {
         onClick={() => setMenuOpen((v) => !v)}
         className="absolute left-8 top-1/2 -translate-y-1/2 sm:hidden grid h-12 w-12 place-items-center text-dark"
       >
-        <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" fill="none"
-          stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
-          {menuOpen ? (
-            <>
-              <path d="M5 5l14 14" />
-              <path d="M19 5L5 19" />
-            </>
-          ) : (
-            <>
-              <path d="M4 7h16" />
-              <path d="M4 12h16" />
-              <path d="M4 17h16" />
-            </>
-          )}
-        </svg>
+        {/* Wider and finer than a stock burger: the lines are set apart so the
+            mark reads as three strokes rather than a solid block. The cross
+            keeps the same weight. */}
+        {menuOpen ? (
+          <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" fill="none"
+            stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <path d="M2.6 2.6l14.8 14.8" />
+            <path d="M17.4 2.6L2.6 17.4" />
+          </svg>
+        ) : (
+          <svg width="30" height="18" viewBox="0 0 30 18" aria-hidden="true" fill="none"
+            stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
+            <path d="M1.6 2h26.8" />
+            <path d="M1.6 9h26.8" />
+            <path d="M1.6 16h26.8" />
+          </svg>
+        )}
       </button>
 
       {/* Menu panel — sits under the bar, so it moves with it while pinned */}
