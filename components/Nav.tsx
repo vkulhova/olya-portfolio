@@ -46,24 +46,46 @@ export default function Nav() {
   return (
     // The shadow is tinted with the site's brown rather than black, and only
     // appears once the bar is pinned — before that it has nothing to cast onto.
+    // Pinned on phones the bar holds nothing in flow — the burger and the L are
+    // both absolute — so it carries a height of its own there.
     <nav
       ref={navRef}
-      className={`sticky top-0 z-40 bg-white flex items-center justify-center gap-10 py-[29px] min-h-[78px] transition-shadow duration-300 ${
-        stuck ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)]" : "shadow-none"
+      className={`sticky top-0 z-40 bg-white flex items-center justify-center gap-10 py-[29px] min-h-[78px] transition-all duration-300 ${
+        stuck
+          ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)] max-sm:py-[10px] max-sm:min-h-[64px]"
+          : "shadow-none max-sm:py-[33px] max-sm:min-h-0"
       }`}
     >
-      {/* Absolutely placed so it never nudges the centred links. On phones it
-          only has room once the links have folded into the menu, which is the
-          same moment it appears. */}
+      {/* Desktop's small logo: absolutely placed so it never nudges the centred
+          links, and only present once the bar is pinned and the big one above
+          has scrolled away. Phones have their own pair below. */}
       <a
         href="#home"
         aria-label="Lolikar — home"
-        className={`absolute left-8 top-1/2 -translate-y-1/2 transition-opacity duration-300 opacity-100 ${
-          stuck ? "sm:opacity-100" : "sm:pointer-events-none sm:opacity-0"
+        className={`hidden sm:block absolute left-8 top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+          stuck ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[47px] w-auto" />
+      </a>
+
+      {/* Phones, at the top of the page: the full logo, centred and large, with
+          the burger out to its left. */}
+      <a href="#home" aria-label="Lolikar — home" className={`sm:hidden ${stuck ? "hidden" : "block"}`}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[73px] w-auto" />
+      </a>
+
+      {/* Phones, once pinned: the wordmark gives way to the L on its own, which
+          keeps the pinned bar shallow. */}
+      <a
+        href="#home"
+        aria-label="Lolikar — home"
+        className={`sm:hidden absolute right-8 top-1/2 -translate-y-1/2 ${stuck ? "block" : "hidden"}`}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/svg/lolikar-l.svg" alt="Lolikar" className="h-[44px] w-auto" />
       </a>
 
       {/* Inline links — from sm up. On phones they live in the burger menu.
@@ -100,7 +122,7 @@ export default function Nav() {
         aria-expanded={menuOpen}
         aria-controls="mobile-menu"
         onClick={() => setMenuOpen((v) => !v)}
-        className="absolute right-8 top-1/2 -translate-y-1/2 sm:hidden grid h-12 w-12 place-items-center text-dark"
+        className="absolute left-8 top-1/2 -translate-y-1/2 sm:hidden grid h-12 w-12 place-items-center text-dark"
       >
         <svg width="34" height="34" viewBox="0 0 24 24" aria-hidden="true" fill="none"
           stroke="currentColor" strokeWidth="2.4" strokeLinecap="round">
