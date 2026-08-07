@@ -51,7 +51,7 @@ export default function About({
             {/* data-about-photo is what AboutCopyFit measures the copy against. */}
             <div
               data-about-photo
-              className="relative w-full max-w-[272px] md:max-w-[300px] mx-auto aspect-[3/4]"
+              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[300px] mx-auto aspect-[3/4]"
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
@@ -61,7 +61,7 @@ export default function About({
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute -top-10 -left-10 md:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+                className="absolute top-[14px] sm:-top-10 -left-10 md:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
