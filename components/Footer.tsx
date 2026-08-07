@@ -13,8 +13,10 @@ export default function Footer() {
       <div className="h-9 bg-white" />
       <DecorativeDots />
 
-      {/* icon and gap both scaled by 1.8, so the row keeps its proportions */}
-      <div className="flex justify-center gap-[9px] pt-12 pb-6">
+      {/* Phones get the icons at 44px — the size the back-to-top button used to
+          be — with the gap scaled to match. From sm up the row keeps the
+          original 22px icons and its 9px gap. */}
+      <div className="flex justify-center gap-[18px] sm:gap-[9px] pt-12 pb-6">
         {socials.map((s) => (
           <a
             key={s.name}
@@ -22,7 +24,7 @@ export default function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={s.name}
-            className="w-[22px] h-[22px] hover:opacity-80 transition-opacity"
+            className="w-11 h-11 sm:w-[22px] sm:h-[22px] hover:opacity-80 transition-opacity"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={s.icon} alt={s.name} className="w-full h-full object-contain" />

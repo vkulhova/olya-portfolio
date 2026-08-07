@@ -37,24 +37,24 @@ export default function BackToTop() {
       type="button"
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
-      className={`fixed bottom-8 right-8 z-50 grid h-11 w-11 sm:h-14 sm:w-14 place-items-center rounded-full bg-peach-mid text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#F5735E] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
+      className={`fixed bottom-8 right-8 z-50 grid h-[38px] w-[38px] sm:h-14 sm:w-14 place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      {/* A single chevron, drawn with the same soft round ends as the rest of
-          the line work. The stroke is left slightly uneven so it keeps the
-          hand-made feel of the illustrations. */}
+      {/* The chevron and its stroke come from the supplied drawing, kept in its
+          own 43-unit box so both scale with the button rather than being fixed
+          to one size. */}
       <svg
-        className="h-[15px] w-[19px] sm:h-[18px] sm:w-[23px]"
-        viewBox="0 0 23 18"
+        className="h-full w-full"
+        viewBox="0 0 43 43"
         fill="none"
         aria-hidden="true"
         stroke="currentColor"
-        strokeWidth="2.6"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M2.2 14.4C5.4 10.2 8.6 6.2 11.5 3.2C14.3 6.1 17.6 10.1 20.8 14.4" />
+        <path d="M31 25L21.5 15.5L12 25" />
       </svg>
     </button>
   );
