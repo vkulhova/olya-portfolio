@@ -1,5 +1,4 @@
 import Image from "next/image";
-import DecorativeDots from "./DecorativeDots";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import AboutCopyFit from "./AboutCopyFit";
@@ -22,16 +21,10 @@ export default function About({
   text?: SiteText;
 }) {
   return (
-    /* pt-6 is space handed over from Portfolio's bottom padding, not added on top */
-    <section id="about" className="w-full bg-white pt-6 scroll-mt-[78px]">
-      <DecorativeDots />
-
-      {/* The mint stripe used to sit here. It is gone at every width, and the
-          white spacer that separated it from the dots went with it — otherwise
-          its height would have stayed behind as a gap. */}
-
-      {/* Main content */}
-      <div className="w-[78%] mx-auto pt-[104px] pb-10">
+    <section id="about" className="w-full bg-white scroll-mt-[78px]">
+      {/* The dot ribbon above lives in SiteHeader now, and brings 32px of white
+          with it — hence 72 here rather than the 104 this used to carry. */}
+      <div className="w-[78%] mx-auto pt-[72px] pb-10">
         {/* Photo + text grid */}
         {/* Between md and lg the photo takes a wider share: it is the taller
             column there, and giving it room is what lets the copy stay beside

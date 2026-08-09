@@ -1,5 +1,4 @@
 import Image from "next/image";
-import DecorativeDots from "./DecorativeDots";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import { backdropUrl } from "@/lib/sanity";
@@ -26,11 +25,6 @@ export default function Hero({
       {/* The band is the first thing below the fold's edge, so its backdrop is
           asked for straight away rather than when the style is applied. */}
       {backdrop && <link rel="preload" as="image" href={backdrop} fetchPriority="high" />}
-
-      {/* pt here + the nav's py keep the original 40px gap; pb-8 the white gap before gold */}
-      <div className="bg-white pt-[20px] pb-8">
-        <DecorativeDots />
-      </div>
 
       {/* Gold hero section — height follows card content so nothing overflows on
           small screens. An uploaded backdrop covers the band; the mustard stays

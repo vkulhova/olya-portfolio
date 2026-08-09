@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import DecorativeDots from "./DecorativeDots";
 import LocalisedHeading from "./LocalisedHeading";
 import Image from "next/image";
 import { useLanguage } from "./Language";
@@ -69,12 +68,6 @@ export default function Contact({
 
   return (
     <section id="contact" className="w-full scroll-mt-[78px]">
-      {/* Dots bar on white, inside the section so Contact begins at the pattern
-          — same as About — rather than at the beige band below it */}
-      <div className="w-full bg-white pt-6 pb-9">
-        <DecorativeDots />
-      </div>
-
     {/* An uploaded backdrop replaces the paper texture rather than sitting under
         it — the grain would only fight a real picture. The beige stays as the
         base colour so the block is never bare while the image loads. */}

@@ -1,4 +1,5 @@
 import StripeBar from "./StripeBar";
+import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
 
@@ -32,6 +33,14 @@ export default function SiteHeader() {
       </div>
 
       <Nav />
+
+      {/* One ribbon for every section rather than one inside each: the sections
+          spaced it slightly differently, so switching between them made it hop.
+          pt here + the nav's py keep the original 40px gap; pb-8 the white gap
+          before whatever the section opens with. */}
+      <div className="bg-white pt-[20px] pb-8">
+        <DecorativeDots />
+      </div>
     </>
   );
 }
