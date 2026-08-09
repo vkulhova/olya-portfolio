@@ -13,6 +13,10 @@ export default function Footer({ colour }: { colour?: string | null }) {
     <footer className="w-full bg-white">
       <div className="h-9 bg-white" />
       <DecorativeDots />
+      {/* The same 32px of white the ribbon at the top of the page carries below
+          it. Without it the beige started on the ribbon's bottom edge and the
+          ribbon read as having come loose from the band. */}
+      <div className="h-8 bg-white" />
 
       {/* Everything below the dot ribbon sits on its own colour, set in Studio
           the way the hero and contact backdrops are; the strip above it stays
@@ -21,7 +25,7 @@ export default function Footer({ colour }: { colour?: string | null }) {
         {/* Phones get the icons at 44px — the size the back-to-top button used
             to be — with the gap scaled to match. From sm up the row keeps the
             original 22px icons and its 9px gap. */}
-        <div className="flex justify-center gap-[18px] sm:gap-[9px] pt-12 pb-6">
+        <div data-footer-icons className="flex justify-center gap-[18px] sm:gap-[9px] pt-12 pb-6">
           {socials.map((s) => (
             <a
               key={s.name}

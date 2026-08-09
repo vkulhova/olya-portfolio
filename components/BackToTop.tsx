@@ -27,15 +27,16 @@ export default function BackToTop() {
       timerRef.current = window.setTimeout(() => setVisible(false), IDLE_TIMEOUT);
     };
 
-    // Where it stops: with its top edge on the top edge of the footer's
-    // coloured band. Measured rather than written down, because the band moves
-    // with the length of the section and the button has two sizes.
+    // Where it stops: level with the row of social icons, off to their right.
+    // Measured off an icon rather than its row, whose padding would put the
+    // centre well below the icons themselves.
     const place = () => {
-      const band = document.querySelector<HTMLElement>("[data-footer-band]");
+      const icon = document.querySelector<HTMLElement>("[data-footer-icons] a");
       const height = buttonRef.current?.offsetHeight ?? 0;
-      if (!band) return setBottom(GAP);
-      const bandTop = band.getBoundingClientRect().top;
-      setBottom(Math.max(GAP, window.innerHeight - bandTop - height));
+      if (!icon) return setBottom(GAP);
+      const box = icon.getBoundingClientRect();
+      const middle = box.top + box.height / 2;
+      setBottom(Math.max(GAP, window.innerHeight - middle - height / 2));
     };
 
     const onScroll = () => {
