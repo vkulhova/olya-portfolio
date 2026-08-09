@@ -5,7 +5,7 @@
 export default function StripeBar() {
   return (
     <div
-      className="w-full h-[14px] sm:h-11 bg-[repeating-linear-gradient(90deg,#FFD8CF_0px,#FFD8CF_35px,#FF917F_35px,#FF917F_70px)] sm:bg-[repeating-linear-gradient(90deg,#FFD8CF_0px,#FFD8CF_55px,#FF917F_55px,#FF917F_110px)]"
+      className="w-full h-[14px] sm:h-[22px] bg-[repeating-linear-gradient(90deg,#FFD8CF_0px,#FFD8CF_35px,#FF917F_35px,#FF917F_70px)] sm:bg-[repeating-linear-gradient(90deg,#FFD8CF_0px,#FFD8CF_55px,#FF917F_55px,#FF917F_110px)]"
     />
   );
 }
