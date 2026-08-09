@@ -90,21 +90,31 @@ export default function Contact({
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[70%] bg-white rounded-3xl px-5 sm:px-10 py-6 sm:py-12">
-          {/* "Drop a letter in my mailbox" SVG heading from Figma */}
-          <div className="mb-8">
+        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-5 sm:px-12 py-6 sm:py-12">
+          {/* Heading with the salmon star beside it, the same pairing About
+              uses. nowrap keeps them on one line: the heading shrinks first. */}
+          <div className="mb-8 flex items-center gap-3 flex-nowrap">
             <LocalisedHeading
               en="/svg/drop-a-letter.svg"
               uk="/svg/drop-a-letter-uk.svg"
               altEn="Drop a letter in my mailbox"
               altUk="Залиште лист у моїй скриньці"
-              className="w-full max-w-[366px] h-auto"
-              ukClassName="w-full max-w-[343px] h-auto"
+              className="w-full max-w-[366px] min-w-0 shrink h-auto"
+              ukClassName="w-full max-w-[343px] min-w-0 shrink h-auto"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/svg/star-salmon.svg"
+              alt=""
+              aria-hidden="true"
+              className="w-[36px] h-[36px] sm:w-[53px] sm:h-[53px] shrink-0"
             />
           </div>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-            <div className="grid grid-cols-2 gap-4">
+            {/* The mock sets the two name fields further apart than the 16px
+                they had; phones keep the tighter gap, there is no room there. */}
+            <div className="grid grid-cols-2 gap-4 sm:gap-10">
               <div className="flex flex-col gap-2">
                 <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
                   {copy.name}
