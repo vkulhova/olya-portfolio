@@ -9,7 +9,6 @@ const config: Config = {
     extend: {
       colors: {
         gold: { DEFAULT: "#BD9E30", light: "#DFC563" },
-        pink: "#C94B7A",
         peach: { light: "#FFD8CF", mid: "#FF917F" },
         dark: "#3C1A05",
         beige: "#F5EDE0",

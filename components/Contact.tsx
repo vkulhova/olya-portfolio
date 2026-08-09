@@ -190,7 +190,7 @@ export default function Contact({
             form?.requestSubmit();
           }}
           disabled={status === "sending" || status === "sent"}
-          className="mt-14 w-48 h-14 pl-[0.2em] rounded-full bg-pink text-white font-futura font-medium text-sm tracking-[0.2em] uppercase hover:bg-pink/90 transition-colors disabled:opacity-60"
+          className="mt-14 w-48 h-14 pl-[0.2em] rounded-full bg-peach-mid text-white font-futura font-medium text-sm tracking-[0.2em] uppercase hover:bg-peach-mid/90 transition-colors disabled:opacity-60"
         >
           {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
         </button>
