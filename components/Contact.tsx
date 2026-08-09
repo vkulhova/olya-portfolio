@@ -98,8 +98,8 @@ export default function Contact({
               uk="/svg/drop-a-letter-uk.svg"
               altEn="Drop a letter in my mailbox"
               altUk="Залиште лист у моїй скриньці"
-              className="w-full max-w-[510px] h-auto"
-              ukClassName="w-full max-w-[600px] h-auto"
+              className="w-full max-w-[366px] h-auto"
+              ukClassName="w-full max-w-[343px] h-auto"
             />
           </div>
 
