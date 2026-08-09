@@ -26,6 +26,20 @@ html[data-lang="UA"] .font-outfit {
   font-family: 'Nunito Sans', sans-serif;
 }
 
+/* Form labels: Outfit Regular in English, Futura Medium in Ukrainian, both
+   set 4px apart. Written here rather than in classes because the face has to
+   follow the language, the same way the body copy does above. */
+.form-label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 400;
+  letter-spacing: 4px;
+}
+
+html[data-lang="UA"] .form-label {
+  font-family: 'Futura PT', 'Futura', sans-serif;
+  font-weight: 500;
+}
+
 /* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit
    of text on the page. WebKit ignores scrollbar-color, so it needs its own
    rules. */

@@ -21,7 +21,7 @@ export default function SiteHeader() {
             logo and the burger from the very top of the page. */}
         <div className="relative bg-white pt-[53px] pb-[23px] hidden sm:flex flex-col items-center">
           {/* Same target as its small twin in the pinned bar */}
-          <a href="#home" aria-label="Lolikar — home">
+          <a href="#portfolio" aria-label="Lolikar — portfolio">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
           </a>

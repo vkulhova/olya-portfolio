@@ -6,10 +6,12 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
  *  them. Which one is in the URL hash, so links are shareable and Back works;
  *  the nav does not have to intercept anything — it stays plain <a href="#…">.
  */
-export const VIEWS = ["home", "portfolio", "about", "contact"] as const;
+export const VIEWS = ["portfolio", "about", "contact"] as const;
 export type ViewName = (typeof VIEWS)[number];
 
-const DEFAULT_VIEW: ViewName = "home";
+/** Also where #home lands: the card that used to be its own section now opens
+ *  portfolio, so old links keep working. */
+const DEFAULT_VIEW: ViewName = "portfolio";
 
 function fromHash(): ViewName {
   const name = window.location.hash.replace("#", "");

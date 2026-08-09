@@ -60,8 +60,8 @@ export default function Nav() {
           links, and only present once the bar is pinned and the big one above
           has scrolled away. Phones have their own pair below. */}
       <a
-        href="#home"
-        aria-label="Lolikar — home"
+        href="#portfolio"
+        aria-label="Lolikar — portfolio"
         className={`hidden sm:block absolute left-8 top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
           stuck ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
@@ -72,7 +72,7 @@ export default function Nav() {
 
       {/* Phones, at the top of the page: the full logo, centred and large, with
           the burger out to its left. */}
-      <a href="#home" aria-label="Lolikar — home" className={`sm:hidden ${stuck ? "hidden" : "block"}`}>
+      <a href="#portfolio" aria-label="Lolikar — portfolio" className={`sm:hidden ${stuck ? "hidden" : "block"}`}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[73px] w-auto" />
       </a>
@@ -80,8 +80,8 @@ export default function Nav() {
       {/* Phones, once pinned: the wordmark gives way to the L on its own, which
           keeps the pinned bar shallow. */}
       <a
-        href="#home"
-        aria-label="Lolikar — home"
+        href="#portfolio"
+        aria-label="Lolikar — portfolio"
         className={`sm:hidden absolute right-8 top-1/2 -translate-y-1/2 ${stuck ? "block" : "hidden"}`}
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}

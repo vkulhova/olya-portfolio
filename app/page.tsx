@@ -25,10 +25,12 @@ export default async function Home() {
           {/* One section at a time, picked by the link the visitor chose. All
               four are rendered on the server, so switching needs no request. */}
           <ViewSwitch
-            home={
-              <Hero avatar={images.avatar} background={images.heroBackground} text={text} />
+            portfolio={
+              <>
+                <Hero avatar={images.avatar} background={images.heroBackground} text={text} />
+                <Portfolio />
+              </>
             }
-            portfolio={<Portfolio />}
             about={
               <About
                 photo={images.aboutPhoto}

@@ -116,7 +116,7 @@ export default function Contact({
                 they had; phones keep the tighter gap, there is no room there. */}
             <div className="grid grid-cols-2 gap-4 sm:gap-10">
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
+                <label className="form-label text-sm sm:text-base text-dark">
                   {copy.name}
                 </label>
                 <input
@@ -127,7 +127,7 @@ export default function Contact({
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
+                <label className="form-label text-sm sm:text-base text-dark">
                   {copy.surname}
                 </label>
                 <input
@@ -140,7 +140,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
+              <label className="form-label text-sm sm:text-base text-dark">
                 {copy.email}
               </label>
               <input
@@ -152,7 +152,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="font-futura text-sm font-normal sm:text-base sm:font-medium tracking-[0.05em] text-dark">
+              <label className="form-label text-sm sm:text-base text-dark">
                 {copy.message}
               </label>
               <textarea
