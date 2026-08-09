@@ -48,13 +48,16 @@ export default function About({
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
-                  than the picture; desktop is meant to look exactly as before. */}
+                  than the picture; desktop is meant to look exactly as before.
+                  On phones it is 72px and sits further out, so its rays stop
+                  short of the hat; still well clear of the salmon star's 59px,
+                  which is meant to stay the smaller of the two. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute top-[14px] sm:-top-10 -left-10 md:-left-[50px] w-[85px] h-[85px] z-10 pointer-events-none"
+                className="absolute top-[14px] -left-12 w-[72px] h-[72px] sm:-top-10 sm:-left-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
