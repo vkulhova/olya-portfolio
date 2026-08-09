@@ -23,8 +23,10 @@ export default function About({
   return (
     <section id="about" className="w-full bg-white scroll-mt-[78px]">
       {/* The dot ribbon above lives in SiteHeader now, and brings 32px of white
-          with it — hence 72 here rather than the 104 this used to carry. */}
-      <div className="w-[78%] mx-auto pt-[72px] pb-10">
+          with it — hence 72 here rather than the 104 this used to carry. On
+          phones that still left the photo further from the ribbon than the
+          other two sections start, so there it is 32. */}
+      <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10">
         {/* Photo + text grid */}
         {/* Between md and lg the photo takes a wider share: it is the taller
             column there, and giving it room is what lets the copy stay beside
