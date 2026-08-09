@@ -46,7 +46,7 @@ export default async function Home() {
             }
           />
 
-          <Footer />
+          <Footer colour={images.footerColour} />
           <BackToTop />
         </main>
       </ViewProvider>

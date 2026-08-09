@@ -26,6 +26,8 @@ export type SiteImages = {
   contactImage: SiteImage;
   heroBackground: SiteImage;
   contactBackground: SiteImage;
+  /** Hex, straight from Studio; null falls back to the shipped colour. */
+  footerColour: string | null;
 };
 
 const EMPTY_SITE_IMAGES: SiteImages = {
@@ -35,6 +37,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   contactImage: null,
   heroBackground: null,
   contactBackground: null,
+  footerColour: null,
 };
 
 const IMAGE_FIELDS = [
@@ -54,7 +57,7 @@ export async function getSiteImages(): Promise<SiteImages> {
 
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
-      `*[_id == "siteImages"][0]{\n    ${projection}\n  }`,
+      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour\n  }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -63,6 +66,17 @@ export async function getSiteImages(): Promise<SiteImages> {
     // The page still has its shipped images, so a Sanity hiccup is not fatal.
     return EMPTY_SITE_IMAGES;
   }
+}
+
+/** The colour the footer ships with, used until Studio says otherwise. */
+export const FOOTER_COLOUR = "#F4F2E3";
+
+/** Accepts what Studio holds — with or without the leading # — and refuses
+ *  anything that is not a hex colour, so a typo cannot inject CSS. */
+export function footerColour(value?: string | null): string {
+  if (!value) return FOOTER_COLOUR;
+  const hex = value.trim().replace(/^#/, "");
+  return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex) ? `#${hex}` : FOOTER_COLOUR;
 }
 
 /** A CSS backdrop is not run through next/image, so without this it downloads

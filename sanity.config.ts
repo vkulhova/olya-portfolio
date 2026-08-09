@@ -1,4 +1,4 @@
-import { defineConfig } from "sanity";
+import { defineConfig, defineField } from "sanity";
 import { structureTool } from "sanity/structure";
 import { EditIcon, ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
 import BulkDeleteTool from "./sanity/BulkDeleteTool";
@@ -174,6 +174,19 @@ export default defineConfig({
               "The block that is beige today. Covers the area. Empty keeps the flat colour and its paper texture.",
             options: { hotspot: true },
           },
+          // defineField rather than a plain object: it is the only way to get
+          // the Rule argument typed without writing the type out by hand.
+          defineField({
+            name: "footerColour",
+            type: "string",
+            title: "Footer background colour",
+            description:
+              "A hex code such as F4F2E3 — the # is optional. Empty keeps the colour the site ships with.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
         ],
         preview: {
           prepare: () => ({ title: "Site images" }),
