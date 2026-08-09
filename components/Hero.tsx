@@ -45,13 +45,17 @@ export default function Hero({
         {/* Card wrapper — width narrows on small screens, height follows content */}
         <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
 
-          {/* Star 1 — straddles the card's top edge, centered above the avatar */}
+          {/* Star 1 — straddles the card's top edge, centered above the avatar.
+              At -top-6 it reaches 64px above the card, which is exactly the
+              band's top padding on phones: the top ray lands on the seam and
+              the star reads as loose in the mustard. Phones keep the earlier
+              -top-2, which tucks it back into the corner of the card. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src="/svg/star-cream.svg"
             alt=""
             aria-hidden="true"
-            className="absolute -top-6 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
+            className="absolute max-sm:-top-2 sm:-top-6 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
           />
 
           {/* Star 2 — attached to card, overlaps bottom-right corner */}
