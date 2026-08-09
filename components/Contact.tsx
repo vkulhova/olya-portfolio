@@ -84,7 +84,10 @@ export default function Contact({
       }}
     >
 
-      <div className="flex flex-col items-center py-14 px-6">
+      {/* Double the blue above the card from sm up: the backdrop is meant to
+          carry a drawing there, and 56px was not enough of it to see. Phones
+          keep 56 — the band is the whole screen there. */}
+      <div className="flex flex-col items-center py-14 sm:pt-28 px-6">
         {/* Scalloped card */}
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
