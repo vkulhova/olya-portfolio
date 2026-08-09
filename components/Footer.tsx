@@ -17,7 +17,7 @@ export default function Footer({ colour }: { colour?: string | null }) {
       {/* Everything below the dot ribbon sits on its own colour, set in Studio
           the way the hero and contact backdrops are; the strip above it stays
           white so the ribbon still reads against the page. */}
-      <div style={{ backgroundColor: footerColour(colour) }}>
+      <div data-footer-band style={{ backgroundColor: footerColour(colour) }}>
         {/* Phones get the icons at 44px — the size the back-to-top button used
             to be — with the gap scaled to match. From sm up the row keeps the
             original 22px icons and its 9px gap. */}
