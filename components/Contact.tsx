@@ -90,10 +90,10 @@ export default function Contact({
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-5 sm:px-12 py-6 sm:py-12">
+        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-7 sm:px-12 pt-5 pb-6 sm:py-12">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
-          <div className="mb-8 flex items-center gap-3 flex-nowrap">
+          <div className="mb-5 sm:mb-8 flex items-center gap-3 flex-nowrap">
             <LocalisedHeading
               en="/svg/drop-a-letter.svg"
               uk="/svg/drop-a-letter-uk.svg"
@@ -116,7 +116,7 @@ export default function Contact({
                 they had; phones keep the tighter gap, there is no room there. */}
             <div className="grid grid-cols-2 gap-4 sm:gap-10">
               <div className="flex flex-col gap-2">
-                <label className="form-label text-sm sm:text-base text-dark">
+                <label className="form-label text-[13px] sm:text-base text-dark">
                   {copy.name}
                 </label>
                 <input
@@ -127,7 +127,7 @@ export default function Contact({
                 />
               </div>
               <div className="flex flex-col gap-2">
-                <label className="form-label text-sm sm:text-base text-dark">
+                <label className="form-label text-[13px] sm:text-base text-dark">
                   {copy.surname}
                 </label>
                 <input
@@ -140,7 +140,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="form-label text-sm sm:text-base text-dark">
+              <label className="form-label text-[13px] sm:text-base text-dark">
                 {copy.email}
               </label>
               <input
@@ -152,7 +152,7 @@ export default function Contact({
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="form-label text-sm sm:text-base text-dark">
+              <label className="form-label text-[13px] sm:text-base text-dark">
                 {copy.message}
               </label>
               <textarea
@@ -168,13 +168,13 @@ export default function Contact({
               it closes it, as before. It sits outside the form so the order can
               be swapped — the 52px top margin is what the form's gap-6 and the
               old mt-7 added up to there. */}
-          <div className="flex justify-center order-first mb-6 sm:order-none sm:mt-[52px] sm:mb-2">
+          <div className="flex justify-center order-first mb-4 sm:order-none sm:mt-[52px] sm:mb-2">
             <Image
               src={illustration?.url ?? "/images/work-1.png"}
               alt="Illustration"
               width={illustration?.width ?? 800}
               height={illustration?.height ?? 600}
-              className="w-full sm:w-[52.7%] h-auto object-contain"
+              className="w-[75%] sm:w-[52.7%] h-auto object-contain"
             />
           </div>
         </div>
