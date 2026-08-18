@@ -27,16 +27,21 @@ export default function BackToTop() {
       timerRef.current = window.setTimeout(() => setVisible(false), IDLE_TIMEOUT);
     };
 
-    // Where it stops: level with the row of social icons, off to their right.
-    // Measured off an icon rather than its row, whose padding would put the
-    // centre well below the icons themselves.
+    // Where it stops, off to the right of the row of social icons: on phones
+    // resting on the icons' top edge, from sm up level with their middle. The
+    // two differ because the button is bigger there and the icons are half the
+    // size, so the same rule would leave it floating well above them. Measured
+    // off an icon rather than its row, whose padding sits above the icons
+    // themselves.
     const place = () => {
       const icon = document.querySelector<HTMLElement>("[data-footer-icons] a");
-      const height = buttonRef.current?.offsetHeight ?? 0;
       if (!icon) return setBottom(GAP);
       const box = icon.getBoundingClientRect();
-      const middle = box.top + box.height / 2;
-      setBottom(Math.max(GAP, window.innerHeight - middle - height / 2));
+      const wide = window.matchMedia("(min-width: 640px)").matches;
+      const target = wide
+        ? box.top + box.height / 2 + (buttonRef.current?.offsetHeight ?? 0) / 2
+        : box.top;
+      setBottom(Math.max(GAP, window.innerHeight - target));
     };
 
     const onScroll = () => {
@@ -62,7 +67,7 @@ export default function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       style={{ bottom }}
-      className={`fixed right-8 z-50 grid h-[34px] w-[34px] sm:h-[43px] sm:w-[43px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
+      className={`fixed right-5 sm:right-8 z-50 grid h-[30px] w-[30px] sm:h-[43px] sm:w-[43px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
