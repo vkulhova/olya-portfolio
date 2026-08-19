@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { getSiteFonts, resolveFont } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Lolikar — Portfolio",
@@ -24,9 +25,36 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  // The two faces Studio may override. Anything it does not recognise resolves
+  // to null, and null means the page keeps the pairing it ships with: the
+  // variables are simply not written, so the fallbacks in globals.css stand.
+  const fonts = await getSiteFonts();
+  const body = resolveFont(fonts.bodyFont);
+  const label = resolveFont(fonts.labelFont);
+
+  // One stylesheet for whichever of the two was chosen. Both files are already
+  // imported for the shipped faces, so nothing extra is fetched until she
+  // actually picks something.
+  const families = [body?.google, label?.google].filter(
+    (f, i, all): f is string => Boolean(f) && all.indexOf(f) === i
+  );
+  const googleHref = families.length
+    ? `https://fonts.googleapis.com/css2?${families.map((f) => `family=${f}`).join("&")}&display=swap`
+    : null;
+
+  const style = {
+    ...(body ? { "--font-body": body.css } : null),
+    ...(label ? { "--font-label": label.css } : null),
+  } as React.CSSProperties;
+
   return (
-    <html lang="en">
+    <html lang="en" style={style}>
+      {googleHref && (
+        <head>
+          <link rel="stylesheet" href={googleHref} />
+        </head>
+      )}
       <body>{children}</body>
     </html>
   );

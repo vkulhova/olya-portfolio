@@ -5,7 +5,7 @@ import LocalisedHeading from "./LocalisedHeading";
 import Image from "next/image";
 import { useLanguage } from "./Language";
 import { backdropUrl } from "@/lib/sanity";
-import type { SiteImage } from "@/lib/sanity";
+import type { SiteHeadings, SiteImage } from "@/lib/sanity";
 
 /** The form is the only block whose text lives in the code rather than in
  *  Studio — it is labels, not copy, so it is translated here. */
@@ -36,10 +36,12 @@ export default function Contact({
   illustration,
   background,
   backgroundMobile,
+  headings,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
   backgroundMobile?: SiteImage;
+  headings?: SiteHeadings;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
@@ -115,8 +117,8 @@ export default function Contact({
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           <div className="mb-5 sm:mb-8 flex items-center gap-3 flex-nowrap">
             <LocalisedHeading
-              en="/svg/drop-a-letter.svg"
-              uk="/svg/drop-a-letter-uk.svg"
+              en={headings?.contactEn ?? "/svg/drop-a-letter.svg"}
+              uk={headings?.contactUk ?? "/svg/drop-a-letter-uk.svg"}
               altEn="Drop a letter in my mailbox"
               altUk="Залиште лист у моїй скриньці"
               className="w-full max-w-[366px] min-w-0 shrink h-auto"

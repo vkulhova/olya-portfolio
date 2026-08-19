@@ -137,3 +137,89 @@ export async function getIllustrations(): Promise<Illustration[]> {
     { next: { revalidate: 60 } }
   );
 }
+
+/** The faces Studio may pick from. A fixed list rather than a free text field
+ *  for two reasons: the name is dropped straight into a font-family and into a
+ *  Google Fonts URL, so an allowlist is what keeps either from being injected
+ *  into; and the site is bilingual, so anything offered here has to carry
+ *  Cyrillic — Outfit, the English body face, does not, which is the whole
+ *  reason the Ukrainian copy has a stand-in today. */
+export const FONT_CHOICES: Record<string, { css: string; google: string }> = {
+  "Nunito Sans": { css: "'Nunito Sans', sans-serif", google: "Nunito+Sans:wght@300;400;500" },
+  Manrope: { css: "'Manrope', sans-serif", google: "Manrope:wght@300;400;500" },
+  Montserrat: { css: "'Montserrat', sans-serif", google: "Montserrat:wght@300;400;500" },
+  Rubik: { css: "'Rubik', sans-serif", google: "Rubik:wght@300;400;500" },
+  Onest: { css: "'Onest', sans-serif", google: "Onest:wght@300;400;500" },
+  "Golos Text": { css: "'Golos Text', sans-serif", google: "Golos+Text:wght@400;500" },
+  Comfortaa: { css: "'Comfortaa', sans-serif", google: "Comfortaa:wght@300;400;500" },
+  Inter: { css: "'Inter', sans-serif", google: "Inter:wght@300;400;500" },
+};
+
+export type SiteFonts = {
+  /** The paragraph face. Empty keeps Outfit in English and Nunito Sans in Ukrainian. */
+  bodyFont: string | null;
+  /** Nav, form labels and the send button. Empty keeps Futura PT. */
+  labelFont: string | null;
+};
+
+const EMPTY_SITE_FONTS: SiteFonts = { bodyFont: null, labelFont: null };
+
+export async function getSiteFonts(): Promise<SiteFonts> {
+  try {
+    const result = await sanityClient.fetch<SiteFonts | null>(
+      `*[_id == "siteFonts"][0]{ bodyFont, labelFont }`,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    return { ...EMPTY_SITE_FONTS, ...(result ?? {}) };
+  } catch {
+    return EMPTY_SITE_FONTS;
+  }
+}
+
+/** Resolves what Studio holds to a face this site ships support for. Anything
+ *  unrecognised — an old name, a typo, a hand-edited document — comes back as
+ *  null, which is the same as "not set": the page keeps the pairing it was
+ *  built with rather than falling back to whatever the device has. */
+export function resolveFont(name?: string | null) {
+  if (!name) return null;
+  return FONT_CHOICES[name.trim()] ?? null;
+}
+
+/** The six handwritten phrases. Each is a drawing rather than text, so each
+ *  language needs its own file; leaving one empty keeps the one that ships in
+ *  /public/svg. Held as files rather than images on purpose: an SVG uploaded
+ *  as an image goes through the transform CDN, which rasterises it. */
+export type SiteHeadings = {
+  heroEn: string | null;
+  heroUk: string | null;
+  aboutEn: string | null;
+  aboutUk: string | null;
+  contactEn: string | null;
+  contactUk: string | null;
+};
+
+const EMPTY_SITE_HEADINGS: SiteHeadings = {
+  heroEn: null,
+  heroUk: null,
+  aboutEn: null,
+  aboutUk: null,
+  contactEn: null,
+  contactUk: null,
+};
+
+export async function getSiteHeadings(): Promise<SiteHeadings> {
+  const fields = Object.keys(EMPTY_SITE_HEADINGS)
+    .map((f) => `"${f}": ${f}.asset->url`)
+    .join(",\n    ");
+  try {
+    const result = await sanityClient.fetch<SiteHeadings | null>(
+      `*[_id == "siteHeadings"][0]{\n    ${fields}\n  }`,
+      {},
+      { next: { revalidate: 60 } }
+    );
+    return { ...EMPTY_SITE_HEADINGS, ...(result ?? {}) };
+  } catch {
+    return EMPTY_SITE_HEADINGS;
+  }
+}

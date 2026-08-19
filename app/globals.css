@@ -12,9 +12,19 @@ html {
   scrollbar-width: thin;
 }
 
+/* Every family below is written as a variable with the shipped face as its
+   fallback. Studio sets --font-body and --font-label on <html> when a face is
+   chosen there; when it is not, the variable is undefined and the fallback —
+   exactly what the site used before any of this existed — is what applies. */
 body {
-  font-family: 'Futura PT', 'Futura', sans-serif;
+  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
   overflow-x: hidden;
+}
+
+/* The paragraph face. These two sit after @tailwind utilities, so they win
+   over the font-outfit utility itself rather than fighting it. */
+.font-outfit {
+  font-family: var(--font-body, 'Outfit', sans-serif);
 }
 
 /* Outfit has no Cyrillic, so in Ukrainian the copy used to land on whatever
@@ -23,14 +33,14 @@ body {
    layout does not shift when the language is switched. The labels and the nav
    keep Futura PT, which does carry Cyrillic. */
 html[data-lang="UA"] .font-outfit {
-  font-family: 'Nunito Sans', sans-serif;
+  font-family: var(--font-body, 'Nunito Sans', sans-serif);
 }
 
 /* Form labels: Outfit Regular in English, Futura Medium in Ukrainian, both
    set 4px apart. Written here rather than in classes because the face has to
    follow the language, the same way the body copy does above. */
 .form-label {
-  font-family: 'Outfit', sans-serif;
+  font-family: var(--font-label, 'Outfit', sans-serif);
   font-weight: 400;
   letter-spacing: 4px;
 }
@@ -41,7 +51,7 @@ html[data-lang="UA"] .font-outfit {
    Regular beside them; 450 is the Medium the design asks for, and the two
    languages now sit at the same weight. */
 html[data-lang="UA"] .form-label {
-  font-family: 'Futura PT', 'Futura', sans-serif;
+  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
   font-weight: 450;
 }
 

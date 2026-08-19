@@ -7,12 +7,16 @@ import SiteHeader from "@/components/SiteHeader";
 import BackToTop from "@/components/BackToTop";
 import { LanguageProvider } from "@/components/Language";
 import { ViewProvider, ViewSwitch } from "@/components/View";
-import { getSiteImages, getSiteText } from "@/lib/sanity";
+import { getSiteHeadings, getSiteImages, getSiteText } from "@/lib/sanity";
 
 export default async function Home() {
   // Fetched once here rather than in each component: Contact runs on the client
   // and could not load it itself.
-  const [images, text] = await Promise.all([getSiteImages(), getSiteText()]);
+  const [images, text, headings] = await Promise.all([
+    getSiteImages(),
+    getSiteText(),
+    getSiteHeadings(),
+  ]);
 
   return (
     // Neither provider renders an element of its own, so the nav stays a direct
@@ -32,6 +36,7 @@ export default async function Home() {
                   background={images.heroBackground}
                   backgroundMobile={images.heroBackgroundMobile}
                   text={text}
+                  headings={headings}
                 />
                 <Portfolio />
               </>
@@ -41,6 +46,7 @@ export default async function Home() {
                 photo={images.aboutPhoto}
                 illustration={images.aboutIllustration}
                 text={text}
+                headings={headings}
               />
             }
             contact={
@@ -48,6 +54,7 @@ export default async function Home() {
                 illustration={images.contactImage}
                 background={images.contactBackground}
                 backgroundMobile={images.contactBackgroundMobile}
+                headings={headings}
               />
             }
           />

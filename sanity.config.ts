@@ -44,6 +44,26 @@ export default defineConfig({
                   .title("Site text")
               ),
             S.listItem()
+              .title("Site fonts")
+              .id("siteFonts")
+              .icon(EditIcon)
+              .child(
+                S.document()
+                  .schemaType("siteFonts")
+                  .documentId("siteFonts")
+                  .title("Site fonts")
+              ),
+            S.listItem()
+              .title("Site headings")
+              .id("siteHeadings")
+              .icon(EditIcon)
+              .child(
+                S.document()
+                  .schemaType("siteHeadings")
+                  .documentId("siteHeadings")
+                  .title("Site headings")
+              ),
+            S.listItem()
               .title("Site images")
               .id("siteImages")
               .icon(ImagesIcon)
@@ -120,6 +140,122 @@ export default defineConfig({
         ],
         preview: {
           prepare: () => ({ title: "Site text" }),
+        },
+      },
+      {
+        name: "siteFonts",
+        type: "document",
+        title: "Site fonts",
+        // A list rather than a free text box: the name goes straight into a
+        // font-family and a Google Fonts URL, and every face offered here has
+        // to carry Cyrillic, since the same one is used for both languages.
+        // Leaving a field empty keeps the pairing the site ships with.
+        fields: [
+          {
+            name: "bodyFont",
+            type: "string",
+            title: "Body text",
+            description:
+              "The paragraphs in the hero card and in About. Empty keeps Outfit in English and Nunito Sans in Ukrainian.",
+            options: {
+              list: [
+                { title: "As it ships (Outfit / Nunito Sans)", value: "" },
+                { title: "Nunito Sans", value: "Nunito Sans" },
+                { title: "Manrope", value: "Manrope" },
+                { title: "Montserrat", value: "Montserrat" },
+                { title: "Rubik", value: "Rubik" },
+                { title: "Onest", value: "Onest" },
+                { title: "Golos Text", value: "Golos Text" },
+                { title: "Comfortaa", value: "Comfortaa" },
+                { title: "Inter", value: "Inter" },
+              ],
+            },
+          },
+          {
+            name: "labelFont",
+            type: "string",
+            title: "Nav, form labels and the button",
+            description:
+              "The spaced capitals in the menu, the field labels and the send button. Empty keeps Futura PT.",
+            options: {
+              list: [
+                { title: "As it ships (Futura PT)", value: "" },
+                { title: "Nunito Sans", value: "Nunito Sans" },
+                { title: "Manrope", value: "Manrope" },
+                { title: "Montserrat", value: "Montserrat" },
+                { title: "Rubik", value: "Rubik" },
+                { title: "Onest", value: "Onest" },
+                { title: "Golos Text", value: "Golos Text" },
+                { title: "Comfortaa", value: "Comfortaa" },
+                { title: "Inter", value: "Inter" },
+              ],
+            },
+          },
+        ],
+        preview: {
+          prepare: () => ({ title: "Site fonts" }),
+        },
+      },
+      {
+        name: "siteHeadings",
+        type: "document",
+        title: "Site headings",
+        // The handwritten phrases. A file field rather than an image one: an
+        // SVG uploaded as an image is sent through the transform CDN, which
+        // turns it into a bitmap and loses the crispness that is the whole
+        // point of shipping them as vectors.
+        fields: [
+          {
+            name: "heroEn",
+            type: "file",
+            title: "Hero card — English",
+            description:
+              "Today: “Hello and welcome”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "heroUk",
+            type: "file",
+            title: "Hero card — Ukrainian",
+            description:
+              "Today: “Вітаю! Рада, що ви тут :)”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "aboutEn",
+            type: "file",
+            title: "About — English",
+            description:
+              "Today: “A few words about me”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "aboutUk",
+            type: "file",
+            title: "About — Ukrainian",
+            description:
+              "Today: “Кілька слів про мене”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "contactEn",
+            type: "file",
+            title: "Contact — English",
+            description:
+              "Today: “Drop a letter in my mailbox”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "contactUk",
+            type: "file",
+            title: "Contact — Ukrainian",
+            description:
+              "Today: “Залиште лист у моїй скриньці”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+        ],
+        preview: {
+          prepare: () => ({ title: "Site headings" }),
         },
       },
       {

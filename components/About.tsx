@@ -2,7 +2,7 @@ import Image from "next/image";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import AboutCopyFit from "./AboutCopyFit";
-import type { SiteImage, SiteText } from "@/lib/sanity";
+import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs. */
 const DEFAULT_ABOUT_EN = `My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a Ukrainian illustrator based in Odesa, and these days that looks like freelance illustration across books, stickers, portraits, and brand work, with four years at a mobile game studio somewhere along the way.
@@ -15,10 +15,12 @@ export default function About({
   photo,
   illustration,
   text,
+  headings,
 }: {
   photo: SiteImage;
   illustration: SiteImage;
   text?: SiteText;
+  headings?: SiteHeadings;
 }) {
   return (
     <section id="about" className="w-full bg-white scroll-mt-[78px]">
@@ -93,8 +95,8 @@ export default function About({
                 with the photo above it; beside the photo it stays left. */}
             <div className="flex items-center gap-3 flex-nowrap justify-center md:justify-start">
               <LocalisedHeading
-                en="/svg/a-few-words-about-me.svg"
-                uk="/svg/a-few-words-about-me-uk.svg"
+                en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
+                uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"

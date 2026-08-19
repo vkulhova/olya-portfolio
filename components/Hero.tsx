@@ -2,7 +2,7 @@ import Image from "next/image";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import { backdropUrl } from "@/lib/sanity";
-import type { SiteImage, SiteText } from "@/lib/sanity";
+import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. */
 const DEFAULT_HERO_EN = `My name is Olika, and my art lives under Lolikar. I make warm, cozy, detailed illustrations for games and books, design characters, and create custom portraits. I love building small worlds you want to get lost in, filling them with little objects, cozy details, and characters that feel like they have their own story. I’m drawn to vintage aesthetics, rich colors, soft textures, and the kind of detail you keep discovering on every look.`;
@@ -12,11 +12,13 @@ export default function Hero({
   background,
   backgroundMobile,
   text,
+  headings,
 }: {
   avatar: SiteImage;
   background?: SiteImage;
   backgroundMobile?: SiteImage;
   text?: SiteText;
+  headings?: SiteHeadings;
 }) {
   const backdrop = backdropUrl(background);
   /* Phones get their own upload when Studio has one. A wide backdrop covers the
@@ -83,8 +85,8 @@ export default function Hero({
             {/* Text content */}
             <div className="flex flex-col gap-6 items-center text-center md:items-start md:text-left min-w-0">
               <LocalisedHeading
-                en="/svg/hello-and-welcome.svg"
-                uk="/svg/hello-and-welcome-uk.svg"
+                en={headings?.heroEn ?? "/svg/hello-and-welcome.svg"}
+                uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
                 altEn="Hello and welcome"
                 altUk="Вітаю, рада що ви тут"
                 className="h-[37px] md:h-[48px] w-auto max-w-full"

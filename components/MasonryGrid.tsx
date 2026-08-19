@@ -11,35 +11,25 @@ const BREAKPOINTS = [
 ];
 const DEFAULT_COLUMNS = 3;
 
-/** Roughly the vertical gap as a fraction of a column's width, so a column
- *  carrying more items is not treated as shorter than it looks. */
-const GAP_IN_COLUMN_WIDTHS = 0.08;
-
 /**
- * Distributes illustrations across columns in numbered order, each one going to
- * whichever column is currently shortest.
+ * Deals the illustrations across the columns in the order Studio gives them:
+ * the first three go across the top row, the next three across the row under
+ * it, and so on. Position n always lands in column n % columnCount, so the
+ * numbering reads left to right the way it is written.
  *
- * CSS columns cannot do this: they fill top to bottom, so positions 1, 2, 3 all
- * land in the first column. Here the first three go across the top row, which is
- * how the numbering reads.
+ * CSS columns cannot do this — they fill top to bottom, so 1, 2 and 3 would all
+ * end up stacked in the first column.
  *
- * Only aspect ratios matter, not pixels — every column is the same width, so the
- * layout is settled before anything is measured.
+ * This used to hand each picture to whichever column was shortest, which kept
+ * the columns level but broke the sequence: after the first row a tall picture
+ * could push number five above number four, and the order Studio set no longer
+ * matched what the eye read. Keeping the order costs a ragged bottom edge —
+ * with pictures of different heights the columns cannot both stay level and
+ * stay in sequence, and the sequence is the one that was asked for.
  */
 function distribute(items: Illustration[], columnCount: number): Illustration[][] {
   const columns: Illustration[][] = Array.from({ length: columnCount }, () => []);
-  const heights = new Array(columnCount).fill(0);
-
-  items.forEach((item) => {
-    let shortest = 0;
-    for (let i = 1; i < columnCount; i++) {
-      if (heights[i] < heights[shortest]) shortest = i;
-    }
-    columns[shortest].push(item);
-    const ratio = item.width && item.height ? item.height / item.width : 1;
-    heights[shortest] += ratio + GAP_IN_COLUMN_WIDTHS;
-  });
-
+  items.forEach((item, i) => columns[i % columnCount].push(item));
   return columns;
 }
 
