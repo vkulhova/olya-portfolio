@@ -27,7 +27,12 @@ export default async function Home() {
           <ViewSwitch
             portfolio={
               <>
-                <Hero avatar={images.avatar} background={images.heroBackground} text={text} />
+                <Hero
+                  avatar={images.avatar}
+                  background={images.heroBackground}
+                  backgroundMobile={images.heroBackgroundMobile}
+                  text={text}
+                />
                 <Portfolio />
               </>
             }
@@ -42,6 +47,7 @@ export default async function Home() {
               <Contact
                 illustration={images.contactImage}
                 background={images.contactBackground}
+                backgroundMobile={images.contactBackgroundMobile}
               />
             }
           />

@@ -167,11 +167,27 @@ export default defineConfig({
             options: { hotspot: true },
           },
           {
+            name: "heroBackgroundMobile",
+            type: "image",
+            title: "Background behind the hero card — phones",
+            description:
+              "Used instead of the one above on screens under 640px, where a wide picture shows only its middle. Empty keeps the wide one on phones too.",
+            options: { hotspot: true },
+          },
+          {
             name: "contactBackground",
             type: "image",
             title: "Background behind the contact form",
             description:
               "The block that is beige today. Covers the area. Empty keeps the flat colour and its paper texture.",
+            options: { hotspot: true },
+          },
+          {
+            name: "contactBackgroundMobile",
+            type: "image",
+            title: "Background behind the contact form — phones",
+            description:
+              "Used instead of the one above on screens under 640px. Empty keeps the wide one on phones too.",
             options: { hotspot: true },
           },
           // defineField rather than a plain object: it is the only way to get

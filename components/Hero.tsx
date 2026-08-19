@@ -10,13 +10,19 @@ const DEFAULT_HERO_EN = `My name is Olika, and my art lives under Lolikar. I mak
 export default function Hero({
   avatar,
   background,
+  backgroundMobile,
   text,
 }: {
   avatar: SiteImage;
   background?: SiteImage;
+  backgroundMobile?: SiteImage;
   text?: SiteText;
 }) {
   const backdrop = backdropUrl(background);
+  /* Phones get their own upload when Studio has one. A wide backdrop covers the
+     band there by showing only its middle strip, so a picture drawn for the
+     desktop band rarely survives the crop. 900px is enough for a 3x phone. */
+  const mobileBackdrop = backdropUrl(backgroundMobile, 900);
 
   return (
     /* The stripe, the logo and the nav are in SiteHeader — they stay put while
@@ -42,30 +48,23 @@ export default function Hero({
             : null),
         }}
       >
+        {/* The phone backdrop sits over the band's own background rather than
+            replacing it in the style above, which cannot hold a media query.
+            Nothing renders unless Studio has a phone upload, so the desktop
+            band is untouched. */}
+        {mobileBackdrop && (
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 sm:hidden bg-cover bg-center pointer-events-none"
+            style={{ backgroundImage: `url(${mobileBackdrop})` }}
+          />
+        )}
+
         {/* Card wrapper — width narrows on small screens, height follows content */}
+        {/* The cream stars that used to straddle this card's top and bottom-right
+            corners are gone: the band is getting a drawn backdrop instead, and
+            the stars would only have to be nudged around whatever it shows. */}
         <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
-
-          {/* Star 1 — straddles the card's top edge, centered above the avatar.
-              At -top-6 it reaches 64px above the card, which is exactly the
-              band's top padding on phones: the top ray lands on the seam and
-              the star reads as loose in the mustard. Phones keep the earlier
-              -top-2, which tucks it back into the corner of the card. */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/svg/star-cream.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute max-sm:-top-2 sm:-top-6 left-[23%] -translate-x-1/2 -translate-y-1/2 w-20 h-20 pointer-events-none z-20"
-          />
-
-          {/* Star 2 — attached to card, overlaps bottom-right corner */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/svg/star-cream.svg"
-            alt=""
-            aria-hidden="true"
-            className="absolute -bottom-10 right-4 w-16 h-16 pointer-events-none z-20"
-          />
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-3xl">
@@ -87,9 +86,14 @@ export default function Hero({
                 en="/svg/hello-and-welcome.svg"
                 uk="/svg/hello-and-welcome-uk.svg"
                 altEn="Hello and welcome"
-                altUk="Привіт, рада що ви тут"
+                altUk="Вітаю, рада що ви тут"
                 className="h-[37px] md:h-[48px] w-auto max-w-full"
-                ukClassName="h-[44px] md:h-[57px] w-auto max-w-full"
+                /* The Ukrainian lettering hangs from the top of its box and
+                   spends the lower part on descenders, so at the same 32px
+                   below the card's edge it reads as sitting higher than the
+                   English does. The extra top margin drops it back onto the
+                   line it was asked for; English is untouched. */
+                ukClassName="mt-2 md:mt-3 h-[51px] md:h-[66px] w-auto max-w-full"
               />
 
               <LocalisedText

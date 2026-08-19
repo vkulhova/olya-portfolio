@@ -25,7 +25,9 @@ export type SiteImages = {
   aboutIllustration: SiteImage;
   contactImage: SiteImage;
   heroBackground: SiteImage;
+  heroBackgroundMobile: SiteImage;
   contactBackground: SiteImage;
+  contactBackgroundMobile: SiteImage;
   /** Hex, straight from Studio; null falls back to the shipped colour. */
   footerColour: string | null;
 };
@@ -36,7 +38,9 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   aboutIllustration: null,
   contactImage: null,
   heroBackground: null,
+  heroBackgroundMobile: null,
   contactBackground: null,
+  contactBackgroundMobile: null,
   footerColour: null,
 };
 
@@ -46,7 +50,9 @@ const IMAGE_FIELDS = [
   "aboutIllustration",
   "contactImage",
   "heroBackground",
+  "heroBackgroundMobile",
   "contactBackground",
+  "contactBackgroundMobile",
 ];
 
 export async function getSiteImages(): Promise<SiteImages> {

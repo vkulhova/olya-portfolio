@@ -35,9 +35,14 @@ html[data-lang="UA"] .font-outfit {
   letter-spacing: 4px;
 }
 
+/* 450, not 500. The CDN that serves this face does not use the usual weight
+   numbers: 450 is Futura Cyrillic Medium and 500 is Demi, a step heavier. At
+   500 the Ukrainian labels came out visibly bolder than the English Outfit
+   Regular beside them; 450 is the Medium the design asks for, and the two
+   languages now sit at the same weight. */
 html[data-lang="UA"] .form-label {
   font-family: 'Futura PT', 'Futura', sans-serif;
-  font-weight: 500;
+  font-weight: 450;
 }
 
 /* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit

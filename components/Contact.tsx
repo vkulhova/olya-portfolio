@@ -35,12 +35,17 @@ const COPY = {
 export default function Contact({
   illustration,
   background,
+  backgroundMobile,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
+  backgroundMobile?: SiteImage;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
+  /* Same as the hero band: phones can have their own upload, and without one
+     they keep whatever the wide backdrop shows. */
+  const mobileBackdrop = backdropUrl(backgroundMobile, 900);
   const copy = COPY[useLanguage()];
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -84,10 +89,22 @@ export default function Contact({
       }}
     >
 
+      {/* A phone-only backdrop, layered over the block's own background because
+          an inline style cannot carry a media query. Absent from the markup
+          unless Studio has one, so nothing changes for the wide layout. */}
+      {mobileBackdrop && (
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 sm:hidden bg-cover bg-center pointer-events-none"
+          style={{ backgroundImage: `url(${mobileBackdrop})` }}
+        />
+      )}
+
       {/* Double the blue above the card from sm up: the backdrop is meant to
           carry a drawing there, and 56px was not enough of it to see. Phones
           keep 56 — the band is the whole screen there. */}
-      <div className="flex flex-col items-center py-14 sm:pt-28 px-6">
+      {/* relative so the form stays above the phone backdrop behind it. */}
+      <div className="relative z-10 flex flex-col items-center py-14 sm:pt-28 px-6">
         {/* Scalloped card */}
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
@@ -103,7 +120,7 @@ export default function Contact({
               altEn="Drop a letter in my mailbox"
               altUk="Залиште лист у моїй скриньці"
               className="w-full max-w-[366px] min-w-0 shrink h-auto"
-              ukClassName="w-full max-w-[343px] min-w-0 shrink h-auto"
+              ukClassName="w-full max-w-[389px] min-w-0 shrink h-auto"
             />
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -182,9 +199,13 @@ export default function Contact({
           </div>
         </div>
 
-        {/* Submit button outside card. The pl offsets the trailing letter-space
-            tracking leaves after the last glyph, which otherwise pulls the
-            centred label visibly left. */}
+        {/* Submit button outside card. Its width follows the label with 24px of
+            air either side, rather than the flat 192px it used to have — at
+            that width the pill read as a long bar around a short word, and the
+            longer Ukrainian label no longer has to fit the English one's box.
+            The pl adds the trailing letter-space tracking leaves after the last
+            glyph on top of that padding, which otherwise pulls the centred
+            label visibly left. */}
         <button
           type="submit"
           form="contact-form"
@@ -193,7 +214,7 @@ export default function Contact({
             form?.requestSubmit();
           }}
           disabled={status === "sending" || status === "sent"}
-          className="mt-14 w-48 h-14 pl-[0.2em] rounded-full bg-peach-mid text-white font-futura font-medium text-base tracking-[0.2em] uppercase hover:bg-peach-mid/90 transition-colors disabled:opacity-60"
+          className="mt-14 px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full bg-peach-mid text-white font-futura font-medium text-base tracking-[0.2em] uppercase hover:bg-peach-mid/90 transition-colors disabled:opacity-60"
         >
           {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
         </button>

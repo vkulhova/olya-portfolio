@@ -1,4 +1,3 @@
-import DecorativeDots from "./DecorativeDots";
 import { footerColour } from "@/lib/sanity";
 
 const socials = [
@@ -11,21 +10,20 @@ const socials = [
 export default function Footer({ colour }: { colour?: string | null }) {
   return (
     <footer className="w-full bg-white">
-      <div className="h-9 bg-white" />
-      <DecorativeDots />
-      {/* The same 32px of white the ribbon at the top of the page carries below
-          it. Without it the beige started on the ribbon's bottom edge and the
-          ribbon read as having come loose from the band. */}
-      <div className="h-8 bg-white" />
+      {/* No dot ribbon down here any more, and no white strips around it: the
+          section above ends on its own colour and the beige starts straight
+          after it. One ribbon at the top of the page is enough — a second one
+          this close to the icons and the signature crowded the foot of the
+          page. */}
 
-      {/* Everything below the dot ribbon sits on its own colour, set in Studio
-          the way the hero and contact backdrops are; the strip above it stays
-          white so the ribbon still reads against the page. */}
+      {/* The band carries its own colour, set in Studio the way the hero and
+          contact backdrops are. */}
       <div data-footer-band style={{ backgroundColor: footerColour(colour) }}>
         {/* Phones get the icons at 44px — the size the back-to-top button used
-            to be — with the gap scaled to match. From sm up the row keeps the
-            original 22px icons and its 9px gap. */}
-        <div data-footer-icons className="flex justify-center gap-[18px] sm:gap-[9px] pt-12 pb-6">
+            to be — with the gap scaled to match. From sm up they are 36px, the
+            size drawn over the mock: at 22px they read as small print rather
+            than as buttons. The 8px gap comes from the same drawing. */}
+        <div data-footer-icons className="flex justify-center gap-[18px] sm:gap-2 pt-16 pb-8">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -33,7 +31,7 @@ export default function Footer({ colour }: { colour?: string | null }) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.name}
-              className="w-11 h-11 sm:w-[22px] sm:h-[22px] hover:opacity-80 transition-opacity"
+              className="w-11 h-11 sm:w-9 sm:h-9 hover:opacity-80 transition-opacity"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={s.icon} alt={s.name} className="w-full h-full object-contain" />
@@ -43,7 +41,10 @@ export default function Footer({ colour }: { colour?: string | null }) {
 
         {/* Signature line. The year comes from the build, so it moves on with
             each deploy rather than being written into the markup. */}
-        <p className="pb-12 text-center font-source-serif italic tracking-[0.12em] text-sm text-dark">
+        {/* pb-16 with the pt-16 above it: the beige band was asked to stand
+            taller, and the room is split evenly above and below its contents
+            so the icons and the signature stay centred in it. */}
+        <p className="pb-16 text-center font-source-serif italic tracking-[0.12em] text-sm text-dark">
           Made with love by Lolikar © {new Date().getFullYear()}
         </p>
       </div>

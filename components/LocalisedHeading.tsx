@@ -22,7 +22,10 @@ export default function LocalisedHeading({
   className?: string;
   /** The Ukrainian lettering has taller ascenders and descenders, so at an
    *  equal box height it reads smaller than the English. Each heading passes
-   *  its own size here to even them out. */
+   *  its own size here to even them out. The sizes are not guesswork: each
+   *  pair was measured by the height of the band the strokes actually fill —
+   *  its x-height rather than the full drawing — and the Ukrainian box scaled
+   *  until the two match. */
   ukClassName?: string;
 }) {
   const isUk = useLanguage() === "UA";

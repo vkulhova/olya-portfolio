@@ -28,11 +28,11 @@ export default function BackToTop() {
     };
 
     // Where it stops, off to the right of the row of social icons: on phones
-    // resting on the icons' top edge, from sm up level with their middle. The
-    // two differ because the button is bigger there and the icons are half the
-    // size, so the same rule would leave it floating well above them. Measured
-    // off an icon rather than its row, whose padding sits above the icons
-    // themselves.
+    // resting on the icons' top edge, from sm up level with their middle —
+    // the button and the icons are both 36px there, so matching the two
+    // centres lines the row up exactly. Phones still differ: the icons are
+    // 44px against a 30px button. Measured off an icon rather than its row,
+    // whose padding sits above the icons themselves.
     const place = () => {
       const icon = document.querySelector<HTMLElement>("[data-footer-icons] a");
       if (!icon) return setBottom(GAP);
@@ -67,7 +67,7 @@ export default function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       style={{ bottom }}
-      className={`fixed right-5 sm:right-8 z-50 grid h-[30px] w-[30px] sm:h-[43px] sm:w-[43px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
+      className={`fixed right-5 sm:right-8 z-50 grid h-[30px] w-[30px] sm:h-9 sm:w-9 place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >

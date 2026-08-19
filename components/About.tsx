@@ -34,7 +34,7 @@ export default function About({
             the original 3:7. */}
         <div
           data-about-grid
-          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-x-10 gap-y-16 md:gap-y-10 items-stretch mb-10"
+          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-x-10 gap-y-16 md:gap-y-10 items-stretch mb-4 sm:mb-10"
         >
 
           {/* Photo column. The box carries the photo's own 3:4 ratio at every
@@ -98,14 +98,18 @@ export default function About({
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"
-                ukClassName="h-[42px] sm:h-[54px] w-auto min-w-0 shrink"
+                ukClassName="h-[50px] sm:h-[64px] w-auto min-w-0 shrink"
               />
+              {/* On phones the star was 36px against a heading it is meant to
+                  answer, and it read as a stray mark rather than a pair. 52px
+                  is the circle drawn over the mock — near enough to the 53px
+                  it has always had on wider screens that the two now match. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/star-olive.svg"
                 alt=""
                 aria-hidden="true"
-                className="w-[36px] h-[36px] sm:w-[53px] sm:h-[53px] shrink-0"
+                className="w-[52px] h-[52px] sm:w-[53px] sm:h-[53px] shrink-0"
               />
             </div>
 
@@ -122,17 +126,22 @@ export default function About({
       </div>
 
       {/* Desk illustration — 60% page width, outside the narrow container */}
-      {/* pb-10 rather than pb-16: Contact takes the other 24px above its dot trim */}
-      {/* The picture file carries wide empty margins — the drawing itself is
-          only about two thirds of its width. On phones it is scaled up and the
-          empty sides run off the edge, so the desk fills the screen; overflow
-          is clipped here so the page never scrolls sideways. */}
-      <div className="w-full sm:w-[60%] mx-auto pb-10 overflow-hidden">
+      {/* The picture file carries empty margins on all four sides — the drawing
+          itself is only about two thirds of its width, and roughly a twentieth
+          of its height is blank above and below. On phones it is scaled up and
+          the empty sides run off the edge, so the desk fills the screen; the
+          negative top and bottom margins pull the blank bands out of the flow
+          the same way, and overflow is clipped here so neither shows and the
+          page never scrolls sideways. Those margins are percentages, which
+          resolve against this box's width — the same thing the image's own
+          height follows — so the crop holds at every phone size. Wide screens
+          keep the picture whole. */}
+      <div className="w-full sm:w-[60%] mx-auto pb-6 sm:pb-10 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={illustration?.url ?? "/images/illustration.png"}
           alt="Cozy desk illustration"
-          className="w-[130%] max-w-none -ml-[15%] sm:w-full sm:ml-0 h-auto"
+          className="w-[130%] max-w-none -ml-[15%] -mt-[4.3%] -mb-[5.8%] sm:w-full sm:ml-0 sm:mt-0 sm:mb-0 h-auto"
         />
       </div>
     </section>
