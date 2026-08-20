@@ -36,6 +36,16 @@ html[data-lang="UA"] .font-outfit {
   font-family: var(--font-body, 'Nunito Sans', sans-serif);
 }
 
+/* The rest of the site's chrome — nav, the language switch, the form fields
+   and the send button. These carried the font-futura utility, which writes the
+   family out as a literal, so no choice made in Studio could ever reach them:
+   the nav and the labels beside them would change while the field the visitor
+   types into stayed Futura. Same variable, same fallback, so with Studio empty
+   this renders exactly as it did before. */
+.font-futura {
+  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
+}
+
 /* Form labels: Outfit Regular in English, Futura Medium in Ukrainian, both
    set 4px apart. Written here rather than in classes because the face has to
    follow the language, the same way the body copy does above. */
