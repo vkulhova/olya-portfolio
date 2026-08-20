@@ -195,7 +195,11 @@ export default function Contact({
         <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-7 sm:px-12 pt-5 pb-6 sm:py-12">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
-          <div className="mb-5 sm:mb-8 flex items-center gap-3 flex-nowrap">
+          {/* Centred on phones, where the phrase is the only thing on its line
+              and sitting hard left left it looking dropped rather than placed.
+              From sm up it stays left, which is where the desktop reference
+              puts it. The gap and nowrap went with the star. */}
+          <div className="mb-5 sm:mb-8 flex items-center justify-center sm:justify-start">
             {/* The salmon star that used to sit here has moved up beside
                 «Colaboration». Two of the same star on one screen read as a
                 repeat rather than a pair, and the reference puts it at the
