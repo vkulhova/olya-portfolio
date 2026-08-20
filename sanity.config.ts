@@ -329,6 +329,17 @@ export default defineConfig({
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
           defineField({
+            name: "buttonColour",
+            type: "string",
+            title: "Send button colour",
+            description:
+              "The «Post it! / Відправити» button under the contact form. A hex code such as FF917F — the # is optional. Empty keeps the peach the site ships with. The label switches between white and brown on its own, whichever stays readable on the colour chosen.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
             name: "footerColour",
             type: "string",
             title: "Footer background colour",

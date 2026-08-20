@@ -36,6 +36,20 @@ html[data-lang="UA"] .font-outfit {
   font-family: var(--font-body, 'Nunito Sans', sans-serif);
 }
 
+/* The send button. Its colour is set in Studio, so it cannot live in a
+   Tailwind class: the variables come down as an inline style and the shipped
+   peach stays here as the fallback. The hover is the same 90% the utility
+   bg-peach-mid/90 used to give — mixed toward transparent so it keeps working
+   whatever colour is chosen. */
+.btn-send {
+  background-color: var(--btn-bg, #FF917F);
+  color: var(--btn-ink, #FFFFFF);
+}
+
+.btn-send:hover {
+  background-color: color-mix(in srgb, var(--btn-bg, #FF917F) 90%, transparent);
+}
+
 /* The rest of the site's chrome — nav, the language switch, the form fields
    and the send button. These carried the font-futura utility, which writes the
    family out as a literal, so no choice made in Studio could ever reach them:

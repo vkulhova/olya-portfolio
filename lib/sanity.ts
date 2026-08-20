@@ -30,6 +30,8 @@ export type SiteImages = {
   contactBackgroundMobile: SiteImage;
   /** Hex, straight from Studio; null falls back to the shipped colour. */
   footerColour: string | null;
+  /** Hex for the send button; null keeps the peach it ships with. */
+  buttonColour: string | null;
 };
 
 const EMPTY_SITE_IMAGES: SiteImages = {
@@ -42,6 +44,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   contactBackground: null,
   contactBackgroundMobile: null,
   footerColour: null,
+  buttonColour: null,
 };
 
 const IMAGE_FIELDS = [
@@ -63,7 +66,7 @@ export async function getSiteImages(): Promise<SiteImages> {
 
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
-      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour\n  }`,
+      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour\n  }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -74,15 +77,43 @@ export async function getSiteImages(): Promise<SiteImages> {
   }
 }
 
-/** The colour the footer ships with, used until Studio says otherwise. */
+/** The colours these two ship with, used until Studio says otherwise. */
 export const FOOTER_COLOUR = "#F4F2E3";
+export const BUTTON_COLOUR = "#FF917F";
 
 /** Accepts what Studio holds — with or without the leading # — and refuses
  *  anything that is not a hex colour, so a typo cannot inject CSS. */
-export function footerColour(value?: string | null): string {
-  if (!value) return FOOTER_COLOUR;
+function hexColour(value: string | null | undefined, fallback: string): string {
+  if (!value) return fallback;
   const hex = value.trim().replace(/^#/, "");
-  return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex) ? `#${hex}` : FOOTER_COLOUR;
+  return /^([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/.test(hex) ? `#${hex}` : fallback;
+}
+
+export function footerColour(value?: string | null): string {
+  return hexColour(value, FOOTER_COLOUR);
+}
+
+export function buttonColour(value?: string | null): string {
+  return hexColour(value, BUTTON_COLOUR);
+}
+
+/** Which ink stays readable on a given background.
+ *
+ *  The button's label is white, which works on the peach it ships with and on
+ *  anything else of that depth. The site's palette is mostly pastel, though,
+ *  and white on #FFD8CF cannot be read at all — so the label follows the
+ *  colour rather than assuming it. The threshold is the WCAG relative
+ *  luminance of the two candidate inks: below it white wins, above it the
+ *  brown every other piece of text on the page already uses. */
+export function readableInk(background: string): string {
+  const hex = background.replace(/^#/, "");
+  const full = hex.length === 3 ? hex.split("").map((c) => c + c).join("") : hex;
+  const channel = (i: number) => {
+    const v = parseInt(full.slice(i * 2, i * 2 + 2), 16) / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  const luminance = 0.2126 * channel(0) + 0.7152 * channel(1) + 0.0722 * channel(2);
+  return luminance > 0.45 ? "#3C1A05" : "#FFFFFF";
 }
 
 /** A CSS backdrop is not run through next/image, so without this it downloads

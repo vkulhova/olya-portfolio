@@ -4,7 +4,7 @@ import { useState } from "react";
 import LocalisedHeading from "./LocalisedHeading";
 import Image from "next/image";
 import { useLanguage } from "./Language";
-import { backdropUrl } from "@/lib/sanity";
+import { backdropUrl, buttonColour, readableInk } from "@/lib/sanity";
 import type { SiteHeadings, SiteImage } from "@/lib/sanity";
 
 /** The form is the only block whose text lives in the code rather than in
@@ -37,11 +37,13 @@ export default function Contact({
   background,
   backgroundMobile,
   headings,
+  buttonColourHex,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
   backgroundMobile?: SiteImage;
   headings?: SiteHeadings;
+  buttonColourHex?: string | null;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
@@ -49,6 +51,10 @@ export default function Contact({
      they keep whatever the wide backdrop shows. */
   const mobileBackdrop = backdropUrl(backgroundMobile, 900);
   const copy = COPY[useLanguage()];
+  /* Resolved once here rather than in the markup: the label's colour is read
+     off the background, so the two have to be decided together. */
+  const buttonBg = buttonColour(buttonColourHex);
+  const buttonInk = readableInk(buttonBg);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -230,7 +236,8 @@ export default function Contact({
           type="submit"
           form="contact-form"
           disabled={status === "sending" || status === "sent"}
-          className="mt-14 px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full bg-peach-mid text-white font-futura font-medium text-base tracking-[0.2em] uppercase hover:bg-peach-mid/90 transition-colors disabled:opacity-60"
+          className="btn-send mt-14 px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-futura font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
+          style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
         >
           {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
         </button>

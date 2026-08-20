@@ -55,6 +55,7 @@ export default async function Home() {
                 background={images.contactBackground}
                 backgroundMobile={images.contactBackgroundMobile}
                 headings={headings}
+                buttonColourHex={images.buttonColour}
               />
             }
           />
