@@ -64,7 +64,12 @@ export default function About({
                 src="/svg/star-gold.svg"
                 alt=""
                 aria-hidden="true"
-                className="absolute top-[14px] -left-10 w-[72px] h-[72px] sm:-top-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
+                /* Phones move it 8px right and 3px up from where it was, which
+                   is what the outline drawn over the screenshot measures to:
+                   the star sits further onto the photo's corner rather than
+                   mostly on the white beside it. sm: puts the old -40px back so
+                   tablets and desktop are untouched. */
+                className="absolute top-[11px] -left-8 w-[72px] h-[72px] sm:-top-10 sm:-left-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
