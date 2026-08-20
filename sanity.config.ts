@@ -359,6 +359,77 @@ export default defineConfig({
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
           defineField({
+            name: "stripeColourLight",
+            type: "string",
+            title: "Stripe bar — light stripe",
+            description:
+              "The pale half of the striped bar at the very top. A hex code such as FFD8CF. Empty keeps the shipped colour.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
+            name: "stripeColourDark",
+            type: "string",
+            title: "Stripe bar — dark stripe",
+            description:
+              "The deeper half of the same bar, such as FF917F. Empty keeps the shipped colour.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
+            name: "ribbonColour",
+            type: "string",
+            title: "Heart ribbon colour",
+            description:
+              "The line of hearts under the nav, such as D5BA54. Empty keeps the gold. The drawing itself does not change — only its colour.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
+            name: "logoInk",
+            type: "string",
+            title: "Logo — lettering colour",
+            description:
+              "The blue of «Lolikar» and of the L on phones, such as 00507D. Empty keeps it. Ignored for a logo uploaded below.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
+            name: "logoBlob",
+            type: "string",
+            title: "Logo — background shape colour",
+            description:
+              "The mint shape behind the lettering, such as B9E8E4. Empty keeps it. Ignored for a logo uploaded below.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          {
+            name: "logoFull",
+            type: "file",
+            title: "Logo — your own drawing",
+            description:
+              "An SVG that replaces «Lolikar» everywhere it appears. Empty keeps the one that ships, in whatever colours are set above.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "logoMark",
+            type: "file",
+            title: "Logo — your own L",
+            description:
+              "An SVG that replaces the single L shown in the pinned bar on phones. Empty keeps the one that ships.",
+            options: { accept: "image/svg+xml" },
+          },
+          defineField({
             name: "socialIconColour",
             type: "string",
             title: "Social icon colour",

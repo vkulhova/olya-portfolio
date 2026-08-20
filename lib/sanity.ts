@@ -34,6 +34,17 @@ export type SiteImages = {
   buttonColour: string | null;
   /** Hex for the circle behind each social mark; null keeps the brown. */
   socialIconColour: string | null;
+  /** The two stripes in the bar at the top of the page. */
+  stripeColourLight: string | null;
+  stripeColourDark: string | null;
+  /** The gold hearts in the ribbon under the nav. */
+  ribbonColour: string | null;
+  /** The wordmark: its lettering and the mint shape behind it. */
+  logoInk: string | null;
+  logoBlob: string | null;
+  /** Uploaded SVGs that replace the drawings outright. */
+  logoFull: SiteImage;
+  logoMark: SiteImage;
 };
 
 const EMPTY_SITE_IMAGES: SiteImages = {
@@ -48,6 +59,13 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   footerColour: null,
   buttonColour: null,
   socialIconColour: null,
+  stripeColourLight: null,
+  stripeColourDark: null,
+  ribbonColour: null,
+  logoInk: null,
+  logoBlob: null,
+  logoFull: null,
+  logoMark: null,
 };
 
 const IMAGE_FIELDS = [
@@ -69,7 +87,10 @@ export async function getSiteImages(): Promise<SiteImages> {
 
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
-      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour\n  }`,
+      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
+    stripeColourLight,\n    stripeColourDark,\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
+    "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -84,6 +105,11 @@ export async function getSiteImages(): Promise<SiteImages> {
 export const FOOTER_COLOUR = "#F4F2E3";
 export const BUTTON_COLOUR = "#FF917F";
 export const SOCIAL_CIRCLE_COLOUR = "#3C1A05";
+export const STRIPE_LIGHT = "#FFD8CF";
+export const STRIPE_DARK = "#FF917F";
+export const RIBBON_COLOUR = "#D5BA54";
+export const LOGO_INK = "#00507D";
+export const LOGO_BLOB = "#B9E8E4";
 
 /** Accepts what Studio holds — with or without the leading # — and refuses
  *  anything that is not a hex colour, so a typo cannot inject CSS. */
@@ -103,6 +129,26 @@ export function buttonColour(value?: string | null): string {
 
 export function socialCircleColour(value?: string | null): string {
   return hexColour(value, SOCIAL_CIRCLE_COLOUR);
+}
+
+export function stripeLight(value?: string | null): string {
+  return hexColour(value, STRIPE_LIGHT);
+}
+
+export function stripeDark(value?: string | null): string {
+  return hexColour(value, STRIPE_DARK);
+}
+
+export function ribbonColour(value?: string | null): string {
+  return hexColour(value, RIBBON_COLOUR);
+}
+
+export function logoInk(value?: string | null): string {
+  return hexColour(value, LOGO_INK);
+}
+
+export function logoBlob(value?: string | null): string {
+  return hexColour(value, LOGO_BLOB);
 }
 
 /** Which ink stays readable on a given background.

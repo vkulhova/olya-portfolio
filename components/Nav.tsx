@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LanguageSwitcher, useLanguage } from "./Language";
 import { useView } from "./View";
+import BrandLogo, { type Brand } from "./BrandLogo";
 
 const LINKS = ["portfolio", "about", "contact"] as const;
 
@@ -12,7 +13,7 @@ const LABELS = {
   UA: { portfolio: "портфоліо", about: "знайомство", contact: "співпраця" },
 } as const;
 
-export default function Nav() {
+export default function Nav({ brand }: { brand: Brand }) {
   // Which section is on screen — the links are plain hash links, and the view
   // follows the hash, so nothing here has to intercept the click.
   const view = useView();
@@ -66,15 +67,13 @@ export default function Nav() {
           stuck ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[47px] w-auto" />
+        <BrandLogo which="full" brand={brand} className="h-[47px]" />
       </a>
 
       {/* Phones, at the top of the page: the full logo, centred and large, with
           the burger out to its left. */}
       <a href="#portfolio" aria-label="Lolikar — portfolio" className={`sm:hidden ${stuck ? "hidden" : "block"}`}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar.svg" alt="Lolikar" className="h-[73px] w-auto" />
+        <BrandLogo which="full" brand={brand} className="h-[73px]" />
       </a>
 
       {/* Phones, once pinned: the wordmark gives way to the L on its own, which
@@ -84,8 +83,7 @@ export default function Nav() {
         aria-label="Lolikar — portfolio"
         className={`sm:hidden absolute right-8 top-1/2 -translate-y-1/2 ${stuck ? "block" : "hidden"}`}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/svg/lolikar-l.svg" alt="Lolikar" className="h-[44px] w-auto" />
+        <BrandLogo which="mark" brand={brand} className="h-[44px]" />
       </a>
 
       {/* Inline links — from sm up. On phones they live in the burger menu.

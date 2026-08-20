@@ -2,6 +2,7 @@ import StripeBar from "./StripeBar";
 import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
+import BrandLogo, { type Brand } from "./BrandLogo";
 
 /** The part of the page that stays put whichever section is selected: the
  *  stripe, the big logo and the nav bar.
@@ -10,11 +11,21 @@ import { LanguageSwitcher } from "./Language";
  *  <main> for `sticky` to hold all the way down. Nested in a div of its own it
  *  would unstick as soon as that div scrolled past.
  */
-export default function SiteHeader() {
+export default function SiteHeader({
+  brand,
+  stripeLight,
+  stripeDark,
+  ribbon,
+}: {
+  brand: Brand;
+  stripeLight?: string;
+  stripeDark?: string;
+  ribbon?: string;
+}) {
   return (
     <>
       <div id="home">
-        <StripeBar />
+        <StripeBar light={stripeLight} dark={stripeDark} />
 
         {/* Logo. pb here + the nav's own py keep the original 43px gap.
             Phones skip this block entirely — there the bar itself carries the
@@ -22,8 +33,7 @@ export default function SiteHeader() {
         <div className="relative bg-white pt-[53px] pb-[23px] hidden sm:flex flex-col items-center">
           {/* Same target as its small twin in the pinned bar */}
           <a href="#portfolio" aria-label="Lolikar — portfolio">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/svg/lolikar.svg" alt="Lolikar" className="h-24 w-auto" />
+            <BrandLogo which="full" brand={brand} className="h-24" />
           </a>
 
           {/* Top-right of the header, above the nav row. Its twin in the pinned
@@ -32,14 +42,14 @@ export default function SiteHeader() {
         </div>
       </div>
 
-      <Nav />
+      <Nav brand={brand} />
 
       {/* One ribbon for every section rather than one inside each: the sections
           spaced it slightly differently, so switching between them made it hop.
           pt here + the nav's py keep the original 40px gap; pb-8 the white gap
           before whatever the section opens with. */}
       <div className="bg-white pt-[20px] pb-8">
-        <DecorativeDots />
+        <DecorativeDots colour={ribbon} />
       </div>
     </>
   );

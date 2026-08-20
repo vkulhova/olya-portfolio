@@ -36,6 +36,58 @@ html[data-lang="UA"] .font-outfit {
   font-family: var(--font-body, 'Nunito Sans', sans-serif);
 }
 
+/* The logo is inlined so Studio can set its two colours, which means the
+   drawing has to be told to fill the box the height class gives it — the job
+   w-auto did while it was an <img>. */
+.brand-logo svg {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+
+/* The stripe bar. Two colours from Studio, and two stripe widths that only a
+   media query can switch between — hence a class rather than the utility that
+   used to spell the gradient out. */
+.stripe-bar {
+  background: repeating-linear-gradient(
+    90deg,
+    var(--stripe-a, #FFD8CF) 0px,
+    var(--stripe-a, #FFD8CF) 35px,
+    var(--stripe-b, #FF917F) 35px,
+    var(--stripe-b, #FF917F) 70px
+  );
+}
+
+@media (min-width: 640px) {
+  .stripe-bar {
+    background: repeating-linear-gradient(
+      90deg,
+      var(--stripe-a, #FFD8CF) 0px,
+      var(--stripe-a, #FFD8CF) 55px,
+      var(--stripe-b, #FF917F) 55px,
+      var(--stripe-b, #FF917F) 110px
+    );
+  }
+}
+
+/* The heart ribbon. The tile is a single colour on transparent, so it is used
+   as a mask over a painted box rather than as a picture — that is what lets
+   the colour come from Studio without the drawing being touched. */
+.ribbon-line {
+  background-color: var(--ribbon, #D5BA54);
+  -webkit-mask: url('/svg/pattern-tile.svg') repeat-x;
+  mask: url('/svg/pattern-tile.svg') repeat-x;
+  -webkit-mask-size: 145.6px 17px;
+  mask-size: 145.6px 17px;
+}
+
+@media (min-width: 640px) {
+  .ribbon-line {
+    -webkit-mask-size: 180px 21px;
+    mask-size: 180px 21px;
+  }
+}
+
 /* The send button. Its colour is set in Studio, so it cannot live in a
    Tailwind class: the variables come down as an inline style and the shipped
    peach stays here as the fallback. The hover is the same 90% the utility
