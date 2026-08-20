@@ -137,6 +137,20 @@ export default defineConfig({
             title: "About — Ukrainian",
             description: "Shown when UA is selected. Empty falls back to English.",
           },
+          {
+            name: "contactEn",
+            type: "text",
+            rows: 6,
+            title: "Collaboration — English",
+            description: "Separate paragraphs with a blank line between them.",
+          },
+          {
+            name: "contactUk",
+            type: "text",
+            rows: 6,
+            title: "Collaboration — Ukrainian",
+            description: "Shown when UA is selected. Empty falls back to English.",
+          },
         ],
         preview: {
           prepare: () => ({ title: "Site text" }),
@@ -251,6 +265,22 @@ export default defineConfig({
             title: "Contact — Ukrainian",
             description:
               "Today: “Залиште лист у моїй скриньці”. Empty keeps it. SVG, cropped tight to the lettering.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "collabEn",
+            type: "file",
+            title: "«Colaboration» — English",
+            description:
+              "The handwritten phrase above the contact text. An SVG; empty keeps the one that ships.",
+            options: { accept: "image/svg+xml" },
+          },
+          {
+            name: "collabUk",
+            type: "file",
+            title: "«Colaboration» — Ukrainian",
+            description:
+              "The same phrase for the Ukrainian page. Empty keeps the English drawing, which is what ships.",
             options: { accept: "image/svg+xml" },
           },
         ],

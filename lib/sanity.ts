@@ -140,6 +140,8 @@ export type SiteText = {
   heroUk: string | null;
   aboutEn: string | null;
   aboutUk: string | null;
+  contactEn: string | null;
+  contactUk: string | null;
 };
 
 const EMPTY_SITE_TEXT: SiteText = {
@@ -147,12 +149,14 @@ const EMPTY_SITE_TEXT: SiteText = {
   heroUk: null,
   aboutEn: null,
   aboutUk: null,
+  contactEn: null,
+  contactUk: null,
 };
 
 export async function getSiteText(): Promise<SiteText> {
   try {
     const result = await sanityClient.fetch<SiteText | null>(
-      `*[_id == "siteText"][0]{ heroEn, heroUk, aboutEn, aboutUk }`,
+      `*[_id == "siteText"][0]{ heroEn, heroUk, aboutEn, aboutUk, contactEn, contactUk }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -236,6 +240,9 @@ export type SiteHeadings = {
   aboutUk: string | null;
   contactEn: string | null;
   contactUk: string | null;
+  /** «Colaboration», the phrase above the contact copy. */
+  collabEn: string | null;
+  collabUk: string | null;
 };
 
 const EMPTY_SITE_HEADINGS: SiteHeadings = {
@@ -245,6 +252,8 @@ const EMPTY_SITE_HEADINGS: SiteHeadings = {
   aboutUk: null,
   contactEn: null,
   contactUk: null,
+  collabEn: null,
+  collabUk: null,
 };
 
 export async function getSiteHeadings(): Promise<SiteHeadings> {

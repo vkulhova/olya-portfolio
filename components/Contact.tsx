@@ -2,10 +2,21 @@
 
 import { useState } from "react";
 import LocalisedHeading from "./LocalisedHeading";
+import LocalisedText from "./LocalisedText";
 import Image from "next/image";
 import { useLanguage } from "./Language";
 import { backdropUrl, buttonColour, readableInk } from "@/lib/sanity";
-import type { SiteHeadings, SiteImage } from "@/lib/sanity";
+import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
+
+/** Used until the Studio field is filled in. Blank lines split the paragraphs,
+ *  the same way About and the hero card read theirs. */
+const DEFAULT_CONTACT_EN = `Looking for an illustrator for your project, your book, your brand or an idea all of your own? I am always open to interesting collaborations and to new creative challenges.
+
+Let us tell your story through visual art. Write to me about what you have in mind through the form below, or send an email, and we will go through all the details together.`;
+
+const DEFAULT_CONTACT_UK = `Шукаєте ілюстратора для свого проєкту, книги, бренду чи унікальної ідеї? Я завжди відкрита до цікавих колаборацій та нових творчих викликів.
+
+Розповімо вашу історію через візуальне мистецтво! Розкажіть мені про свої задуми через форму нижче або напишіть на пошту, і ми обговоримо всі деталі.`;
 
 /** The form is the only block whose text lives in the code rather than in
  *  Studio — it is labels, not copy, so it is translated here. */
@@ -37,12 +48,14 @@ export default function Contact({
   background,
   backgroundMobile,
   headings,
+  text,
   buttonColourHex,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
   backgroundMobile?: SiteImage;
   headings?: SiteHeadings;
+  text?: SiteText;
   buttonColourHex?: string | null;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
@@ -87,6 +100,61 @@ export default function Contact({
 
   return (
     <section id="contact" className="w-full scroll-mt-[78px]">
+
+    {/* The white opening: the phrase, the copy, then the letter. It used to be
+        the form straight after the ribbon, with the letter buried at the foot
+        of the card — the drawing now introduces the section instead of closing
+        it. The top spacing is About's, so both sections start on the same
+        line under the ribbon. */}
+    <div className="w-full bg-white">
+      <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10 sm:pb-14 flex flex-col items-center">
+        {/* Phrase and star, paired the way About pairs its heading with the
+            olive one. nowrap keeps them on one line: the phrase shrinks first. */}
+        {/* gap-5 rather than the 3 About uses: this star sits beside the end
+            of a word rather than a whole phrase, and at 3 its rays touched the
+            final letter. */}
+        <div className="flex items-center gap-4 sm:gap-5 flex-nowrap">
+          <LocalisedHeading
+            en={headings?.collabEn ?? "/svg/colaboration.svg"}
+            uk={headings?.collabUk ?? headings?.collabEn ?? "/svg/colaboration.svg"}
+            altEn="Colaboration"
+            altUk="Колаборація"
+            className="h-[38px] sm:h-[48px] w-auto min-w-0 shrink"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/svg/star-salmon.svg"
+            alt=""
+            aria-hidden="true"
+            className="w-[42px] h-[42px] sm:w-[53px] sm:h-[53px] shrink-0 self-start"
+          />
+        </div>
+
+        {/* Centred and held to a readable measure rather than run across the
+            full 78% — at this size the line would otherwise be far longer than
+            the copy in About, which is kept beside a photo. */}
+        <div className="mt-7 sm:mt-9 max-w-[640px] flex flex-col gap-4 text-center">
+          <LocalisedText
+            en={text?.contactEn?.trim() || DEFAULT_CONTACT_EN}
+            uk={text?.contactUk?.trim() || DEFAULT_CONTACT_UK}
+            className="font-outfit font-light text-sm sm:text-base leading-[1.7] text-dark"
+          />
+        </div>
+
+        {/* The letter, moved up here from inside the form card. Same Studio
+            field as before — nothing has to be uploaded again. */}
+        <div className="mt-10 sm:mt-12 w-[70%] sm:w-[380px] max-w-full">
+          <Image
+            src={illustration?.url ?? "/images/work-1.png"}
+            alt="Illustration"
+            width={illustration?.width ?? 985}
+            height={illustration?.height ?? 845}
+            className="w-full h-auto object-contain"
+          />
+        </div>
+      </div>
+    </div>
+
     {/* An uploaded backdrop replaces the paper texture rather than sitting under
         it — the grain would only fight a real picture. The beige stays as the
         base colour so the block is never bare while the image loads. */}
@@ -128,6 +196,10 @@ export default function Contact({
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           <div className="mb-5 sm:mb-8 flex items-center gap-3 flex-nowrap">
+            {/* The salmon star that used to sit here has moved up beside
+                «Colaboration». Two of the same star on one screen read as a
+                repeat rather than a pair, and the reference puts it at the
+                top. */}
             <LocalisedHeading
               en={headings?.contactEn ?? "/svg/drop-a-letter.svg"}
               uk={headings?.contactUk ?? "/svg/drop-a-letter-uk.svg"}
@@ -135,13 +207,6 @@ export default function Contact({
               altUk="Залиште лист у моїй скриньці"
               className="w-full max-w-[366px] min-w-0 shrink h-auto"
               ukClassName="w-full max-w-[389px] min-w-0 shrink h-auto"
-            />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/svg/star-salmon.svg"
-              alt=""
-              aria-hidden="true"
-              className="w-[36px] h-[36px] sm:w-[53px] sm:h-[53px] shrink-0"
             />
           </div>
 
@@ -210,19 +275,6 @@ export default function Contact({
             />
           </form>
 
-          {/* On phones the letter opens the card, above the heading; from sm up
-              it closes it, as before. It sits outside the form so the order can
-              be swapped — the 52px top margin is what the form's gap-6 and the
-              old mt-7 added up to there. */}
-          <div className="flex justify-center order-first mb-4 sm:order-none sm:mt-[52px] sm:mb-2">
-            <Image
-              src={illustration?.url ?? "/images/work-1.png"}
-              alt="Illustration"
-              width={illustration?.width ?? 800}
-              height={illustration?.height ?? 600}
-              className="w-[75%] sm:w-[52.7%] h-auto object-contain"
-            />
-          </div>
         </div>
 
         {/* Submit button outside card. Its width follows the label with 24px of
