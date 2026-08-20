@@ -128,7 +128,12 @@ export default function About({
           resolve against this box's width — the same thing the image's own
           height follows — so the crop holds at every phone size. Wide screens
           keep the picture whole. */}
-      <div className="w-full sm:w-[60%] mx-auto pb-6 sm:pb-10 overflow-hidden">
+      {/* pb-16 on phones, not the 6 it had. The negative bottom margin below
+          crops the drawing's blank band by very nearly the whole 24px that
+          padding gave, so the desk was finishing about 2px above the beige and
+          the two blocks touched. 64px here leaves roughly the 45 the mark on
+          the card asks for. Wide screens keep their 40. */}
+      <div className="w-full sm:w-[60%] mx-auto pb-16 sm:pb-10 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={illustration?.url ?? "/images/illustration.png"}
