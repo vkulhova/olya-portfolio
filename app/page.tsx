@@ -60,7 +60,7 @@ export default async function Home() {
             }
           />
 
-          <Footer colour={images.footerColour} />
+          <Footer colour={images.footerColour} iconColour={images.socialIconColour} />
           <BackToTop />
         </main>
       </ViewProvider>

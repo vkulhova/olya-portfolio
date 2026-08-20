@@ -329,6 +329,17 @@ export default defineConfig({
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
           defineField({
+            name: "socialIconColour",
+            type: "string",
+            title: "Social icon colour",
+            description:
+              "The circle behind each social mark in the footer. A hex code such as 3C1A05 — the # is optional. Empty keeps the brown. The mark inside always takes the footer's own colour, so it stays a clean cut-out whatever the band is set to.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
             name: "buttonColour",
             type: "string",
             title: "Send button colour",

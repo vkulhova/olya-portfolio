@@ -32,6 +32,8 @@ export type SiteImages = {
   footerColour: string | null;
   /** Hex for the send button; null keeps the peach it ships with. */
   buttonColour: string | null;
+  /** Hex for the circle behind each social mark; null keeps the brown. */
+  socialIconColour: string | null;
 };
 
 const EMPTY_SITE_IMAGES: SiteImages = {
@@ -45,6 +47,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   contactBackgroundMobile: null,
   footerColour: null,
   buttonColour: null,
+  socialIconColour: null,
 };
 
 const IMAGE_FIELDS = [
@@ -66,7 +69,7 @@ export async function getSiteImages(): Promise<SiteImages> {
 
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
-      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour\n  }`,
+      `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour\n  }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -80,6 +83,7 @@ export async function getSiteImages(): Promise<SiteImages> {
 /** The colours these two ship with, used until Studio says otherwise. */
 export const FOOTER_COLOUR = "#F4F2E3";
 export const BUTTON_COLOUR = "#FF917F";
+export const SOCIAL_CIRCLE_COLOUR = "#3C1A05";
 
 /** Accepts what Studio holds — with or without the leading # — and refuses
  *  anything that is not a hex colour, so a typo cannot inject CSS. */
@@ -95,6 +99,10 @@ export function footerColour(value?: string | null): string {
 
 export function buttonColour(value?: string | null): string {
   return hexColour(value, BUTTON_COLOUR);
+}
+
+export function socialCircleColour(value?: string | null): string {
+  return hexColour(value, SOCIAL_CIRCLE_COLOUR);
 }
 
 /** Which ink stays readable on a given background.
