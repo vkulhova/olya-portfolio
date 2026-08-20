@@ -93,9 +93,18 @@ export default function Hero({
                 /* The Ukrainian lettering hangs from the top of its box and
                    spends the lower part on descenders, so at the same 32px
                    below the card's edge it reads as sitting higher than the
-                   English does. The extra top margin drops it back onto the
-                   line it was asked for; English is untouched. */
-                ukClassName="mt-2 md:mt-3 h-[51px] md:h-[66px] w-auto max-w-full"
+                   English does. The small top margin drops it back onto the
+                   line it was asked for; English is untouched.
+
+                   The box is 56 rather than the 66 it was sized to. That 66
+                   matched the height of the letters themselves to the English
+                   drawing, but the Ukrainian one spends a third of its box on
+                   ascenders, the comma and the «:)» — so an equal letter
+                   height still made the block a third taller than the English
+                   one and left the greeting looming over copy set at 14px.
+                   At 56 the letters land just under the About phrase's and
+                   the block sits level with the paragraph under it. */
+                ukClassName="mt-1.5 md:mt-2 h-[44px] md:h-[56px] w-auto max-w-full"
               />
 
               <LocalisedText
