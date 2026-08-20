@@ -57,10 +57,16 @@ export default function Contact({
     const data = new FormData(form);
 
     try {
-      const res = await fetch("https://formspree.io/f/YOUR_FORM_ID", {
+      const res = await fetch("/api/contact", {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          email: data.get("email"),
+          message: data.get("message"),
+          website: data.get("website"),
+        }),
       });
       if (res.ok) {
         setStatus("sent");
@@ -133,7 +139,7 @@ export default function Contact({
             />
           </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-6">
             {/* The mock sets the two name fields further apart than the 16px
                 they had; phones keep the tighter gap, there is no room there. */}
             <div className="grid grid-cols-2 gap-4 sm:gap-10">
@@ -184,6 +190,18 @@ export default function Contact({
               />
             </div>
 
+            {/* Bait for form-filling bots — off-screen rather than
+                display:none, which some of them check for. Nothing here is
+                reachable by keyboard or read aloud; the server drops any
+                submission that fills it. */}
+            <input
+              type="text"
+              name="website"
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              className="absolute w-px h-px -left-[9999px] opacity-0"
+            />
           </form>
 
           {/* On phones the letter opens the card, above the heading; from sm up
@@ -211,10 +229,6 @@ export default function Contact({
         <button
           type="submit"
           form="contact-form"
-          onClick={() => {
-            const form = document.querySelector<HTMLFormElement>("#contact form");
-            form?.requestSubmit();
-          }}
           disabled={status === "sending" || status === "sent"}
           className="mt-14 px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full bg-peach-mid text-white font-futura font-medium text-base tracking-[0.2em] uppercase hover:bg-peach-mid/90 transition-colors disabled:opacity-60"
         >
