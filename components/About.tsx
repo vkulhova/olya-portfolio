@@ -88,12 +88,13 @@ export default function About({
           {/* Text column — stretches to photo height; AboutCopyFit keeps the
               copy inside it. */}
           <div className="flex flex-col gap-5 pt-2">
-            {/* Heading + star */}
-            {/* nowrap keeps the star beside the heading; both shrink together on
-                narrow screens rather than the star dropping to its own line */}
+            {/* Heading. The olive star that used to sit beside it is gone —
+                the two gold and salmon ones on the photo are the section's
+                punctuation, and a third on the same screen was one mark too
+                many. Both languages lose it. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="flex items-center gap-3 flex-nowrap justify-center md:justify-start">
+            <div className="flex items-center justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
@@ -101,17 +102,6 @@ export default function About({
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"
                 ukClassName="h-[50px] sm:h-[64px] w-auto min-w-0 shrink"
-              />
-              {/* On phones the star was 36px against a heading it is meant to
-                  answer, and it read as a stray mark rather than a pair. 52px
-                  is the circle drawn over the mock — near enough to the 53px
-                  it has always had on wider screens that the two now match. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/svg/star-olive.svg"
-                alt=""
-                aria-hidden="true"
-                className="w-[52px] h-[52px] sm:w-[53px] sm:h-[53px] shrink-0"
               />
             </div>
 
