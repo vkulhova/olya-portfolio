@@ -83,7 +83,12 @@ export default function Hero({
             </div>
 
             {/* Text content */}
-            <div className="flex flex-col gap-6 items-center text-center md:items-start md:text-left min-w-0">
+            {/* gap-4, not the 6 it had. The phrase is a drawing whose box ends
+                where its descenders do, so the 24px sat under the tail of the
+                lettering rather than under the line of it — the greeting and
+                the paragraph read as two separate blocks. 16px closes them up
+                without letting them touch. Both languages, one container. */}
+            <div className="flex flex-col gap-4 items-center text-center md:items-start md:text-left min-w-0">
               <LocalisedHeading
                 en={headings?.heroEn ?? "/svg/hello-and-welcome.svg"}
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
