@@ -67,7 +67,11 @@ export default function Nav({ brand }: { brand: Brand }) {
           stuck ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       >
-        <BrandLogo which="full" brand={brand} className="h-[47px]" />
+        {/* The corner takes the L on its own rather than the wordmark. At the
+            pinned bar's height the full name had to be set small enough to be
+            read as a smudge rather than a name; the single letter holds at
+            that size, which is what it was drawn for. */}
+        <BrandLogo which="mark" brand={brand} className="h-[47px]" />
       </a>
 
       {/* Phones, at the top of the page: the full logo, centred and large, with
