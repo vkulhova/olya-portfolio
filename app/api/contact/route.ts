@@ -4,12 +4,15 @@ import { NextResponse } from "next/server";
  *  deploy, but the address is here so the form works out of the box. */
 const TO = process.env.CONTACT_TO || "hi.lolikar@gmail.com";
 
-/** Resend's shared sender, which needs no DNS of our own. It may only write to
- *  the address that owns the Resend account — which is why that account has to
- *  be the one on TO above. Once lolikar.com is verified in Resend, set
- *  CONTACT_FROM to something like "Lolikar <hi@lolikar.com>" and the letters
- *  arrive from the site's own domain instead. */
-const FROM = process.env.CONTACT_FROM || "Lolikar <onboarding@resend.dev>";
+/** The site's own address. lolikar.com is verified in Resend — DKIM at
+ *  resend._domainkey, SPF and the return path on send.lolikar.com — so mail
+ *  leaves as Lolikar rather than as Resend's shared onboarding@resend.dev.
+ *
+ *  The domain publishes DMARC p=reject with adkim=s, so an unsigned or
+ *  misaligned letter is refused outright rather than filed as spam. That holds
+ *  because Resend signs as lolikar.com itself. Point this at another address
+ *  only under a domain Resend has verified. */
+const FROM = process.env.CONTACT_FROM || "Lolikar <hi@lolikar.com>";
 
 const MAX = { name: 100, email: 200, message: 5000 };
 
