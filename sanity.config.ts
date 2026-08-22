@@ -1,3 +1,4 @@
+import { fontOptions } from "./lib/fonts";
 import { defineConfig, defineField } from "sanity";
 import { structureTool } from "sanity/structure";
 import { EditIcon, ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
@@ -171,19 +172,7 @@ export default defineConfig({
             title: "Body text",
             description:
               "The paragraphs in the hero card and in About. Empty keeps Outfit in English and Nunito Sans in Ukrainian.",
-            options: {
-              list: [
-                { title: "As it ships (Outfit / Nunito Sans)", value: "" },
-                { title: "Nunito Sans", value: "Nunito Sans" },
-                { title: "Manrope", value: "Manrope" },
-                { title: "Montserrat", value: "Montserrat" },
-                { title: "Rubik", value: "Rubik" },
-                { title: "Onest", value: "Onest" },
-                { title: "Golos Text", value: "Golos Text" },
-                { title: "Comfortaa", value: "Comfortaa" },
-                { title: "Inter", value: "Inter" },
-              ],
-            },
+            options: { list: fontOptions("As it ships (Outfit / Nunito Sans)") },
           },
           {
             name: "labelFont",
@@ -191,19 +180,7 @@ export default defineConfig({
             title: "Nav and the send button",
             description:
               "The spaced capitals in the menu and on the send button. Empty keeps Futura PT. The contact form has its own setting below.",
-            options: {
-              list: [
-                { title: "As it ships (Futura PT)", value: "" },
-                { title: "Nunito Sans", value: "Nunito Sans" },
-                { title: "Manrope", value: "Manrope" },
-                { title: "Montserrat", value: "Montserrat" },
-                { title: "Rubik", value: "Rubik" },
-                { title: "Onest", value: "Onest" },
-                { title: "Golos Text", value: "Golos Text" },
-                { title: "Comfortaa", value: "Comfortaa" },
-                { title: "Inter", value: "Inter" },
-              ],
-            },
+            options: { list: fontOptions("As it ships (Futura PT)") },
           },
           {
             name: "formFont",
@@ -211,19 +188,7 @@ export default defineConfig({
             title: "Contact form",
             description:
               "The field captions («Ваше ім\u02BCя», «Email»…) and the text visitors type into the boxes. Empty follows the nav choice above, which is what the form did before it had a setting of its own.",
-            options: {
-              list: [
-                { title: "Same as the nav", value: "" },
-                { title: "Nunito Sans", value: "Nunito Sans" },
-                { title: "Manrope", value: "Manrope" },
-                { title: "Montserrat", value: "Montserrat" },
-                { title: "Rubik", value: "Rubik" },
-                { title: "Onest", value: "Onest" },
-                { title: "Golos Text", value: "Golos Text" },
-                { title: "Comfortaa", value: "Comfortaa" },
-                { title: "Inter", value: "Inter" },
-              ],
-            },
+            options: { list: fontOptions("Same as the nav") },
           },
         ],
         preview: {

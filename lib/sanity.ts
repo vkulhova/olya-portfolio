@@ -1,4 +1,9 @@
 import { createClient } from "@sanity/client";
+import { FONT_CHOICES } from "./fonts";
+
+/* Re-exported so callers keep importing fonts from one place; the list itself
+   lives in lib/fonts.ts, which Studio also reads to build its dropdowns. */
+export { FONT_CHOICES } from "./fonts";
 
 export const sanityClient = createClient({
   projectId: "v18r1vne",
@@ -233,16 +238,6 @@ export async function getIllustrations(): Promise<Illustration[]> {
  *  into; and the site is bilingual, so anything offered here has to carry
  *  Cyrillic — Outfit, the English body face, does not, which is the whole
  *  reason the Ukrainian copy has a stand-in today. */
-export const FONT_CHOICES: Record<string, { css: string; google: string }> = {
-  "Nunito Sans": { css: "'Nunito Sans', sans-serif", google: "Nunito+Sans:wght@300;400;500" },
-  Manrope: { css: "'Manrope', sans-serif", google: "Manrope:wght@300;400;500" },
-  Montserrat: { css: "'Montserrat', sans-serif", google: "Montserrat:wght@300;400;500" },
-  Rubik: { css: "'Rubik', sans-serif", google: "Rubik:wght@300;400;500" },
-  Onest: { css: "'Onest', sans-serif", google: "Onest:wght@300;400;500" },
-  "Golos Text": { css: "'Golos Text', sans-serif", google: "Golos+Text:wght@400;500" },
-  Comfortaa: { css: "'Comfortaa', sans-serif", google: "Comfortaa:wght@300;400;500" },
-  Inter: { css: "'Inter', sans-serif", google: "Inter:wght@300;400;500" },
-};
 
 export type SiteFonts = {
   /** The paragraph face. Empty keeps Outfit in English and Nunito Sans in Ukrainian. */
