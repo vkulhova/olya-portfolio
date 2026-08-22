@@ -60,7 +60,7 @@ export default function Footer({
         {/* pb-16 with the pt-16 above it: the beige band was asked to stand
             taller, and the room is split evenly above and below its contents
             so the icons and the signature stay centred in it. */}
-        <p className="pb-16 text-center font-source-serif italic tracking-[0.12em] text-sm text-dark">
+        <p className="pb-16 text-center font-signature italic tracking-[0.12em] text-sm text-dark">
           Made with love by Lolikar © {new Date().getFullYear()}
         </p>
       </div>

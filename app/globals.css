@@ -102,6 +102,15 @@ html[data-lang="UA"] .font-outfit {
   background-color: color-mix(in srgb, var(--btn-bg, #FF917F) 90%, transparent);
 }
 
+/* The footer signature. It was the one piece of running text on the site that
+   no Studio setting could reach — set in Source Serif italic straight from a
+   Tailwind class, so choosing a body face left it behind. It now follows the
+   body face and keeps the serif as its fallback, so an empty Studio still
+   renders the signature it was designed with. */
+.font-signature {
+  font-family: var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif);
+}
+
 /* The rest of the site's chrome — nav, the language switch, the form fields
    and the send button. These carried the font-futura utility, which writes the
    family out as a literal, so no choice made in Studio could ever reach them:
