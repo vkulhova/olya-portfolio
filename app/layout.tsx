@@ -32,11 +32,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const fonts = await getSiteFonts();
   const body = resolveFont(fonts.bodyFont);
   const label = resolveFont(fonts.labelFont);
+  const form = resolveFont(fonts.formFont);
 
-  // One stylesheet for whichever of the two was chosen. Both files are already
+  // One stylesheet for whichever of the three were chosen. Both files are already
   // imported for the shipped faces, so nothing extra is fetched until she
   // actually picks something.
-  const families = [body?.google, label?.google].filter(
+  const families = [body?.google, label?.google, form?.google].filter(
     (f, i, all): f is string => Boolean(f) && all.indexOf(f) === i
   );
   const googleHref = families.length
@@ -46,6 +47,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const style = {
     ...(body ? { "--font-body": body.css } : null),
     ...(label ? { "--font-label": label.css } : null),
+    ...(form ? { "--font-form": form.css } : null),
   } as React.CSSProperties;
 
   return (

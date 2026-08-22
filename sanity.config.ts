@@ -188,12 +188,32 @@ export default defineConfig({
           {
             name: "labelFont",
             type: "string",
-            title: "Nav, form labels and the button",
+            title: "Nav and the send button",
             description:
-              "The spaced capitals in the menu, the field labels and the send button. Empty keeps Futura PT.",
+              "The spaced capitals in the menu and on the send button. Empty keeps Futura PT. The contact form has its own setting below.",
             options: {
               list: [
                 { title: "As it ships (Futura PT)", value: "" },
+                { title: "Nunito Sans", value: "Nunito Sans" },
+                { title: "Manrope", value: "Manrope" },
+                { title: "Montserrat", value: "Montserrat" },
+                { title: "Rubik", value: "Rubik" },
+                { title: "Onest", value: "Onest" },
+                { title: "Golos Text", value: "Golos Text" },
+                { title: "Comfortaa", value: "Comfortaa" },
+                { title: "Inter", value: "Inter" },
+              ],
+            },
+          },
+          {
+            name: "formFont",
+            type: "string",
+            title: "Contact form",
+            description:
+              "The field captions («Ваше ім\u02BCя», «Email»…) and the text visitors type into the boxes. Empty follows the nav choice above, which is what the form did before it had a setting of its own.",
+            options: {
+              list: [
+                { title: "Same as the nav", value: "" },
                 { title: "Nunito Sans", value: "Nunito Sans" },
                 { title: "Manrope", value: "Manrope" },
                 { title: "Montserrat", value: "Montserrat" },

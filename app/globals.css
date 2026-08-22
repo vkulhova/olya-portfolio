@@ -114,9 +114,13 @@ html[data-lang="UA"] .font-outfit {
 
 /* Form labels: Outfit Regular in English, Futura Medium in Ukrainian, both
    set 4px apart. Written here rather than in classes because the face has to
-   follow the language, the same way the body copy does above. */
+   follow the language, the same way the body copy does above.
+
+   --font-form is the contact form's own choice in Studio. When it is unset the
+   nested fallback hands over to --font-label, so the form keeps following the
+   nav exactly as it did before the form got a setting of its own. */
 .form-label {
-  font-family: var(--font-label, 'Outfit', sans-serif);
+  font-family: var(--font-form, var(--font-label, 'Outfit', sans-serif));
   font-weight: 400;
   letter-spacing: 4px;
 }
@@ -127,8 +131,15 @@ html[data-lang="UA"] .font-outfit {
    Regular beside them; 450 is the Medium the design asks for, and the two
    languages now sit at the same weight. */
 html[data-lang="UA"] .form-label {
-  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
+  font-family: var(--font-form, var(--font-label, 'Futura PT', 'Futura', sans-serif));
   font-weight: 450;
+}
+
+/* The boxes the visitor types into. Same choice as the labels above them —
+   a form whose caption and answer are set in two different faces reads as a
+   mistake — and the same fallback chain when Studio has nothing. */
+.form-field {
+  font-family: var(--font-form, var(--font-label, 'Futura PT', 'Futura', sans-serif));
 }
 
 /* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit

@@ -247,16 +247,20 @@ export const FONT_CHOICES: Record<string, { css: string; google: string }> = {
 export type SiteFonts = {
   /** The paragraph face. Empty keeps Outfit in English and Nunito Sans in Ukrainian. */
   bodyFont: string | null;
-  /** Nav, form labels and the send button. Empty keeps Futura PT. */
+  /** Nav and the send button. Empty keeps Futura PT. */
   labelFont: string | null;
+  /** The contact form only — its labels and the text visitors type into it.
+   *  Empty follows labelFont, which is how the form behaved before this
+   *  existed. */
+  formFont: string | null;
 };
 
-const EMPTY_SITE_FONTS: SiteFonts = { bodyFont: null, labelFont: null };
+const EMPTY_SITE_FONTS: SiteFonts = { bodyFont: null, labelFont: null, formFont: null };
 
 export async function getSiteFonts(): Promise<SiteFonts> {
   try {
     const result = await sanityClient.fetch<SiteFonts | null>(
-      `*[_id == "siteFonts"][0]{ bodyFont, labelFont }`,
+      `*[_id == "siteFonts"][0]{ bodyFont, labelFont, formFont }`,
       {},
       { next: { revalidate: 60 } }
     );
