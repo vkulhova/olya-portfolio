@@ -152,18 +152,18 @@ html[data-lang="UA"] .form-label {
   background: #57280C;
 }
 
-/* About copy. AboutCopyFit measures the block against the photo and sets
-   --about-fs so the text stops at the bottom of the picture without the photo
-   ever being cropped. 16px is the full size, used whenever it fits and
-   whenever the columns are stacked. */
-.about-copy {
-  font-size: var(--about-fs, 16px);
-}
+/* The paragraph copy in Hero, About and Contact. One rule for all three: they
+   used to run at three different sizes and two different weights — 14px/400 in
+   the hero, a fluid 11–16px/300 in About, 14–16px/300 in Contact — so the same
+   voice read differently in each section.
 
-/* Set by AboutCopyFit when the copy will not fit beside the photo even at its
-   smallest size — the point where stacking beats shrinking further. */
-[data-about-grid][data-about-stacked] {
-  grid-template-columns: 1fr;
+   The fluid size in About came from a script that shrank the copy until it
+   ended level with the photo. That is what made equal sizes impossible, so it
+   is gone; where the text now runs past the picture, it simply runs past it. */
+.body-copy {
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.7;
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */

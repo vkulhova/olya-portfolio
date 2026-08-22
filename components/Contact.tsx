@@ -137,7 +137,7 @@ export default function Contact({
           <LocalisedText
             en={text?.contactEn?.trim() || DEFAULT_CONTACT_EN}
             uk={text?.contactUk?.trim() || DEFAULT_CONTACT_UK}
-            className="font-outfit font-light text-sm sm:text-base leading-[1.7] text-dark"
+            className="body-copy font-outfit text-dark"
           />
         </div>
 

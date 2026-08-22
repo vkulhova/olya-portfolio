@@ -1,7 +1,6 @@
 import Image from "next/image";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
-import AboutCopyFit from "./AboutCopyFit";
 import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs. */
@@ -35,19 +34,16 @@ export default function About({
             it at a readable size instead of stacking. From lg up the split is
             the original 3:7. */}
         <div
-          data-about-grid
           className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-x-10 gap-y-16 md:gap-y-10 items-stretch mb-4 sm:mb-10"
         >
 
           {/* Photo column. The box carries the photo's own 3:4 ratio at every
               width, so it is exactly the picture — nothing is cropped and no
-              letterboxing is left for the stars to float in. Keeping the text
-              inside this height is the copy's job, not the photo's: see the
-              fluid size on .about-copy. */}
+              letterboxing is left for the stars to float in. The copy beside
+              it is no longer sized to end level with the picture; below about
+              1100px it runs on past it. */}
           <div>
-            {/* data-about-photo is what AboutCopyFit measures the copy against. */}
             <div
-              data-about-photo
               className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[300px] mx-auto aspect-[3/4]"
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
@@ -90,8 +86,8 @@ export default function About({
             </div>
           </div>
 
-          {/* Text column — stretches to photo height; AboutCopyFit keeps the
-              copy inside it. */}
+          {/* Text column. It sets the row's height whenever the copy is
+              taller than the photo. */}
           <div className="flex flex-col gap-5 pt-2">
             {/* Heading. The olive star that used to sit beside it is gone —
                 the two gold and salmon ones on the photo are the section's
@@ -110,13 +106,11 @@ export default function About({
               />
             </div>
 
-            <AboutCopyFit>
-              <LocalisedText
-                en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
-                uk={text?.aboutUk ?? null}
-                className="about-copy font-outfit font-light leading-[1.7] text-dark text-justify"
-              />
-            </AboutCopyFit>
+            <LocalisedText
+              en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
+              uk={text?.aboutUk ?? null}
+              className="body-copy font-outfit text-dark text-justify"
+            />
           </div>
         </div>
 
