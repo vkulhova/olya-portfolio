@@ -279,30 +279,35 @@ export default function Contact({
             />
           </form>
 
+          {/* The button sits inside the card, centred under the fields. It used
+              to stand on the backdrop below it, which read as a separate
+              object rather than as the end of the form.
+
+              Its width follows the label with 24px of air either side, rather
+              than the flat 192px it once had — at that width the pill read as
+              a long bar around a short word, and the longer Ukrainian label no
+              longer has to fit the English one's box. The pl adds the trailing
+              letter-space tracking leaves after the last glyph on top of that
+              padding, which otherwise pulls the centred label visibly left. */}
+          <div className="mt-8 flex flex-col items-center">
+            <button
+              type="submit"
+              form="contact-form"
+              disabled={status === "sending" || status === "sent"}
+              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-futura font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
+              style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
+            >
+              {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
+            </button>
+
+            {status === "error" && (
+              <p className="mt-3 text-red-500 font-futura text-xs tracking-wider text-center">
+                {copy.error}
+              </p>
+            )}
+          </div>
+
         </div>
-
-        {/* Submit button outside card. Its width follows the label with 24px of
-            air either side, rather than the flat 192px it used to have — at
-            that width the pill read as a long bar around a short word, and the
-            longer Ukrainian label no longer has to fit the English one's box.
-            The pl adds the trailing letter-space tracking leaves after the last
-            glyph on top of that padding, which otherwise pulls the centred
-            label visibly left. */}
-        <button
-          type="submit"
-          form="contact-form"
-          disabled={status === "sending" || status === "sent"}
-          className="btn-send mt-14 px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-futura font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
-          style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
-        >
-          {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
-        </button>
-
-        {status === "error" && (
-          <p className="mt-3 text-red-500 font-futura text-xs tracking-wider">
-            {copy.error}
-          </p>
-        )}
       </div>
     </div>
     </section>
