@@ -185,7 +185,10 @@ html[data-lang="UA"] .form-label {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  font-size: 16px;
+  /* 16px is what the site is drawn at; Studio may override it because the same
+     size does not read the same in every face — x-heights differ enough that a
+     face can look small at 16 and large at 16. */
+  font-size: var(--body-size, 16px);
   font-weight: 300;
   line-height: 1.7;
 }

@@ -182,6 +182,14 @@ export default defineConfig({
               "The spaced capitals in the menu. Empty keeps Futura PT. The contact form, including its button, has its own setting below.",
             options: { list: fontOptions("As it ships (Futura PT)") },
           },
+          defineField({
+            name: "bodySize",
+            type: "number",
+            title: "Body text size",
+            description:
+              "Paragraph size in pixels, 12 to 24. Empty keeps 16, which is what the site is drawn at. Worth touching after changing the body face: two faces set at the same size rarely look the same size, because their letters are not the same height.",
+            validation: (Rule) => Rule.min(12).max(24).integer(),
+          }),
           {
             name: "formFont",
             type: "string",

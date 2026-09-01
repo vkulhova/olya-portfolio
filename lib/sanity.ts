@@ -248,14 +248,23 @@ export type SiteFonts = {
    *  Empty follows labelFont, which is how the form behaved before this
    *  existed. */
   formFont: string | null;
+  /** Paragraph size in px. Empty keeps the 16 the site is drawn at. Faces set
+   *  at the same size do not read at the same size — x-heights differ — so the
+   *  size follows the face rather than being fixed to it. */
+  bodySize: number | null;
 };
 
-const EMPTY_SITE_FONTS: SiteFonts = { bodyFont: null, labelFont: null, formFont: null };
+const EMPTY_SITE_FONTS: SiteFonts = {
+  bodyFont: null,
+  labelFont: null,
+  formFont: null,
+  bodySize: null,
+};
 
 export async function getSiteFonts(): Promise<SiteFonts> {
   try {
     const result = await sanityClient.fetch<SiteFonts | null>(
-      `*[_id == "siteFonts"][0]{ bodyFont, labelFont, formFont }`,
+      `*[_id == "siteFonts"][0]{ bodyFont, labelFont, formFont, bodySize }`,
       {},
       { next: { revalidate: 60 } }
     );
@@ -269,6 +278,18 @@ export async function getSiteFonts(): Promise<SiteFonts> {
  *  unrecognised — an old name, a typo, a hand-edited document — comes back as
  *  null, which is the same as "not set": the page keeps the pairing it was
  *  built with rather than falling back to whatever the device has. */
+/** The size Studio holds, as a CSS length — or null to keep the shipped 16px.
+ *  Clamped rather than trusted: Studio validates the field, but a hand-edited
+ *  document should not be able to set the whole site to 2px or 400. */
+export const BODY_SIZE_MIN = 12;
+export const BODY_SIZE_MAX = 24;
+
+export function resolveBodySize(value?: number | null): string | null {
+  if (typeof value !== "number" || !Number.isFinite(value)) return null;
+  const px = Math.min(BODY_SIZE_MAX, Math.max(BODY_SIZE_MIN, Math.round(value)));
+  return `${px}px`;
+}
+
 export function resolveFont(name?: string | null) {
   if (!name) return null;
   return FONT_CHOICES[name.trim()] ?? null;

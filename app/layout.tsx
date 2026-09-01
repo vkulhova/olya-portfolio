@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { getSiteFonts, resolveFont } from "@/lib/sanity";
+import { getSiteFonts, resolveBodySize, resolveFont } from "@/lib/sanity";
 
 export const metadata: Metadata = {
   title: "Lolikar — Portfolio",
@@ -33,6 +33,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const body = resolveFont(fonts.bodyFont);
   const label = resolveFont(fonts.labelFont);
   const form = resolveFont(fonts.formFont);
+  const bodySize = resolveBodySize(fonts.bodySize);
 
   // One stylesheet for whichever of the three were chosen. Both files are already
   // imported for the shipped faces, so nothing extra is fetched until she
@@ -48,6 +49,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     ...(body ? { "--font-body": body.css } : null),
     ...(label ? { "--font-label": label.css } : null),
     ...(form ? { "--font-form": form.css } : null),
+    ...(bodySize ? { "--body-size": bodySize } : null),
   } as React.CSSProperties;
 
   return (
