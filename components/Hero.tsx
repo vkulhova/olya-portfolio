@@ -94,7 +94,7 @@ export default function Hero({
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
                 altEn="Hello and welcome"
                 altUk="Вітаю, рада що ви тут"
-                className="h-[37px] md:h-[48px] w-auto max-w-full"
+                className="h-[37px] sm:h-[44px] w-auto max-w-full"
                 /* The Ukrainian lettering hangs from the top of its box and
                    spends the lower part on descenders, so at the same 32px
                    below the card's edge it reads as sitting higher than the
