@@ -44,6 +44,8 @@ export type SiteImages = {
   stripeColourDark: string | null;
   /** True hides the striped bar at the very top. Absent or false keeps it. */
   hideStripeBar: boolean | null;
+  /** The colour of the section you are on and the language you are in. */
+  accentColour: string | null;
   /** The gold hearts in the ribbon under the nav. */
   ribbonColour: string | null;
   /** The wordmark: its lettering and the mint shape behind it. */
@@ -69,6 +71,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   stripeColourLight: null,
   stripeColourDark: null,
   hideStripeBar: null,
+  accentColour: null,
   ribbonColour: null,
   logoInk: null,
   logoBlob: null,
@@ -96,7 +99,7 @@ export async function getSiteImages(): Promise<SiteImages> {
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
       `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
-    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    ribbonColour,\n    logoInk,\n    logoBlob,
     "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
     "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
@@ -112,6 +115,8 @@ export async function getSiteImages(): Promise<SiteImages> {
 /** The colours these two ship with, used until Studio says otherwise. */
 export const FOOTER_COLOUR = "#F4F2E3";
 export const BUTTON_COLOUR = "#FF917F";
+/** The gold the nav and the language switch mark the current one with. */
+export const ACCENT_COLOUR = "#BD9E30";
 export const SOCIAL_CIRCLE_COLOUR = "#3C1A05";
 export const STRIPE_LIGHT = "#FFD8CF";
 export const STRIPE_DARK = "#FF917F";
@@ -133,6 +138,10 @@ export function footerColour(value?: string | null): string {
 
 export function buttonColour(value?: string | null): string {
   return hexColour(value, BUTTON_COLOUR);
+}
+
+export function accentColour(value?: string | null): string {
+  return hexColour(value, ACCENT_COLOUR);
 }
 
 export function socialCircleColour(value?: string | null): string {

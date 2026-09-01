@@ -14,6 +14,7 @@ import {
   logoBlob,
   logoInk,
   ribbonColour,
+  accentColour,
   stripeDark,
   stripeLight,
 } from "@/lib/sanity";
@@ -41,7 +42,7 @@ export default async function Home() {
     // child of <main> and its sticky positioning is unaffected.
     <LanguageProvider>
       <ViewProvider>
-        <main>
+        <main style={{ "--accent": accentColour(images.accentColour) } as React.CSSProperties}>
           <SiteHeader
             brand={brand}
             stripeLight={stripeLight(images.stripeColourLight)}

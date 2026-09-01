@@ -102,6 +102,18 @@ html[data-lang="UA"] .font-outfit {
   background-color: color-mix(in srgb, var(--btn-bg, #FF917F) 90%, transparent);
 }
 
+/* The mark on the section you are on and the language you are in — the only
+   two places on the site that say "you are here". Both used the gold as a
+   literal, so there was no way to recolour them from Studio; --accent carries
+   that gold as its fallback, so an untouched document looks the same. */
+.accent-ink {
+  color: var(--accent, #BD9E30);
+}
+
+.accent-hover:hover {
+  color: var(--accent, #BD9E30);
+}
+
 /* The footer signature. It was the one piece of running text on the site that
    no Studio setting could reach — set in Source Serif italic straight from a
    Tailwind class, so choosing a body face left it behind. It now follows the

@@ -100,8 +100,8 @@ export default function Nav({ brand }: { brand: Brand }) {
             key={link}
             href={`#${link}`}
             aria-current={view === link ? "page" : undefined}
-            className={`font-futura font-semibold text-sm tracking-[0.15em] md:tracking-[0.25em] uppercase transition-colors hover:text-gold ${
-              view === link ? "text-gold" : "text-dark"
+            className={`font-futura font-semibold text-sm tracking-[0.15em] md:tracking-[0.25em] uppercase transition-colors accent-hover ${
+              view === link ? "accent-ink" : "text-dark"
             }`}
           >
             {labels[link]}
@@ -159,7 +159,7 @@ export default function Nav({ brand }: { brand: Brand }) {
                 onClick={() => setMenuOpen(false)}
                 aria-current={view === link ? "page" : undefined}
                 className={`font-futura font-semibold text-sm tracking-[0.25em] uppercase transition-colors ${
-                  view === link ? "text-gold" : "text-dark"
+                  view === link ? "accent-ink" : "text-dark"
                 }`}
               >
                 {labels[link]}

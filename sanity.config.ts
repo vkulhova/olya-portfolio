@@ -352,6 +352,17 @@ export default defineConfig({
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
           defineField({
+            name: "accentColour",
+            type: "string",
+            title: "Highlight colour",
+            description:
+              "Marks the section you are on in the menu and the language you are in. A hex code such as BD9E30. Empty keeps the gold.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          defineField({
             name: "hideStripeBar",
             type: "boolean",
             title: "Hide the striped bar",
