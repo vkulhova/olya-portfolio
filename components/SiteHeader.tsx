@@ -15,17 +15,21 @@ export default function SiteHeader({
   brand,
   stripeLight,
   stripeDark,
+  hideStripes,
   ribbon,
 }: {
   brand: Brand;
   stripeLight?: string;
   stripeDark?: string;
+  /** Studio can take the striped bar away entirely; the rest of the header
+   *  closes up on its own, since the bar is a block in the flow. */
+  hideStripes?: boolean;
   ribbon?: string;
 }) {
   return (
     <>
       <div id="home">
-        <StripeBar light={stripeLight} dark={stripeDark} />
+        {!hideStripes && <StripeBar light={stripeLight} dark={stripeDark} />}
 
         {/* Logo. pb here + the nav's own py keep the original 43px gap.
             Phones skip this block entirely — there the bar itself carries the

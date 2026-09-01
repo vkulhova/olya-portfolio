@@ -352,6 +352,13 @@ export default defineConfig({
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
           defineField({
+            name: "hideStripeBar",
+            type: "boolean",
+            title: "Hide the striped bar",
+            description:
+              "Takes the striped bar off the top of every page. Off keeps it. The header closes up on its own — nothing else moves.",
+          }),
+          defineField({
             name: "stripeColourLight",
             type: "string",
             title: "Stripe bar — light stripe",

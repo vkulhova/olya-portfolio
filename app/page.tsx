@@ -46,6 +46,7 @@ export default async function Home() {
             brand={brand}
             stripeLight={stripeLight(images.stripeColourLight)}
             stripeDark={stripeDark(images.stripeColourDark)}
+            hideStripes={images.hideStripeBar ?? false}
             ribbon={ribbonColour(images.ribbonColour)}
           />
 

@@ -42,6 +42,8 @@ export type SiteImages = {
   /** The two stripes in the bar at the top of the page. */
   stripeColourLight: string | null;
   stripeColourDark: string | null;
+  /** True hides the striped bar at the very top. Absent or false keeps it. */
+  hideStripeBar: boolean | null;
   /** The gold hearts in the ribbon under the nav. */
   ribbonColour: string | null;
   /** The wordmark: its lettering and the mint shape behind it. */
@@ -66,6 +68,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   socialIconColour: null,
   stripeColourLight: null,
   stripeColourDark: null,
+  hideStripeBar: null,
   ribbonColour: null,
   logoInk: null,
   logoBlob: null,
@@ -93,7 +96,7 @@ export async function getSiteImages(): Promise<SiteImages> {
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
       `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
-    stripeColourLight,\n    stripeColourDark,\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    ribbonColour,\n    logoInk,\n    logoBlob,
     "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
     "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
