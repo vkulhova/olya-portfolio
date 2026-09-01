@@ -116,7 +116,7 @@ export default function About({
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"
-                ukClassName="h-[50px] sm:h-[64px] w-auto min-w-0 shrink"
+                ukClassName="h-[50px] sm:h-[48px] w-auto min-w-0 shrink"
               />
             </div>
 

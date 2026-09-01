@@ -109,7 +109,7 @@ export default function Hero({
                    one and left the greeting looming over copy set at 14px.
                    At 56 the letters land just under the About phrase's and
                    the block sits level with the paragraph under it. */
-                ukClassName="mt-1.5 md:mt-2 h-[44px] md:h-[56px] w-auto max-w-full"
+                ukClassName="mt-1.5 md:mt-2 h-[44px] sm:h-[48px] w-auto max-w-full"
               />
 
               <LocalisedText
