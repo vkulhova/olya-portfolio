@@ -28,23 +28,25 @@ export default function About({
           phones that still left the photo further from the ribbon than the
           other two sections start, so there it is 32. */}
       <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10">
-        {/* Photo + text grid */}
-        {/* Between md and lg the photo takes a wider share: it is the taller
-            column there, and giving it room is what lets the copy stay beside
-            it at a readable size instead of stacking. From lg up the split is
-            the original 3:7. */}
-        <div
-          className="grid grid-cols-1 md:grid-cols-[4fr_6fr] lg:grid-cols-[3fr_7fr] gap-x-10 gap-y-16 md:gap-y-10 items-stretch mb-4 sm:mb-10"
-        >
+        {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
+            go once it outgrew the picture, so it piled up in its own narrow
+            half and hung far below the photo on middle-sized screens. The
+            picture is floated instead, so the copy sets beside it and then
+            carries on underneath at the full width of the section — the text
+            moves sideways as the window narrows rather than downwards.
 
-          {/* Photo column. The box carries the photo's own 3:4 ratio at every
-              width, so it is exactly the picture — nothing is cropped and no
-              letterboxing is left for the stars to float in. The copy beside
-              it is no longer sized to end level with the picture; below about
-              1100px it runs on past it. */}
+            Below md there is no float: the picture is a centred block with the
+            copy under it, exactly as before. */}
+        <div className="mb-4 sm:mb-10">
+
+          {/* The box carries the photo's own 3:4 ratio at every width, so it is
+              exactly the picture — nothing is cropped and no letterboxing is
+              left for the stars to float in. mb-16 on phones is the 64px the
+              grid's row gap used to give it; the salmon star hangs 36px below
+              the frame and needs the room. */}
           <div>
             <div
-              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[300px] mx-auto aspect-[3/4]"
+              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[300px] mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4]"
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
@@ -86,16 +88,19 @@ export default function About({
             </div>
           </div>
 
-          {/* Text column. It sets the row's height whenever the copy is
-              taller than the photo. */}
-          <div className="flex flex-col gap-5 pt-2">
+          {/* No column any more — the heading and the copy are ordinary blocks
+              in the flow beside the float. The heading is a flex box, which
+              keeps clear of the picture as a whole; the copy is a plain block,
+              which is the only kind whose lines wrap around a float and then
+              close up underneath it. */}
+          <div className="pt-2">
             {/* Heading. The olive star that used to sit beside it is gone —
                 the two gold and salmon ones on the photo are the section's
                 punctuation, and a third on the same screen was one mark too
                 many. Both languages lose it. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="flex items-center justify-center md:justify-start">
+            <div className="mb-5 flex items-center justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
@@ -106,12 +111,19 @@ export default function About({
               />
             </div>
 
-            <LocalisedText
-              en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
-              uk={text?.aboutUk ?? null}
-              className="body-copy font-outfit text-dark text-justify"
-            />
+            {/* space-y stands in for the flex gap the paragraphs used to get.
+                It is margin, not layout, so the block still wraps the float. */}
+            <div className="space-y-5">
+              <LocalisedText
+                en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
+                uk={text?.aboutUk ?? null}
+                className="body-copy font-outfit text-dark text-justify"
+              />
+            </div>
           </div>
+
+          {/* Closes the float so the section's height counts the picture. */}
+          <div className="clear-both" />
         </div>
 
       </div>
