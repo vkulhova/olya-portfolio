@@ -43,10 +43,19 @@ export default function About({
               exactly the picture — nothing is cropped and no letterboxing is
               left for the stars to float in. mb-16 on phones is the 64px the
               grid's row gap used to give it; the salmon star hangs 36px below
-              the frame and needs the room. */}
+              the frame and needs the room.
+
+              270px rather than 300 from md up. At 300 the picture stood 44px
+              taller than the copy at 1440px, which is the overhang the card
+              asks about. No single number closes that gap everywhere: the copy
+              gets shorter as the window widens while the picture does not, so
+              1440px wants 250px and 1280px wants 290px. 270 splits them — 31px
+              of picture below the copy at 1440, 23px of copy below the picture
+              at 1280 — and any exact fit would go stale the moment the text is
+              edited in Studio. */}
           <div>
             <div
-              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[300px] mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4]"
+              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[270px] mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4]"
             >
               {/* Gold star — top-left, overlapping photo corner. The lg offsets
                   sit 10px further out because the old box was that much wider
