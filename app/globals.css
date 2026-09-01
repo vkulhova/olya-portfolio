@@ -144,9 +144,13 @@ html[data-lang="UA"] .form-label {
   font-weight: 450;
 }
 
-/* The boxes the visitor types into. Same choice as the labels above them —
-   a form whose caption and answer are set in two different faces reads as a
-   mistake — and the same fallback chain when Studio has nothing. */
+/* Everything inside the contact form: the captions, the boxes the visitor
+   types into, the send button and the error line under it. They share one
+   setting on purpose — a form whose caption, answer and button are set in
+   three different faces reads as a mistake rather than a decision. The button
+   used to answer to the nav instead, which is what made the form's own setting
+   look as though it did nothing. Same fallback chain when Studio has nothing:
+   the form's choice, then the nav's, then Futura PT. */
 .form-field {
   font-family: var(--font-form, var(--font-label, 'Futura PT', 'Futura', sans-serif));
 }

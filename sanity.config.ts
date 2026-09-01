@@ -177,9 +177,9 @@ export default defineConfig({
           {
             name: "labelFont",
             type: "string",
-            title: "Nav and the send button",
+            title: "Nav",
             description:
-              "The spaced capitals in the menu and on the send button. Empty keeps Futura PT. The contact form has its own setting below.",
+              "The spaced capitals in the menu. Empty keeps Futura PT. The contact form, including its button, has its own setting below.",
             options: { list: fontOptions("As it ships (Futura PT)") },
           },
           {
@@ -187,7 +187,7 @@ export default defineConfig({
             type: "string",
             title: "Contact form",
             description:
-              "The field captions («Ваше ім\u02BCя», «Email»…) and the text visitors type into the boxes. Empty follows the nav choice above, which is what the form did before it had a setting of its own.",
+              "Everything in the contact form: the field captions, the text visitors type into the boxes, and the «Відправити» button. Empty follows the nav choice above.",
             options: { list: fontOptions("Same as the nav") },
           },
         ],

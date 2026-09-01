@@ -294,14 +294,14 @@ export default function Contact({
               type="submit"
               form="contact-form"
               disabled={status === "sending" || status === "sent"}
-              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-futura font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
+              className="btn-send form-field px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
               style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
             >
               {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
             </button>
 
             {status === "error" && (
-              <p className="mt-3 text-red-500 font-futura text-xs tracking-wider text-center">
+              <p className="mt-3 text-red-500 form-field text-xs tracking-wider text-center">
                 {copy.error}
               </p>
             )}
