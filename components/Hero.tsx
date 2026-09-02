@@ -38,7 +38,7 @@ export default function Hero({
           small screens. An uploaded backdrop covers the band; the mustard stays
           underneath so the area is never bare while the image loads. */}
       <div
-        className="relative w-full py-16 md:py-20 flex items-center justify-center"
+        className="relative w-full py-16 md:py-24 flex items-center justify-center"
         style={{
           backgroundColor: "#D5BA54",
           ...(backdrop

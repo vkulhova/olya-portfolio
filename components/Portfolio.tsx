@@ -12,7 +12,7 @@ export default async function Portfolio() {
   return (
     /* pb-4 rather than pb-10: About takes the other 24px as breathing room
        above its dot trim, so the seam is unchanged in total */
-    <section id="portfolio" className="w-full bg-white pt-20 pb-4 scroll-mt-[78px]">
+    <section id="portfolio" className="w-full bg-white pt-20 sm:pt-24 pb-4 scroll-mt-[78px]">
       <MasonryGrid items={works} />
     </section>
   );

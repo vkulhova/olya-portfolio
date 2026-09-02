@@ -52,7 +52,7 @@ export default function SiteHeader({
           spaced it slightly differently, so switching between them made it hop.
           pt here + the nav's py keep the original 40px gap; pb-8 the white gap
           before whatever the section opens with. */}
-      <div className="bg-white pt-[20px] pb-8">
+      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
         <DecorativeDots colour={ribbon} />
       </div>
     </>
