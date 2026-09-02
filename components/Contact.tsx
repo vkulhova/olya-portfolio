@@ -186,13 +186,13 @@ export default function Contact({
           carry a drawing there, and 56px was not enough of it to see. Phones
           keep 56 — the band is the whole screen there. */}
       {/* relative so the form stays above the phone backdrop behind it. */}
-      <div className="relative z-10 flex flex-col items-center py-14 sm:pt-28 px-6">
+      <div className="relative z-10 flex flex-col items-center py-14 sm:pt-28 sm:pb-28 px-6">
         {/* Scalloped card */}
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-7 sm:px-12 pt-5 pb-6 sm:py-12">
+        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-7 sm:px-12 pt-5 pb-6 sm:pt-12 sm:pb-16">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           {/* Centred on phones, where the phrase is the only thing on its line
@@ -289,7 +289,7 @@ export default function Contact({
               longer has to fit the English one's box. The pl adds the trailing
               letter-space tracking leaves after the last glyph on top of that
               padding, which otherwise pulls the centred label visibly left. */}
-          <div className="mt-8 flex flex-col items-center">
+          <div className="mt-8 sm:mt-16 flex flex-col items-center">
             <button
               type="submit"
               form="contact-form"
