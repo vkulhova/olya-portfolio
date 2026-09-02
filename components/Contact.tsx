@@ -22,8 +22,8 @@ const DEFAULT_CONTACT_UK = `Шукаєте ілюстратора для сво�
  *  Studio — it is labels, not copy, so it is translated here. */
 const COPY = {
   EN: {
-    name: "Your name",
-    surname: "Your surname",
+    name: "Name",
+    surname: "Surname",
     email: "Email",
     message: "Write your letter here...",
     send: "Post it!",
@@ -32,8 +32,8 @@ const COPY = {
     error: "Something went wrong. Please try again.",
   },
   UA: {
-    name: "Ваше імʼя",
-    surname: "Ваше прізвище",
+    name: "Імʼя",
+    surname: "Прізвище",
     email: "Email",
     message: "Напишіть тут свій лист",
     send: "Відправити",
@@ -217,29 +217,30 @@ export default function Contact({
           <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-6">
             {/* The mock sets the two name fields further apart than the 16px
                 they had; phones keep the tighter gap, there is no room there. */}
-            <div className="grid grid-cols-2 gap-4 sm:gap-10">
-              <div className="flex flex-col gap-2">
-                <label className="form-label text-[13px] sm:text-base text-dark">
-                  {copy.name}
-                </label>
-                <input
-                  type="text"
-                  name="firstName"
-                  required
-                  className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
-                />
-              </div>
-              <div className="flex flex-col gap-2">
-                <label className="form-label text-[13px] sm:text-base text-dark">
-                  {copy.surname}
-                </label>
-                <input
-                  type="text"
-                  name="lastName"
-                  required
-                  className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
-                />
-              </div>
+            {/* One grid rather than two stacked cells side by side. Both
+                captions share the first row and both boxes the second, so a
+                caption that wraps makes the whole row taller instead of
+                pushing its own box below its neighbour's — which is what put
+                the surname field out of line on phones. */}
+            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-10 gap-y-2">
+              <label className="form-label text-[13px] sm:text-base text-dark">
+                {copy.name}
+              </label>
+              <label className="form-label text-[13px] sm:text-base text-dark">
+                {copy.surname}
+              </label>
+              <input
+                type="text"
+                name="firstName"
+                required
+                className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+              />
+              <input
+                type="text"
+                name="lastName"
+                required
+                className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+              />
             </div>
 
             <div className="flex flex-col gap-2">
