@@ -74,9 +74,14 @@ export default function About({
                 /* Phones move it 8px right and 3px up from where it was, which
                    is what the outline drawn over the screenshot measures to:
                    the star sits further onto the photo's corner rather than
-                   mostly on the white beside it. sm: puts the old -40px back so
-                   tablets and desktop are untouched. */
-                className="absolute top-[11px] -left-8 w-[72px] h-[72px] sm:-top-10 sm:-left-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
+                   mostly on the white beside it.
+
+                   From sm up it used to hang 40px above the picture; the circle
+                   drawn on the card puts it 69px lower, level with the top
+                   corner rather than over the white above it. 13px down from
+                   the picture's top edge is where that circle's centre lands.
+                   The horizontal offset already matched and is untouched. */
+                className="absolute top-[11px] -left-8 w-[72px] h-[72px] sm:top-[13px] sm:-left-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
               />
               {/* Photo */}
               <Image
