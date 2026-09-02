@@ -33,7 +33,7 @@ body {
    layout does not shift when the language is switched. The labels and the nav
    keep Futura PT, which does carry Cyrillic. */
 html[data-lang="UA"] .font-outfit {
-  font-family: var(--font-body, 'Nunito Sans', sans-serif);
+  font-family: var(--font-body-uk, var(--font-body, 'Nunito Sans', sans-serif));
 }
 
 /* The logo is inlined so Studio can set its two colours, which means the
@@ -152,8 +152,31 @@ html[data-lang="UA"] .font-outfit {
    Regular beside them; 450 is the Medium the design asks for, and the two
    languages now sit at the same weight. */
 html[data-lang="UA"] .form-label {
-  font-family: var(--font-form, var(--font-label, 'Futura PT', 'Futura', sans-serif));
+  font-family: var(
+    --font-form-uk,
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif)))
+  );
   font-weight: 450;
+}
+
+/* Fields, button and error line, Ukrainian side. Same chain as the captions
+   above so the whole form stays in one face. */
+html[data-lang="UA"] .form-field {
+  font-family: var(
+    --font-form-uk,
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif)))
+  );
+}
+
+/* Nav and the language switch, Ukrainian side. */
+html[data-lang="UA"] .font-futura {
+  font-family: var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif));
+}
+
+/* The footer signature follows the body face, so it follows it per language
+   too. */
+html[data-lang="UA"] .font-signature {
+  font-family: var(--font-body-uk, var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif));
 }
 
 /* Everything inside the contact form: the captions, the boxes the visitor

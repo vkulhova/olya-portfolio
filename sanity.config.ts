@@ -182,6 +182,30 @@ export default defineConfig({
               "The spaced capitals in the menu. Empty keeps Futura PT. The contact form, including its button, has its own setting below.",
             options: { list: fontOptions("As it ships (Futura PT)") },
           },
+          {
+            name: "bodyFontUk",
+            type: "string",
+            title: "Body text — Ukrainian",
+            description:
+              "Used only on the Ukrainian side. Empty means the Ukrainian text uses the same face as the English above.",
+            options: { list: fontOptions("Same as English") },
+          },
+          {
+            name: "labelFontUk",
+            type: "string",
+            title: "Nav — Ukrainian",
+            description:
+              "Used only on the Ukrainian side. Empty means the same face as the English above.",
+            options: { list: fontOptions("Same as English") },
+          },
+          {
+            name: "formFontUk",
+            type: "string",
+            title: "Contact form — Ukrainian",
+            description:
+              "Used only on the Ukrainian side. Empty means the same face as the English above.",
+            options: { list: fontOptions("Same as English") },
+          },
           defineField({
             name: "bodySize",
             type: "number",

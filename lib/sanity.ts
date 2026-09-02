@@ -260,6 +260,12 @@ export type SiteFonts = {
    *  Empty follows labelFont, which is how the form behaved before this
    *  existed. */
   formFont: string | null;
+  /** Optional Ukrainian counterparts. Each falls back to the field above it,
+   *  so leaving them empty keeps one face for both languages — which is how
+   *  the site behaved before these existed. */
+  bodyFontUk: string | null;
+  labelFontUk: string | null;
+  formFontUk: string | null;
   /** Paragraph size in px. Empty keeps the 16 the site is drawn at. Faces set
    *  at the same size do not read at the same size — x-heights differ — so the
    *  size follows the face rather than being fixed to it. */
@@ -270,13 +276,20 @@ const EMPTY_SITE_FONTS: SiteFonts = {
   bodyFont: null,
   labelFont: null,
   formFont: null,
+  bodyFontUk: null,
+  labelFontUk: null,
+  formFontUk: null,
   bodySize: null,
 };
 
 export async function getSiteFonts(): Promise<SiteFonts> {
   try {
     const result = await sanityClient.fetch<SiteFonts | null>(
-      `*[_id == "siteFonts"][0]{ bodyFont, labelFont, formFont, bodySize }`,
+      `*[_id == "siteFonts"][0]{
+         bodyFont, labelFont, formFont,
+         bodyFontUk, labelFontUk, formFontUk,
+         bodySize
+       }`,
       {},
       { next: { revalidate: 60 } }
     );

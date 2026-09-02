@@ -33,12 +33,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const body = resolveFont(fonts.bodyFont);
   const label = resolveFont(fonts.labelFont);
   const form = resolveFont(fonts.formFont);
+  const bodyUk = resolveFont(fonts.bodyFontUk);
+  const labelUk = resolveFont(fonts.labelFontUk);
+  const formUk = resolveFont(fonts.formFontUk);
   const bodySize = resolveBodySize(fonts.bodySize);
 
   // One stylesheet for whichever of the three were chosen. Both files are already
   // imported for the shipped faces, so nothing extra is fetched until she
   // actually picks something.
-  const families = [body?.google, label?.google, form?.google].filter(
+  const families = [
+    body?.google, label?.google, form?.google,
+    bodyUk?.google, labelUk?.google, formUk?.google,
+  ].filter(
     (f, i, all): f is string => Boolean(f) && all.indexOf(f) === i
   );
   const googleHref = families.length
@@ -49,6 +55,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     ...(body ? { "--font-body": body.css } : null),
     ...(label ? { "--font-label": label.css } : null),
     ...(form ? { "--font-form": form.css } : null),
+    ...(bodyUk ? { "--font-body-uk": bodyUk.css } : null),
+    ...(labelUk ? { "--font-label-uk": labelUk.css } : null),
+    ...(formUk ? { "--font-form-uk": formUk.css } : null),
     ...(bodySize ? { "--body-size": bodySize } : null),
   } as React.CSSProperties;
 
