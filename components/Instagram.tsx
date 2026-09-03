@@ -42,7 +42,9 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
             /* noreferrer as well as noopener: the post should not learn which
                page sent the visitor. */
             rel="noopener noreferrer"
-            className="block overflow-hidden"
+            /* group so the two hover marks below can answer to the link
+               rather than to themselves. */
+            className="group relative block overflow-hidden"
           >
             <Image
               src={post.image}
@@ -51,6 +53,23 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
               height={1200}
               sizes="(max-width: 1280px) 30vw, 350px"
               className="w-full h-auto object-cover"
+            />
+
+            {/* Hover: the picture pales under a half-opaque white, and a heart
+                appears in the corner. Both are decoration — aria-hidden, and
+                pointer-events-none so neither can swallow the click. Motion is
+                dropped for anyone who has asked their system for less of it;
+                the marks still appear, just without the fade. */}
+            <span
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-0 bg-white opacity-0 transition-opacity duration-300 group-hover:opacity-50 motion-reduce:transition-none"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/svg/heart-white.svg"
+              alt=""
+              aria-hidden="true"
+              className="pointer-events-none absolute bottom-6 left-8 w-9 h-9 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:transition-none"
             />
           </a>
         ))}
