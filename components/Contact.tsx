@@ -192,14 +192,14 @@ export default function Contact({
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[62%] bg-white rounded-3xl px-7 sm:px-12 pt-8 pb-10 sm:pt-12 sm:pb-16">
+        <div className="flex flex-col w-full sm:w-[51%] bg-white rounded-[6px] px-7 sm:px-12 pt-8 pb-10 sm:pt-12 sm:pb-16">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           {/* Centred on phones, where the phrase is the only thing on its line
               and sitting hard left left it looking dropped rather than placed.
               From sm up it stays left, which is where the desktop reference
               puts it. The gap and nowrap went with the star. */}
-          <div className="mb-5 sm:mb-8 flex items-center justify-center sm:justify-start">
+          <div className="mb-5 sm:mb-8 flex items-center justify-start sm:justify-center">
             {/* The salmon star that used to sit here has moved up beside
                 «Colaboration». Two of the same star on one screen read as a
                 repeat rather than a pair, and the reference puts it at the
@@ -222,7 +222,7 @@ export default function Contact({
                 caption that wraps makes the whole row taller instead of
                 pushing its own box below its neighbour's — which is what put
                 the surname field out of line on phones. */}
-            <div className="grid grid-cols-2 gap-x-4 sm:gap-x-10 gap-y-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-10 gap-y-2">
               <label className="form-label text-[13px] sm:text-base text-dark">
                 {copy.name}
               </label>
@@ -233,13 +233,13 @@ export default function Contact({
                 type="text"
                 name="firstName"
                 required
-                className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
               />
               <input
                 type="text"
                 name="lastName"
                 required
-                className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
               />
             </div>
 
@@ -251,7 +251,7 @@ export default function Contact({
                 type="email"
                 name="email"
                 required
-                className="border border-gold rounded-lg px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
               />
             </div>
 
@@ -262,7 +262,7 @@ export default function Contact({
               <textarea
                 name="message"
                 required
-                className="border border-gold rounded-lg px-4 py-3 h-[84px] form-field text-sm tracking-wider outline-none focus:border-gold/80 bg-white resize-none"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-3 h-[84px] form-field text-sm tracking-wider outline-none focus:border-gold bg-white resize-none"
               />
             </div>
 
@@ -295,7 +295,7 @@ export default function Contact({
               type="submit"
               form="contact-form"
               disabled={status === "sending" || status === "sent"}
-              className="btn-send form-field px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-full font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
+              className="btn-send form-field px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
               style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
             >
               {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
