@@ -137,7 +137,7 @@ export default function Contact({
           <LocalisedText
             en={text?.contactEn?.trim() || DEFAULT_CONTACT_EN}
             uk={text?.contactUk?.trim() || DEFAULT_CONTACT_UK}
-            className="body-copy font-outfit text-dark"
+            className="body-copy font-outfit text-dark text-justify"
           />
         </div>
 
@@ -223,46 +223,46 @@ export default function Contact({
                 pushing its own box below its neighbour's — which is what put
                 the surname field out of line on phones. */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-10 gap-y-2">
-              <label className="form-label text-[13px] sm:text-base text-dark">
+              <label className="form-label text-dark">
                 {copy.name}
               </label>
-              <label className="form-label text-[13px] sm:text-base text-dark">
+              <label className="form-label text-dark">
                 {copy.surname}
               </label>
               <input
                 type="text"
                 name="firstName"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
               />
               <input
                 type="text"
                 name="lastName"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="form-label text-[13px] sm:text-base text-dark">
+              <label className="form-label text-dark">
                 {copy.email}
               </label>
               <input
                 type="email"
                 name="email"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field text-sm tracking-wider outline-none focus:border-gold bg-white"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
               />
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="form-label text-[13px] sm:text-base text-dark">
+              <label className="form-label text-dark">
                 {copy.message}
               </label>
               <textarea
                 name="message"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-3 h-[84px] form-field text-sm tracking-wider outline-none focus:border-gold bg-white resize-none"
+                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-3 h-[84px] form-field outline-none focus:border-gold bg-white resize-none"
               />
             </div>
 
@@ -295,7 +295,7 @@ export default function Contact({
               type="submit"
               form="contact-form"
               disabled={status === "sending" || status === "sent"}
-              className="btn-send form-field px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-medium text-base tracking-[0.2em] uppercase transition-colors disabled:opacity-60"
+              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-chrome font-bold text-[18px] tracking-[4px] uppercase transition-colors disabled:opacity-60"
               style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
             >
               {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}

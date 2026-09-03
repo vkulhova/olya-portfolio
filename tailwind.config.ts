@@ -14,7 +14,6 @@ const config: Config = {
         beige: "#F5EDE0",
       },
       fontFamily: {
-        futura: ["Futura PT", "Futura", "sans-serif"],
         outfit: ["Outfit", "sans-serif"],
       },
       letterSpacing: {

@@ -1,5 +1,4 @@
-@import url('https://fonts.cdnfonts.com/css/futura-pt');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Nunito+Sans:wght@300;400;500&family=Outfit:wght@300;400;500&family=Source+Serif+4:ital,wght@1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Nunito+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -17,7 +16,7 @@ html {
    chosen there; when it is not, the variable is undefined and the fallback —
    exactly what the site used before any of this existed — is what applies. */
 body {
-  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
+  font-family: var(--font-label, 'Outfit', sans-serif);
   overflow-x: hidden;
 }
 
@@ -31,7 +30,7 @@ body {
    sans the device happened to have. Nunito Sans stands in: measured against
    Outfit it matches its line width to 1% and its x-height to 1%, so the
    layout does not shift when the language is switched. The labels and the nav
-   keep Futura PT, which does carry Cyrillic. */
+   keep the same substitution. */
 html[data-lang="UA"] .font-outfit {
   font-family: var(--font-body-uk, var(--font-body, 'Nunito Sans', sans-serif));
 }
@@ -138,42 +137,42 @@ html[data-lang="UA"] .font-outfit {
    renders the signature it was designed with. */
 .font-signature {
   font-family: var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif);
+  font-size: 18px;
+  letter-spacing: 1px;
 }
 
-/* The rest of the site's chrome — nav, the language switch, the form fields
-   and the send button. These carried the font-futura utility, which writes the
+/* The rest of the site's chrome — the nav, the language switch and the send
+   button. The class used to be called font-futura, after a face the site no
+   longer uses. These carried the font-chrome utility, which writes the
    family out as a literal, so no choice made in Studio could ever reach them:
    the nav and the labels beside them would change while the field the visitor
-   types into stayed Futura. Same variable, same fallback, so with Studio empty
-   this renders exactly as it did before. */
-.font-futura {
-  font-family: var(--font-label, 'Futura PT', 'Futura', sans-serif);
+   types into stayed behind. Same variable, same fallback throughout. */
+.font-chrome {
+  font-family: var(--font-label, 'Outfit', sans-serif);
 }
 
-/* Form labels: Outfit Regular in English, Futura Medium in Ukrainian, both
-   set 4px apart. Written here rather than in classes because the face has to
-   follow the language, the same way the body copy does above.
+/* Form captions: Outfit Medium at 18px, 4px apart, per the type spec.
+   Written here rather than in classes because the face has to follow the
+   language, the same way the body copy does above.
 
    --font-form is the contact form's own choice in Studio. When it is unset the
    nested fallback hands over to --font-label, so the form keeps following the
    nav exactly as it did before the form got a setting of its own. */
 .form-label {
   font-family: var(--font-form, var(--font-label, 'Outfit', sans-serif));
-  font-weight: 400;
+  font-size: 18px;
+  font-weight: 500;
   letter-spacing: 4px;
 }
 
-/* 450, not 500. The CDN that serves this face does not use the usual weight
-   numbers: 450 is Futura Cyrillic Medium and 500 is Demi, a step heavier. At
-   500 the Ukrainian labels came out visibly bolder than the English Outfit
-   Regular beside them; 450 is the Medium the design asks for, and the two
-   languages now sit at the same weight. */
+/* Same weight as the English side now — both are Medium. The old 450 was a
+   quirk of the CDN that used to serve Futura PT, which is gone. */
 html[data-lang="UA"] .form-label {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif)))
   );
-  font-weight: 450;
+  font-weight: 500;
 }
 
 /* Fields, button and error line, Ukrainian side. Same chain as the captions
@@ -181,13 +180,13 @@ html[data-lang="UA"] .form-label {
 html[data-lang="UA"] .form-field {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif)))
   );
 }
 
 /* Nav and the language switch, Ukrainian side. */
-html[data-lang="UA"] .font-futura {
-  font-family: var(--font-label-uk, var(--font-label, 'Futura PT', 'Futura', sans-serif));
+html[data-lang="UA"] .font-chrome {
+  font-family: var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif));
 }
 
 /* The footer signature follows the body face, so it follows it per language
@@ -202,9 +201,12 @@ html[data-lang="UA"] .font-signature {
    three different faces reads as a mistake rather than a decision. The button
    used to answer to the nav instead, which is what made the form's own setting
    look as though it did nothing. Same fallback chain when Studio has nothing:
-   the form's choice, then the nav's, then Futura PT. */
+   the form's choice, then the nav's, then Outfit. */
 .form-field {
-  font-family: var(--font-form, var(--font-label, 'Futura PT', 'Futura', sans-serif));
+  font-family: var(--font-form, var(--font-label, 'Outfit', sans-serif));
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 1px;
 }
 
 /* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit
@@ -237,11 +239,12 @@ html[data-lang="UA"] .font-signature {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* 16px is what the site is drawn at; Studio may override it because the same
-     size does not read the same in every face — x-heights differ enough that a
-     face can look small at 16 and large at 16. */
-  font-size: var(--body-size, 16px);
+  /* 18px, Light, 1px apart — the type spec. Studio may still override the size,
+     because the same number does not read the same in every face: x-heights
+     differ enough that a face can look small at 18 and large at 18. */
+  font-size: var(--body-size, 18px);
   font-weight: 300;
+  letter-spacing: 1px;
   line-height: 1.7;
 }
 
