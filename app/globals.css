@@ -114,6 +114,23 @@ html[data-lang="UA"] .font-outfit {
   color: var(--accent, #BD9E30);
 }
 
+/* The band behind the About card. It exists only from sm up — the phone
+   design puts the photo and the copy straight on the page — and an inline
+   style cannot carry a media query, so Studio's colour and picture arrive as
+   variables and this rule decides where they apply. */
+.about-band {
+  background-color: transparent;
+}
+
+@media (min-width: 640px) {
+  .about-band {
+    background-color: var(--about-band, #EDE0D8);
+    background-image: var(--about-band-image, none);
+    background-size: cover;
+    background-position: center;
+  }
+}
+
 /* The footer signature. It was the one piece of running text on the site that
    no Studio setting could reach — set in Source Serif italic straight from a
    Tailwind class, so choosing a body face left it behind. It now follows the

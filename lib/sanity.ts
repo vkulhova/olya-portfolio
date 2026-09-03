@@ -28,6 +28,7 @@ export type SiteImages = {
   avatar: SiteImage;
   aboutPhoto: SiteImage;
   aboutIllustration: SiteImage;
+  aboutBackground: SiteImage;
   contactImage: SiteImage;
   heroBackground: SiteImage;
   heroBackgroundMobile: SiteImage;
@@ -46,6 +47,8 @@ export type SiteImages = {
   hideStripeBar: boolean | null;
   /** The colour of the section you are on and the language you are in. */
   accentColour: string | null;
+  /** The band behind the About card on desktop. */
+  aboutBandColour: string | null;
   /** The gold hearts in the ribbon under the nav. */
   ribbonColour: string | null;
   /** The wordmark: its lettering and the mint shape behind it. */
@@ -60,6 +63,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   avatar: null,
   aboutPhoto: null,
   aboutIllustration: null,
+  aboutBackground: null,
   contactImage: null,
   heroBackground: null,
   heroBackgroundMobile: null,
@@ -72,6 +76,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   stripeColourDark: null,
   hideStripeBar: null,
   accentColour: null,
+  aboutBandColour: null,
   ribbonColour: null,
   logoInk: null,
   logoBlob: null,
@@ -83,6 +88,7 @@ const IMAGE_FIELDS = [
   "avatar",
   "aboutPhoto",
   "aboutIllustration",
+  "aboutBackground",
   "contactImage",
   "heroBackground",
   "heroBackgroundMobile",
@@ -99,7 +105,7 @@ export async function getSiteImages(): Promise<SiteImages> {
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
       `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
-    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    aboutBandColour,\n    ribbonColour,\n    logoInk,\n    logoBlob,
     "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
     "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
@@ -117,6 +123,8 @@ export const FOOTER_COLOUR = "#F4F2E3";
 export const BUTTON_COLOUR = "#FF917F";
 /** The gold the nav and the language switch mark the current one with. */
 export const ACCENT_COLOUR = "#BD9E30";
+/** The band the About card sits on, from the new design. */
+export const ABOUT_BAND_COLOUR = "#EDE0D8";
 export const SOCIAL_CIRCLE_COLOUR = "#3C1A05";
 export const STRIPE_LIGHT = "#FFD8CF";
 export const STRIPE_DARK = "#FF917F";
@@ -142,6 +150,10 @@ export function buttonColour(value?: string | null): string {
 
 export function accentColour(value?: string | null): string {
   return hexColour(value, ACCENT_COLOUR);
+}
+
+export function aboutBandColour(value?: string | null): string {
+  return hexColour(value, ABOUT_BAND_COLOUR);
 }
 
 export function socialCircleColour(value?: string | null): string {

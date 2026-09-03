@@ -375,6 +375,25 @@ export default defineConfig({
           },
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
+          {
+            name: "aboutBackground",
+            type: "image",
+            title: "Background behind the About card",
+            description:
+              "Desktop only. Empty leaves the plain colour below. Phones never show it — that design puts the photo straight on the page.",
+            options: { hotspot: true },
+          },
+          defineField({
+            name: "aboutBandColour",
+            type: "string",
+            title: "About band colour",
+            description:
+              "The band the About card sits on, desktop only. A hex code such as EDE0D8. Empty keeps the shipped colour.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
           defineField({
             name: "accentColour",
             type: "string",

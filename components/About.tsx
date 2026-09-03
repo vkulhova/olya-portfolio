@@ -15,19 +15,38 @@ export default function About({
   illustration,
   text,
   headings,
+  bandColour,
+  bandImage,
 }: {
   photo: SiteImage;
   illustration: SiteImage;
   text?: SiteText;
   headings?: SiteHeadings;
+  bandColour?: string;
+  bandImage?: string | null;
 }) {
   return (
     <section id="about" className="w-full bg-white scroll-mt-[78px]">
+      {/* Coloured band, desktop only. Studio can put a picture here instead of
+          the colour; both arrive as variables because .about-band has to hold
+          them behind a media query. */}
+      <div
+        className="about-band sm:py-24"
+        style={
+          {
+            ...(bandColour ? { "--about-band": bandColour } : null),
+            ...(bandImage ? { "--about-band-image": `url(${bandImage})` } : null),
+          } as React.CSSProperties
+        }
+      >
       {/* The dot ribbon above lives in SiteHeader now, and brings 32px of white
           with it — hence 72 here rather than the 104 this used to carry. On
           phones that still left the photo further from the ribbon than the
           other two sections start, so there it is 32. */}
-      <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10">
+      <div className="w-[78%] mx-auto pt-8 sm:pt-0 pb-10 sm:pb-0">
+        {/* White card, desktop only — 6px corners, as the design asks. On
+            phones the photo and the copy sit straight on the page. */}
+        <div className="sm:bg-white sm:rounded-[6px] sm:px-14 sm:py-12">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -57,32 +76,6 @@ export default function About({
             <div
               className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[270px] mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4]"
             >
-              {/* Gold star — top-left, overlapping photo corner. The lg offsets
-                  sit 10px further out because the old box was that much wider
-                  than the picture; desktop is meant to look exactly as before.
-                  On phones the size alone keeps it off the hat: at 72px in the
-                  same -40px position it reaches 32px onto the picture, all of
-                  it sky. Moving it out as well left the star's body short of
-                  the photo with only a ray tip bridging the white between.
-                  Still well clear of the salmon star's 59px, which is meant to
-                  stay the smaller of the two. */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/svg/star-gold.svg"
-                alt=""
-                aria-hidden="true"
-                /* Phones move it 8px right and 3px up from where it was, which
-                   is what the outline drawn over the screenshot measures to:
-                   the star sits further onto the photo's corner rather than
-                   mostly on the white beside it.
-
-                   From sm up it used to hang 40px above the picture; the circle
-                   drawn on the card puts it 69px lower, level with the top
-                   corner rather than over the white above it. 13px down from
-                   the picture's top edge is where that circle's centre lands.
-                   The horizontal offset already matched and is untouched. */
-                className="absolute top-[11px] -left-8 w-[72px] h-[72px] sm:top-[13px] sm:-left-10 sm:w-[85px] sm:h-[85px] md:-left-[50px] z-10 pointer-events-none"
-              />
               {/* Photo */}
               <Image
                 src={photo?.url ?? "/images/photo-olya.jpg"}
@@ -90,14 +83,6 @@ export default function About({
                 fill
                 sizes="(max-width: 768px) 272px, 300px"
                 className="object-cover object-top"
-              />
-              {/* Salmon star — bottom-left, overlapping photo corner */}
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/svg/star-salmon.svg"
-                alt=""
-                aria-hidden="true"
-                className="absolute -bottom-9 left-4 md:left-[6px] w-[59px] h-[59px] z-10 pointer-events-none"
               />
             </div>
           </div>
@@ -108,13 +93,13 @@ export default function About({
               which is the only kind whose lines wrap around a float and then
               close up underneath it. */}
           <div className="pt-2">
-            {/* Heading. The olive star that used to sit beside it is gone —
-                the two gold and salmon ones on the photo are the section's
-                punctuation, and a third on the same screen was one mark too
-                many. Both languages lose it. */}
+            {/* Heading, with the olive star back beside it. The two on the
+                photo are gone, so this is the section's only mark now — which
+                is what the new design asks for, on phones as well as here.
+                nowrap keeps the pair on one line: the phrase shrinks first. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="mb-5 flex items-center justify-center md:justify-start">
+            <div className="mb-5 flex items-center gap-3 flex-nowrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
@@ -122,6 +107,13 @@ export default function About({
                 altUk="Кілька слів про мене"
                 className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"
                 ukClassName="h-[50px] sm:h-[48px] w-auto min-w-0 shrink"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/svg/star-olive.svg"
+                alt=""
+                aria-hidden="true"
+                className="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] shrink-0"
               />
             </div>
 
@@ -139,7 +131,9 @@ export default function About({
           {/* Closes the float so the section's height counts the picture. */}
           <div className="clear-both" />
         </div>
+        </div>
 
+      </div>
       </div>
 
       {/* Desk illustration — 60% page width, outside the narrow container */}
@@ -153,12 +147,11 @@ export default function About({
           resolve against this box's width — the same thing the image's own
           height follows — so the crop holds at every phone size. Wide screens
           keep the picture whole. */}
-      {/* pb-16 on phones, not the 6 it had. The negative bottom margin below
-          crops the drawing's blank band by very nearly the whole 24px that
-          padding gave, so the desk was finishing about 2px above the beige and
-          the two blocks touched. 64px here leaves roughly the 45 the mark on
-          the card asks for. Wide screens keep their 40. */}
-      <div className="w-full sm:w-[60%] mx-auto pb-16 sm:pb-10 overflow-hidden">
+      {/* Phones only now: from sm up the Instagram row stands in this spot,
+          which is what the new design puts there. The negative bottom margin
+          crops the drawing's blank band by very nearly the whole 24px the old
+          padding gave, so 64px here leaves roughly the 45 the card asks for. */}
+      <div className="sm:hidden w-full mx-auto pb-16 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={illustration?.url ?? "/images/illustration.png"}

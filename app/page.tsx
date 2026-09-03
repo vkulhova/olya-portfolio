@@ -4,6 +4,7 @@ import About from "@/components/About";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import SiteHeader from "@/components/SiteHeader";
+import Instagram from "@/components/Instagram";
 import BackToTop from "@/components/BackToTop";
 import { LanguageProvider } from "@/components/Language";
 import { ViewProvider, ViewSwitch } from "@/components/View";
@@ -14,7 +15,9 @@ import {
   logoBlob,
   logoInk,
   ribbonColour,
+  aboutBandColour,
   accentColour,
+  backdropUrl,
   stripeDark,
   stripeLight,
 } from "@/lib/sanity";
@@ -67,12 +70,17 @@ export default async function Home() {
               </>
             }
             about={
-              <About
-                photo={images.aboutPhoto}
-                illustration={images.aboutIllustration}
-                text={text}
-                headings={headings}
-              />
+              <>
+                <About
+                  photo={images.aboutPhoto}
+                  illustration={images.aboutIllustration}
+                  text={text}
+                  headings={headings}
+                  bandColour={aboutBandColour(images.aboutBandColour)}
+                  bandImage={backdropUrl(images.aboutBackground)}
+                />
+                <Instagram />
+              </>
             }
             contact={
               <Contact
