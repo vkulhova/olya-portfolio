@@ -10,7 +10,7 @@ const LINKS = ["portfolio", "about", "contact"] as const;
 /** Lower case: the links are uppercased by their own styling. */
 const LABELS = {
   EN: { portfolio: "portfolio", about: "about", contact: "contact" },
-  UA: { portfolio: "портфоліо", about: "знайомство", contact: "співпраця" },
+  UA: { portfolio: "портфоліо", about: "знайомство", contact: "контакти" },
 } as const;
 
 export default function Nav({ brand }: { brand: Brand }) {
