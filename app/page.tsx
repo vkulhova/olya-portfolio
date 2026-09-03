@@ -18,6 +18,7 @@ import {
   aboutBandColour,
   accentColour,
   backdropUrl,
+  instagramPosts,
   stripeDark,
   stripeLight,
 } from "@/lib/sanity";
@@ -79,7 +80,7 @@ export default async function Home() {
                   bandColour={aboutBandColour(images.aboutBandColour)}
                   bandImage={backdropUrl(images.aboutBackground)}
                 />
-                <Instagram />
+                <Instagram posts={instagramPosts(images.instagramPosts)} />
               </>
             }
             contact={

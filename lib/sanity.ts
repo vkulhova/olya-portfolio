@@ -49,6 +49,8 @@ export type SiteImages = {
   accentColour: string | null;
   /** The band behind the About card on desktop. */
   aboutBandColour: string | null;
+  /** The Instagram row. Empty keeps the three the site ships with. */
+  instagramPosts: { image: string | null; href: string | null }[] | null;
   /** The gold hearts in the ribbon under the nav. */
   ribbonColour: string | null;
   /** The wordmark: its lettering and the mint shape behind it. */
@@ -77,6 +79,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   hideStripeBar: null,
   accentColour: null,
   aboutBandColour: null,
+  instagramPosts: null,
   ribbonColour: null,
   logoInk: null,
   logoBlob: null,
@@ -105,7 +108,7 @@ export async function getSiteImages(): Promise<SiteImages> {
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
       `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
-    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    aboutBandColour,\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    aboutBandColour,\n    "instagramPosts": instagramPosts[]{ "image": image.asset->url, href },\n    ribbonColour,\n    logoInk,\n    logoBlob,
     "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
     "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
@@ -154,6 +157,19 @@ export function accentColour(value?: string | null): string {
 
 export function aboutBandColour(value?: string | null): string {
   return hexColour(value, ABOUT_BAND_COLOUR);
+}
+
+/** The Instagram row as the component wants it: only entries that carry both
+ *  a picture and a link, at most three. Undefined — not an empty array — when
+ *  Studio has nothing usable, so the component falls back to the shipped set
+ *  rather than rendering an empty row. */
+export function instagramPosts(
+  raw?: SiteImages["instagramPosts"]
+): { image: string; href: string }[] | undefined {
+  const posts = (raw ?? [])
+    .filter((p): p is { image: string; href: string } => Boolean(p?.image && p?.href))
+    .slice(0, 3);
+  return posts.length ? posts : undefined;
 }
 
 export function socialCircleColour(value?: string | null): string {

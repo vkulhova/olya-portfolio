@@ -375,6 +375,24 @@ export default defineConfig({
           },
           // defineField rather than a plain object: it is the only way to get
           // the Rule argument typed without writing the type out by hand.
+          defineField({
+            name: "instagramPosts",
+            type: "array",
+            title: "Instagram row",
+            description:
+              "The three pictures under About on desktop. Each needs both a picture and the link to its post — an entry missing either one is skipped. Empty keeps the three the site ships with.",
+            of: [
+              {
+                type: "object",
+                fields: [
+                  { name: "image", type: "image", title: "Picture", options: { hotspot: true } },
+                  { name: "href", type: "url", title: "Link to the post" },
+                ],
+                preview: { select: { media: "image", subtitle: "href" } },
+              },
+            ],
+            validation: (Rule) => Rule.max(3),
+          }),
           {
             name: "aboutBackground",
             type: "image",

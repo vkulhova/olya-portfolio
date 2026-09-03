@@ -23,6 +23,11 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
   const language = useLanguage();
   if (!posts.length) return null;
 
+  /* The design has three, and three is the maximum Studio accepts — but the
+     row is built from however many are actually there, so a set of two is a
+     row of two rather than two and a hole. */
+  const columns = { gridTemplateColumns: `repeat(${posts.length}, minmax(0, 1fr))` };
+
   return (
     /* Hidden below sm rather than absent from the markup: the phone layout is
        a separate design, not a narrower version of this one. */
@@ -33,7 +38,7 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
 
       {/* Three across, always. The pictures are all 4:5, so the row keeps its
           rhythm whatever is uploaded in their place. */}
-      <div className="w-[78%] mx-auto grid grid-cols-3 gap-8 lg:gap-14">
+      <div className="w-[78%] mx-auto grid gap-8 lg:gap-14" style={columns}>
         {posts.map((post, i) => (
           <a
             key={post.href || i}
