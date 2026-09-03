@@ -105,8 +105,8 @@ export default function About({
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
-                className="h-[34px] sm:h-[44px] w-auto min-w-0 shrink"
-                ukClassName="h-[50px] sm:h-[48px] w-auto min-w-0 shrink"
+                className="max-h-[34px] w-auto max-w-full h-auto min-w-0 shrink"
+                ukClassName="max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img

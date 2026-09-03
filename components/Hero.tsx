@@ -94,7 +94,7 @@ export default function Hero({
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
                 altEn="Hello and welcome"
                 altUk="Вітаю, рада що ви тут"
-                className="h-[34px] sm:h-[44px] w-auto max-w-full"
+                className="max-h-[38px] sm:max-h-[38px] w-auto max-w-full h-auto"
                 /* The Ukrainian lettering hangs from the top of its box and
                    spends the lower part on descenders, so at the same 32px
                    below the card's edge it reads as sitting higher than the
@@ -109,7 +109,7 @@ export default function Hero({
                    one and left the greeting looming over copy set at 14px.
                    At 56 the letters land just under the About phrase's and
                    the block sits level with the paragraph under it. */
-                ukClassName="mt-1.5 md:mt-2 h-[50px] sm:h-[48px] w-auto max-w-full"
+                ukClassName="mt-1.5 md:mt-2 max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto"
               />
 
               <LocalisedText
