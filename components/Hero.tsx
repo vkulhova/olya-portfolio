@@ -69,7 +69,7 @@ export default function Hero({
         <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
 
           {/* Hero card */}
-          <div className="w-full bg-white rounded-3xl">
+          <div className="w-full bg-white rounded-[6px]">
             <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
             <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
@@ -94,7 +94,7 @@ export default function Hero({
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
                 altEn="Hello and welcome"
                 altUk="Вітаю, рада що ви тут"
-                className="h-[37px] sm:h-[44px] w-auto max-w-full"
+                className="h-[34px] sm:h-[44px] w-auto max-w-full"
                 /* The Ukrainian lettering hangs from the top of its box and
                    spends the lower part on descenders, so at the same 32px
                    below the card's edge it reads as sitting higher than the
@@ -109,7 +109,7 @@ export default function Hero({
                    one and left the greeting looming over copy set at 14px.
                    At 56 the letters land just under the About phrase's and
                    the block sits level with the paragraph under it. */
-                ukClassName="mt-1.5 md:mt-2 h-[44px] sm:h-[48px] w-auto max-w-full"
+                ukClassName="mt-1.5 md:mt-2 h-[50px] sm:h-[48px] w-auto max-w-full"
               />
 
               <LocalisedText
