@@ -171,16 +171,16 @@ export default defineConfig({
             type: "string",
             title: "Body text",
             description:
-              "The paragraphs in the hero card and in About. Empty keeps Outfit in English and Nunito Sans in Ukrainian.",
-            options: { list: fontOptions("As it ships (Outfit / Nunito Sans)") },
+              "The paragraphs in the hero card and in About. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian.",
+            options: { list: fontOptions("As it ships (Plus Jakarta Sans / Onest)") },
           },
           {
             name: "labelFont",
             type: "string",
             title: "Nav",
             description:
-              "The spaced capitals in the menu. Empty keeps Futura PT. The contact form, including its button, has its own setting below.",
-            options: { list: fontOptions("As it ships (Futura PT)") },
+              "The spaced capitals in the menu. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian. The contact form, including its button, has its own setting below.",
+            options: { list: fontOptions("As it ships (Plus Jakarta Sans / Onest)") },
           },
           {
             name: "bodyFontUk",

@@ -109,17 +109,30 @@ export default function Contact({
     <div className="w-full bg-white">
       <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10 sm:pb-14 flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
-            olive one. nowrap keeps them on one line: the phrase shrinks first. */}
+            olive one. nowrap keeps them on one line: the phrase shrinks first.
+
+            The phrase is held to one height on both widths. It used to be told
+            to be 38px on phones and 48px from sm up, which is a 21% drop that
+            nothing asked for — every other drawing on the site is sized so its
+            letters come out the same on a phone as on a desktop, and this one
+            was left behind. At 48px it is 204px wide, and the row it sits in is
+            304px on a 390px screen, so the star still fits beside it. */}
         {/* gap-5 rather than the 3 About uses: this star sits beside the end
             of a word rather than a whole phrase, and at 3 its rays touched the
             final letter. */}
         <div className="flex items-center gap-4 sm:gap-5 flex-nowrap">
+          {/* The drawing reads «Colaboration» with one l. The alt text is what
+              a screen reader speaks and what a search engine indexes, so it
+              carries the correctly spelled word; redrawing the lettering
+              itself is Olya's to do, not ours. The Ukrainian page falls back
+              to the same English drawing until a Ukrainian one is uploaded in
+              Studio, which is why altUk already speaks Ukrainian. */}
           <LocalisedHeading
             en={headings?.collabEn ?? "/svg/colaboration.svg"}
             uk={headings?.collabUk ?? headings?.collabEn ?? "/svg/colaboration.svg"}
-            altEn="Colaboration"
+            altEn="Collaboration"
             altUk="Колаборація"
-            className="h-[38px] sm:h-[48px] w-auto min-w-0 shrink"
+            className="max-h-[48px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink"
           />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
@@ -199,7 +212,7 @@ export default function Contact({
               and sitting hard left left it looking dropped rather than placed.
               From sm up it stays left, which is where the desktop reference
               puts it. The gap and nowrap went with the star. */}
-          <div className="mb-5 sm:mb-8 flex items-center justify-start sm:justify-center">
+          <div className="mb-5 sm:mb-8 -mx-4 sm:mx-0 flex items-center justify-start sm:justify-center">
             {/* The salmon star that used to sit here has moved up beside
                 «Colaboration». Two of the same star on one screen read as a
                 repeat rather than a pair, and the reference puts it at the
@@ -217,30 +230,46 @@ export default function Contact({
           <form id="contact-form" onSubmit={handleSubmit} className="flex flex-col gap-6">
             {/* The mock sets the two name fields further apart than the 16px
                 they had; phones keep the tighter gap, there is no room there. */}
-            {/* One grid rather than two stacked cells side by side. Both
-                captions share the first row and both boxes the second, so a
-                caption that wraps makes the whole row taller instead of
-                pushing its own box below its neighbour's — which is what put
-                the surname field out of line on phones. */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 sm:gap-x-10 gap-y-2">
-              <label className="form-label text-dark">
-                {copy.name}
-              </label>
-              <label className="form-label text-dark">
-                {copy.surname}
-              </label>
-              <input
-                type="text"
-                name="firstName"
-                required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
-              />
-              <input
-                type="text"
-                name="lastName"
-                required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
-              />
+            {/* Side by side from sm up, stacked on phones — and the two
+                arrangements want opposite things from the markup.
+
+                Across two columns the captions must share the first row and
+                the boxes the second, so a caption that wraps makes the whole
+                row taller rather than pushing its own box below its
+                neighbour's. Stacked in one column that same arrangement reads
+                as «Name», «Surname», box, box — the surname caption sitting
+                over the name field, which is worse than any misalignment it
+                was meant to avoid.
+
+                So each field is its own cell, caption above box, which is the
+                right thing on a phone and matches every other field in the
+                form. From sm up the cells are display: contents, which takes
+                them out of the layout and hands their caption and box to the
+                grid directly; the placements below then put them back in the
+                two rows the desktop wants. */}
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-2">
+              <div className="flex flex-col gap-2 sm:contents">
+                <label className="form-label text-dark sm:col-start-1 sm:row-start-1">
+                  {copy.name}
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  required
+                  className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white sm:col-start-1 sm:row-start-2"
+                />
+              </div>
+              <div className="flex flex-col gap-2 sm:contents">
+                <label className="form-label text-dark sm:col-start-2 sm:row-start-1">
+                  {copy.surname}
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  required
+                  className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white sm:col-start-2 sm:row-start-2"
+                />
+              </div>
             </div>
 
             <div className="flex flex-col gap-2">
