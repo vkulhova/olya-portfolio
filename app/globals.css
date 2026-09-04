@@ -49,7 +49,7 @@
 html {
   scroll-behavior: smooth;
   /* Firefox. Inherited, so nested scrollers (the message field) match too. */
-  scrollbar-color: #3C1A05 #FFFFFF;
+  scrollbar-color: #BCB9A2 transparent;
   scrollbar-width: thin;
 }
 
@@ -220,25 +220,31 @@ body {
   letter-spacing: 0;
 }
 
-/* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit
-   of text on the page. WebKit ignores scrollbar-color, so it needs its own
-   rules. */
+/* The scrollbar, page and message field alike. It used to be 10px of the
+   site's darkest brown on white, which read as a bar rather than a hint —
+   card #59 asks for something small in BCB9A2, the same colour the field
+   rules are drawn in, so the two agree.
+
+   The track is transparent rather than white: the message field sits on the
+   card now, with no fill of its own, and a white track would have drawn a
+   stripe down it. WebKit ignores scrollbar-color, so it needs its own rules
+   alongside the Firefox ones above. */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #FFFFFF;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #3C1A05;
+  background: #BCB9A2;
   border-radius: 999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #57280C;
+  background: #A6A288;
 }
 
 /* The paragraph copy in Hero, About and Contact. One rule for all three: they
