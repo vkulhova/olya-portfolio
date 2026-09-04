@@ -77,9 +77,22 @@ export default function Hero({
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-[6px]">
-            <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+            {/* Side by side from lg, stacked below it. The greeting is a
+                drawing, so a column too narrow for it does not wrap the
+                greeting — it scales the whole thing down, height included. On
+                a tablet that is what left it at 25px once card #54 narrowed
+                the card. Rather than guess at a width where it still fits,
+                the avatar and the greeting only share a line from lg up,
+                where the measurements below show there is room for the
+                greeting at its full size. */}
+            <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-6 xl:gap-8">
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
-            <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-48 lg:h-48 rounded-full overflow-hidden">
+            {/* Smaller between lg and xl. At 1024 the card is 53% of a narrow
+                window, and the circle at its old 192px left the greeting 239px
+                where it needs 267 — so it scaled down to 34. At 144, with the
+                tighter gap below, the greeting keeps its full size; from xl
+                there is room for the circle to go back up. */}
+            <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-36 lg:h-36 xl:w-44 xl:h-44 rounded-full overflow-hidden">
               <Image
                 src={avatar?.url ?? "/images/avatar.png"}
                 alt="Olika"
@@ -95,7 +108,7 @@ export default function Hero({
                 lettering rather than under the line of it — the greeting and
                 the paragraph read as two separate blocks. 16px closes them up
                 without letting them touch. Both languages, one container. */}
-            <div className="flex flex-col gap-4 items-center text-center md:items-start md:text-left min-w-0">
+            <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left min-w-0">
               <LocalisedHeading
                 en={headings?.heroEn ?? "/svg/hello-and-welcome.svg"}
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}

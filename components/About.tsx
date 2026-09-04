@@ -108,7 +108,7 @@ From md up the picture is 31.6% of the card's inner width —
                 nowrap keeps the pair on one line: the phrase shrinks first. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="mb-5 flex items-center gap-3 flex-nowrap justify-center md:justify-start">
+            <div className="mb-5 flex items-center gap-3 flex-wrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
