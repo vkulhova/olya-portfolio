@@ -1,4 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Onest:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Source+Serif+4:ital,wght@1,400&display=swap');
+/* Source Serif is the only face still fetched from Google — the footer
+   signature is the one line of the site set in it. Everything else is Fixel,
+   served from /fonts, so the pages ask nothing of a third party for their
+   type.
+
+   Fixel is MacPaw's, under the SIL Open Font License; it was drawn for
+   Ukrainian, so one family covers both languages and nothing has to stand in
+   for anything. The files are subset to the Latin and Cyrillic the site
+   actually sets — 137KB for four weights rather than 318. See
+   public/fonts/LICENSE.txt. */
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@1,400&display=swap');
+
+@font-face {
+  font-family: 'Fixel Display';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/FixelDisplay-Medium.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fixel Display';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/FixelDisplay-SemiBold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fixel Display';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/FixelDisplay-Bold.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Fixel Text';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/FixelText-Regular.woff2') format('woff2');
+}
 
 @tailwind base;
 @tailwind components;
@@ -16,30 +58,22 @@ html {
    chosen there; when it is not, the variable is undefined and the fallback —
    exactly what the site used before any of this existed — is what applies. */
 body {
-  font-family: var(--font-label, 'Plus Jakarta Sans', sans-serif);
+  font-family: var(--font-label, 'Fixel Text', sans-serif);
   overflow-x: hidden;
 }
 
 /* The paragraph face. These two sit after @tailwind utilities, so they win
    over the font-prose utility itself rather than fighting it. */
 .font-prose {
-  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
+  font-family: var(--font-body, 'Fixel Text', sans-serif);
 }
 
-/* Plus Jakarta Sans has no Cyrillic — its web font ships latin, latin-ext and
-   cyrillic-ext, and cyrillic-ext is U+0460-052F, which holds none of А-Я, а-я,
-   і, ї, є or ґ. Drawn side by side at 80px, "Привіт" in Plus Jakarta Sans and
-   "Привіт" in a font that does not exist come out pixel for pixel identical;
-   "Hello" does not. So in Ukrainian the copy would land on whatever sans the
-   device happened to have, differently on every device.
-
-   Onest stands in. It was picked by measuring fourteen Cyrillic faces against
-   Plus Jakarta Sans and it came first: line width within 1.7%, x-height within
-   0.8%, and ink coverage within two points at every weight from 300 to 800, so
-   neither the layout nor the colour of the page shifts when the language is
-   switched. The labels and the nav keep the same substitution. */
+/* Fixel carries Latin and Cyrillic in one family, so the Ukrainian side is set
+   in the same face as the English one and nothing is substituted for anything.
+   The per-language variables stay only because Studio can still override the
+   face; with Studio empty both branches land on the same Fixel. */
 html[data-lang="UA"] .font-prose {
-  font-family: var(--font-body-uk, var(--font-body, 'Onest', sans-serif));
+  font-family: var(--font-body-uk, var(--font-body, 'Fixel Text', sans-serif));
 }
 
 /* The logo is inlined so Studio can set its two colours, which means the
@@ -144,7 +178,7 @@ html[data-lang="UA"] .font-prose {
    renders the signature it was designed with. */
 .font-signature {
   font-family: var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif);
-  font-size: 16px;
+  font-size: 15px;
   letter-spacing: 1px;
 }
 
@@ -155,11 +189,12 @@ html[data-lang="UA"] .font-prose {
    the nav and the labels beside them would change while the field the visitor
    types into stayed behind. Same variable, same fallback throughout. */
 .font-chrome {
-  font-family: var(--font-label, 'Plus Jakarta Sans', sans-serif);
+  font-family: var(--font-label, 'Fixel Display', sans-serif);
 }
 
-/* Form captions: Plus Jakarta Sans Regular at 16px, 2px apart, per the type
-   spec.
+/* Form captions: Fixel Display Medium at 13px, 2px apart, set in capitals, per
+   the type spec. Display rather than Text: the captions are chrome, like the
+   nav and the button, while the line the visitor types is running text.
    Written here rather than in classes because the face has to follow the
    language, the same way the body copy does above.
 
@@ -167,10 +202,11 @@ html[data-lang="UA"] .font-prose {
    nested fallback hands over to --font-label, so the form keeps following the
    nav exactly as it did before the form got a setting of its own. */
 .form-label {
-  font-family: var(--font-form, var(--font-label, 'Plus Jakarta Sans', sans-serif));
-  font-size: 16px;
-  font-weight: 400;
+  font-family: var(--font-form, var(--font-label, 'Fixel Display', sans-serif));
+  font-size: 13px;
+  font-weight: 500;
   letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
 /* Same weight as the English side now — both are Medium. The old 450 was a
@@ -178,9 +214,9 @@ html[data-lang="UA"] .font-prose {
 html[data-lang="UA"] .form-label {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Onest', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Fixel Display', sans-serif)))
   );
-  font-weight: 400;
+  font-weight: 500;
 }
 
 /* Fields, button and error line, Ukrainian side. Same chain as the captions
@@ -188,13 +224,13 @@ html[data-lang="UA"] .form-label {
 html[data-lang="UA"] .form-field {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Onest', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Fixel Text', sans-serif)))
   );
 }
 
 /* Nav and the language switch, Ukrainian side. */
 html[data-lang="UA"] .font-chrome {
-  font-family: var(--font-label-uk, var(--font-label, 'Onest', sans-serif));
+  font-family: var(--font-label-uk, var(--font-label, 'Fixel Display', sans-serif));
 }
 
 /* The footer signature follows the body face, so it follows it per language
@@ -209,11 +245,11 @@ html[data-lang="UA"] .font-signature {
    three different faces reads as a mistake rather than a decision. The button
    used to answer to the nav instead, which is what made the form's own setting
    look as though it did nothing. Same fallback chain when Studio has nothing:
-   the form's choice, then the nav's, then Plus Jakarta Sans. */
+   the form's choice, then the nav's, then Fixel. */
 .form-field {
-  font-family: var(--font-form, var(--font-label, 'Plus Jakarta Sans', sans-serif));
+  font-family: var(--font-form, var(--font-label, 'Fixel Text', sans-serif));
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   letter-spacing: 0;
 }
 
@@ -247,14 +283,14 @@ html[data-lang="UA"] .font-signature {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* 16px, Light, no extra spacing — the type spec. Studio may still override
-     the size,
+  /* 17px, Regular, no extra spacing, lines 1.65 apart — the type spec. Studio
+     may still override the size,
      because the same number does not read the same in every face: x-heights
-     differ enough that a face can look small at 16 and large at 16. */
-  font-size: var(--body-size, 16px);
-  font-weight: 300;
+     differ enough that a face can look small at 17 and large at 17. */
+  font-size: var(--body-size, 17px);
+  font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.7;
+  line-height: 1.65;
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */

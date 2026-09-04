@@ -1,0 +1,10 @@
+Fixel
+© 2023 MacPaw Inc. Authors: Alfabravo + MacPaw.
+https://fixel.macpaw.com
+
+Licensed under the SIL Open Font License, Version 1.1.
+http://scripts.sil.org/OFL
+
+The files in this folder are subsets of the originals, cut down to the Latin
+and Cyrillic the site actually sets so the pages carry 137KB rather than 318.
+The full family is at the address above.
