@@ -32,7 +32,7 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
     /* Hidden below sm rather than absent from the markup: the phone layout is
        a separate design, not a narrower version of this one. */
     <section className="hidden sm:block w-full bg-white pt-20 pb-24">
-      <p className="font-chrome font-medium text-[18px] tracking-[0.5px] text-center text-dark px-6 mb-14">
+      <p className="font-chrome font-medium text-[16px] leading-[1.4] sm:text-[18px] sm:leading-normal tracking-[0.5px] text-center text-dark px-6 mb-14">
         {COPY[language]}
       </p>
 

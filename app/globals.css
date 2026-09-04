@@ -172,8 +172,14 @@ body {
    face still fetched from Google. */
 .font-signature {
   font-family: 'Source Serif 4', 'Source Serif Pro', serif;
-  font-size: 15px;
+  font-size: 14px;
   letter-spacing: 1px;
+}
+
+@media (min-width: 640px) {
+  .font-signature {
+    font-size: 15px;
+  }
 }
 
 /* The site's chrome — the nav, the language switch, the send button and the
@@ -188,10 +194,16 @@ body {
    nav and the button, while the line the visitor types is running text. */
 .form-label {
   font-family: 'Fixel Display', sans-serif;
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
+}
+
+@media (min-width: 640px) {
+  .form-label {
+    font-size: 13px;
+  }
 }
 
 /* What the visitor types, and the error line under the button: Fixel Text at
@@ -233,11 +245,19 @@ body {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* 17px, Regular, no extra spacing, lines 1.65 apart — the type spec. */
-  font-size: 17px;
+  /* Two specs, one for each width: 16px on lines 1.6 apart on a phone, 17px on
+     1.65 from sm up. Written mobile-first, the way the rest of the site is. */
+  font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.65;
+  line-height: 1.6;
+}
+
+@media (min-width: 640px) {
+  .body-copy {
+    font-size: 17px;
+    line-height: 1.65;
+  }
 }
 
 /* Scalloped card — exactly 5 white outward bumps on each side via pseudo-elements */

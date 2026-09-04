@@ -324,7 +324,7 @@ export default function Contact({
               type="submit"
               form="contact-form"
               disabled={status === "sending" || status === "sent"}
-              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-chrome font-bold text-[15px] tracking-[4px] uppercase transition-colors disabled:opacity-60"
+              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-chrome font-bold text-[15px] tracking-[3px] sm:tracking-[4px] uppercase transition-colors disabled:opacity-60"
               style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
             >
               {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}
