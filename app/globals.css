@@ -53,28 +53,25 @@ html {
   scrollbar-width: thin;
 }
 
-/* Every family below is written as a variable with the shipped face as its
-   fallback. Studio sets --font-body and --font-label on <html> when a face is
-   chosen there; when it is not, the variable is undefined and the fallback —
-   exactly what the site used before any of this existed — is what applies. */
+/* The type is fixed in code. Studio used to be able to override every family
+   and the paragraph size, which meant six dropdowns whose combinations mostly
+   made the page worse, and a spec that was true only while all six were left
+   alone. Card #51 took them away, so what is written here is what renders. */
 body {
-  font-family: var(--font-label, 'Fixel Text', sans-serif);
+  font-family: 'Fixel Text', sans-serif;
   overflow-x: hidden;
 }
 
 /* The paragraph face. These two sit after @tailwind utilities, so they win
    over the font-prose utility itself rather than fighting it. */
 .font-prose {
-  font-family: var(--font-body, 'Fixel Text', sans-serif);
+  font-family: 'Fixel Text', sans-serif;
 }
 
-/* Fixel carries Latin and Cyrillic in one family, so the Ukrainian side is set
-   in the same face as the English one and nothing is substituted for anything.
-   The per-language variables stay only because Studio can still override the
-   face; with Studio empty both branches land on the same Fixel. */
-html[data-lang="UA"] .font-prose {
-  font-family: var(--font-body-uk, var(--font-body, 'Fixel Text', sans-serif));
-}
+/* There is no Ukrainian branch anywhere below. Fixel carries Latin and Cyrillic
+   in one family, so both languages are set in the same face and there is
+   nothing to swap — which is what every `html[data-lang="UA"]` rule here used
+   to do. */
 
 /* The logo is inlined so Studio can set its two colours, which means the
    drawing has to be told to fill the box the height class gives it — the job
@@ -171,83 +168,36 @@ html[data-lang="UA"] .font-prose {
   }
 }
 
-/* The footer signature. It was the one piece of running text on the site that
-   no Studio setting could reach — set in Source Serif italic straight from a
-   Tailwind class, so choosing a body face left it behind. It now follows the
-   body face and keeps the serif as its fallback, so an empty Studio still
-   renders the signature it was designed with. */
+/* The footer signature — the one line of the site set in a serif, and the only
+   face still fetched from Google. */
 .font-signature {
-  font-family: var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif);
+  font-family: 'Source Serif 4', 'Source Serif Pro', serif;
   font-size: 15px;
   letter-spacing: 1px;
 }
 
-/* The rest of the site's chrome — the nav, the language switch and the send
-   button. The class used to be called font-futura, after a face the site no
-   longer uses. These carried the font-chrome utility, which writes the
-   family out as a literal, so no choice made in Studio could ever reach them:
-   the nav and the labels beside them would change while the field the visitor
-   types into stayed behind. Same variable, same fallback throughout. */
+/* The site's chrome — the nav, the language switch, the send button and the
+   form captions. Fixel Display rather than Text: it is the face drawn for
+   short runs set in capitals. */
 .font-chrome {
-  font-family: var(--font-label, 'Fixel Display', sans-serif);
+  font-family: 'Fixel Display', sans-serif;
 }
 
 /* Form captions: Fixel Display Medium at 13px, 2px apart, set in capitals, per
    the type spec. Display rather than Text: the captions are chrome, like the
-   nav and the button, while the line the visitor types is running text.
-   Written here rather than in classes because the face has to follow the
-   language, the same way the body copy does above.
-
-   --font-form is the contact form's own choice in Studio. When it is unset the
-   nested fallback hands over to --font-label, so the form keeps following the
-   nav exactly as it did before the form got a setting of its own. */
+   nav and the button, while the line the visitor types is running text. */
 .form-label {
-  font-family: var(--font-form, var(--font-label, 'Fixel Display', sans-serif));
+  font-family: 'Fixel Display', sans-serif;
   font-size: 13px;
   font-weight: 500;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
-/* Same weight as the English side now — both are Medium. The old 450 was a
-   quirk of the CDN that used to serve Futura PT, which is gone. */
-html[data-lang="UA"] .form-label {
-  font-family: var(
-    --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Fixel Display', sans-serif)))
-  );
-  font-weight: 500;
-}
-
-/* Fields, button and error line, Ukrainian side. Same chain as the captions
-   above so the whole form stays in one face. */
-html[data-lang="UA"] .form-field {
-  font-family: var(
-    --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Fixel Text', sans-serif)))
-  );
-}
-
-/* Nav and the language switch, Ukrainian side. */
-html[data-lang="UA"] .font-chrome {
-  font-family: var(--font-label-uk, var(--font-label, 'Fixel Display', sans-serif));
-}
-
-/* The footer signature follows the body face, so it follows it per language
-   too. */
-html[data-lang="UA"] .font-signature {
-  font-family: var(--font-body-uk, var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif));
-}
-
-/* Everything inside the contact form: the captions, the boxes the visitor
-   types into, the send button and the error line under it. They share one
-   setting on purpose — a form whose caption, answer and button are set in
-   three different faces reads as a mistake rather than a decision. The button
-   used to answer to the nav instead, which is what made the form's own setting
-   look as though it did nothing. Same fallback chain when Studio has nothing:
-   the form's choice, then the nav's, then Fixel. */
+/* What the visitor types, and the error line under the button: Fixel Text at
+   16px, which is the running-text face rather than the chrome one. */
 .form-field {
-  font-family: var(--font-form, var(--font-label, 'Fixel Text', sans-serif));
+  font-family: 'Fixel Text', sans-serif;
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
@@ -283,11 +233,8 @@ html[data-lang="UA"] .font-signature {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* 17px, Regular, no extra spacing, lines 1.65 apart — the type spec. Studio
-     may still override the size,
-     because the same number does not read the same in every face: x-heights
-     differ enough that a face can look small at 17 and large at 17. */
-  font-size: var(--body-size, 17px);
+  /* 17px, Regular, no extra spacing, lines 1.65 apart — the type spec. */
+  font-size: 17px;
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.65;

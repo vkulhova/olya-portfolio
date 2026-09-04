@@ -1,9 +1,4 @@
 import { createClient } from "@sanity/client";
-import { FONT_CHOICES } from "./fonts";
-
-/* Re-exported so callers keep importing fonts from one place; the list itself
-   lives in lib/fonts.ts, which Studio also reads to build its dropdowns. */
-export { FONT_CHOICES } from "./fonts";
 
 export const sanityClient = createClient({
   projectId: "v18r1vne",
@@ -272,81 +267,6 @@ export async function getIllustrations(): Promise<Illustration[]> {
   );
 }
 
-/** The faces Studio may pick from. A fixed list rather than a free text field
- *  for two reasons: the name is dropped straight into a font-family and into a
- *  Google Fonts URL, so an allowlist is what keeps either from being injected
- *  into; and the site is bilingual, so anything offered here has to carry
- *  Cyrillic — Plus Jakarta Sans, the English body face, does not, which is the whole
- *  reason the Ukrainian copy has a stand-in today. */
-
-export type SiteFonts = {
-  /** The paragraph face. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian. */
-  bodyFont: string | null;
-  /** Nav and the send button. Empty keeps Futura PT. */
-  labelFont: string | null;
-  /** The contact form only — its labels and the text visitors type into it.
-   *  Empty follows labelFont, which is how the form behaved before this
-   *  existed. */
-  formFont: string | null;
-  /** Optional Ukrainian counterparts. Each falls back to the field above it,
-   *  so leaving them empty keeps one face for both languages — which is how
-   *  the site behaved before these existed. */
-  bodyFontUk: string | null;
-  labelFontUk: string | null;
-  formFontUk: string | null;
-  /** Paragraph size in px. Empty keeps the 16 the site is drawn at. Faces set
-   *  at the same size do not read at the same size — x-heights differ — so the
-   *  size follows the face rather than being fixed to it. */
-  bodySize: number | null;
-};
-
-const EMPTY_SITE_FONTS: SiteFonts = {
-  bodyFont: null,
-  labelFont: null,
-  formFont: null,
-  bodyFontUk: null,
-  labelFontUk: null,
-  formFontUk: null,
-  bodySize: null,
-};
-
-export async function getSiteFonts(): Promise<SiteFonts> {
-  try {
-    const result = await sanityClient.fetch<SiteFonts | null>(
-      `*[_id == "siteFonts"][0]{
-         bodyFont, labelFont, formFont,
-         bodyFontUk, labelFontUk, formFontUk,
-         bodySize
-       }`,
-      {},
-      { next: { revalidate: 60 } }
-    );
-    return { ...EMPTY_SITE_FONTS, ...(result ?? {}) };
-  } catch {
-    return EMPTY_SITE_FONTS;
-  }
-}
-
-/** Resolves what Studio holds to a face this site ships support for. Anything
- *  unrecognised — an old name, a typo, a hand-edited document — comes back as
- *  null, which is the same as "not set": the page keeps the pairing it was
- *  built with rather than falling back to whatever the device has. */
-/** The size Studio holds, as a CSS length — or null to keep the shipped 16px.
- *  Clamped rather than trusted: Studio validates the field, but a hand-edited
- *  document should not be able to set the whole site to 2px or 400. */
-export const BODY_SIZE_MIN = 12;
-export const BODY_SIZE_MAX = 24;
-
-export function resolveBodySize(value?: number | null): string | null {
-  if (typeof value !== "number" || !Number.isFinite(value)) return null;
-  const px = Math.min(BODY_SIZE_MAX, Math.max(BODY_SIZE_MIN, Math.round(value)));
-  return `${px}px`;
-}
-
-export function resolveFont(name?: string | null) {
-  if (!name) return null;
-  return FONT_CHOICES[name.trim()] ?? null;
-}
 
 /** The six handwritten phrases. Each is a drawing rather than text, so each
  *  language needs its own file; leaving one empty keeps the one that ships in

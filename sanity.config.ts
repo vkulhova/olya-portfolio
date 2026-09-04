@@ -1,4 +1,3 @@
-import { fontOptions } from "./lib/fonts";
 import { defineConfig, defineField } from "sanity";
 import { structureTool } from "sanity/structure";
 import { EditIcon, ImagesIcon, SortIcon, TrashIcon, UploadIcon } from "@sanity/icons";
@@ -43,16 +42,6 @@ export default defineConfig({
                   .schemaType("siteText")
                   .documentId("siteText")
                   .title("Site text")
-              ),
-            S.listItem()
-              .title("Site fonts")
-              .id("siteFonts")
-              .icon(EditIcon)
-              .child(
-                S.document()
-                  .schemaType("siteFonts")
-                  .documentId("siteFonts")
-                  .title("Site fonts")
               ),
             S.listItem()
               .title("Site headings")
@@ -155,76 +144,6 @@ export default defineConfig({
         ],
         preview: {
           prepare: () => ({ title: "Site text" }),
-        },
-      },
-      {
-        name: "siteFonts",
-        type: "document",
-        title: "Site fonts",
-        // A list rather than a free text box: the name goes straight into a
-        // font-family and a Google Fonts URL, and every face offered here has
-        // to carry Cyrillic, since the same one is used for both languages.
-        // Leaving a field empty keeps the pairing the site ships with.
-        fields: [
-          {
-            name: "bodyFont",
-            type: "string",
-            title: "Body text",
-            description:
-              "The paragraphs in the hero card and in About. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian.",
-            options: { list: fontOptions("As it ships (Plus Jakarta Sans / Onest)") },
-          },
-          {
-            name: "labelFont",
-            type: "string",
-            title: "Nav",
-            description:
-              "The spaced capitals in the menu. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian. The contact form, including its button, has its own setting below.",
-            options: { list: fontOptions("As it ships (Plus Jakarta Sans / Onest)") },
-          },
-          {
-            name: "bodyFontUk",
-            type: "string",
-            title: "Body text — Ukrainian",
-            description:
-              "Used only on the Ukrainian side. Empty means the Ukrainian text uses the same face as the English above.",
-            options: { list: fontOptions("Same as English") },
-          },
-          {
-            name: "labelFontUk",
-            type: "string",
-            title: "Nav — Ukrainian",
-            description:
-              "Used only on the Ukrainian side. Empty means the same face as the English above.",
-            options: { list: fontOptions("Same as English") },
-          },
-          {
-            name: "formFontUk",
-            type: "string",
-            title: "Contact form — Ukrainian",
-            description:
-              "Used only on the Ukrainian side. Empty means the same face as the English above.",
-            options: { list: fontOptions("Same as English") },
-          },
-          defineField({
-            name: "bodySize",
-            type: "number",
-            title: "Body text size",
-            description:
-              "Paragraph size in pixels, 12 to 24. Empty keeps 16, which is what the site is drawn at. Worth touching after changing the body face: two faces set at the same size rarely look the same size, because their letters are not the same height.",
-            validation: (Rule) => Rule.min(12).max(24).integer(),
-          }),
-          {
-            name: "formFont",
-            type: "string",
-            title: "Contact form",
-            description:
-              "Everything in the contact form: the field captions, the text visitors type into the boxes, and the «Відправити» button. Empty follows the nav choice above.",
-            options: { list: fontOptions("Same as the nav") },
-          },
-        ],
-        preview: {
-          prepare: () => ({ title: "Site fonts" }),
         },
       },
       {
