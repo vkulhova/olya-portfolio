@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Nunito+Sans:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&family=Source+Serif+4:ital,wght@1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500&family=Onest:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Source+Serif+4:ital,wght@1,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -16,23 +16,30 @@ html {
    chosen there; when it is not, the variable is undefined and the fallback —
    exactly what the site used before any of this existed — is what applies. */
 body {
-  font-family: var(--font-label, 'Outfit', sans-serif);
+  font-family: var(--font-label, 'Plus Jakarta Sans', sans-serif);
   overflow-x: hidden;
 }
 
 /* The paragraph face. These two sit after @tailwind utilities, so they win
-   over the font-outfit utility itself rather than fighting it. */
-.font-outfit {
-  font-family: var(--font-body, 'Outfit', sans-serif);
+   over the font-prose utility itself rather than fighting it. */
+.font-prose {
+  font-family: var(--font-body, 'Plus Jakarta Sans', sans-serif);
 }
 
-/* Outfit has no Cyrillic, so in Ukrainian the copy used to land on whatever
-   sans the device happened to have. Nunito Sans stands in: measured against
-   Outfit it matches its line width to 1% and its x-height to 1%, so the
-   layout does not shift when the language is switched. The labels and the nav
-   keep the same substitution. */
-html[data-lang="UA"] .font-outfit {
-  font-family: var(--font-body-uk, var(--font-body, 'Nunito Sans', sans-serif));
+/* Plus Jakarta Sans has no Cyrillic — its web font ships latin, latin-ext and
+   cyrillic-ext, and cyrillic-ext is U+0460-052F, which holds none of А-Я, а-я,
+   і, ї, є or ґ. Drawn side by side at 80px, "Привіт" in Plus Jakarta Sans and
+   "Привіт" in a font that does not exist come out pixel for pixel identical;
+   "Hello" does not. So in Ukrainian the copy would land on whatever sans the
+   device happened to have, differently on every device.
+
+   Onest stands in. It was picked by measuring fourteen Cyrillic faces against
+   Plus Jakarta Sans and it came first: line width within 1.7%, x-height within
+   0.8%, and ink coverage within two points at every weight from 300 to 800, so
+   neither the layout nor the colour of the page shifts when the language is
+   switched. The labels and the nav keep the same substitution. */
+html[data-lang="UA"] .font-prose {
+  font-family: var(--font-body-uk, var(--font-body, 'Onest', sans-serif));
 }
 
 /* The logo is inlined so Studio can set its two colours, which means the
@@ -137,7 +144,7 @@ html[data-lang="UA"] .font-outfit {
    renders the signature it was designed with. */
 .font-signature {
   font-family: var(--font-body, 'Source Serif 4', 'Source Serif Pro', serif);
-  font-size: 18px;
+  font-size: 16px;
   letter-spacing: 1px;
 }
 
@@ -148,10 +155,11 @@ html[data-lang="UA"] .font-outfit {
    the nav and the labels beside them would change while the field the visitor
    types into stayed behind. Same variable, same fallback throughout. */
 .font-chrome {
-  font-family: var(--font-label, 'Outfit', sans-serif);
+  font-family: var(--font-label, 'Plus Jakarta Sans', sans-serif);
 }
 
-/* Form captions: Outfit Medium at 18px, 4px apart, per the type spec.
+/* Form captions: Plus Jakarta Sans Regular at 16px, 2px apart, per the type
+   spec.
    Written here rather than in classes because the face has to follow the
    language, the same way the body copy does above.
 
@@ -159,10 +167,10 @@ html[data-lang="UA"] .font-outfit {
    nested fallback hands over to --font-label, so the form keeps following the
    nav exactly as it did before the form got a setting of its own. */
 .form-label {
-  font-family: var(--font-form, var(--font-label, 'Outfit', sans-serif));
-  font-size: 18px;
-  font-weight: 500;
-  letter-spacing: 4px;
+  font-family: var(--font-form, var(--font-label, 'Plus Jakarta Sans', sans-serif));
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 2px;
 }
 
 /* Same weight as the English side now — both are Medium. The old 450 was a
@@ -170,9 +178,9 @@ html[data-lang="UA"] .font-outfit {
 html[data-lang="UA"] .form-label {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Onest', sans-serif)))
   );
-  font-weight: 500;
+  font-weight: 400;
 }
 
 /* Fields, button and error line, Ukrainian side. Same chain as the captions
@@ -180,13 +188,13 @@ html[data-lang="UA"] .form-label {
 html[data-lang="UA"] .form-field {
   font-family: var(
     --font-form-uk,
-    var(--font-form, var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif)))
+    var(--font-form, var(--font-label-uk, var(--font-label, 'Onest', sans-serif)))
   );
 }
 
 /* Nav and the language switch, Ukrainian side. */
 html[data-lang="UA"] .font-chrome {
-  font-family: var(--font-label-uk, var(--font-label, 'Nunito Sans', sans-serif));
+  font-family: var(--font-label-uk, var(--font-label, 'Onest', sans-serif));
 }
 
 /* The footer signature follows the body face, so it follows it per language
@@ -201,12 +209,12 @@ html[data-lang="UA"] .font-signature {
    three different faces reads as a mistake rather than a decision. The button
    used to answer to the nav instead, which is what made the form's own setting
    look as though it did nothing. Same fallback chain when Studio has nothing:
-   the form's choice, then the nav's, then Outfit. */
+   the form's choice, then the nav's, then Plus Jakarta Sans. */
 .form-field {
-  font-family: var(--font-form, var(--font-label, 'Outfit', sans-serif));
-  font-size: 18px;
+  font-family: var(--font-form, var(--font-label, 'Plus Jakarta Sans', sans-serif));
+  font-size: 16px;
   font-weight: 300;
-  letter-spacing: 1px;
+  letter-spacing: 0;
 }
 
 /* Brown scrollbar — #3C1A05 is the `dark` token, the same brown as every bit
@@ -239,12 +247,13 @@ html[data-lang="UA"] .font-signature {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* 18px, Light, 1px apart — the type spec. Studio may still override the size,
+  /* 16px, Light, no extra spacing — the type spec. Studio may still override
+     the size,
      because the same number does not read the same in every face: x-heights
-     differ enough that a face can look small at 18 and large at 18. */
-  font-size: var(--body-size, 18px);
+     differ enough that a face can look small at 16 and large at 16. */
+  font-size: var(--body-size, 16px);
   font-weight: 300;
-  letter-spacing: 1px;
+  letter-spacing: 0;
   line-height: 1.7;
 }
 

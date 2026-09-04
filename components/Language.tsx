@@ -47,7 +47,7 @@ export function LanguageSwitcher({ className = "" }: { className?: string }) {
           type="button"
           onClick={() => setLanguage(code)}
           aria-pressed={language === code}
-          className={`font-chrome font-bold text-[18px] tracking-[4px] uppercase transition-colors accent-hover ${
+          className={`font-chrome font-extrabold text-[16px] tracking-[4px] uppercase transition-colors accent-hover ${
             language === code ? "accent-ink underline underline-offset-4" : "text-dark"
           }`}
         >

@@ -137,7 +137,7 @@ export default function Contact({
           <LocalisedText
             en={text?.contactEn?.trim() || DEFAULT_CONTACT_EN}
             uk={text?.contactUk?.trim() || DEFAULT_CONTACT_UK}
-            className="body-copy font-outfit text-dark text-justify"
+            className="body-copy font-prose text-dark text-justify"
           />
         </div>
 
@@ -295,7 +295,7 @@ export default function Contact({
               type="submit"
               form="contact-form"
               disabled={status === "sending" || status === "sent"}
-              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-chrome font-bold text-[18px] tracking-[4px] uppercase transition-colors disabled:opacity-60"
+              className="btn-send px-6 h-14 pl-[calc(1.5rem+0.2em)] rounded-[62px] font-chrome font-extrabold text-[16px] tracking-[4px] uppercase transition-colors disabled:opacity-60"
               style={{ "--btn-bg": buttonBg, "--btn-ink": buttonInk } as React.CSSProperties}
             >
               {status === "sent" ? copy.sent : status === "sending" ? copy.sending : copy.send}

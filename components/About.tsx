@@ -123,7 +123,7 @@ export default function About({
               <LocalisedText
                 en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
                 uk={text?.aboutUk ?? null}
-                className="body-copy font-outfit text-dark text-justify"
+                className="body-copy font-prose text-dark text-justify"
               />
             </div>
           </div>

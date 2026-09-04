@@ -14,7 +14,7 @@ const config: Config = {
         beige: "#F5EDE0",
       },
       fontFamily: {
-        outfit: ["Outfit", "sans-serif"],
+        prose: ["Plus Jakarta Sans", "sans-serif"],
       },
       letterSpacing: {
         wider: "0.25em",

@@ -276,11 +276,11 @@ export async function getIllustrations(): Promise<Illustration[]> {
  *  for two reasons: the name is dropped straight into a font-family and into a
  *  Google Fonts URL, so an allowlist is what keeps either from being injected
  *  into; and the site is bilingual, so anything offered here has to carry
- *  Cyrillic — Outfit, the English body face, does not, which is the whole
+ *  Cyrillic — Plus Jakarta Sans, the English body face, does not, which is the whole
  *  reason the Ukrainian copy has a stand-in today. */
 
 export type SiteFonts = {
-  /** The paragraph face. Empty keeps Outfit in English and Nunito Sans in Ukrainian. */
+  /** The paragraph face. Empty keeps Plus Jakarta Sans in English and Onest in Ukrainian. */
   bodyFont: string | null;
   /** Nav and the send button. Empty keeps Futura PT. */
   labelFont: string | null;

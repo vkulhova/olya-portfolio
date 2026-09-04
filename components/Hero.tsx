@@ -115,7 +115,7 @@ export default function Hero({
               <LocalisedText
                 en={text?.heroEn?.trim() || DEFAULT_HERO_EN}
                 uk={text?.heroUk ?? null}
-                className="body-copy font-outfit text-dark text-justify"
+                className="body-copy font-prose text-dark text-justify"
               />
             </div>
             </div>
