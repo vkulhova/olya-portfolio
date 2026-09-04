@@ -31,7 +31,7 @@ export default function About({
           the colour; both arrive as variables because .about-band has to hold
           them behind a media query. */}
       <div
-        className="about-band sm:py-24"
+        className="about-band sm:py-[13.1%]"
         style={
           {
             ...(bandColour ? { "--about-band": bandColour } : null),
@@ -43,7 +43,13 @@ export default function About({
           with it — hence 72 here rather than the 104 this used to carry. On
           phones that still left the photo further from the ribbon than the
           other two sections start, so there it is 32. */}
-      <div className="w-[78%] mx-auto pt-8 sm:pt-0 pb-10 sm:pb-0">
+      {/* 72% of the window, centred, capped at the 1216px the drawing on card
+          #55 shows. Past that width the card would be an extrapolation of the
+          drawing rather than the drawing: the copy sets in fewer and fewer
+          lines as the measure grows while the photo only gets taller, so the
+          two stop meeting. Freezing the card at the width it was drawn at
+          keeps the whole block in the proportions that were approved. */}
+      <div className="w-[90%] sm:w-[72%] sm:max-w-[1216px] mx-auto pt-8 sm:pt-0 pb-10 sm:pb-0">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
         <div className="sm:bg-white sm:rounded-[6px] sm:px-14 sm:py-12">
@@ -64,17 +70,17 @@ export default function About({
               grid's row gap used to give it; the salmon star hangs 36px below
               the frame and needs the room.
 
-              270px rather than 300 from md up. At 300 the picture stood 44px
-              taller than the copy at 1440px, which is the overhang the card
-              asks about. No single number closes that gap everywhere: the copy
-              gets shorter as the window widens while the picture does not, so
-              1440px wants 250px and 1280px wants 290px. 270 splits them — 31px
-              of picture below the copy at 1440, 23px of copy below the picture
-              at 1280 — and any exact fit would go stale the moment the text is
-              edited in Studio. */}
+From md up the picture is 31.6% of the card's inner width —
+              the 28% of its outer width the drawing shows, once the card's own
+              padding is taken off — and carries the drawing's own 340:481, which is what card #55 measures: the photo
+              runs from the top of the drawn phrase to the last line of the
+              copy. It is a proportion rather than a pixel width so that the
+              two keep meeting as the window changes — an exact height would
+              hold at one width and nowhere else, and would go stale the moment
+              the text is edited in Studio. */}
           <div>
             <div
-              className="relative w-full max-w-[200px] sm:max-w-[272px] md:max-w-[270px] mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4]"
+              className="relative w-full max-w-[200px] sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4] md:aspect-[340/481]"
             >
               {/* Photo */}
               <Image
@@ -92,7 +98,10 @@ export default function About({
               keeps clear of the picture as a whole; the copy is a plain block,
               which is the only kind whose lines wrap around a float and then
               close up underneath it. */}
-          <div className="pt-2">
+          {/* pt-2 gives the phrase a little air on phones, where it sits under
+              the photo. Beside the photo it has to start level with it, which
+              is what the card asks for, so from md up the padding goes. */}
+          <div className="pt-2 md:pt-0">
             {/* Heading, with the olive star back beside it. The two on the
                 photo are gone, so this is the section's only mark now — which
                 is what the new design asks for, on phones as well as here.
@@ -105,7 +114,7 @@ export default function About({
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
-                className="max-h-[34px] w-auto max-w-full h-auto min-w-0 shrink"
+                className="max-h-[38px] w-auto max-w-full h-auto min-w-0 shrink"
                 ukClassName="max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
