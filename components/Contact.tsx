@@ -199,20 +199,34 @@ export default function Contact({
           carry a drawing there, and 56px was not enough of it to see. Phones
           keep 56 — the band is the whole screen there. */}
       {/* relative so the form stays above the phone backdrop behind it. */}
-      <div className="relative z-10 flex flex-col items-center py-20 sm:pt-28 sm:pb-28 px-6">
+      {/* 8.8% of the window above and below the card, which is what the
+          drawing on card #57 measures — 167px over the card and 166 under it
+          at a page 1892 wide. A proportion rather than a pixel figure, so the
+          band keeps its shape; the point of the change is that the blue now
+          fits a screen while you scroll rather than running past it. */}
+      <div className="relative z-10 flex flex-col items-center py-20 sm:py-[8.8%] px-6">
         {/* Scalloped card */}
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
             illustration no room to grow. */}
         {/* Same radius as the hero card, so the two white blocks match */}
-        <div className="flex flex-col w-full sm:w-[51%] bg-white rounded-[6px] px-7 sm:px-12 pt-8 pb-10 sm:pt-12 sm:pb-16">
+        {/* 42.6% of the band's inner width, which is the drawing's 41.4% of
+            the window once the band's own 24px of side padding is taken off —
+            41.2% at 1440 and 41.5% at the width it was drawn at. */}
+        <div className="flex flex-col w-full sm:w-[42.6%] bg-white rounded-[6px] px-7 sm:px-12 pt-8 pb-10 sm:pt-12 sm:pb-16">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           {/* Centred on phones, where the phrase is the only thing on its line
               and sitting hard left left it looking dropped rather than placed.
               From sm up it stays left, which is where the desktop reference
               puts it. The gap and nowrap went with the star. */}
-          <div className="mb-5 sm:mb-8 -mx-4 sm:mx-0 flex items-center justify-start sm:justify-center">
+          {/* Left on every width now. It used to be centred from sm up; card
+              #57 puts it on the left with the button under it. */}
+          {/* The negative margin is on the right only. It exists to give the
+              longer Ukrainian drawing room on a phone; pulled left as well it
+              would start the heading 16px outside the fields, which reads as a
+              mistake now that the heading is left-aligned rather than centred. */}
+          <div className="mb-5 sm:mb-8 -mr-4 sm:mr-0 flex items-center justify-start">
             {/* The salmon star that used to sit here has moved up beside
                 «Colaboration». Two of the same star on one screen read as a
                 repeat rather than a pair, and the reference puts it at the
@@ -256,7 +270,7 @@ export default function Contact({
                   type="text"
                   name="firstName"
                   required
-                  className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white sm:col-start-1 sm:row-start-2"
+                  className="border-0 border-b-2 border-[#BCB9A2] rounded-none px-0 py-2.5 form-field outline-none focus:border-gold bg-transparent sm:col-start-1 sm:row-start-2"
                 />
               </div>
               <div className="flex flex-col gap-2 sm:contents">
@@ -267,7 +281,7 @@ export default function Contact({
                   type="text"
                   name="lastName"
                   required
-                  className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white sm:col-start-2 sm:row-start-2"
+                  className="border-0 border-b-2 border-[#BCB9A2] rounded-none px-0 py-2.5 form-field outline-none focus:border-gold bg-transparent sm:col-start-2 sm:row-start-2"
                 />
               </div>
             </div>
@@ -280,7 +294,7 @@ export default function Contact({
                 type="email"
                 name="email"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-2.5 form-field outline-none focus:border-gold bg-white"
+                className="border-0 border-b-2 border-[#BCB9A2] rounded-none px-0 py-2.5 form-field outline-none focus:border-gold bg-transparent"
               />
             </div>
 
@@ -291,7 +305,7 @@ export default function Contact({
               <textarea
                 name="message"
                 required
-                className="border-2 border-[#BCB9A2] rounded-[2px] px-4 py-3 h-[84px] form-field outline-none focus:border-gold bg-white resize-none"
+                className="border-0 border-b-2 border-[#BCB9A2] rounded-none px-0 py-3 h-[84px] form-field outline-none focus:border-gold bg-transparent resize-none"
               />
             </div>
 
@@ -319,7 +333,7 @@ export default function Contact({
               longer has to fit the English one's box. The pl adds the trailing
               letter-space tracking leaves after the last glyph on top of that
               padding, which otherwise pulls the centred label visibly left. */}
-          <div className="mt-10 sm:mt-16 flex flex-col items-center">
+          <div className="mt-10 sm:mt-16 flex flex-col items-start">
             <button
               type="submit"
               form="contact-form"
