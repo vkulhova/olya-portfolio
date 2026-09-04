@@ -38,7 +38,7 @@ export default function Hero({
           small screens. An uploaded backdrop covers the band; the mustard stays
           underneath so the area is never bare while the image loads. */}
       <div
-        className="relative w-full py-16 md:py-24 flex items-center justify-center"
+        className="relative w-full py-16 md:py-[13.9%] flex items-center justify-center"
         style={{
           backgroundColor: "#D5BA54",
           ...(backdrop
@@ -50,7 +50,14 @@ export default function Hero({
             : null),
         }}
       >
-        {/* The phone backdrop sits over the band's own background rather than
+        {/* Card #54 set these two numbers against a drawing: the card is 53% of
+            the window from lg up, centred, and the band carries 13.9% of the
+            window's width as padding above and below it. Both are proportions
+            rather than pixels because that is what the card asked for — the
+            band then keeps its shape at any width, and the room it leaves
+            around the card is the room the illustrations are meant to fill.
+
+            The phone backdrop sits over the band's own background rather than
             replacing it in the style above, which cannot hold a media query.
             Nothing renders unless Studio has a phone upload, so the desktop
             band is untouched. */}
@@ -66,7 +73,7 @@ export default function Hero({
         {/* The cream stars that used to straddle this card's top and bottom-right
             corners are gone: the band is getting a drawn backdrop instead, and
             the stars would only have to be nudged around whatever it shows. */}
-        <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[75%] lg:w-[69%]">
+        <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-[6px]">
