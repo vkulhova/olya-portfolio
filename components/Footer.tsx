@@ -55,6 +55,22 @@ export default function Footer({
           ))}
         </div>
 
+        {/* The address, above the signature and set in the same face, per the
+            drawing on card #53. It is a mailto rather than plain text: it is
+            the one place on the site outside the form where a visitor can
+            start a letter, and an address that cannot be tapped on a phone is
+            an address that gets copied by hand or not at all. Same colour and
+            weight as the line under it, so the pair still reads as one block;
+            the hover is the only thing that gives it away as a link. */}
+        <p className="text-center font-signature italic text-dark">
+          <a
+            href="mailto:hi.lolikar@gmail.com"
+            className="hover:opacity-70 transition-opacity"
+          >
+            hi.lolikar@gmail.com
+          </a>
+        </p>
+
         {/* Signature line. The year comes from the build, so it moves on with
             each deploy rather than being written into the markup. */}
         {/* pb-16 with the pt-16 above it: the beige band was asked to stand
