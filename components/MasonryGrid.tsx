@@ -52,9 +52,16 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
   const columns = distribute(items, columnCount);
 
   return (
-    <div className="w-[86%] mx-auto flex gap-x-14 items-start">
+    // 76% on a phone rather than 86%: card #62's green frame puts the picture
+    // 48px in from each edge of a 402px screen, which is 305 of it. Wider
+    // screens keep the 86% they had.
+    <div className="w-[76%] sm:w-[86%] mx-auto flex gap-x-14 items-start">
       {columns.map((column, i) => (
-        <div key={i} className="flex-1 min-w-0 flex flex-col gap-8">
+        // 48px between pictures on a phone rather than 32, so the white
+        // between them matches the white at the sides — the two things the
+        // blue marks on card #62 pair up. From sm up the columns sit side by
+        // side and the gaps answer to the layout instead, so 32 stays.
+        <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-8">
           {column.map((work) => (
             <Image
               key={work._id}
