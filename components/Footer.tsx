@@ -32,7 +32,12 @@ export default function Footer({
             to be — with the gap scaled to match. From sm up they are 36px, the
             size drawn over the mock: at 22px they read as small print rather
             than as buttons. The 8px gap comes from the same drawing. */}
-        <div data-footer-icons className="flex justify-center gap-[18px] sm:gap-2 pt-16 pb-8">
+        {/* Card #63, measured off the drawing: on a phone the icons sit 45px
+            below the band's top rather than 64, with 7px between them rather
+            than 18, and 14px of air under them rather than 32. The circles
+            themselves stay 44px — the green marks are the same size as what is
+            there, only lower and closer together. From sm up nothing moves. */}
+        <div data-footer-icons className="flex justify-center gap-[7px] sm:gap-2 pt-[45px] sm:pt-16 pb-[14px] sm:pb-8">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -76,7 +81,7 @@ export default function Footer({
         {/* pb-16 with the pt-16 above it: the beige band was asked to stand
             taller, and the room is split evenly above and below its contents
             so the icons and the signature stay centred in it. */}
-        <p className="pb-16 text-center font-signature italic text-dark">
+        <p className="pb-[46px] sm:pb-16 text-center font-signature italic text-dark">
           Made with love by Lolikar © {new Date().getFullYear()}
         </p>
       </div>
