@@ -61,13 +61,21 @@ export default function Nav({ brand }: { brand: Brand }) {
 
       {/* The shadow is tinted with the site's brown rather than black, and only
           appears once the bar is pinned — before that it has nothing to cast
-          onto. Pinned on phones the bar holds nothing in flow — the burger and
-          the L are both absolute — so it carries a height of its own there. */}
+          onto.
+
+          On phones the bar has an explicit height in both states rather than a
+          height its contents happen to add up to. Card #60: the wordmark used
+          to be removed outright the moment the bar pinned, so the bar went from
+          139px to 64 in a single frame and everything under it jumped 75px. A
+          height can be animated; a child appearing and disappearing cannot. So
+          the phone's two logos are both absolute now — they cross-fade in place
+          and take no part in the height — and the height itself moves between
+          the two figures over the same 300ms the shadow takes. */}
       <nav
-        className={`sticky top-0 z-40 bg-white flex items-center justify-center gap-10 py-[29px] min-h-[78px] transition-all duration-300 ${
+        className={`sticky top-0 z-40 bg-white flex items-center justify-center gap-10 py-[29px] min-h-[78px] max-sm:min-h-0 max-sm:py-0 transition-all duration-300 ${
           stuck
-            ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)] max-sm:py-[10px] max-sm:min-h-[64px]"
-            : "shadow-none max-sm:py-[33px] max-sm:min-h-0"
+            ? "shadow-[0_2px_8px_rgba(60,26,5,0.05)] max-sm:h-[64px]"
+            : "shadow-none max-sm:h-[139px]"
         }`}
       >
         {/* Desktop's small logo: absolutely placed so it never nudges the centred
@@ -87,18 +95,30 @@ export default function Nav({ brand }: { brand: Brand }) {
           <BrandLogo which="mark" brand={brand} className="h-[47px]" />
         </a>
 
-        {/* Phones, at the top of the page: the full logo, centred and large, with
-            the burger out to its left. */}
-        <a href="#portfolio" aria-label="Lolikar — portfolio" className={`sm:hidden ${stuck ? "hidden" : "block"}`}>
-          <BrandLogo which="full" brand={brand} className="h-[73px]" />
-        </a>
-
-        {/* Phones, once pinned: the wordmark gives way to the L on its own, which
-            keeps the pinned bar shallow. */}
+        {/* Phones, at the top of the page: the full logo, centred and large,
+            with the burger out to its left. Absolutely placed so the bar's
+            height is the bar's own business rather than this drawing's, and
+            faded rather than removed so the swap has something to animate. */}
         <a
           href="#portfolio"
           aria-label="Lolikar — portfolio"
-          className={`sm:hidden absolute right-8 top-1/2 -translate-y-1/2 ${stuck ? "block" : "hidden"}`}
+          className={`sm:hidden absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+            stuck ? "pointer-events-none opacity-0" : "opacity-100"
+          }`}
+        >
+          <BrandLogo which="full" brand={brand} className="h-[73px]" />
+        </a>
+
+        {/* Phones, once pinned: the wordmark gives way to the L on its own,
+            which keeps the pinned bar shallow. The two fade past each other
+            rather than one being swapped for the other. */}
+        <a
+          href="#portfolio"
+          aria-label="Lolikar — portfolio"
+          aria-hidden={!stuck}
+          className={`sm:hidden absolute right-8 top-1/2 -translate-y-1/2 transition-opacity duration-300 ${
+            stuck ? "opacity-100" : "pointer-events-none opacity-0"
+          }`}
         >
           <BrandLogo which="mark" brand={brand} className="h-[44px]" />
         </a>

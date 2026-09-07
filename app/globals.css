@@ -60,6 +60,14 @@ html {
 body {
   font-family: 'Fixel Text', sans-serif;
   overflow-x: hidden;
+  /* The pinned bar on phones is 75px shorter than the unpinned one, and it is
+     in flow, so shrinking it lifts everything under it. Left alone the browser
+     "helpfully" pulls the scroll position back by the same 75px to hold that
+     content still — which undoes most of the gesture: scrolling 60px landed
+     you at 8. That fight is what card #60 is about. With anchoring off the
+     scroll position stays where it was put and the page slides up under the
+     bar over the same 300ms the bar takes to shrink. */
+  overflow-anchor: none;
 }
 
 /* The paragraph face. These two sit after @tailwind utilities, so they win
