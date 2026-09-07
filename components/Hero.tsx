@@ -73,7 +73,9 @@ export default function Hero({
         {/* The cream stars that used to straddle this card's top and bottom-right
             corners are gone: the band is getting a drawn backdrop instead, and
             the stars would only have to be nudged around whatever it shows. */}
-        <div className="relative z-10 w-[90%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
+        {/* 65.7% on a phone — the 264px the red marks on card #61 measure out
+            of that screen's 402. Wider screens keep what card #54 set. */}
+        <div className="relative z-10 w-[65.7%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-[6px]">
@@ -85,7 +87,10 @@ export default function Hero({
                 the avatar and the greeting only share a line from lg up,
                 where the measurements below show there is room for the
                 greeting at its full size. */}
-            <div className="w-full px-6 py-10 md:px-12 md:py-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-6 xl:gap-8">
+            {/* 32px of side padding on a phone rather than 24: the green marks
+                on card #61 put the greeting and the copy 34 and 29 in from the
+                card's edges. */}
+            <div className="w-full px-8 sm:px-6 py-10 md:px-12 md:py-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-6 xl:gap-8">
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
             {/* Smaller between lg and xl. At 1024 the card is 53% of a narrow
                 window, and the circle at its old 192px left the greeting 239px
