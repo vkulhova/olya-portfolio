@@ -124,16 +124,17 @@ export default function Nav({ brand }: { brand: Brand }) {
         </a>
 
         {/* Inline links — from sm up. On phones they live in the burger menu.
-            Between sm and md the row is tightened: the Ukrainian labels are half
-            again as wide as the English ones and would otherwise run into the
-            pinned logo. From md up the spacing is the original. */}
-        <div className="hidden sm:flex gap-6 md:gap-10">
+            50px apart at every width from sm, per card #65; the row used to
+            tighten to 24px between sm and md to keep the longer Ukrainian
+            labels clear of the pinned logo, and that is checked again below
+            rather than assumed. */}
+        <div className="hidden sm:flex gap-[50px]">
           {LINKS.map((link) => (
             <a
               key={link}
               href={`#${link}`}
               aria-current={view === link ? "page" : undefined}
-              className={`font-chrome font-semibold text-[15px] sm:text-[14px] tracking-[3px] uppercase transition-colors accent-hover ${
+              className={`font-chrome font-semibold sm:font-bold text-[15px] sm:text-[12px] tracking-[3px] sm:tracking-[1.5px] uppercase transition-colors accent-hover ${
                 view === link ? "accent-ink" : "text-dark"
               }`}
             >
@@ -191,7 +192,7 @@ export default function Nav({ brand }: { brand: Brand }) {
                   href={`#${link}`}
                   onClick={() => setMenuOpen(false)}
                   aria-current={view === link ? "page" : undefined}
-                  className={`font-chrome font-semibold text-[15px] sm:text-[14px] tracking-[3px] uppercase transition-colors ${
+                  className={`font-chrome font-semibold sm:font-bold text-[15px] sm:text-[12px] tracking-[3px] sm:tracking-[1.5px] uppercase transition-colors ${
                     view === link ? "accent-ink" : "text-dark"
                   }`}
                 >

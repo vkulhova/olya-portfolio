@@ -191,7 +191,8 @@ body {
 
 @media (min-width: 640px) {
   .font-signature {
-    font-size: 15px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
   }
 }
 
@@ -215,7 +216,8 @@ body {
 
 @media (min-width: 640px) {
   .form-label {
-    font-size: 13px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
   }
 }
 
@@ -226,6 +228,13 @@ body {
   font-size: 16px;
   font-weight: 400;
   letter-spacing: 0;
+}
+
+@media (min-width: 640px) {
+  .form-field {
+    font-size: 14px;
+    line-height: 24px;
+  }
 }
 
 /* The scrollbar, page and message field alike. It used to be 10px of the
@@ -274,8 +283,31 @@ body {
 
 @media (min-width: 640px) {
   .body-copy {
-    font-size: 17px;
-    line-height: 1.65;
+    font-size: 14px;
+    line-height: 24px;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* The Instagram line. Card #52 sets it in Fixel Display Medium at 16 on a
+   phone; card #65 sets it in Fixel Text Regular at 18 from sm up. The family
+   itself changes with the width, which no utility class can express, so the
+   line has a rule of its own. */
+.instagram-line {
+  font-family: 'Fixel Display', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+@media (min-width: 640px) {
+  .instagram-line {
+    font-family: 'Fixel Text', sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 0;
   }
 }
 
