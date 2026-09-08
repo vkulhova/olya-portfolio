@@ -29,6 +29,8 @@ export type SiteImages = {
   heroBackgroundMobile: SiteImage;
   contactBackground: SiteImage;
   contactBackgroundMobile: SiteImage;
+  /** The pink band that opens the Contact page — card #67. */
+  contactTopBackground: SiteImage;
   /** Hex, straight from Studio; null falls back to the shipped colour. */
   footerColour: string | null;
   /** Hex for the send button; null keeps the peach it ships with. */
@@ -44,6 +46,8 @@ export type SiteImages = {
   accentColour: string | null;
   /** The band behind the About card on desktop. */
   aboutBandColour: string | null;
+  /** The pink band under the menu on the Contact page. */
+  contactTopColour: string | null;
   /** The Instagram row. Empty keeps the three the site ships with. */
   instagramPosts: { image: string | null; href: string | null }[] | null;
   /** The gold hearts in the ribbon under the nav. */
@@ -66,6 +70,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   heroBackgroundMobile: null,
   contactBackground: null,
   contactBackgroundMobile: null,
+  contactTopBackground: null,
   footerColour: null,
   buttonColour: null,
   socialIconColour: null,
@@ -74,6 +79,7 @@ const EMPTY_SITE_IMAGES: SiteImages = {
   hideStripeBar: null,
   accentColour: null,
   aboutBandColour: null,
+  contactTopColour: null,
   instagramPosts: null,
   ribbonColour: null,
   logoInk: null,
@@ -92,6 +98,7 @@ const IMAGE_FIELDS = [
   "heroBackgroundMobile",
   "contactBackground",
   "contactBackgroundMobile",
+  "contactTopBackground",
 ];
 
 export async function getSiteImages(): Promise<SiteImages> {
@@ -103,7 +110,7 @@ export async function getSiteImages(): Promise<SiteImages> {
   try {
     const result = await sanityClient.fetch<SiteImages | null>(
       `*[_id == "siteImages"][0]{\n    ${projection},\n    footerColour,\n    buttonColour,\n    socialIconColour,
-    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    aboutBandColour,\n    "instagramPosts": instagramPosts[]{ "image": image.asset->url, href },\n    ribbonColour,\n    logoInk,\n    logoBlob,
+    stripeColourLight,\n    stripeColourDark,\n    hideStripeBar,\n    accentColour,\n    aboutBandColour,\n    contactTopColour,\n    "instagramPosts": instagramPosts[]{ "image": image.asset->url, href },\n    ribbonColour,\n    logoInk,\n    logoBlob,
     "logoFull": logoFull.asset->{ url, "width": 0, "height": 0 },
     "logoMark": logoMark.asset->{ url, "width": 0, "height": 0 }\n  }`,
       {},
@@ -123,6 +130,8 @@ export const BUTTON_COLOUR = "#FF917F";
 export const ACCENT_COLOUR = "#BD9E30";
 /** The band the About card sits on, from the new design. */
 export const ABOUT_BAND_COLOUR = "#EDE0D8";
+/** The band that opens the Contact page — the pink on the drawing for #67. */
+export const CONTACT_TOP_COLOUR = "#FFC7BD";
 export const SOCIAL_CIRCLE_COLOUR = "#3C1A05";
 export const STRIPE_LIGHT = "#FFD8CF";
 export const STRIPE_DARK = "#FF917F";
@@ -152,6 +161,10 @@ export function accentColour(value?: string | null): string {
 
 export function aboutBandColour(value?: string | null): string {
   return hexColour(value, ABOUT_BAND_COLOUR);
+}
+
+export function contactTopColour(value?: string | null): string {
+  return hexColour(value, CONTACT_TOP_COLOUR);
 }
 
 /** The Instagram row as the component wants it: only entries that carry both

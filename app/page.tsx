@@ -16,6 +16,7 @@ import {
   logoInk,
   ribbonColour,
   aboutBandColour,
+  contactTopColour,
   accentColour,
   backdropUrl,
   instagramPosts,
@@ -93,6 +94,8 @@ export default async function Home() {
                 text={text}
                 buttonColourHex={images.buttonColour}
                 ribbon={ribbonColour(images.ribbonColour)}
+                topColour={contactTopColour(images.contactTopColour)}
+                topBackground={backdropUrl(images.contactTopBackground)}
               />
             }
           />

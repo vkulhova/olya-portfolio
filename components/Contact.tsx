@@ -52,6 +52,8 @@ export default function Contact({
   text,
   buttonColourHex,
   ribbon,
+  topColour,
+  topBackground,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
@@ -61,6 +63,9 @@ export default function Contact({
   buttonColourHex?: string | null;
   /** The line of hearts, drawn by the section now rather than by SiteHeader. */
   ribbon?: string;
+  /** The band that opens the page — card #67. Studio sets both. */
+  topColour?: string;
+  topBackground?: string | null;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
@@ -104,13 +109,30 @@ export default function Contact({
 
   return (
     <section id="contact" className="w-full scroll-mt-[78px]">
-      {/* The hearts. They used to be drawn once in SiteHeader for every
-          section; cards #64, #66 and #67 move them under each section's own
-          coloured band, so each section draws its own. This one is still in
-          its old place, above the section, and moves down when that section's
-          own card is done — leaving it here keeps the seam as it was rather
-          than removing the line for a while. */}
-      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
+      {/* The band that opens the page — card #67. It carries no content of its
+          own, so its height is padding rather than anything inside it: a
+          percentage resolves against this box's width, which is the window,
+          so the band keeps its shape at every size. 13.3% is the 230px the
+          desktop drawing measures out of 1728; phones get the 23.3% their own
+          drawing measures out of 588.
+
+          Studio can put a picture here the way it can on every other coloured
+          block; the colour stays underneath so the band is never bare while
+          the picture loads. */}
+      <div
+        aria-hidden="true"
+        className="w-full pt-[23.3%] sm:pt-[13.3%] bg-cover bg-center"
+        style={{
+          backgroundColor: topColour ?? "#FFC7BD",
+          ...(topBackground ? { backgroundImage: `url(${topBackground})` } : null),
+        }}
+      />
+
+      {/* The hearts, under the band rather than over it — cards #67 and #71.
+          The drawings measure 50px of white between the band and the line's
+          first ink on the desktop and 20 on a phone; the line's own box
+          carries 2px above the drawing, hence the figures below. */}
+      <div className="bg-white pt-[19px] sm:pt-[48px]">
         <DecorativeDots colour={ribbon} />
       </div>
 
@@ -121,7 +143,7 @@ export default function Contact({
         it. The top spacing is About's, so both sections start on the same
         line under the ribbon. */}
     <div className="w-full bg-white">
-      <div className="w-[78%] mx-auto pt-8 sm:pt-[72px] pb-10 sm:pb-14 flex flex-col items-center">
+      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[184px] pb-[117px] sm:pb-[172px] flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
             olive one. nowrap keeps them on one line: the phrase shrinks first.
 
@@ -180,6 +202,15 @@ export default function Contact({
           />
         </div>
       </div>
+    </div>
+
+    {/* A second line of hearts, above the blue — cards #67 and #71 ask for the
+        same line on both sides of the white opening. The white above it is the
+        opening block's own bottom padding; the figures here are the 50px the
+        desktop drawing leaves between the line's last ink and the blue, and
+        the 38 the phone drawing leaves. */}
+    <div className="bg-white pb-[38px] sm:pb-[50px]">
+      <DecorativeDots colour={ribbon} />
     </div>
 
     {/* An uploaded backdrop replaces the paper texture rather than sitting under

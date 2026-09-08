@@ -313,6 +313,25 @@ export default defineConfig({
             validation: (Rule) => Rule.max(3),
           }),
           {
+            name: "contactTopBackground",
+            type: "image",
+            title: "Picture in the pink band under the menu — Contact",
+            description:
+              "The band that opens the Contact page. Covers the area, the way the other coloured blocks do. Empty keeps the flat colour below.",
+            options: { hotspot: true },
+          },
+          defineField({
+            name: "contactTopColour",
+            type: "string",
+            title: "Contact band colour",
+            description:
+              "The band under the menu on the Contact page. A hex code such as FFC7BD. Empty keeps the shipped pink.",
+            validation: (Rule) =>
+              Rule.regex(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/, {
+                name: "hex colour",
+              }),
+          }),
+          {
             name: "aboutBackground",
             type: "image",
             title: "Background behind the About card",
