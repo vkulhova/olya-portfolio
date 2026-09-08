@@ -25,20 +25,31 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
 
   /* The design has three, and three is the maximum Studio accepts — but the
      row is built from however many are actually there, so a set of two is a
-     row of two rather than two and a hole. */
-  const columns = { gridTemplateColumns: `repeat(${posts.length}, minmax(0, 1fr))` };
+     row of two rather than two and a hole.
+
+     A variable rather than the property itself: phones stack the pictures in
+     one column (card #70), and an inline style cannot carry a media query —
+     so the class below decides where this template applies. */
+  const columns = {
+    "--ig-columns": `repeat(${posts.length}, minmax(0, 1fr))`,
+  } as React.CSSProperties;
 
   return (
-    /* Hidden below sm rather than absent from the markup: the phone layout is
-       a separate design, not a narrower version of this one. */
-    <section className="hidden sm:block w-full bg-white pt-20 pb-24">
-      <p className="instagram-line text-center text-dark px-6 mb-14">
+    /* On phones too, since card #70 — the drawing there stacks the pictures
+       rather than dropping the row. */
+    <section className="w-full bg-white pt-[46px] sm:pt-20 pb-24">
+      <p className="instagram-line text-center text-dark px-6 mb-[37px] sm:mb-14">
         {COPY[language]}
       </p>
 
-      {/* Three across, always. The pictures are all 4:5, so the row keeps its
-          rhythm whatever is uploaded in their place. */}
-      <div className="w-[78%] mx-auto grid gap-8 lg:gap-14" style={columns}>
+      {/* Three across from sm, stacked on a phone. The pictures are all 4:5,
+          so the row keeps its rhythm whatever is uploaded in their place.
+          69.6% and 59px apart on a phone, which is what the drawing on card
+          #70 measures out of its 588. */}
+      <div
+        className="w-[69.6%] sm:w-[78%] mx-auto grid grid-cols-1 gap-[59px] sm:gap-8 lg:gap-14 sm:[grid-template-columns:var(--ig-columns)]"
+        style={columns}
+      >
         {posts.map((post, i) => (
           <a
             key={post.href || i}
@@ -56,7 +67,7 @@ export default function Instagram({ posts = DEFAULT_POSTS }: { posts?: Instagram
               alt=""
               width={960}
               height={1200}
-              sizes="(max-width: 1280px) 30vw, 350px"
+              sizes="(max-width: 640px) 70vw, (max-width: 1280px) 30vw, 350px"
               className="w-full h-auto object-cover"
             />
 

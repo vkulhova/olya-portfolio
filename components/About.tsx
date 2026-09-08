@@ -37,15 +37,11 @@ export default function About({
           its old place, above the section, and moves down when that section's
           own card is done — leaving it here keeps the seam as it was rather
           than removing the line for a while. */}
-      <div className="sm:hidden bg-white pt-[20px] pb-8">
-        <DecorativeDots colour={ribbon} />
-      </div>
-
       {/* Coloured band, desktop only. Studio can put a picture here instead of
           the colour; both arrive as variables because .about-band has to hold
           them behind a media query. */}
       <div
-        className="about-band sm:py-[13.1%]"
+        className="about-band pt-[13.8%] pb-[17.2%] sm:py-[13.1%]"
         style={
           {
             ...(bandColour ? { "--about-band": bandColour } : null),
@@ -63,10 +59,10 @@ export default function About({
           lines as the measure grows while the photo only gets taller, so the
           two stop meeting. Freezing the card at the width it was drawn at
           keeps the whole block in the proportions that were approved. */}
-      <div className="w-[90%] sm:w-[72%] sm:max-w-[1216px] mx-auto pt-8 sm:pt-0 pb-10 sm:pb-0">
+      <div className="w-[71.3%] sm:w-[72%] sm:max-w-[1216px] mx-auto">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
-        <div className="sm:bg-white sm:rounded-[6px] sm:px-14 md:px-20 sm:py-12 md:py-16">
+        <div className="bg-white rounded-[6px] px-[13.4%] pt-16 pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -98,7 +94,7 @@ From md up the picture is 31.6% of the card's inner width —
               the text is edited in Studio. */}
           <div>
             <div
-              className="relative w-full max-w-[200px] sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-16 md:mx-0 md:mb-10 md:mr-[6.7%] md:float-left aspect-[3/4] md:aspect-[324/411]"
+              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-10 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[324/411]"
             >
               {/* Photo */}
               <Image
@@ -126,7 +122,7 @@ From md up the picture is 31.6% of the card's inner width —
                 nowrap keeps the pair on one line: the phrase shrinks first. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="mb-5 flex items-center gap-3 flex-wrap justify-center md:justify-start">
+            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 flex-wrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
@@ -136,11 +132,14 @@ From md up the picture is 31.6% of the card's inner width —
                 ukClassName="max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink"
               />
               {/* eslint-disable-next-line @next/next/no-img-element */}
+              {/* Not on a phone: the drawing on card #70 shows the phrase on
+                  its own there, and the card is narrow enough that the star
+                  beside it would only shrink the lettering. */}
               <img
                 src="/svg/star-olive.svg"
                 alt=""
                 aria-hidden="true"
-                className="w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] shrink-0"
+                className="hidden sm:block w-[44px] h-[44px] sm:w-[48px] sm:h-[48px] shrink-0"
               />
             </div>
 
@@ -158,48 +157,41 @@ From md up the picture is 31.6% of the card's inner width —
           {/* Closes the float so the section's height counts the picture. */}
           <div className="clear-both" />
         </div>
+
+        {/* The desk, phones only. It used to sit under the band, drawn wider
+            than the screen so its blank margins ran off the edges; card #70
+            puts it inside the white card, under the copy.
+
+            160% of the card's inner width, which is what makes the drawing
+            itself come out at the 269 by 276 the phone drawing measures: the
+            file carries wide transparent margins, so its box has to be much
+            larger than the picture in it. The box overflows the card on both
+            sides, which nothing can see — it is empty there — and stays
+            inside the screen at every phone width. From sm up the Instagram
+            row stands in this spot instead. */}
+        <div className="sm:hidden mt-[66px] w-[160%] max-w-none relative left-1/2 -translate-x-1/2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={illustration?.url ?? "/images/illustration.png"}
+            alt="Cozy desk illustration"
+            className="w-full h-auto"
+          />
+        </div>
         </div>
 
       </div>
       </div>
 
-      {/* The hearts, under the milky band rather than over it — card #66. The
-          drawing puts 40px of white above the line's first ink, and the line's
-          own box carries 2px above the drawing; the room below it is the
-          Instagram row's own, plus what is added here to reach the 127px the
-          drawing measures down to that line of copy.
-
-          Phones keep the line where it was, above the section: the milky band
-          is desktop-only until card #70 turns it on there too, and a line
-          "under the band" with no band to sit under is just a line in the
-          wrong place. */}
-      <div className="hidden sm:block bg-white pt-[38px] pb-[42px]">
+      {/* The hearts, under the milky band rather than over it — cards #66 and
+          #70. The drawings put 40px of white above the line's first ink on the
+          desktop and 34 on a phone, and the line's own box carries 2px above
+          the drawing; the room below it is the Instagram row's own plus what
+          is added here, to reach the 127px the desktop drawing measures down
+          to that line of copy and the 93 the phone one does. */}
+      <div className="bg-white pt-[33px] sm:pt-[38px] pb-[42px]">
         <DecorativeDots colour={ribbon} />
       </div>
 
-      {/* Desk illustration — 60% page width, outside the narrow container */}
-      {/* The picture file carries empty margins on all four sides — the drawing
-          itself is only about two thirds of its width, and roughly a twentieth
-          of its height is blank above and below. On phones it is scaled up and
-          the empty sides run off the edge, so the desk fills the screen; the
-          negative top and bottom margins pull the blank bands out of the flow
-          the same way, and overflow is clipped here so neither shows and the
-          page never scrolls sideways. Those margins are percentages, which
-          resolve against this box's width — the same thing the image's own
-          height follows — so the crop holds at every phone size. Wide screens
-          keep the picture whole. */}
-      {/* Phones only now: from sm up the Instagram row stands in this spot,
-          which is what the new design puts there. The negative bottom margin
-          crops the drawing's blank band by very nearly the whole 24px the old
-          padding gave, so 64px here leaves roughly the 45 the card asks for. */}
-      <div className="sm:hidden w-full mx-auto pb-16 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={illustration?.url ?? "/images/illustration.png"}
-          alt="Cozy desk illustration"
-          className="w-[130%] max-w-none -ml-[15%] -mt-[4.3%] -mb-[5.8%] sm:w-full sm:ml-0 sm:mt-0 sm:mb-0 h-auto"
-        />
-      </div>
     </section>
   );
 }
