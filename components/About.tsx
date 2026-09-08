@@ -37,7 +37,7 @@ export default function About({
           its old place, above the section, and moves down when that section's
           own card is done — leaving it here keeps the seam as it was rather
           than removing the line for a while. */}
-      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
+      <div className="sm:hidden bg-white pt-[20px] pb-8">
         <DecorativeDots colour={ribbon} />
       </div>
 
@@ -66,7 +66,7 @@ export default function About({
       <div className="w-[90%] sm:w-[72%] sm:max-w-[1216px] mx-auto pt-8 sm:pt-0 pb-10 sm:pb-0">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
-        <div className="sm:bg-white sm:rounded-[6px] sm:px-14 sm:py-12">
+        <div className="sm:bg-white sm:rounded-[6px] sm:px-14 md:px-20 sm:py-12 md:py-16">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -76,7 +76,11 @@ export default function About({
 
             Below md there is no float: the picture is a centred block with the
             copy under it, exactly as before. */}
-        <div className="mb-4 sm:mb-10">
+        {/* No bottom margin from md: beside the photo the card's own 64px of
+            padding is all the drawing on card #66 leaves under the content,
+            and this margin was adding 40 more. Below md the photo sits above
+            the copy and the margin is the gap between the two blocks. */}
+        <div className="mb-4 sm:mb-10 md:mb-0">
 
           {/* The box carries the photo's own 3:4 ratio at every width, so it is
               exactly the picture — nothing is cropped and no letterboxing is
@@ -94,7 +98,7 @@ From md up the picture is 31.6% of the card's inner width —
               the text is edited in Studio. */}
           <div>
             <div
-              className="relative w-full max-w-[200px] sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-16 md:mx-0 md:mb-10 md:mr-10 md:float-left aspect-[3/4] md:aspect-[340/481]"
+              className="relative w-full max-w-[200px] sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-16 md:mx-0 md:mb-10 md:mr-[6.7%] md:float-left aspect-[3/4] md:aspect-[324/411]"
             >
               {/* Photo */}
               <Image
@@ -157,6 +161,20 @@ From md up the picture is 31.6% of the card's inner width —
         </div>
 
       </div>
+      </div>
+
+      {/* The hearts, under the milky band rather than over it — card #66. The
+          drawing puts 40px of white above the line's first ink, and the line's
+          own box carries 2px above the drawing; the room below it is the
+          Instagram row's own, plus what is added here to reach the 127px the
+          drawing measures down to that line of copy.
+
+          Phones keep the line where it was, above the section: the milky band
+          is desktop-only until card #70 turns it on there too, and a line
+          "under the band" with no band to sit under is just a line in the
+          wrong place. */}
+      <div className="hidden sm:block bg-white pt-[38px] pb-[42px]">
+        <DecorativeDots colour={ribbon} />
       </div>
 
       {/* Desk illustration — 60% page width, outside the narrow container */}

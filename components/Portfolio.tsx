@@ -18,7 +18,7 @@ export default async function Portfolio() {
        It used to be 16px, chosen back when a dot trim followed this section
        and took the rest of the gap. That trim has moved under the band above,
        so the section now closes on its own. */
-    <section id="portfolio" className="w-full bg-white pt-20 sm:pt-24 pb-[12%] sm:pb-[7%] scroll-mt-[78px]">
+    <section id="portfolio" className="w-full bg-white pt-20 sm:pt-[92px] pb-[12%] sm:pb-[7%] scroll-mt-[78px]">
       <MasonryGrid items={works} />
     </section>
   );

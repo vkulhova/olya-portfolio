@@ -154,10 +154,15 @@ export default function Hero({
         </div>
       </div>
 
-      {/* The hearts, under the mustard rather than over it. 24px of white above
-          them and 84 below, which is what the drawing on card #64 measures
-          between the band, the line and the first row of work. */}
-      <div className="bg-white pt-[24px] pb-[84px]">
+      {/* The hearts, under the mustard rather than over it. The drawing on card
+          #64 measures 38px of white between the band and the line's first ink,
+          and 92 between its last ink and the first row of work — the line's own
+          box carries 2px above the drawing, hence 36 here.
+
+          Nothing below from sm up: the 92 is Portfolio's own top padding,
+          which this used to be added on top of. Phones keep the figures they
+          were given, until card #69 measures them against their own drawing. */}
+      <div className="bg-white pt-[24px] sm:pt-[36px] pb-[84px] sm:pb-0">
         <DecorativeDots colour={ribbon} />
       </div>
     </>
