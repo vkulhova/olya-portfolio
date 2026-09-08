@@ -1,5 +1,4 @@
 import StripeBar from "./StripeBar";
-import DecorativeDots from "./DecorativeDots";
 import Nav from "./Nav";
 import { LanguageSwitcher } from "./Language";
 import BrandLogo, { type Brand } from "./BrandLogo";
@@ -16,7 +15,6 @@ export default function SiteHeader({
   stripeLight,
   stripeDark,
   hideStripes,
-  ribbon,
 }: {
   brand: Brand;
   stripeLight?: string;
@@ -24,7 +22,6 @@ export default function SiteHeader({
   /** Studio can take the striped bar away entirely; the rest of the header
    *  closes up on its own, since the bar is a block in the flow. */
   hideStripes?: boolean;
-  ribbon?: string;
 }) {
   return (
     <>
@@ -47,14 +44,6 @@ export default function SiteHeader({
       </div>
 
       <Nav brand={brand} />
-
-      {/* One ribbon for every section rather than one inside each: the sections
-          spaced it slightly differently, so switching between them made it hop.
-          pt here + the nav's py keep the original 40px gap; pb-8 the white gap
-          before whatever the section opens with. */}
-      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
-        <DecorativeDots colour={ribbon} />
-      </div>
     </>
   );
 }

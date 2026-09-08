@@ -52,7 +52,6 @@ export default async function Home() {
             stripeLight={stripeLight(images.stripeColourLight)}
             stripeDark={stripeDark(images.stripeColourDark)}
             hideStripes={images.hideStripeBar ?? false}
-            ribbon={ribbonColour(images.ribbonColour)}
           />
 
           {/* One section at a time, picked by the link the visitor chose. All
@@ -64,6 +63,7 @@ export default async function Home() {
                   avatar={images.avatar}
                   background={images.heroBackground}
                   backgroundMobile={images.heroBackgroundMobile}
+                  ribbon={ribbonColour(images.ribbonColour)}
                   text={text}
                   headings={headings}
                 />
@@ -79,6 +79,7 @@ export default async function Home() {
                   headings={headings}
                   bandColour={aboutBandColour(images.aboutBandColour)}
                   bandImage={backdropUrl(images.aboutBackground)}
+                  ribbon={ribbonColour(images.ribbonColour)}
                 />
                 <Instagram posts={instagramPosts(images.instagramPosts)} />
               </>
@@ -91,6 +92,7 @@ export default async function Home() {
                 headings={headings}
                 text={text}
                 buttonColourHex={images.buttonColour}
+                ribbon={ribbonColour(images.ribbonColour)}
               />
             }
           />

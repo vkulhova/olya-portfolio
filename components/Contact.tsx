@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useLanguage } from "./Language";
 import { backdropUrl, buttonColour, readableInk } from "@/lib/sanity";
 import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
+import DecorativeDots from "./DecorativeDots";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs,
  *  the same way About and the hero card read theirs. */
@@ -50,6 +51,7 @@ export default function Contact({
   headings,
   text,
   buttonColourHex,
+  ribbon,
 }: {
   illustration: SiteImage;
   background?: SiteImage;
@@ -57,6 +59,8 @@ export default function Contact({
   headings?: SiteHeadings;
   text?: SiteText;
   buttonColourHex?: string | null;
+  /** The line of hearts, drawn by the section now rather than by SiteHeader. */
+  ribbon?: string;
 }) {
   const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
   const backdrop = backdropUrl(background);
@@ -100,6 +104,16 @@ export default function Contact({
 
   return (
     <section id="contact" className="w-full scroll-mt-[78px]">
+      {/* The hearts. They used to be drawn once in SiteHeader for every
+          section; cards #64, #66 and #67 move them under each section's own
+          coloured band, so each section draws its own. This one is still in
+          its old place, above the section, and moves down when that section's
+          own card is done — leaving it here keeps the seam as it was rather
+          than removing the line for a while. */}
+      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
+        <DecorativeDots colour={ribbon} />
+      </div>
+
 
     {/* The white opening: the phrase, the copy, then the letter. It used to be
         the form straight after the ribbon, with the letter buried at the foot

@@ -2,6 +2,7 @@ import Image from "next/image";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
+import DecorativeDots from "./DecorativeDots";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs. */
 const DEFAULT_ABOUT_EN = `My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a Ukrainian illustrator based in Odesa, and these days that looks like freelance illustration across books, stickers, portraits, and brand work, with four years at a mobile game studio somewhere along the way.
@@ -17,6 +18,7 @@ export default function About({
   headings,
   bandColour,
   bandImage,
+  ribbon,
 }: {
   photo: SiteImage;
   illustration: SiteImage;
@@ -24,9 +26,21 @@ export default function About({
   headings?: SiteHeadings;
   bandColour?: string;
   bandImage?: string | null;
+  /** The line of hearts, drawn by the section now rather than by SiteHeader. */
+  ribbon?: string;
 }) {
   return (
     <section id="about" className="w-full bg-white scroll-mt-[78px]">
+      {/* The hearts. They used to be drawn once in SiteHeader for every
+          section; cards #64, #66 and #67 move them under each section's own
+          coloured band, so each section draws its own. This one is still in
+          its old place, above the section, and moves down when that section's
+          own card is done — leaving it here keeps the seam as it was rather
+          than removing the line for a while. */}
+      <div className="bg-white pt-[20px] pb-8 sm:pb-12">
+        <DecorativeDots colour={ribbon} />
+      </div>
+
       {/* Coloured band, desktop only. Studio can put a picture here instead of
           the colour; both arrive as variables because .about-band has to hold
           them behind a media query. */}

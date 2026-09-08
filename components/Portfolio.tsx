@@ -10,9 +10,15 @@ export default async function Portfolio() {
   }
 
   return (
-    /* pb-4 rather than pb-10: About takes the other 24px as breathing room
-       above its dot trim, so the seam is unchanged in total */
-    <section id="portfolio" className="w-full bg-white pt-20 sm:pt-24 pb-4 scroll-mt-[78px]">
+    /* The white under the last row matches the white beside the rows, which is
+       what cards #64 and #69 ask for. Both are percentages of the window, so
+       they stay matched: the grid is 76% of a phone and 86% from sm, leaving
+       12% and 7% at each side, and those are the two figures below.
+
+       It used to be 16px, chosen back when a dot trim followed this section
+       and took the rest of the gap. That trim has moved under the band above,
+       so the section now closes on its own. */
+    <section id="portfolio" className="w-full bg-white pt-20 sm:pt-24 pb-[12%] sm:pb-[7%] scroll-mt-[78px]">
       <MasonryGrid items={works} />
     </section>
   );

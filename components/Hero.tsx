@@ -2,6 +2,7 @@ import Image from "next/image";
 import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import { backdropUrl } from "@/lib/sanity";
+import DecorativeDots from "./DecorativeDots";
 import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
 
 /** Used until the Studio field is filled in. */
@@ -11,12 +12,17 @@ export default function Hero({
   avatar,
   background,
   backgroundMobile,
+  ribbon,
   text,
   headings,
 }: {
   avatar: SiteImage;
   background?: SiteImage;
   backgroundMobile?: SiteImage;
+  /** The line of hearts. It used to sit above every section, in SiteHeader;
+   *  cards #64 and #69 put it under each section's coloured band instead, so
+   *  each section draws its own now. */
+  ribbon?: string;
   text?: SiteText;
   headings?: SiteHeadings;
 }) {
@@ -146,6 +152,13 @@ export default function Hero({
             </div>
           </div>
         </div>
+      </div>
+
+      {/* The hearts, under the mustard rather than over it. 24px of white above
+          them and 84 below, which is what the drawing on card #64 measures
+          between the band, the line and the first row of work. */}
+      <div className="bg-white pt-[24px] pb-[84px]">
+        <DecorativeDots colour={ribbon} />
       </div>
     </>
   );
