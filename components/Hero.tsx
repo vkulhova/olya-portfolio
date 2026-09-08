@@ -79,9 +79,10 @@ export default function Hero({
         {/* The cream stars that used to straddle this card's top and bottom-right
             corners are gone: the band is getting a drawn backdrop instead, and
             the stars would only have to be nudged around whatever it shows. */}
-        {/* 65.7% on a phone — the 264px the red marks on card #61 measure out
-            of that screen's 402. Wider screens keep what card #54 set. */}
-        <div className="relative z-10 w-[65.7%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
+        {/* 73.6% on a phone — the 433px the drawing on card #69 measures out of
+            its 588. It was 65.7%, taken from the red marks on card #61, which
+            card #69 asks to widen. Wider screens keep what card #54 set. */}
+        <div className="relative z-10 w-[73.6%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-[6px]">
@@ -159,10 +160,11 @@ export default function Hero({
           and 92 between its last ink and the first row of work — the line's own
           box carries 2px above the drawing, hence 36 here.
 
-          Nothing below from sm up: the 92 is Portfolio's own top padding,
-          which this used to be added on top of. Phones keep the figures they
-          were given, until card #69 measures them against their own drawing. */}
-      <div className="bg-white pt-[24px] sm:pt-[36px] pb-[84px] sm:pb-0">
+          Nothing below: the room under the line is Portfolio's own top
+          padding, which this used to be added on top of. The phone drawing on
+          card #69 measures the same 38 above and 91 below, so both widths take
+          the same figure here. */}
+      <div className="bg-white pt-[36px]">
         <DecorativeDots colour={ribbon} />
       </div>
     </>
