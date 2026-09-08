@@ -177,23 +177,17 @@ body {
 }
 
 /* The footer signature — the one line of the site set in a serif, and the only
-   face still fetched from Google. */
+   face still fetched from Google. 13px on 0.5 at every width: cards #65 and
+   #68 agree, which is also what settles the two different footers #65 names. */
 .font-signature {
   font-family: 'Source Serif 4', 'Source Serif Pro', serif;
-  font-size: 14px;
-  letter-spacing: 1px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
   /* 28px, per card #56. The address and the signature are two lines of one
      block in the drawing — 244 by 56, which is twice this — so they are spaced
      by their own leading rather than by a margin between the paragraphs. The
      figure does not change with the width; only the size does. */
   line-height: 28px;
-}
-
-@media (min-width: 640px) {
-  .font-signature {
-    font-size: 13px;
-    letter-spacing: 0.5px;
-  }
 }
 
 /* The site's chrome — the nav, the language switch, the send button and the
@@ -203,22 +197,15 @@ body {
   font-family: 'Fixel Display', sans-serif;
 }
 
-/* Form captions: Fixel Display Medium at 13px, 2px apart, set in capitals, per
-   the type spec. Display rather than Text: the captions are chrome, like the
+/* Form captions: Fixel Display Medium at 11px, 1.5px apart, set in capitals.
+   Cards #65 and #68 give the same figures, so there is no breakpoint here. Display rather than Text: the captions are chrome, like the
    nav and the button, while the line the visitor types is running text. */
 .form-label {
   font-family: 'Fixel Display', sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
-  letter-spacing: 2px;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
-}
-
-@media (min-width: 640px) {
-  .form-label {
-    font-size: 11px;
-    letter-spacing: 1.5px;
-  }
 }
 
 /* What the visitor types, and the error line under the button: Fixel Text at
@@ -273,12 +260,13 @@ body {
    ended level with the photo. That is what made equal sizes impossible, so it
    is gone; where the text now runs past the picture, it simply runs past it. */
 .body-copy {
-  /* Two specs, one for each width: 16px on lines 1.6 apart on a phone, 17px on
-     1.65 from sm up. Written mobile-first, the way the rest of the site is. */
-  font-size: 16px;
+  /* Two specs, one for each width: 14px on 23px lines with 0.3 of spacing on a
+     phone (card #68), 14 on 24 with 0.5 from sm up (card #65). Written
+     mobile-first, the way the rest of the site is. */
+  font-size: 14px;
   font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.6;
+  letter-spacing: 0.3px;
+  line-height: 23px;
 }
 
 @media (min-width: 640px) {
@@ -289,16 +277,16 @@ body {
   }
 }
 
-/* The Instagram line. Card #52 sets it in Fixel Display Medium at 16 on a
+/* The Instagram line. Card #68 sets it in Fixel Display Medium at 15 on a
    phone; card #65 sets it in Fixel Text Regular at 18 from sm up. The family
    itself changes with the width, which no utility class can express, so the
    line has a rule of its own. */
 .instagram-line {
   font-family: 'Fixel Display', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 1.4;
-  letter-spacing: 0.5px;
+  letter-spacing: 0;
 }
 
 @media (min-width: 640px) {
