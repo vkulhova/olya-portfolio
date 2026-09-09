@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import Lightbox from "./Lightbox";
 import type { Illustration } from "@/lib/sanity";
 
 /** Column count per breakpoint, matching the sm / lg steps used elsewhere. */
@@ -27,11 +28,15 @@ const DEFAULT_COLUMNS = 3;
  * with pictures of different heights the columns cannot both stay level and
  * stay in sequence, and the sequence is the one that was asked for.
  */
-function distribute(items: Illustration[], columnCount: number): Illustration[][] {
-  const columns: Illustration[][] = Array.from({ length: columnCount }, () => []);
-  items.forEach((item, i) => columns[i % columnCount].push(item));
+function distribute(items: Illustration[], columnCount: number): Placed[][] {
+  const columns: Placed[][] = Array.from({ length: columnCount }, () => []);
+  items.forEach((work, at) => columns[at % columnCount].push({ work, at }));
   return columns;
 }
+
+/** A picture and where it sits in Studio's order — which is the order the
+ *  overlay steps through, not the order of the column it happens to be in. */
+type Placed = { work: Illustration; at: number };
 
 export default function MasonryGrid({ items }: { items: Illustration[] }) {
   // The server has no viewport, so it lays out the desktop case and the client
@@ -51,30 +56,53 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
 
   const columns = distribute(items, columnCount);
 
+  /* Which picture the overlay is showing, as a position in `items`. Card #73.
+     Stepping wraps around both ends, so the arrows never dead-end. */
+  const [open, setOpen] = useState<number | null>(null);
+  const step = useCallback(
+    (delta: number) =>
+      setOpen((at) => (at === null ? null : (at + delta + items.length) % items.length)),
+    [items.length]
+  );
+
   return (
-    // 76% on a phone rather than 86%: card #62's green frame puts the picture
-    // 48px in from each edge of a 402px screen, which is 305 of it. Wider
-    // screens keep the 86% they had.
-    <div className="w-[76%] sm:w-[86%] mx-auto flex gap-x-14 items-start">
-      {columns.map((column, i) => (
-        // 48px between pictures on a phone rather than 32, so the white
-        // between them matches the white at the sides — the two things the
-        // blue marks on card #62 pair up. From sm up the columns sit side by
-        // side and the gaps answer to the layout instead, so 32 stays.
-        <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-8">
-          {column.map((work) => (
-            <Image
-              key={work._id}
-              src={work.imageUrl}
-              alt={work.title}
-              width={work.width}
-              height={work.height}
-              className="w-full h-auto"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 500px"
-            />
-          ))}
-        </div>
-      ))}
-    </div>
+    <>
+      {/* 76% on a phone rather than 86%: card #62's green frame puts the
+          picture 48px in from each edge of a 402px screen, which is 305 of it.
+          Wider screens keep the 86% they had. */}
+      <div className="w-[76%] sm:w-[86%] mx-auto flex gap-x-14 items-start">
+        {columns.map((column, i) => (
+          // 48px between pictures on a phone rather than 32, so the white
+          // between them matches the white at the sides — the two things the
+          // blue marks on card #62 pair up. From sm up the columns sit side by
+          // side and the gaps answer to the layout instead, so 32 stays.
+          <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-8">
+            {column.map(({ work, at }) => (
+              /* A button rather than the picture on its own: opening the large
+                 view is an action, so it answers to the keyboard and to a
+                 screen reader as one. */
+              <button
+                key={work._id}
+                type="button"
+                onClick={() => setOpen(at)}
+                aria-label={work.title ? `Open ${work.title}` : "Open illustration"}
+                className="block w-full cursor-zoom-in"
+              >
+                <Image
+                  src={work.imageUrl}
+                  alt={work.title}
+                  width={work.width}
+                  height={work.height}
+                  className="w-full h-auto"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 500px"
+                />
+              </button>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      <Lightbox items={items} index={open} onClose={() => setOpen(null)} onStep={step} />
+    </>
   );
 }
