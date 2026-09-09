@@ -122,7 +122,12 @@ From md up the picture is 31.6% of the card's inner width —
                 nowrap keeps the pair on one line: the phrase shrinks first. */}
             {/* Centred while the columns are stacked, so the heading lines up
                 with the photo above it; beside the photo it stays left. */}
-            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 flex-wrap justify-center md:justify-start">
+            {/* nowrap, not wrap — card #77. Between 768 and 1023 the text
+                column is narrow enough that the pair no longer fitted on one
+                line, and the star dropped underneath the phrase on its own.
+                The phrase carries min-w-0 and shrink, so it is the one that
+                gives way now, exactly as the Contact heading already did. */}
+            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 flex-nowrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
