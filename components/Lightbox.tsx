@@ -13,6 +13,14 @@ import type { Illustration } from "@/lib/sanity";
    scaled along with the shape.
 
    currentColor throughout, so the colour is set once on the button. */
+/* What a button shows when the keyboard reaches it. The browser's own ring is
+   turned off: it is blue, which belongs to no part of this site, and it was
+   being drawn around the cross the moment the overlay opened. This one is the
+   site's brown, and focus-visible means it appears for the keyboard and not
+   for a tap. */
+const FOCUS_RING =
+  "outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark";
+
 function CloseMark({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className={className}>
@@ -67,16 +75,21 @@ export default function Lightbox({
 }) {
   const open = index !== null;
   const panelRef = useRef<HTMLDivElement>(null);
-  const closeRef = useRef<HTMLButtonElement>(null);
   /* What had the focus before the overlay opened, so it can be handed back
      when it closes — otherwise the focus falls to the top of the page and the
      next Tab starts from the beginning. */
   const previous = useRef<HTMLElement | null>(null);
 
+  /* The overlay itself takes the focus, not the close button — card #80. It
+     used to be the button, and a phone then drew the browser's own focus ring
+     around the cross: a blue square, which is not the design and is not
+     something a visitor did anything to ask for. The overlay is not a button,
+     so nothing is drawn around it, and everything the focus was there for
+     still works: Escape, the arrow keys and Tab all answer to the overlay. */
   useEffect(() => {
     if (!open) return;
     previous.current = document.activeElement as HTMLElement | null;
-    closeRef.current?.focus();
+    panelRef.current?.focus();
     return () => previous.current?.focus?.();
   }, [open]);
 
@@ -111,7 +124,12 @@ export default function Lightbox({
       if (!focusable?.length) return;
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
+      // Shift+Tab straight from the overlay itself goes to the last button
+      // rather than out of the overlay and onto the page behind it.
+      if (e.shiftKey && document.activeElement === panelRef.current) {
+        e.preventDefault();
+        last.focus();
+      } else if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
       } else if (!e.shiftKey && document.activeElement === last) {
@@ -132,10 +150,13 @@ export default function Lightbox({
       role="dialog"
       aria-modal="true"
       aria-label={work.title || "Illustration"}
+      tabIndex={-1}
       onKeyDown={onKeyDown}
       /* Above the back-to-top button, which is itself z-50 and fixed: with
-         the two on the same level it showed through the overlay. */
-      className="fixed inset-0 z-[60] bg-white text-dark"
+         the two on the same level it showed through the overlay.
+         outline-none because the overlay is what takes the focus now, and a
+         ring around the whole screen is not a useful thing to draw. */
+      className="fixed inset-0 z-[60] bg-white text-dark outline-none"
     >
       {/* The picture. 77.5% of the window's height on the desktop, which is the
           777 of 1003 the drawing measures, and never wider than the middle of
@@ -156,11 +177,10 @@ export default function Lightbox({
       {/* Close. 32px at 76 in from the right and 97 down on the desktop, 27px
           at 48 and 53 on a phone — both straight off the drawings. */}
       <button
-        ref={closeRef}
         type="button"
         onClick={onClose}
         aria-label="Close"
-        className="absolute right-[48px] top-[53px] sm:right-[76px] sm:top-[97px] transition-opacity hover:opacity-60"
+        className={`absolute right-[48px] top-[53px] sm:right-[76px] sm:top-[97px] transition-opacity hover:opacity-60 ${FOCUS_RING}`}
       >
         <CloseMark className="w-[27px] h-[27px] sm:w-8 sm:h-8 [stroke-width:2.37] sm:[stroke-width:3]" />
       </button>
@@ -178,7 +198,7 @@ export default function Lightbox({
             type="button"
             onClick={() => onStep(-1)}
             aria-label="Previous illustration"
-            className="hidden sm:block absolute left-[15.86%] top-1/2 -translate-y-1/2 transition-opacity hover:opacity-60"
+            className={`hidden sm:block absolute left-[15.86%] top-1/2 -translate-y-1/2 transition-opacity hover:opacity-60 ${FOCUS_RING}`}
           >
             <Chevron back className="w-[19px] h-8" />
           </button>
@@ -186,7 +206,7 @@ export default function Lightbox({
             type="button"
             onClick={() => onStep(1)}
             aria-label="Next illustration"
-            className="hidden sm:block absolute right-[15.86%] top-1/2 -translate-y-1/2 transition-opacity hover:opacity-60"
+            className={`hidden sm:block absolute right-[15.86%] top-1/2 -translate-y-1/2 transition-opacity hover:opacity-60 ${FOCUS_RING}`}
           >
             <Chevron className="w-[19px] h-8" />
           </button>
