@@ -48,8 +48,9 @@
 
 html {
   scroll-behavior: smooth;
-  /* Firefox. Inherited, so nested scrollers (the message field) match too. */
-  scrollbar-color: #BCB9A2 transparent;
+  /* Firefox. The page's own bar is the site's dark brown — card #79. This is
+     inherited, so the message field below takes itself back out of it. */
+  scrollbar-color: #3C1A05 transparent;
   scrollbar-width: thin;
 }
 
@@ -219,10 +220,11 @@ body {
   }
 }
 
-/* The scrollbar, page and message field alike. It used to be 10px of the
-   site's darkest brown on white, which read as a bar rather than a hint —
-   card #59 asks for something small in BCB9A2, the same colour the field
-   rules are drawn in, so the two agree.
+/* The scrollbars. They used to be 10px of the site's darkest brown on white,
+   which read as a bar rather than a hint — card #59 asks for something small
+   in BCB9A2, the same colour the field rules are drawn in, so the two agree.
+   Card #79 then brought the dark brown back, but only to the page's own bar;
+   the size stays as #59 set it.
 
    The track is transparent rather than white: the message field sits on the
    card now, with no fill of its own, and a white track would have drawn a
@@ -244,6 +246,33 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #A6A288;
+}
+
+/* The page's own bar, and only it — card #79 asks for the big one to be the
+   site's dark brown. The rules above still hold for everything nested: the
+   message field keeps the BCB9A2 that card #59 matched to the field rules,
+   where a dark bar would have been the heaviest thing on the card.
+
+   Both html and body carry it. WebKit takes the page's bar from the root
+   element, but when the root's own overflow is visible it takes it from body
+   instead — and body here sets overflow-x: hidden (card #60), which is exactly
+   the case that hands the styling over. Naming both covers either path, and
+   either one out-specifies the bare rules above.
+
+   Firefox has no such split — scrollbar-color is inherited — so the field is
+   given its own value rather than the page being given a different one. */
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: #3C1A05;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: #2A1204;
+}
+
+textarea {
+  scrollbar-color: #BCB9A2 transparent;
 }
 
 /* The paragraph copy in Hero, About and Contact. One rule for all three: they
