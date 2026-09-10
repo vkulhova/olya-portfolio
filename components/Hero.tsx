@@ -82,7 +82,7 @@ export default function Hero({
         {/* 73.6% on a phone — the 433px the drawing on card #69 measures out of
             its 588. It was 65.7%, taken from the red marks on card #61, which
             card #69 asks to widen. Wider screens keep what card #54 set. */}
-        <div className="relative z-10 w-[73.6%] sm:w-[85%] md:w-[62%] lg:w-[53%]">
+        <div className="relative z-10 w-[73.6%] sm:w-[85%] md:w-[62%] lg:w-[847px]">
 
           {/* Hero card */}
           <div className="w-full bg-white rounded-[6px]">
@@ -97,19 +97,32 @@ export default function Hero({
             {/* 32px of side padding on a phone rather than 24: the green marks
                 on card #61 put the greeting and the copy 34 and 29 in from the
                 card's edges. */}
-            <div className="w-full px-8 sm:px-6 py-10 md:px-12 md:py-8 flex flex-col lg:flex-row items-center gap-6 lg:gap-6 xl:gap-8">
+            {/* From lg the card is one fixed composition, 847px wide — card #88.
+                Every figure is the drawing's, measured at its 1723 window: 55
+                to the avatar, a 314 avatar, 46 to the copy, a 365 column, 67 to
+                the edge, and 58 above and below the avatar, which makes the
+                card the drawing's 430 tall.
+
+                Fixed rather than a share of the window on purpose. The card
+                asks for the avatar to run from the top of the greeting to the
+                bottom of the copy. With a percentage the column narrows as the
+                window does, the copy takes more lines, and the two meet at one
+                width only — which is where card #64 had to leave it. At a fixed
+                column the copy sets in the same lines on every laptop, so they
+                meet everywhere. Below lg nothing here changes. */}
+            <div className="w-full px-8 sm:px-6 py-10 md:px-12 md:py-8 lg:pl-[55px] lg:pr-[67px] lg:py-[58px] flex flex-col lg:flex-row items-center gap-6 lg:gap-[46px]">
             {/* Avatar circle — fixed responsive sizes so it never overflows on narrow screens */}
-            {/* Smaller between lg and xl. At 1024 the card is 53% of a narrow
-                window, and the circle at its old 192px left the greeting 239px
-                where it needs 267 — so it scaled down to 34. At 144, with the
-                tighter gap below, the greeting keeps its full size; from xl
-                there is room for the circle to go back up. */}
-            <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-36 lg:h-36 xl:w-44 xl:h-44 rounded-full overflow-hidden">
+            {/* 314 from lg, one size at every width: the card no longer
+                narrows with the window, so there is no step where the circle
+                has to shrink to leave the greeting room. 314 is the box whose
+                drawing comes out at the 294 the mockup measures — the avatar
+                file carries a thin transparent ring. */}
+            <div className="shrink-0 w-48 h-48 sm:w-40 sm:h-40 md:w-44 md:h-44 lg:w-[314px] lg:h-[314px] rounded-full overflow-hidden">
               <Image
                 src={avatar?.url ?? "/images/avatar.png"}
                 alt="Olika"
-                width={176}
-                height={176}
+                width={314}
+                height={314}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -120,13 +133,22 @@ export default function Hero({
                 lettering rather than under the line of it — the greeting and
                 the paragraph read as two separate blocks. 16px closes them up
                 without letting them touch. Both languages, one container. */}
-            <div className="flex flex-col gap-4 items-center text-center lg:items-start lg:text-left min-w-0">
+            {/* 33 between greeting and copy from lg: the drawing measures 40 from
+                the lettering's last ink to the first line's, and the line box
+                carries 7 of that above its letters. */}
+            <div className="flex flex-col gap-4 lg:gap-[33px] items-center text-center lg:items-start lg:text-left min-w-0">
               <LocalisedHeading
                 en={headings?.heroEn ?? "/svg/hello-and-welcome.svg"}
                 uk={headings?.heroUk ?? "/svg/hello-and-welcome-uk.svg"}
+                /* From lg the greeting is set to a height rather than capped
+                   at one — card #88 draws it 53px tall, and the drawing's own
+                   box is only 49, so max-h could never reach it. object-contain
+                   keeps the lettering in proportion if the 365 column is the
+                   narrower of the two, and object-left keeps it on the copy's
+                   left edge. */
                 altEn="Hello and welcome"
                 altUk="Вітаю, рада що ви тут"
-                className="max-h-[38px] sm:max-h-[38px] w-auto max-w-full h-auto"
+                className="max-h-[38px] w-auto max-w-full h-auto lg:h-[53px] lg:max-h-none lg:object-contain lg:object-left"
                 /* The Ukrainian lettering hangs from the top of its box and
                    spends the lower part on descenders, so at the same 32px
                    below the card's edge it reads as sitting higher than the
@@ -141,7 +163,7 @@ export default function Hero({
                    one and left the greeting looming over copy set at 14px.
                    At 56 the letters land just under the About phrase's and
                    the block sits level with the paragraph under it. */
-                ukClassName="mt-1.5 md:mt-2 max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto"
+                ukClassName="mt-1.5 md:mt-2 max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto lg:h-[67px] lg:max-h-none lg:object-contain lg:object-left"
               />
 
               <LocalisedText
