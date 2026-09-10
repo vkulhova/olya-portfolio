@@ -62,10 +62,10 @@ export default function About({
           The cap is there for the reason #55 gave: past it the card would be
           an extrapolation of the drawing rather than the drawing, the copy
           setting in fewer lines while the photo only gets taller. */}
-      <div className="w-[71.3%] sm:w-[79.5%] sm:max-w-[1178px] mx-auto">
+      <div className="w-[71.3%] sm:w-[79.5%] sm:max-w-[1178px] xl:w-[1079px] xl:max-w-none mx-auto">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
-        <div className="bg-white rounded-[6px] px-[13.4%] pt-16 pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16">
+        <div className="bg-white rounded-[6px] px-[13.4%] pt-16 pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16 xl:pl-[70px] xl:pr-[43px] xl:py-[72px]">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -79,7 +79,23 @@ export default function About({
             padding is all the drawing on card #66 leaves under the content,
             and this margin was adding 40 more. Below md the photo sits above
             the copy and the margin is the gap between the two blocks. */}
-        <div className="mb-4 sm:mb-10 md:mb-0">
+        {/* From xl the card is one fixed composition — card #89, measured at
+            its 1728 window: 70 to a 323 x 448 photo, 67 to a 576 column, 43 to
+            the edge, and the card 598 tall. Two columns rather than the
+            float: the drawing sets the copy beside the photo only, never under
+            it, and the card asks for the photo to run from the top of the
+            greeting to the bottom of the copy.
+
+            Fixed for the reason card #88 gave the hero card: at a fixed column
+            the copy sets in the same lines on every screen from xl, so photo
+            and copy meet at every width rather than one. 1079 does not fit a
+            1024 window, so between lg and xl the float from card #87 stays.
+
+            72 above and below rather than the 75 the drawing puts around the
+            photo: the copy column's box is 6px taller than the photo, so it is
+            the column that sets the card's height, and 72 is what brings the
+            card to 598 with the photo sitting 75 in from both edges. */}
+        <div className="mb-4 sm:mb-10 md:mb-0 xl:flex xl:items-center xl:gap-[67px]">
 
           {/* The box carries the photo's own 3:4 ratio at every width, so it is
               exactly the picture — nothing is cropped and no letterboxing is
@@ -95,7 +111,7 @@ From md up the picture is 31.6% of the card's inner width —
               two keep meeting as the window changes — an exact height would
               hold at one width and nowhere else, and would go stale the moment
               the text is edited in Studio. */}
-          <div>
+          <div className="xl:w-[323px] xl:shrink-0">
             {/* 8px under the picture from md, not the 40 it had — card #87. The
                 float's bottom margin counts towards the card's height whenever
                 the picture is the taller of the two, so 40 was adding 26px of
@@ -104,14 +120,14 @@ From md up the picture is 31.6% of the card's inner width —
                 line, and copy that wraps under the picture on narrower screens
                 still starts 18px clear of it. */}
             <div
-              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[288/431]"
+              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[288/431] xl:w-full xl:float-none xl:mr-0 xl:mb-0 xl:aspect-[323/448]"
             >
               {/* Photo */}
               <Image
                 src={photo?.url ?? "/images/photo-olya.jpg"}
                 alt="Olika Nikolska"
                 fill
-                sizes="(max-width: 768px) 272px, 300px"
+                sizes="(max-width: 768px) 272px, (min-width: 1280px) 323px, 300px"
                 className="object-cover object-top"
               />
             </div>
@@ -125,7 +141,7 @@ From md up the picture is 31.6% of the card's inner width —
           {/* pt-2 gives the phrase a little air on phones, where it sits under
               the photo. Beside the photo it has to start level with it, which
               is what the card asks for, so from md up the padding goes. */}
-          <div className="pt-2 md:pt-0">
+          <div className="pt-2 md:pt-0 xl:flex-1 xl:min-w-0">
             {/* Heading, with the olive star back beside it. The two on the
                 photo are gone, so this is the section's only mark now — which
                 is what the new design asks for, on phones as well as here.
@@ -137,19 +153,19 @@ From md up the picture is 31.6% of the card's inner width —
                 line, and the star dropped underneath the phrase on its own.
                 The phrase carries min-w-0 and shrink, so it is the one that
                 gives way now, exactly as the Contact heading already did. */}
-            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 lg:gap-4 flex-nowrap justify-center md:justify-start">
+            <div className="mb-[42px] sm:mb-5 xl:mb-[39px] flex items-center gap-3 lg:gap-4 flex-nowrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
                 altEn="A few words about me"
                 altUk="Кілька слів про мене"
-                className="max-h-[38px] w-auto max-w-full h-auto min-w-0 shrink"
-                ukClassName="max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink"
+                className="max-h-[38px] w-auto max-w-full h-auto min-w-0 shrink xl:h-[55px] xl:max-h-none xl:object-contain xl:object-left"
+                ukClassName="max-h-[50px] sm:max-h-[48px] w-auto max-w-full h-auto min-w-0 shrink xl:h-[69px] xl:max-h-none xl:object-contain xl:object-left"
               />
-              {/* eslint-disable-next-line @next/next/no-img-element */}
               {/* Not on a phone: the drawing on card #70 shows the phrase on
                   its own there, and the card is narrow enough that the star
                   beside it would only shrink the lettering. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/svg/star-olive.svg"
                 alt=""
@@ -160,7 +176,7 @@ From md up the picture is 31.6% of the card's inner width —
 
             {/* space-y stands in for the flex gap the paragraphs used to get.
                 It is margin, not layout, so the block still wraps the float. */}
-            <div className="space-y-5">
+            <div className="space-y-5 xl:space-y-3">
               <LocalisedText
                 en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
                 uk={text?.aboutUk ?? null}
@@ -170,7 +186,7 @@ From md up the picture is 31.6% of the card's inner width —
           </div>
 
           {/* Closes the float so the section's height counts the picture. */}
-          <div className="clear-both" />
+          <div className="clear-both xl:hidden" />
         </div>
 
         {/* The desk, phones only. It used to sit under the band, drawn wider
