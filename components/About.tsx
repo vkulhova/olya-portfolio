@@ -219,7 +219,10 @@ From md up the picture is 31.6% of the card's inner width —
           the drawing; the room below it is the Instagram row's own plus what
           is added here, to reach the 127px the desktop drawing measures down
           to that line of copy and the 93 the phone one does. */}
-      <div className="bg-white pt-[33px] sm:pt-[38px] pb-[42px]">
+      {/* 40px of white between the coloured band and the line's first ink,
+          the same at every band and every width — card #91. The line's own
+          box carries 2px above its drawing, hence 38. */}
+      <div className="bg-white pt-[38px] pb-[42px]">
         <DecorativeDots colour={ribbon} />
       </div>
 

@@ -186,7 +186,10 @@ export default function Hero({
           padding, which this used to be added on top of. The phone drawing on
           card #69 measures the same 38 above and 91 below, so both widths take
           the same figure here. */}
-      <div className="bg-white pt-[36px]">
+      {/* 40px of white between the coloured band and the line's first ink,
+          the same at every band and every width — card #91. The line's own
+          box carries 2px above its drawing, hence 38. */}
+      <div className="bg-white pt-[38px]">
         <DecorativeDots colour={ribbon} />
       </div>
     </>
