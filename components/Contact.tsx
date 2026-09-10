@@ -146,7 +146,12 @@ export default function Contact({
         it. The top spacing is About's, so both sections start on the same
         line under the ribbon. */}
     <div className="w-full bg-white">
-      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[184px] pb-[117px] sm:pb-[172px] flex flex-col items-center">
+      {/* 92 under the letter from sm, not 172 — card #94. Its screenshot marks
+          a red band to cut between the letter and the flower line; scaled off
+          the page's own flower line and the letter's width (both give 0.86),
+          the white it leaves is 127px from the letter's last ink to the line's
+          first, where there were 207. Phones are card #85's. */}
+      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[184px] pb-[117px] sm:pb-[92px] flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
             olive one. nowrap keeps them on one line: the phrase shrinks first.
 
