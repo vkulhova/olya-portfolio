@@ -53,13 +53,16 @@ export default function About({
           with it — hence 72 here rather than the 104 this used to carry. On
           phones that still left the photo further from the ribbon than the
           other two sections start, so there it is 32. */}
-      {/* 72% of the window, centred, capped at the 1216px the drawing on card
-          #55 shows. Past that width the card would be an extrapolation of the
-          drawing rather than the drawing: the copy sets in fewer and fewer
-          lines as the measure grows while the photo only gets taller, so the
-          two stop meeting. Freezing the card at the width it was drawn at
-          keeps the whole block in the proportions that were approved. */}
-      <div className="w-[71.3%] sm:w-[72%] sm:max-w-[1216px] mx-auto">
+      {/* 79.5% of the window, centred, capped at 1178px. Card #87 draws the
+          card 1071 wide in a 1347 window, which is the 79.5%; card #66 draws
+          it 1178 wide at 1728, which is where the cap comes from — so both
+          drawings hold exactly, and between them the card simply stops
+          growing. It was 72% capped at 1216, from card #55.
+
+          The cap is there for the reason #55 gave: past it the card would be
+          an extrapolation of the drawing rather than the drawing, the copy
+          setting in fewer lines while the photo only gets taller. */}
+      <div className="w-[71.3%] sm:w-[79.5%] sm:max-w-[1178px] mx-auto">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
         <div className="bg-white rounded-[6px] px-[13.4%] pt-16 pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16">
@@ -86,15 +89,22 @@ export default function About({
 
 From md up the picture is 31.6% of the card's inner width —
               the 28% of its outer width the drawing shows, once the card's own
-              padding is taken off — and carries the drawing's own 340:481, which is what card #55 measures: the photo
+              padding is taken off — and carries 288:431, which is what the drawing on card #87 measures (it was 340:481 from card #55, then 324:411 from #66): the photo
               runs from the top of the drawn phrase to the last line of the
               copy. It is a proportion rather than a pixel width so that the
               two keep meeting as the window changes — an exact height would
               hold at one width and nowhere else, and would go stale the moment
               the text is edited in Studio. */}
           <div>
+            {/* 8px under the picture from md, not the 40 it had — card #87. The
+                float's bottom margin counts towards the card's height whenever
+                the picture is the taller of the two, so 40 was adding 26px of
+                empty card under the copy that the drawing does not have. At 8
+                the card comes out at the drawing's 572 with 68 under the last
+                line, and copy that wraps under the picture on narrower screens
+                still starts 18px clear of it. */}
             <div
-              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-10 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[324/411]"
+              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[288/431]"
             >
               {/* Photo */}
               <Image
@@ -127,7 +137,7 @@ From md up the picture is 31.6% of the card's inner width —
                 line, and the star dropped underneath the phrase on its own.
                 The phrase carries min-w-0 and shrink, so it is the one that
                 gives way now, exactly as the Contact heading already did. */}
-            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 flex-nowrap justify-center md:justify-start">
+            <div className="mb-[42px] sm:mb-5 flex items-center gap-3 lg:gap-4 flex-nowrap justify-center md:justify-start">
               <LocalisedHeading
                 en={headings?.aboutEn ?? "/svg/a-few-words-about-me.svg"}
                 uk={headings?.aboutUk ?? "/svg/a-few-words-about-me-uk.svg"}
