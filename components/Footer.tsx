@@ -28,16 +28,15 @@ export default function Footer({
       {/* The band carries its own colour, set in Studio the way the hero and
           contact backdrops are. */}
       <div data-footer-band style={{ backgroundColor: band }}>
-        {/* Phones get the icons at 44px — the size the back-to-top button used
-            to be — with the gap scaled to match. From sm up they are 36px, the
-            size drawn over the mock: at 22px they read as small print rather
-            than as buttons. The 8px gap comes from the same drawing. */}
-        {/* Card #63, measured off the drawing: on a phone the icons sit 45px
-            below the band's top rather than 64, with 7px between them rather
-            than 18, and 14px of air under them rather than 32. The circles
-            themselves stay 44px — the green marks are the same size as what is
-            there, only lower and closer together. From sm up nothing moves. */}
-        <div data-footer-icons className="flex justify-center gap-[7px] sm:gap-2 pt-[45px] sm:pt-16 pb-[14px] sm:pb-8">
+        {/* Phones: 44px icons, 45 below the band's top, 7 between them and 14
+            of air under them — card #63's figures, measured off its drawing.
+            The back-to-top button is 44 there too, so the two match. */}
+        {/* From sm the icons are 55px, 10 apart and 80 below the band's top —
+            card #92, which also makes the back-to-top button the same 55 and
+            sets it on this row's centre line. 12 under them brings the
+            address's first ink to the 20px the drawing leaves. Phones keep
+            card #63's figures. */}
+        <div data-footer-icons className="flex justify-center gap-[7px] sm:gap-[10px] pt-[45px] sm:pt-[80px] pb-[14px] sm:pb-3">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -45,7 +44,7 @@ export default function Footer({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={s.name}
-              className="w-11 h-11 sm:w-9 sm:h-9 hover:opacity-80 transition-opacity"
+              className="w-11 h-11 sm:w-[55px] sm:h-[55px] hover:opacity-80 transition-opacity"
             >
               {/* The glyph is painted in the band's own colour, so the mark
                   reads as a knock-out whatever colour Studio sets. The markup
@@ -78,11 +77,16 @@ export default function Footer({
 
         {/* Signature line. The year comes from the build, so it moves on with
             each deploy rather than being written into the markup. */}
-        {/* pb-16 with the pt-16 above it: the beige band was asked to stand
-            taller, and the room is split evenly above and below its contents
-            so the icons and the signature stay centred in it. */}
-        <p className="pb-[46px] sm:pb-16 text-center font-signature italic text-dark">
+        <p className="text-center font-signature italic text-dark">
           Made with love by Lolikar © {new Date().getFullYear()}
+        </p>
+
+        {/* Its own line under the signature, in the same face — card #92. The
+            band's bottom padding moved down onto it: 62 from sm leaves the
+            69px the drawing measures under the last ink; phones keep the 46
+            they had under the signature. */}
+        <p className="pb-[46px] sm:pb-[62px] text-center font-signature italic text-dark">
+          All Rights Reserved
         </p>
       </div>
     </footer>

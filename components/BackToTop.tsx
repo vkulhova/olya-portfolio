@@ -27,20 +27,18 @@ export default function BackToTop() {
       timerRef.current = window.setTimeout(() => setVisible(false), IDLE_TIMEOUT);
     };
 
-    // Where it stops, off to the right of the row of social icons: on phones
-    // resting on the icons' top edge, from sm up level with their middle —
-    // the button and the icons are both 36px there, so matching the two
-    // centres lines the row up exactly. Phones still differ: the icons are
-    // 44px against a 30px button. Measured off an icon rather than its row,
-    // whose padding sits above the icons themselves.
+    // Where it stops, off to the right of the row of social icons and level
+    // with their middle, at every width — card #92 asks for the button and the
+    // icons to be one size and on one line. They are the same size now on a
+    // phone too (44px), so matching the two centres lines the row up exactly
+    // there as well; it used to rest on the icons' top edge because it was
+    // only 30. Measured off an icon rather than its row, whose padding sits
+    // above the icons themselves.
     const place = () => {
       const icon = document.querySelector<HTMLElement>("[data-footer-icons] a");
       if (!icon) return setBottom(GAP);
       const box = icon.getBoundingClientRect();
-      const wide = window.matchMedia("(min-width: 640px)").matches;
-      const target = wide
-        ? box.top + box.height / 2 + (buttonRef.current?.offsetHeight ?? 0) / 2
-        : box.top;
+      const target = box.top + box.height / 2 + (buttonRef.current?.offsetHeight ?? 0) / 2;
       setBottom(Math.max(GAP, window.innerHeight - target));
     };
 
@@ -67,24 +65,25 @@ export default function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       style={{ bottom }}
-      className={`fixed right-5 sm:right-8 z-50 grid h-[30px] w-[30px] sm:h-9 sm:w-9 place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
+      className={`fixed right-5 sm:right-[54px] z-50 grid h-11 w-11 sm:h-[55px] sm:w-[55px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
-      {/* The chevron and its stroke come from the supplied drawing, kept in its
-          own 43-unit box so both scale with the button rather than being fixed
-          to one size. */}
+      {/* The chevron is the one drawn on card #92, point for point, in the
+          button's own 55-unit box: wider and steeper than the one it replaces,
+          with a 3-unit stroke. Kept in its box so it scales with the button —
+          44px on a phone, 55 from sm. */}
       <svg
         className="h-full w-full"
-        viewBox="0 0 43 43"
+        viewBox="0 0 55 55"
         fill="none"
         aria-hidden="true"
         stroke="currentColor"
-        strokeWidth="2"
+        strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path d="M31 25L21.5 15.5L12 25" />
+        <path d="M41.85 33.478L27.5 16.739L13.15 33.478" />
       </svg>
     </button>
   );
