@@ -67,16 +67,20 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
 
   return (
     <>
-      {/* 76% on a phone rather than 86%: card #62's green frame puts the
-          picture 48px in from each edge of a 402px screen, which is 305 of it.
-          Wider screens keep the 86% they had. */}
-      <div className="w-[76%] sm:w-[86%] mx-auto flex gap-x-14 items-start">
+      {/* 76% on a phone: card #62's green frame puts the picture 48px in from
+          each edge of a 402px screen, which is 305 of it.
+
+          92.5% from sm, and 28 between the columns — card #93. Its red frame
+          sits about 3.75% in from each side of the window, where the grid had
+          7; the frame was drawn by hand 49 and 58px in, so the two sides are
+          evened out. The gap between the columns is half the 56 it was, as
+          the card asks. */}
+      <div className="w-[76%] sm:w-[92.5%] mx-auto flex gap-x-14 sm:gap-x-7 items-start">
         {columns.map((column, i) => (
-          // 48px between pictures on a phone rather than 32, so the white
-          // between them matches the white at the sides — the two things the
-          // blue marks on card #62 pair up. From sm up the columns sit side by
-          // side and the gaps answer to the layout instead, so 32 stays.
-          <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-8">
+          // 48px between pictures on a phone, so the white between them
+          // matches the white at the sides — the two things the blue marks on
+          // card #62 pair up. From sm, 16: half the 32 it was, per card #93.
+          <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-4">
             {column.map(({ work, at }) => (
               /* A button rather than the picture on its own: opening the large
                  view is an action, so it answers to the keyboard and to a
@@ -94,7 +98,7 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
                   width={work.width}
                   height={work.height}
                   className="w-full h-auto"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 500px"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
                 />
               </button>
             ))}
