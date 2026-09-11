@@ -3,6 +3,7 @@ import LocalisedText from "./LocalisedText";
 import LocalisedHeading from "./LocalisedHeading";
 import type { SiteHeadings, SiteImage, SiteText } from "@/lib/sanity";
 import DecorativeDots from "./DecorativeDots";
+import WrapGap from "./WrapGap";
 
 /** Used until the Studio field is filled in. Blank lines split the paragraphs. */
 const DEFAULT_ABOUT_EN = `My name is Olika Nikolska, and I’ve been drawing for as long as I can remember. I’m a Ukrainian illustrator based in Odesa, and these days that looks like freelance illustration across books, stickers, portraits, and brand work, with four years at a mobile game studio somewhere along the way.
@@ -119,7 +120,12 @@ From md up the picture is 31.6% of the card's inner width —
                 the card comes out at the drawing's 572 with 68 under the last
                 line, and copy that wraps under the picture on narrower screens
                 still starts 18px clear of it. */}
+            {/* Between md and xl the 8px under the picture is only a fallback:
+                WrapGap sets the margin and nudges the height so the copy
+                closing up underneath sits as far from the photo as the copy
+                beside it — cards #99 and #105. */}
             <div
+              data-about-photo
               className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[288/431] xl:w-full xl:float-none xl:mr-0 xl:mb-0 xl:aspect-[323/448]"
             >
               {/* Photo */}
@@ -176,7 +182,8 @@ From md up the picture is 31.6% of the card's inner width —
 
             {/* space-y stands in for the flex gap the paragraphs used to get.
                 It is margin, not layout, so the block still wraps the float. */}
-            <div className="space-y-5 xl:space-y-3">
+            <div data-about-copy className="space-y-5 xl:space-y-3">
+              <WrapGap />
               <LocalisedText
                 en={text?.aboutEn?.trim() || DEFAULT_ABOUT_EN}
                 uk={text?.aboutUk ?? null}
