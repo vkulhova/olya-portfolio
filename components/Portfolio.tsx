@@ -28,7 +28,10 @@ export default async function Portfolio() {
        at every size: 128 at 1280, 151 at 1506, 174 at 1728. A share rather
        than a figure so the two stay alike as the window changes; the floor
        keeps narrower screens from losing any of the white they have now. */
-    <section id="portfolio" className="w-full bg-white pt-[82px] sm:pt-[max(107px,10%)] pb-[12%] sm:pb-[7%] scroll-mt-[78px]">
+    /* On a phone, card #83: 54 on top, where its first red frame starts under
+       the flower line (it was 82), and 8.46% under the last row, which is the
+       white the grid now leaves at each side. */
+    <section id="portfolio" className="w-full bg-white pt-[54px] sm:pt-[max(107px,10%)] pb-[8.46%] sm:pb-[7%] scroll-mt-[78px]">
       <MasonryGrid items={works} />
     </section>
   );

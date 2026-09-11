@@ -135,12 +135,18 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
           7; the frame was drawn by hand 49 and 58px in, so the two sides are
           evened out. The gap between the columns is half the 56 it was, as
           the card asks. */}
-      <div className="w-[76%] sm:w-[92.5%] mx-auto flex gap-x-14 sm:gap-x-7 items-start">
+      {/* 83.1% on a phone since card #83: its red frames draw the pictures
+          about 34px in from each edge of a 402px screen and 32 apart, and ask
+          for the white at the sides, between the pictures and under the last
+          one to be the same. So all three are 8.46% of the screen — 34 at
+          402 — and stay equal at every phone width rather than at one. */}
+      <div className="w-[83.1%] sm:w-[92.5%] mx-auto flex gap-x-14 sm:gap-x-7 items-start">
         {columns.map((column, i) => (
           // 48px between pictures on a phone, so the white between them
           // matches the white at the sides — the two things the blue marks on
           // card #62 pair up. From sm, 16: half the 32 it was, per card #93.
-          <div key={i} className="flex-1 min-w-0 flex flex-col gap-12 sm:gap-4">
+          // Card #83 then makes it 8.46vw, the same share as the sides.
+          <div key={i} className="flex-1 min-w-0 flex flex-col gap-[8.46vw] sm:gap-4">
             {column.map(({ work, at }) => (
               /* A button rather than the picture on its own: opening the large
                  view is an action, so it answers to the keyboard and to a
