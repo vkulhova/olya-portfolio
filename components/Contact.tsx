@@ -284,7 +284,12 @@ export default function Contact({
           at a page 1892 wide. A proportion rather than a pixel figure, so the
           band keeps its shape; the point of the change is that the blue now
           fits a screen while you scroll rather than running past it. */}
-      <div className="relative z-10 flex flex-col items-center py-20 sm:py-[8.8%] px-6">
+      {/* On a phone, card #86's red frame: the card starts 43px into the blue
+          rather than 80, and sits 45 in from each edge of a 402px screen
+          rather than 24 — 11.2% of the width, so it keeps that share on any
+          phone. The frame runs off the bottom of the screenshot; the blue
+          under the card is given the same 43 so the band stays even. */}
+      <div className="relative z-10 flex flex-col items-center py-[43px] sm:py-[8.8%] px-[11.2%] sm:px-6">
         {/* Scalloped card */}
         {/* Phones get the full width and tighter padding — at 70% the card was
             239px of a 390px screen, which squeezed the fields and left the
@@ -300,7 +305,11 @@ export default function Contact({
             the button, 64 above the card's. The gaps inside the form are left
             alone, so the card comes out 12px taller rather than squeezing
             them. Below lg the card is too narrow to give up 16px a side. */}
-        <div className="flex flex-col w-full sm:w-[42.6%] bg-white rounded-[6px] px-7 sm:px-12 lg:px-16 pt-8 pb-10 sm:pt-12 lg:pt-[60px] sm:pb-16">
+        {/* Card #86's green frame on a phone: everything inside starts 27px
+            under the card's top and about 23 in from its sides (20 and 26 as
+            drawn), where it was 32 and 28. The phrase's letters start at the
+            top of their box, hence 26. */}
+        <div className="flex flex-col w-full sm:w-[42.6%] bg-white rounded-[6px] px-[23px] sm:px-12 lg:px-16 pt-[26px] pb-10 sm:pt-12 lg:pt-[60px] sm:pb-16">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           {/* Centred on phones, where the phrase is the only thing on its line
