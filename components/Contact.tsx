@@ -152,12 +152,17 @@ export default function Contact({
           the white it leaves is 127px from the letter's last ink to the line's
           first, where there were 207. Phones are card #85's.
 
+          Then 20px of that given back — the card came back asking for a touch
+          more white, as the cut had taken a little too much. A quarter of the
+          80 removed, so 147 from ink to ink from sm, and 112 of padding. */}
+      {/*
+
           127 on top from sm, not 184 — card #95, the same kind of screenshot
           for the white between the upper flower line and the phrase. Scaled
           the same way (heart pitch and line pitch both give 0.87), it leaves
           131px from the line's last ink to the phrase's first, where there
           were 188. Phones are card #84's. */}
-      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[127px] pb-[117px] sm:pb-[92px] flex flex-col items-center">
+      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[127px] pb-[117px] sm:pb-[112px] flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
             olive one. nowrap keeps them on one line: the phrase shrinks first.
 
