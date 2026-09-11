@@ -275,7 +275,14 @@ export default function Contact({
         {/* 42.6% of the band's inner width, which is the drawing's 41.4% of
             the window once the band's own 24px of side padding is taken off —
             41.2% at 1440 and 41.5% at the width it was drawn at. */}
-        <div className="flex flex-col w-full sm:w-[42.6%] bg-white rounded-[6px] px-7 sm:px-12 pt-8 pb-10 sm:pt-12 sm:pb-16">
+        {/* More white inside the card from lg — card #103, whose green square
+            sits 64px in from either side and 59 from the top of the card at
+            the 1500 window it was drawn in, where the form was 48 from both.
+            The bottom already matched: the square's lower edge is the foot of
+            the button, 64 above the card's. The gaps inside the form are left
+            alone, so the card comes out 12px taller rather than squeezing
+            them. Below lg the card is too narrow to give up 16px a side. */}
+        <div className="flex flex-col w-full sm:w-[42.6%] bg-white rounded-[6px] px-7 sm:px-12 lg:px-16 pt-8 pb-10 sm:pt-12 lg:pt-[60px] sm:pb-16">
           {/* Heading with the salmon star beside it, the same pairing About
               uses. nowrap keeps them on one line: the heading shrinks first. */}
           {/* Centred on phones, where the phrase is the only thing on its line
