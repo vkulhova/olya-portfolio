@@ -17,13 +17,27 @@ import type { Illustration } from "@/lib/sanity";
    turned off: it is blue, which belongs to no part of this site, and it was
    being drawn around the cross the moment the overlay opened. This one is the
    site's brown, and focus-visible means it appears for the keyboard and not
-   for a tap. */
+   for a tap.
+
+   Card #100: Safari still drew a ring around the cross on the desktop — pale
+   green, which is the Mac's own accent colour, so it was Safari's native ring
+   and not anything this file draws. The outline used to be turned off as a 2px
+   transparent line, which Safari can still paint; it is now no outline at all.
+   The marks inside the buttons are kept out of focus and out of the pointer's
+   way too (see focusable and pointer-events on the SVGs below), so the ring
+   has nothing left to settle on. The brown ring for the keyboard is untouched. */
 const FOCUS_RING =
-  "outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark";
+  "[outline-style:none] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-dark";
 
 function CloseMark({ className = "" }: { className?: string }) {
   return (
-    <svg viewBox="0 0 32 32" fill="none" aria-hidden="true" className={className}>
+    <svg
+      viewBox="0 0 32 32"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className={`pointer-events-none [outline-style:none] ${className}`}
+    >
       <path
         d="M0 32L15.81 16L0 0M32 32L16.19 16L32 0"
         stroke="currentColor"
@@ -36,7 +50,13 @@ function CloseMark({ className = "" }: { className?: string }) {
 
 function Chevron({ back = false, className = "" }: { back?: boolean; className?: string }) {
   return (
-    <svg viewBox="0 0 19 32" fill="none" aria-hidden="true" className={className}>
+    <svg
+      viewBox="0 0 19 32"
+      fill="none"
+      aria-hidden="true"
+      focusable="false"
+      className={`pointer-events-none [outline-style:none] ${className}`}
+    >
       <path
         d={back ? "M18.565 0L0 15.913L18.565 31.826" : "M0 31.826L18.57 15.913L0 0"}
         stroke="currentColor"
@@ -129,6 +149,12 @@ export default function Lightbox({
       if (e.shiftKey && document.activeElement === panelRef.current) {
         e.preventDefault();
         last.focus();
+      } else if (!e.shiftKey && document.activeElement === panelRef.current) {
+        // And plain Tab from the overlay goes to the cross. Left to itself
+        // Safari, which skips buttons unless told otherwise, sent the focus
+        // out of the overlay altogether.
+        e.preventDefault();
+        first.focus();
       } else if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
         last.focus();
