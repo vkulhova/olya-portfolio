@@ -60,6 +60,19 @@ html {
    alone. Card #51 took them away, so what is written here is what renders. */
 body {
   font-family: 'Fixel Text', sans-serif;
+  /* Card #96. Greyscale antialiasing on macOS and iOS, which draws the light
+     type thinner and closer to how it is set in the drawings; Firefox on a
+     Mac needs its own property for the same thing. And pretty wrapping,
+     which the browser uses to keep a single short word from being left alone
+     on the last line of a paragraph. Both are inherited, so set once here
+     they reach every line of text on the site.
+
+     The card's third point, font-display: swap, was already in place: every
+     @font-face above carries it, and the Google import asks for it with
+     display=swap. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-wrap: pretty;
   overflow-x: hidden;
   /* The pinned bar on phones is 75px shorter than the unpinned one, and it is
      in flow, so shrinking it lifts everything under it. Left alone the browser
