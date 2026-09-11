@@ -66,7 +66,11 @@ export default function About({
       <div className="w-[71.3%] sm:w-[79.5%] sm:max-w-[1178px] xl:w-[1079px] xl:max-w-none mx-auto">
         {/* White card, desktop only — 6px corners, as the design asks. On
             phones the photo and the copy sit straight on the page. */}
-        <div className="bg-white rounded-[6px] px-[13.4%] pt-16 pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16 xl:pl-[70px] xl:pr-[43px] xl:py-[72px]">
+        {/* On a phone, 10.1% at the sides and 30 on top — card #81, whose red
+            frame puts the photo 29px in from either side of the 286.6px card
+            and 30 under its top edge, where the padding was 13.4% and 64. The
+            copy takes the same column, as the card's blue frame does. */}
+        <div className="bg-white rounded-[6px] px-[10.1%] pt-[30px] pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16 xl:pl-[70px] xl:pr-[43px] xl:py-[72px]">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -113,6 +117,11 @@ From md up the picture is 31.6% of the card's inner width —
               hold at one width and nowhere else, and would go stale the moment
               the text is edited in Studio. */}
           <div className="xl:w-[323px] xl:shrink-0">
+            {/* On a phone the picture is card #81's red frame: 229 by 262 at
+                402, so that proportion, and 46px from its foot to the first
+                ink of the phrase, which is the card's green frame — 38 here
+                plus the 8 the copy's own padding adds; the phrase's letters
+                start at the top of their box. */}
             {/* 8px under the picture from md, not the 40 it had — card #87. The
                 float's bottom margin counts towards the card's height whenever
                 the picture is the taller of the two, so 40 was adding 26px of
@@ -126,7 +135,7 @@ From md up the picture is 31.6% of the card's inner width —
                 beside it — cards #99 and #105. */}
             <div
               data-about-photo
-              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[294/346] sm:aspect-[3/4] md:aspect-[288/431] xl:w-full xl:float-none xl:mr-0 xl:mb-0 xl:aspect-[323/448]"
+              className="relative w-full sm:max-w-[272px] md:w-[31.6%] md:max-w-none mx-auto mb-[38px] sm:mb-[47px] md:mx-0 md:mb-2 md:mr-[6.7%] md:float-left aspect-[229/262] sm:aspect-[3/4] md:aspect-[288/431] xl:w-full xl:float-none xl:mr-0 xl:mb-0 xl:aspect-[323/448]"
             >
               {/* Photo */}
               <Image
@@ -207,7 +216,10 @@ From md up the picture is 31.6% of the card's inner width —
             sides, which nothing can see — it is empty there — and stays
             inside the screen at every phone width. From sm up the Instagram
             row stands in this spot instead. */}
-        <div className="sm:hidden mt-[66px] w-[160%] max-w-none relative left-1/2 -translate-x-1/2">
+        {/* 146.9% rather than 160 since card #81 widened the column it is a
+            share of: the same 335.7px box at 402 as before, so the drawing
+            itself keeps its size. */}
+        <div className="sm:hidden mt-[66px] w-[146.9%] max-w-none relative left-1/2 -translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={illustration?.url ?? "/images/illustration.png"}
