@@ -290,6 +290,22 @@ textarea {
   scrollbar-color: #BCB9A2 transparent;
 }
 
+/* Card #107: while the message field is chosen its bar is the same gold as the
+   rule under it, so the two still agree — grey together when the field is
+   left, gold together while it is being written in. Both the standard
+   property and WebKit's own rules, for the same reason as above. */
+textarea:focus {
+  scrollbar-color: #BD9E30 transparent;
+}
+
+textarea:focus::-webkit-scrollbar-thumb {
+  background: #BD9E30;
+}
+
+textarea:focus::-webkit-scrollbar-thumb:hover {
+  background: #A38828;
+}
+
 /* The paragraph copy in Hero, About and Contact. One rule for all three: they
    used to run at three different sizes and two different weights — 14px/400 in
    the hero, a fluid 11–16px/300 in About, 14–16px/300 in Contact — so the same
