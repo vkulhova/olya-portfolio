@@ -164,7 +164,11 @@ export default function Contact({
           the same way (heart pitch and line pitch both give 0.87), it leaves
           131px from the line's last ink to the phrase's first, where there
           were 188. Phones are card #84's. */}
-      <div className="w-[78%] mx-auto pt-[126px] sm:pt-[127px] pb-[117px] sm:pb-[112px] flex flex-col items-center">
+      {/* 59 on top on a phone, not 126 — card #84, the phone's screenshot of
+          the same white: its red frame, measured between the centres of its
+          lines, takes 66.7px of the 126 between the line's last ink and the
+          phrase's first at 402, so 59 are left. */}
+      <div className="w-[78%] mx-auto pt-[59px] sm:pt-[127px] pb-[117px] sm:pb-[112px] flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
             olive one. nowrap keeps them on one line: the phrase shrinks first.
 
