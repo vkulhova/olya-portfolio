@@ -133,9 +133,11 @@ export default function Contact({
           first ink on the desktop and 20 on a phone; the line's own box
           carries 2px above the drawing, hence the figures below. */}
       {/* 40px of white between the coloured band and the line's first ink,
-          the same at every band and every width — card #91. The line's own
-          box carries 2px above its drawing, hence 38. */}
-      <div className="bg-white pt-[38px]">
+          the same at every band — card #91. The line's own box carries 2px
+          above its drawing, hence 38. On a phone the card came back asking for
+          a touch less than 40: 34, the figure the phone drawing for About
+          measures, so 32 here. */}
+      <div className="bg-white pt-[32px] sm:pt-[38px]">
         <DecorativeDots colour={ribbon} />
       </div>
 
@@ -231,7 +233,9 @@ export default function Contact({
     {/* And 40 between the line's last ink and the blue — card #91. The
         drawing ends flush with the bottom of its box, so the figure is the
         padding itself. */}
-    <div className="bg-white pb-[40px]">
+    {/* 34 on a phone, like the lines under the bands — the card came back
+        asking for a touch less than 40 there. */}
+    <div className="bg-white pb-[34px] sm:pb-[40px]">
       <DecorativeDots colour={ribbon} />
     </div>
 

@@ -227,9 +227,11 @@ From md up the picture is 31.6% of the card's inner width —
           is added here, to reach the 127px the desktop drawing measures down
           to that line of copy and the 93 the phone one does. */}
       {/* 40px of white between the coloured band and the line's first ink,
-          the same at every band and every width — card #91. The line's own
-          box carries 2px above its drawing, hence 38. */}
-      <div className="bg-white pt-[38px] pb-[42px]">
+          the same at every band — card #91. The line's own box carries 2px
+          above its drawing, hence 38. On a phone the card came back asking for
+          a touch less than 40: 34, the figure this section's phone drawing
+          measures, so 32 here. */}
+      <div className="bg-white pt-[32px] sm:pt-[38px] pb-[42px]">
         <DecorativeDots colour={ribbon} />
       </div>
 
