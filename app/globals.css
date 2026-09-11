@@ -192,11 +192,13 @@ body {
   font-family: 'Source Serif 4', 'Source Serif Pro', serif;
   font-size: 13px;
   letter-spacing: 0.5px;
-  /* 28px, per card #56. The address and the signature are two lines of one
-     block in the drawing — 244 by 56, which is twice this — so they are spaced
-     by their own leading rather than by a margin between the paragraphs. The
-     figure does not change with the width; only the size does. */
-  line-height: 28px;
+  /* 24px — card #104; it was 28, per card #56. The address, the signature and
+     the rights line are lines of one block, so they are spaced by their own
+     leading rather than by a margin between the paragraphs. The figure does
+     not change with the width. The 2px each line gives up above its letters
+     and below them are handed back in the footer's own padding, so the block
+     sits as far from the icons and from the bottom of the band as before. */
+  line-height: 24px;
 }
 
 /* The site's chrome — the nav, the language switch, the send button and the

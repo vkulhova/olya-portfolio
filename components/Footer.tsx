@@ -36,7 +36,10 @@ export default function Footer({
             sets it on this row's centre line. 12 under them brings the
             address's first ink to the 20px the drawing leaves. Phones keep
             card #63's figures. */}
-        <div data-footer-icons className="flex justify-center gap-[7px] sm:gap-[10px] pt-[45px] sm:pt-[80px] pb-[14px] sm:pb-3">
+        {/* 2px more under the icons at every width since card #104 took the
+            lines below from 28px to 24: the address's first line lost 2px
+            above its letters, and this puts them back where they were. */}
+        <div data-footer-icons className="flex justify-center gap-[7px] sm:gap-[10px] pt-[45px] sm:pt-[80px] pb-[16px] sm:pb-[14px]">
           {socials.map((s) => (
             <a
               key={s.name}
@@ -84,8 +87,9 @@ export default function Footer({
         {/* Its own line under the signature, in the same face — card #92. The
             band's bottom padding moved down onto it: 62 from sm leaves the
             69px the drawing measures under the last ink; phones keep the 46
-            they had under the signature. */}
-        <p className="pb-[46px] sm:pb-[62px] text-center font-signature italic text-dark">
+            they had under the signature. Both 2px more since card #104, for
+            the 2px the 24px line gave up under its letters. */}
+        <p className="pb-[48px] sm:pb-[64px] text-center font-signature italic text-dark">
           All Rights Reserved
         </p>
       </div>
