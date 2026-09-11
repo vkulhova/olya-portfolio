@@ -44,12 +44,47 @@ export default function Nav({ brand }: { brand: Brand }) {
     return () => window.removeEventListener("keydown", onKey);
   }, [menuOpen]);
 
+  /* Card #109. On a phone pinning takes the bar from 139px to 64 and, the bar
+     being in flow, moves the whole page 75px with it. It used to pin the moment
+     the marker left the screen and unpin the moment it came back — one pixel
+     either way — and when Safari springs at the top of the page the scroll
+     position crosses that pixel several times in a row, so the bar flipped and
+     the page lurched 75px up and down: the stutter the card describes.
+
+     So on a phone there is room between the two: the bar pins only once the
+     page is PIN_AFTER past the marker, and unpins only when it is back at the
+     marker. A bounce at the top never gets that far, so the bar changes once
+     instead of flickering. The desktop bar keeps one height whichever state it
+     is in, and keeps its single threshold exactly where it was.
+
+     The marker's place is read from the layout, which a bounce does not move. */
   useEffect(() => {
     const marker = sentinelRef.current;
     if (!marker) return;
-    const io = new IntersectionObserver(([entry]) => setStuck(!entry.isIntersecting));
-    io.observe(marker);
-    return () => io.disconnect();
+    const PIN_AFTER = 80;
+    const phone = window.matchMedia("(max-width: 639px)");
+    let pinned = false;
+
+    const update = () => {
+      let markerEnd = marker.offsetHeight;
+      for (let el: HTMLElement | null = marker; el; el = el.offsetParent as HTMLElement | null) {
+        markerEnd += el.offsetTop;
+      }
+      const past = window.scrollY - markerEnd;
+      const next = phone.matches ? (pinned ? past > 0 : past > PIN_AFTER) : past > 0;
+      if (next !== pinned) {
+        pinned = next;
+        setStuck(next);
+      }
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   return (
