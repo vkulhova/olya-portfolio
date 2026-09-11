@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Lightbox from "./Lightbox";
 import type { Illustration } from "@/lib/sanity";
@@ -37,6 +37,66 @@ function distribute(items: Illustration[], columnCount: number): Placed[][] {
 /** A picture and where it sits in Studio's order — which is the order the
  *  overlay steps through, not the order of the column it happens to be in. */
 type Placed = { work: Illustration; at: number };
+
+/**
+ * A picture drifting up into place as it scrolls into view — card #101, which
+ * asks for barely any movement, one picture at a time, each at its own pace.
+ *
+ * So each one rises only 14 to 22px and fades in over 0.9 to 1.5s, starting up
+ * to 0.16s late. The spread comes from the picture's place in Studio's order
+ * rather than from chance, so a row never moves in step and the page moves the
+ * same way on every visit.
+ *
+ * Only pictures still below the screen when the page arrives wait to rise:
+ * whatever is already in sight stays put rather than jumping down and back.
+ * Nothing moves for a visitor who has asked their system for less motion, and
+ * without the script every picture is simply where it belongs.
+ */
+function Rise({ at, children }: { at: number; children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [phase, setPhase] = useState<"still" | "waiting" | "risen">("still");
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (element.getBoundingClientRect().top < window.innerHeight) return;
+    setPhase("waiting");
+    // Starts once the picture is a little way onto the screen, not the moment
+    // its top edge touches the bottom of it, so the movement can be seen.
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setPhase("risen");
+        observer.disconnect();
+      },
+      { rootMargin: "0px 0px -6% 0px" }
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
+  const duration = 900 + ((at * 7919) % 13) * 50;
+  const delay = ((at * 104729) % 9) * 20;
+  const distance = 14 + ((at * 31) % 9);
+
+  const style: React.CSSProperties =
+    phase === "waiting"
+      ? { transform: `translateY(${distance}px)`, opacity: 0 }
+      : phase === "risen"
+        ? {
+            transform: "none",
+            opacity: 1,
+            transition: `transform ${duration}ms cubic-bezier(0.22, 0.61, 0.36, 1) ${delay}ms, opacity ${Math.round(duration * 0.8)}ms ease-out ${delay}ms`,
+          }
+        : {};
+
+  return (
+    <div ref={ref} style={style}>
+      {children}
+    </div>
+  );
+}
 
 export default function MasonryGrid({ items }: { items: Illustration[] }) {
   // The server has no viewport, so it lays out the desktop case and the client
@@ -85,22 +145,23 @@ export default function MasonryGrid({ items }: { items: Illustration[] }) {
               /* A button rather than the picture on its own: opening the large
                  view is an action, so it answers to the keyboard and to a
                  screen reader as one. */
-              <button
-                key={work._id}
-                type="button"
-                onClick={() => setOpen(at)}
-                aria-label={work.title ? `Open ${work.title}` : "Open illustration"}
-                className="block w-full cursor-zoom-in"
-              >
-                <Image
-                  src={work.imageUrl}
-                  alt={work.title}
-                  width={work.width}
-                  height={work.height}
-                  className="w-full h-auto"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
-                />
-              </button>
+              <Rise key={work._id} at={at}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(at)}
+                  aria-label={work.title ? `Open ${work.title}` : "Open illustration"}
+                  className="block w-full cursor-zoom-in"
+                >
+                  <Image
+                    src={work.imageUrl}
+                    alt={work.title}
+                    width={work.width}
+                    height={work.height}
+                    className="w-full h-auto"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 540px"
+                  />
+                </button>
+              </Rise>
             ))}
           </div>
         ))}
