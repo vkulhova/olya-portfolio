@@ -167,8 +167,13 @@ export default function Contact({
       {/* 59 on top on a phone, not 126 — card #84, the phone's screenshot of
           the same white: its red frame, measured between the centres of its
           lines, takes 66.7px of the 126 between the line's last ink and the
-          phrase's first at 402, so 59 are left. */}
-      <div className="w-[78%] mx-auto pt-[59px] sm:pt-[127px] pb-[117px] sm:pb-[112px] flex flex-col items-center">
+          phrase's first at 402, so 59 are left.
+
+          And 40 underneath on a phone, not 117 — card #85, the same kind of
+          screenshot for the white between the letter and the lower line: its
+          red frame takes 76.5px, centre of line to centre of line, of the 137
+          from the letter's last ink to the line's first, so 60 are left. */}
+      <div className="w-[78%] mx-auto pt-[59px] sm:pt-[127px] pb-[40px] sm:pb-[112px] flex flex-col items-center">
         {/* Phrase and star, paired the way About pairs its heading with the
             olive one. nowrap keeps them on one line: the phrase shrinks first.
 
