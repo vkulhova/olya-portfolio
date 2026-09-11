@@ -42,7 +42,9 @@ export default function About({
           the colour; both arrive as variables because .about-band has to hold
           them behind a media query. */}
       <div
-        className="about-band pt-[13.8%] pb-[17.2%] sm:py-[13.1%]"
+        /* 13.6% under the card on a phone rather than 17.2 — card #82, whose
+           orange frame ends the milky band 54.5px under the card at 402. */
+        className="about-band pt-[13.8%] pb-[13.6%] sm:py-[13.1%]"
         style={
           {
             ...(bandColour ? { "--about-band": bandColour } : null),
@@ -70,7 +72,9 @@ export default function About({
             frame puts the photo 29px in from either side of the 286.6px card
             and 30 under its top edge, where the padding was 13.4% and 64. The
             copy takes the same column, as the card's blue frame does. */}
-        <div className="bg-white rounded-[6px] px-[10.1%] pt-[30px] pb-[42px] sm:px-14 md:px-20 sm:py-12 md:py-16 xl:pl-[70px] xl:pr-[43px] xl:py-[72px]">
+        {/* 17 under the desk on a phone, not 42 — card #82's purple frame
+            ends the card 33px under the drawing's last ink. */}
+        <div className="bg-white rounded-[6px] px-[10.1%] pt-[30px] pb-[17px] sm:px-14 md:px-20 sm:py-12 md:py-16 xl:pl-[70px] xl:pr-[43px] xl:py-[72px]">
         {/* Photo and copy. Not a grid: in two columns the copy had nowhere to
             go once it outgrew the picture, so it piled up in its own narrow
             half and hung far below the photo on middle-sized screens. The
@@ -100,7 +104,10 @@ export default function About({
             photo: the copy column's box is 6px taller than the photo, so it is
             the column that sets the card's height, and 72 is what brings the
             card to 598 with the photo sitting 75 in from both edges. */}
-        <div className="mb-4 sm:mb-10 md:mb-0 xl:flex xl:items-center xl:gap-[67px]">
+        {/* Nothing under it on a phone since card #82: the only thing below
+            there is the desk, and this margin would swallow the desk's own
+            smaller one where the two meet. */}
+        <div className="sm:mb-10 md:mb-0 xl:flex xl:items-center xl:gap-[67px]">
 
           {/* The box carries the photo's own 3:4 ratio at every width, so it is
               exactly the picture — nothing is cropped and no letterboxing is
@@ -219,7 +226,12 @@ From md up the picture is 31.6% of the card's inner width —
         {/* 146.9% rather than 160 since card #81 widened the column it is a
             share of: the same 335.7px box at 402 as before, so the drawing
             itself keeps its size. */}
-        <div className="sm:hidden mt-[66px] w-[146.9%] max-w-none relative left-1/2 -translate-x-1/2">
+        {/* Card #82's pink frame: the drawing's first ink 30px under the last
+            line of copy and 205 tall, where it was 84 under and 198.5 tall.
+            The file carries 11px of blank above its ink at this size, hence
+            the 11 of margin, and 151.7% of the column is what makes the ink
+            205. */}
+        <div className="sm:hidden mt-[11px] w-[151.7%] max-w-none relative left-1/2 -translate-x-1/2">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={illustration?.url ?? "/images/illustration.png"}
