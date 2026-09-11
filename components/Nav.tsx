@@ -170,11 +170,17 @@ export default function Nav({ brand }: { brand: Brand }) {
               <path d="M17.4 2.6L2.6 17.4" />
             </svg>
           ) : (
-            <svg width="30" height="18" viewBox="0 0 30 18" aria-hidden="true" fill="none"
+            /* Card #102: narrower, with more air between the lines. Its
+               drawing puts each line 11.6 of its own thickness long and 3.6
+               of it apart; at the same weight and colour as before that is
+               about 23px across and 7 between, where it was 29 and 5. The
+               box is an even 22 tall so it centres on a whole pixel in the
+               48px button, and the lines stay as crisp as they were. */
+            <svg width="24" height="22" viewBox="0 0 24 22" aria-hidden="true" fill="none"
               stroke="currentColor" strokeWidth="2.2" strokeLinecap="round">
-              <path d="M1.6 2h26.8" />
-              <path d="M1.6 9h26.8" />
-              <path d="M1.6 16h26.8" />
+              <path d="M1.55 2h20.9" />
+              <path d="M1.55 11h20.9" />
+              <path d="M1.55 20h20.9" />
             </svg>
           )}
         </button>
