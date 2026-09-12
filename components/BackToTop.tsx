@@ -41,11 +41,10 @@ export default function BackToTop() {
 
     // Where it stops, off to the right of the row of social icons and level
     // with their middle, at every width — card #92 asks for the button and the
-    // icons to be one size and on one line. They are the same size now on a
-    // phone too (44px), so matching the two centres lines the row up exactly
-    // there as well; it used to rest on the icons' top edge because it was
-    // only 30. Measured off an icon rather than its row, whose padding sits
-    // above the icons themselves.
+    // icons to be on one line. From sm they are also one size; on a phone the
+    // button is back to 30px against the icons' 44 (card #110), and it still
+    // centres on them there. Measured off an icon rather than its row, whose
+    // padding sits above the icons themselves.
     const update = () => {
       const icon = document.querySelector<HTMLElement>("[data-footer-icons] a");
       const fixed: Place = { mode: "fixed", bottom: GAP };
@@ -97,14 +96,17 @@ export default function BackToTop() {
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label="Back to top"
       style={place.mode === "fixed" ? { bottom: place.bottom } : { top: place.top }}
-      className={`${place.mode} right-5 sm:right-[54px] z-50 grid h-11 w-11 sm:h-[55px] sm:w-[55px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
+      /* 30px on a phone again — card #110, which takes back the phone half of
+         card #92: the button there is to be the size it was before, and only
+         from sm the size of the social icons. */
+      className={`${place.mode} right-5 sm:right-[54px] z-50 grid h-[30px] w-[30px] sm:h-[55px] sm:w-[55px] place-items-center rounded-full bg-[#D5BA54] text-white shadow-lg transition-[opacity,background-color,transform] duration-300 hover:-translate-y-1 hover:bg-[#C4A845] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-dark ${
         visible ? "opacity-100" : "pointer-events-none opacity-0"
       }`}
     >
       {/* The chevron is the one drawn on card #92, point for point, in the
           button's own 55-unit box: wider and steeper than the one it replaces,
           with a 3-unit stroke. Kept in its box so it scales with the button —
-          44px on a phone, 55 from sm. */}
+          30px on a phone, 55 from sm. */}
       <svg
         className="h-full w-full"
         viewBox="0 0 55 55"
